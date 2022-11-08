@@ -5,17 +5,18 @@ class Profil extends CI_Controller {
         
     function __construct(){
         parent::__construct();
-		$this->load->model('M_auth', 'm_auth');
+		$this->load->model('M_main', 'm_main');
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
 		define('ID_POSISI',$this->session->userdata('id_posisi'));
+		define('ID_KOTA',$this->session->userdata('id_kota'));
     }
 
 	public function ganti_password(){
 		$data = [
 			'password' => password_hash($_POST['pass1'], PASSWORD_DEFAULT)
 		];
-		$qry = $this->m_auth->updateIN('account','id_account',ID_ACCOUNT,$data);
+		$qry = $this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
 
 		$output['message'] = "Password Berhasil di Simpan!";
 		$output['result'] = "success";
@@ -43,7 +44,7 @@ class Profil extends CI_Controller {
 				$this->load->library('image_lib', $config);
 				$this->image_lib->resize();
 
-                $account = $this->m_auth->getRow('account','email',EMAIL);
+                $account = $this->m_main->getRow('db_account','email',EMAIL);
 				if ($account['foto'] != "profile.jpg" && $account['foto'] != NULL || $account['foto'] != '') {
 					$target_file = $uploadDIR . $account['foto'];
 					if(file_exists($target_file)){
@@ -52,7 +53,7 @@ class Profil extends CI_Controller {
 				}
 				
 				$data['foto'] = $uploadData['file_name'];
-				$qry = $this->m_auth->updateIN('account','id_account',ID_ACCOUNT,$data);
+				$qry = $this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
 
 				$output['message'] ="Foto profil berhasil di ganti!";
 				$output['result'] = "success";
@@ -79,7 +80,7 @@ class Profil extends CI_Controller {
 			'no_rek' => $_POST['no_rek'],
 			'telp' => $_POST['telp'],
 		];
-		$this->m_auth->updateIN('account','id_account',ID_ACCOUNT,$data);
+		$this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
 		$this->session->set_userdata('email', $_POST['email']);
 		$output['message'] ="Data profile berhasil diganti!";
 		$output['result'] = "success";

@@ -17,7 +17,7 @@
                                         </div>
                                         <div class="ml-3">
                                             <h4 class="mt-3 mb-0 fw-bold"><?= $account['nama'] ?></h4>
-                                            <p class="mb-0 text-grey"><?= $account['email']; ?></p>
+                                            <p class="mb-0 text-grey"><?= $posisi['nama_posisi']; ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -37,12 +37,18 @@
                 <div class="col-md-8">
                     <div class="card card-dark bg-secondary-gradient shadow text-white" style="min-height:190px;">
                         <div class="card-body bubble-shadow">
-                            <h5>Klinik Gigi Joy Dental</h5>
+                            <h5>Klinik Gigi Joy Dental <?= $kota['nama_kota'] ?></h5>
                             <h2 class="py-4 mb-0"><?= $account['nomor_induk'] ?></h2>
                             <div class="row">
                                 <div class="col-8 pr-0">
-                                    <div class="text-small fw-bold op-8">Tgl Mulai Kerja</div>
-                                    <h3 class="fw-bold mb-0 mt-1"><?= date_format(date_create($account['tgl_mulai_kerja']),"d F Y") ?></h3>
+                                    <div class="text-small fw-bold op-8">Mulai Kerja : <?= date_format(date_create($account['tgl_mulai_kerja']),"d F Y") ?></div>
+                                    <?php 
+                                        $date1 = date_create($account['tgl_mulai_kerja']);
+                                        $date2 = date_create(date("Y-m-d"));
+                                        $diff = date_diff($date1,$date2);
+                                        $lama_kerja = ($diff->y).' Thn, '.($diff->m).' Bln';
+                                    ?>
+                                    <h3 class="fw-bold mb-0 mt-1"><?= $lama_kerja ?></h3>
                                 </div>
                                 <div class="col-4 pl-0 text-right">
                                     <div class="text-small text-uppercase fw-bold op-8 mt-2">Status</div>
@@ -70,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="btn-group border-option form-filter" style="margin-bottom: 30px !important;">
                         <label class="label-filter">Periode: </label>&nbsp;&nbsp;
                         <input type="hidden" name="start-date" value="">
@@ -94,7 +100,7 @@
                     </div>
                     <div class="card p-3">
                         <div class="d-flex align-items-center">
-                            <span class="stamp stamp-md bg-info mr-3">
+                            <span class="stamp stamp-md bg-warning mr-3">
                                 <i class="fa fa-magic"></i>
                             </span>
                             <div>
@@ -105,7 +111,7 @@
                     </div>
                     <div class="card p-3">
                         <div class="d-flex align-items-center">
-                            <span class="stamp stamp-md bg-info mr-3">
+                            <span class="stamp stamp-md bg-danger mr-3">
                                 <i class="fa fa-magic"></i>
                             </span>
                             <div>
@@ -115,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title fw-mediumbold">Online Account</div>
@@ -126,9 +132,12 @@
                                             <div class="avatar avatar-online">
                                                 <img src="<?= base_url().'assets/img/photo/'.$list->foto ?>" alt="..." class="avatar-img rounded-circle">
                                             </div>
-                                            <div class="info-user ml-3">
+                                            <div class="info-user mx-3">
                                                 <div class="fw-bold mb-1"><?= $list->nama ?></div>
                                                 <div class="status"><?= $list->email ?></div>
+                                            </div>
+                                            <div class="d-flex ml-auto align-items-center">
+                                                <p class="text-info fw-bold"><?= $list->inisial_kota ?></p>
                                             </div>
                                         </div>
                                         <div class="separator-dashed m-0"></div>
@@ -144,34 +153,10 @@
             <div class="card">
                 <div class="card-body">
                     <div id="calendar" class="text-center"></div>
-                    <div class="card-title fw-mediumbold mt-2">Kegiatan</div>
+                    <div class="card-title fw-mediumbold mt-2">Kegiatan Pengumuman</div>
                     
                     <div class="tableBodyScroll" style="height: 422.7px;">
-                        <ol class="activity-feed">
-                            <li class="feed-item feed-item-secondary">
-                                <time class="date" datetime="9-25">Sep 25</time>
-                                <span class="text">Responded to need <a href="#">"Volunteer opportunity"</a></span>
-                            </li>
-                            <li class="feed-item feed-item-success">
-                                <time class="date" datetime="9-24">Sep 24</time>
-                                <span class="text">Added an interest <a href="#">"Volunteer Activities"</a></span>
-                            </li>
-                            <li class="feed-item feed-item-info">
-                                <time class="date" datetime="9-23">Sep 23</time>
-                                <span class="text">Joined the group <a href="single-group.php">"Boardsmanship Forum"</a></span>
-                            </li>
-                            <li class="feed-item feed-item-warning">
-                                <time class="date" datetime="9-21">Sep 21</time>
-                                <span class="text">Responded to need <a href="#">"In-Kind Opportunity"</a></span>
-                            </li>
-                            <li class="feed-item feed-item-danger">
-                                <time class="date" datetime="9-18">Sep 18</time>
-                                <span class="text">Created need <a href="#">"Volunteer Opportunity"</a></span>
-                            </li>
-                            <li class="feed-item">
-                                <time class="date" datetime="9-17">Sep 17</time>
-                                <span class="text">Attending the event <a href="single-event.php">"Some New Event"</a></span>
-                            </li>
+                        <ol class="activity-feed" id="list_kegiatan">
                         </ol>
                     </div>
                 </div>

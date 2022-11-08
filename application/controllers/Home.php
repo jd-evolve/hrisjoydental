@@ -5,7 +5,7 @@ class Home extends CI_Controller {
         
     function __construct(){
         parent::__construct();
-		$this->load->model('M_auth', 'm_auth');
+		$this->load->model('M_main', 'm_main');
     }
 
 	public function index(){
@@ -23,11 +23,11 @@ class Home extends CI_Controller {
 		if($_POST['email']){
 			$email = $_POST['email'];
 			$password = $_POST['password'];
-			$account = $this->m_auth->getRow('account','email',$email);
+			$account = $this->m_main->getRow('db_account','email',$email);
 			if($account){
 				if($account['status'] == 1){
 					if(password_verify($password, $account['password'])){
-						$this->m_auth->updateIN('account','id_account',$account['id_account'],['tgl_masuk' => date("Y-m-d H:i:s")]);
+						$this->m_main->updateIN('db_account','id_account',$account['id_account'],['tgl_masuk' => date("Y-m-d H:i:s")]);
 						
 						$data = [
 							'id_account' => $account['id_account'],
@@ -65,7 +65,7 @@ class Home extends CI_Controller {
 
 	public function logout(){
 		if($this->session->userdata('id_account')){
-			$this->m_auth->updateIN('account','id_account',$this->session->userdata('id_account'),['tgl_keluar' => date("Y-m-d H:i:s")]);
+			$this->m_main->updateIN('db_account','id_account',$this->session->userdata('id_account'),['tgl_keluar' => date("Y-m-d H:i:s")]);
 		}
 		$data = [
 			'id_account',
