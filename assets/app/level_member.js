@@ -158,7 +158,7 @@
         }
     });
 
-    $('body').on('click','#tambah_level',function(){
+    $('#tambah_level').on('click', function(){
         document.getElementById("show-level").style.display = "none";
         document.getElementById("aksi-level").style.display = "unset";
         document.getElementById("update_level").style.display = "none";
@@ -185,7 +185,7 @@
             },
         });
 
-        $("body").on("click", "#simpan_level", function (e) {
+        $("#simpan_level").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-level").reportValidity();
             if (validasi) {
@@ -212,7 +212,7 @@
         });
     });
 
-    $('body').on('click','#level-edit',function(){
+    $('#level-edit').on('click', function(){
         document.getElementById("show-level").style.display = "none";
         document.getElementById("aksi-level").style.display = "unset";
         document.getElementById("update_level").style.display = "unset";
@@ -239,7 +239,7 @@
             },
         });
         
-        $("body").on("click", "#update_level", function (e) {
+        $("#update_level").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-level").reportValidity();
             if (validasi) {
@@ -266,17 +266,17 @@
         });
     });
 
-    $('body').on('click','#level-restore',function(){
+    $('#level-restore').on('click', function(){
         let id_level = $(this).data('id');
         action('restore_level',id_level,'Level member akan dikembalikan ke daftar data aktif!');
     });
 
-    $('body').on('click','#level-remove',function(){
+    $('#level-remove').on('click', function(){
         let id_level = $(this).data('id');
         action('remove_level',id_level,'Level member akan dihapus dari daftar data aktif!');
     });
 
-    $('body').on('click','#level-delete',function(){
+    $('#level-delete').on('click', function(){
         let id_level = $(this).data('id');
         action('delete_level',id_level,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });

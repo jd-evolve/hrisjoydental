@@ -125,4 +125,110 @@ class Menu extends CI_Controller {
 			redirect('logout');
 		}
     }
+	
+    public function cuti_tahunan(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Cuti Tahunan';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/cuti_tahunan');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function cuti_menikah(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Cuti Menikah';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/cuti_menikah');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function cuti_melahirkan(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Cuti Melahirkan';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/cuti_melahirkan');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function ijin_pribadi(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Ijin Pribadi';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/ijin_pribadi');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function ijin_duka(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Ijin Duka';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/ijin_duka');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function ijin_dinas(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Ijin Dinas Keluar';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/ijin_dinas');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function konfigurasi(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Konfigurasi';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['account_online'] = $this->m_auth->GetAccountOnline();
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('pengaturan/konfigurasi');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
 }

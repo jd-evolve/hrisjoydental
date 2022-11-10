@@ -50,6 +50,10 @@
                     'kegiatan-pengumuman',
                 );
 
+                $pengaturan = array(
+                    'konfigurasi',
+                );
+
                 $uri_path = $this->uri->segment(1);
             ?> 
 
@@ -71,7 +75,7 @@
                 <li class="nav-item <?= !$cekmenu['menu_ijincuti'] ? 'gone' : '' ?><?= in_array($uri_path, $ijincuti) ? 'active submenu' : '' ?>">
                     <a data-toggle="collapse" href="#ijin_cuti">
                         <i class="fas fa-file-signature"></i>
-                        <p>Ijin Cuti</p>
+                        <p>Ijin/Cuti</p>
                         <span class="caret"></span>
                     </a>
                     <div id="ijin_cuti" <?= in_array($uri_path, $ijincuti) ? 'class="collapse show"' : 'class="collapse"' ?>>
@@ -136,6 +140,23 @@
                             <li class="<?= !$cekmenu['kegiatan-pengumuman'] ? 'gone' : '' ?> <?= $uri_path == "kegiatan-pengumuman"? 'active' : '' ?>">
                                 <a href="<?= base_url('kegiatan-pengumuman') ?>">
                                     <span class="sub-item">Kegiatan Pengumuman</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item <?= !$cekmenu['menu_pengaturan'] ? 'gone' : '' ?><?= in_array($uri_path, $pengaturan) ? 'active submenu' : '' ?>">
+                    <a data-toggle="collapse" href="#pengaturan">
+                        <i class="fas fa-cog"></i>
+                        <p>Pengaturan</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div id="pengaturan" <?= in_array($uri_path, $pengaturan) ? 'class="collapse show"' : 'class="collapse"' ?>>
+                        <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['konfigurasi'] ? 'gone' : '' ?> <?= $uri_path == "konfigurasi"? 'active' : '' ?>">
+                                <a href="<?= base_url('konfigurasi') ?>">
+                                    <span class="sub-item">Konfigurasi</span>
                                 </a>
                             </li>
                         </ul>

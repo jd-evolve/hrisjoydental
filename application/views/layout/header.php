@@ -14,7 +14,7 @@
 
 	<!-- Fonts and icons -->
 	<script src="<?= base_url() ?>assets/js/plugin/webfont/webfont.min.js"></script>
-	<link rel="stylesheet" href="<?= base_url() ?>assets/css/family.css" media="all">
+	<!-- <link rel="stylesheet" href="<?= base_url() ?>assets/css/family.css" media="all"> -->
 	<link rel="stylesheet" href="<?= base_url() ?>assets/css/fonts.css" media="all">
 
 	<!-- CSS Files -->

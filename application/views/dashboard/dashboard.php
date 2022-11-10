@@ -17,7 +17,7 @@
                                         </div>
                                         <div class="ml-3">
                                             <h4 class="mt-3 mb-0 fw-bold"><?= $account['nama'] ?></h4>
-                                            <p class="mb-0 text-grey"><?= $posisi['nama_posisi']; ?></p>
+                                            <p class="mb-0 text-grey"><?= $posisi['nama_posisi'] ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                         <path fill="transparent" stroke="#fff" stroke-width="5" d="M 49.99032552282448 2.500000985215891 A 47.5 47.5 0 1 1 4.81379135029583 35.355664990673006 " class="circles-valueStroke"></path>
                                     </svg>
                                     <div class="circles-text" style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 35px; height: 100px; line-height: 100px;">
-                                        <?= $account['sisa_cuti'] ?>
+                                        <?= floatval($account['sisa_cuti']) ?>
                                     </div>
                                 </div>
                             </div>

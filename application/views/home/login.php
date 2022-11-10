@@ -66,13 +66,13 @@
 	<script src="<?= base_url() ?>assets/js/ready.js"></script>
 
 	<script>
-		$('body').on('click','#lupa_password',function(){
+		$('#lupa_password').on('click', function(){
 			swal("Hubungi admin untuk merubah password",{
 				icon: "info",
 			});
 		});
 		
-		$("body").on("click", "#login", function (e) {
+		$("#login").on("click", function (e) {
 			e.preventDefault();
 			let email = $('input[name="email"]').val();
 			let password = $('input[name="password"]').val();

@@ -185,7 +185,7 @@
         alias: "tt.mm.jjjj"
     }).mask('.tgl');
 
-    $("body").on("click", "#tambah_kegiatan", function () {
+    $("#tambah_kegiatan").on("click", function () {
         $("#modal-kegiatan").modal();
         document.getElementById("text-kegiatan").innerHTML = "Tambah Pengumuman/Kegiatan";
 		$('input[name="tgl_kegiatan"]').val('');
@@ -193,7 +193,7 @@
         $('input[name="edit_kegiatan"]').attr("type", "hidden");
         $('input[name="add_kegiatan"]').attr("type", "submit");
         var count = 0;
-        $("body").on("click", "input#add_kegiatan", function (e) {
+        $("input#add_kegiatan").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-kegiatan").reportValidity();
             if (validasi) {
@@ -220,7 +220,7 @@
 
     });
     
-    $('body').on('click','#kegiatan-edit',function(){
+    $('#kegiatan-edit').on('click', function(){
         $("#modal-kegiatan").modal();
         let id_kegiatan = $(this).data('id');
         document.getElementById("text-kegiatan").innerHTML = "Ubah kegiatan";
@@ -230,7 +230,7 @@
         $('input[name="edit_kegiatan"]').attr("type", "submit");
         $('input[name="add_kegiatan"]').attr("type", "hidden");
         var count = 0;
-        $("body").on("click", "input#edit_kegiatan", function (e) {
+        $("input#edit_kegiatan").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-kegiatan").reportValidity();
             if (validasi) {
@@ -257,17 +257,17 @@
         });
     });
 
-    $('body').on('click','#kegiatan-restore',function(){
+    $('#kegiatan-restore').on('click', function(){
         let id_kegiatan = $(this).data('id');
         action('restore_kegiatan',id_kegiatan,'Data kegiatan akan dikembalikan ke daftar kegiatan aktif!');
     });
 
-    $('body').on('click','#kegiatan-remove',function(){
+    $('#kegiatan-remove').on('click', function(){
         let id_kegiatan = $(this).data('id');
         action('remove_kegiatan',id_kegiatan,'Data kegiatan akan dihapus dari daftar kegiatan aktif');
     });
 
-    $('body').on('click','#kegiatan-delete',function(){
+    $('#kegiatan-delete').on('click', function(){
         let id_kegiatan = $(this).data('id');
         action('delete_kegiatan',id_kegiatan,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });

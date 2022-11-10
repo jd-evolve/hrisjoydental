@@ -22,3 +22,4 @@ $route['cuti-melahirkan'] = 'menu/cuti_melahirkan';
 $route['ijin-pribadi'] = 'menu/ijin_pribadi';
 $route['ijin-duka'] = 'menu/ijin_duka';
 $route['ijin-dinas'] = 'menu/ijin_dinas';
+$route['konfigurasi'] = 'menu/konfigurasi';

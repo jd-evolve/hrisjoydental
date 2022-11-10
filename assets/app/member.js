@@ -217,7 +217,7 @@
         alias: "tt.mm.jjjj"
     }).mask('.tgl');
 
-    $("body").on("click", "#tambah_member", function () {
+    $("#tambah_member").on("click", function () {
         $("#modal-member").modal();
         document.getElementById("text-member").innerHTML = "Tambah Member";
 		$('input[name="kode"]').val('');
@@ -239,7 +239,7 @@
         $('input[name="edit_member"]').attr("type", "hidden");
         $('input[name="add_member"]').attr("type", "submit");
         var count = 0;
-        $("body").on("click", "input#add_member", function (e) {
+        $("input#add_member").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-member").reportValidity();
             if (validasi) {
@@ -265,7 +265,7 @@
         });
     });
     
-    $('body').on('click','#member-edit',function(){
+    $('#member-edit').on('click', function(){
         $("#modal-member").modal();
         let id_account = $(this).data('id');
         document.getElementById("text-member").innerHTML = "Ubah Member";
@@ -290,7 +290,7 @@
         $('input[name="edit_member"]').attr("type", "submit");
         $('input[name="add_member"]').attr("type", "hidden");
         var count = 0;
-        $("body").on("click", "input#edit_member", function (e) {
+        $("input#edit_member").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-member").reportValidity();
             if (validasi) {
@@ -317,17 +317,17 @@
         });
     });
 
-    $('body').on('click','#member-restore',function(){
+    $('#member-restore').on('click', function(){
         let id_account = $(this).data('id');
         action('restore_member',id_account,'Member akan dikembalikan ke daftar data aktif!');
     });
 
-    $('body').on('click','#member-remove',function(){
+    $('#member-remove').on('click', function(){
         let id_account = $(this).data('id');
         action('remove_member',id_account,'Member akan dihapus dari daftar data aktif!');
     });
 
-    $('body').on('click','#member-delete',function(){
+    $('#member-delete').on('click', function(){
         let id_account = $(this).data('id');
         action('delete_member',id_account,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });

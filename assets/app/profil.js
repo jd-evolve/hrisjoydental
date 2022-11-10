@@ -9,7 +9,7 @@
         $(this).prev("label").text(file);
     });
 
-    $("body").on("click", "#ganti_foto", function(e) {
+    $("#ganti_foto").on("click", function(e) {
         e.preventDefault();
         var validasi = $('input[name="profile_image"]').val();
         if (validasi != "") {
@@ -60,7 +60,7 @@
         }
     });
 
-    $("body").on("click", "input#edit_profile", function() {
+    $("input#edit_profile").on("click", function() {
         $.validator.setDefaults({
             submitHandler: function() {
                 var formData = new FormData(document.querySelector("#ubah_profil"));
@@ -83,7 +83,7 @@
         $("form#ubah_profil").validate();
     });
 
-    $('body').on('click', '#simpan_password', function(e) {
+    $('#simpan_password').on('click', function(e) {
         e.preventDefault();
         let new_pass = $('input[name="new_password1"]').val();
         let repeat_pass = $('input[name="new_password2"]').val();

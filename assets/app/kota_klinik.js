@@ -174,7 +174,7 @@
         }
     }
 
-    $("body").on("click", "#tambah_kota", function () {
+    $("#tambah_kota").on("click", function () {
         $("#modal-kota").modal();
         document.getElementById("text-kota").innerHTML = "Tambah Kota";
 		$('input[name="inisial_kota"]').val('');
@@ -182,7 +182,7 @@
         $('input[name="edit_kota"]').attr("type", "hidden");
         $('input[name="add_kota"]').attr("type", "submit");
         var count = 0;
-        $("body").on("click", "input#add_kota", function (e) {
+        $("input#add_kota").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-kota").reportValidity();
             if (validasi) {
@@ -209,7 +209,7 @@
 
     });
     
-    $('body').on('click','#kota-edit',function(){
+    $('#kota-edit').on('click', function(){
         $("#modal-kota").modal();
         let id_kota = $(this).data('id');
         document.getElementById("text-kota").innerHTML = "Ubah Kota";
@@ -219,7 +219,7 @@
         $('input[name="edit_kota"]').attr("type", "submit");
         $('input[name="add_kota"]').attr("type", "hidden");
         var count = 0;
-        $("body").on("click", "input#edit_kota", function (e) {
+        $("input#edit_kota").on("click", function (e) {
             e.preventDefault();
             let validasi = document.getElementById("form-kota").reportValidity();
             if (validasi) {
@@ -246,17 +246,17 @@
         });
     });
 
-    $('body').on('click','#kota-restore',function(){
+    $('#kota-restore').on('click', function(){
         let id_kota = $(this).data('id');
         action('restore_kota',id_kota,'Data kota akan dikembalikan ke daftar kota aktif!');
     });
 
-    $('body').on('click','#kota-remove',function(){
+    $('#kota-remove').on('click', function(){
         let id_kota = $(this).data('id');
         action('remove_kota',id_kota,'Data kota akan dihapus dari daftar kota aktif');
     });
 
-    $('body').on('click','#kota-delete',function(){
+    $('#kota-delete').on('click', function(){
         let id_kota = $(this).data('id');
         action('delete_kota',id_kota,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });

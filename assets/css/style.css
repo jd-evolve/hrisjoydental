@@ -3083,7 +3083,7 @@ label.error {
     border-bottom: 1px solid #f1f1f1;
 }
 .nav.nav-line .nav-link {
-    padding: 15px 20px;
+    padding: 5px 10px;
     color: #575962;
     border-width: 0;
     font-size: 13px;
@@ -3856,12 +3856,6 @@ label.error {
 .btn-no-radius {
     border-radius: 0;
 }
-.nav-pills > li:first-child > .nav-link {
-    border-radius: 4px 0 0 4px !important;
-}
-.nav-pills > li:last-child > .nav-link {
-    border-radius: 0 4px 4px 0 !important;
-}
 .nav-link.disabled {
     color: #6c757d !important;
 }
@@ -3970,8 +3964,7 @@ label.error {
     border: 1px solid #282a3c;
 }
 .nav-pills.nav-primary .nav-link.active {
-    background: #177dff;
-    border: 1px solid #177dff;
+    background: #6176b1;
 }
 .nav-pills.nav-secondary .nav-link.active {
     background: #716aca;
@@ -10497,6 +10490,25 @@ hr {
     padding: 0 20px 0 20px !important;
     line-height: 1.5;
 }
+.table-ijin-cuti,
+.table-ijin-cuti > tbody > tr > th {
+    border: 1px solid #eee !important;
+    text-align: center !important;
+    background-color: #e8ebf1;
+}
+.table-ijin-cuti {
+    width: 100% !important;
+    border-collapse: collapse;
+    table-layout: fixed;
+    vertical-align: top;
+    color: #505458;
+}
+.table-ijin-cuti > tbody > tr > td,
+.table-ijin-cuti > tbody > tr > th {
+    border: 1px solid #eee !important;
+    padding: 2px;
+}
+
 .table-surat-tindakan,
 .table-surat-tindakan > tbody > tr > th {
     border: 3px solid #505458 !important;
