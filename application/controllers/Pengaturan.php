@@ -15,12 +15,12 @@ class Pengaturan extends CI_Controller {
     
 	//================= KONFIGURASI
 	public function get_konfigurasi(){
-		$cuti_tahunan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','cuti_tahunan');
-		$cuti_menikah = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','cuti_menikah');
-		$cuti_melahirkan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','cuti_melahirkan');
-		$ijin_pribadi = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','ijin_pribadi');
-		$ijin_duka = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','ijin_duka');
-		$ijin_dinas = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','ijin_dinas');
+		$cuti_tahunan = $this->m_main->getRow('db_ijincuti','id_ijincuti',1);
+		$cuti_menikah = $this->m_main->getRow('db_ijincuti','id_ijincuti',2);
+		$cuti_melahirkan = $this->m_main->getRow('db_ijincuti','id_ijincuti',3);
+		$ijin_pribadi = $this->m_main->getRow('db_ijincuti','id_ijincuti',4);
+		$ijin_duka = $this->m_main->getRow('db_ijincuti','id_ijincuti',5);
+		$ijin_dinas = $this->m_main->getRow('db_ijincuti','id_ijincuti',6);
 		$smtp_host = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','smtp_host');
 		$smtp_port = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','smtp_port');
 		$smtp_user = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','smtp_user');
@@ -28,12 +28,12 @@ class Pengaturan extends CI_Controller {
 		$initial_name = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','initial_name');
 		
 		$output = [
-			'cuti_tahunan' => $cuti_tahunan['isi_konfigurasi'],
-			'cuti_menikah' => $cuti_menikah['isi_konfigurasi'],
-			'cuti_melahirkan' => $cuti_melahirkan['isi_konfigurasi'],
-			'ijin_pribadi' => $ijin_pribadi['isi_konfigurasi'],
-			'ijin_duka' => $ijin_duka['isi_konfigurasi'],
-			'ijin_dinas' => $ijin_dinas['isi_konfigurasi'],
+			'cuti_tahunan' => $cuti_tahunan['potong_cuti'],
+			'cuti_menikah' => $cuti_menikah['potong_cuti'],
+			'cuti_melahirkan' => $cuti_melahirkan['potong_cuti'],
+			'ijin_pribadi' => $ijin_pribadi['potong_cuti'],
+			'ijin_duka' => $ijin_duka['potong_cuti'],
+			'ijin_dinas' => $ijin_dinas['potong_cuti'],
 			'smtp_host' => $smtp_host['isi_konfigurasi'],
 			'smtp_port' => $smtp_port['isi_konfigurasi'],
 			'smtp_user' => $smtp_user['isi_konfigurasi'],
@@ -44,12 +44,12 @@ class Pengaturan extends CI_Controller {
 	}
 
 	public function edit_konfigurasi(){
-        $cuti_tahunan['isi_konfigurasi'] = $_POST['cuti_tahunan'];
-        $cuti_menikah['isi_konfigurasi'] = $_POST['cuti_menikah'];
-        $cuti_melahirkan['isi_konfigurasi'] = $_POST['cuti_melahirkan'];
-        $ijin_pribadi['isi_konfigurasi'] = $_POST['ijin_pribadi'];
-        $ijin_duka['isi_konfigurasi'] = $_POST['ijin_duka'];
-        $ijin_dinas['isi_konfigurasi'] = $_POST['ijin_dinas'];
+        $cuti_tahunan['potong_cuti'] = $_POST['cuti_tahunan'];
+        $cuti_menikah['potong_cuti'] = $_POST['cuti_menikah'];
+        $cuti_melahirkan['potong_cuti'] = $_POST['cuti_melahirkan'];
+        $ijin_pribadi['potong_cuti'] = $_POST['ijin_pribadi'];
+        $ijin_duka['potong_cuti'] = $_POST['ijin_duka'];
+        $ijin_dinas['potong_cuti'] = $_POST['ijin_dinas'];
         $smtp_host['isi_konfigurasi'] = $_POST['smtp_host'];
         $smtp_port['isi_konfigurasi'] = $_POST['smtp_port'];
         $smtp_user['isi_konfigurasi'] = $_POST['smtp_user'];
@@ -57,12 +57,13 @@ class Pengaturan extends CI_Controller {
         $initial_name['isi_konfigurasi'] = $_POST['initial_name'];
         $tgl['tgl_edit'] = date("Y-m-d H:i:s");
 
-        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','cuti_tahunan',$cuti_tahunan);
-        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','cuti_menikah',$cuti_menikah);
-        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','cuti_melahirkan',$cuti_melahirkan);
-        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','ijin_pribadi',$ijin_pribadi);
-        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','ijin_duka',$ijin_duka);
-        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','ijin_dinas',$ijin_dinas);
+        $this->m_main->updateIN('db_ijincuti','id_ijincuti',1,$cuti_tahunan);
+        $this->m_main->updateIN('db_ijincuti','id_ijincuti',2,$cuti_menikah);
+        $this->m_main->updateIN('db_ijincuti','id_ijincuti',3,$cuti_melahirkan);
+        $this->m_main->updateIN('db_ijincuti','id_ijincuti',4,$ijin_pribadi);
+        $this->m_main->updateIN('db_ijincuti','id_ijincuti',5,$ijin_duka);
+        $this->m_main->updateIN('db_ijincuti','id_ijincuti',6,$ijin_dinas);
+
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_host',$smtp_host);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_port',$smtp_port);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_user',$smtp_user);

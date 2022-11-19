@@ -24,7 +24,7 @@ class Masterdata extends CI_Controller {
 				$row = [];
 				$row['No'] = $no;
 				$row['Kode'] = $list->kode;
-				$row['No_induk'] = $list->kode;
+				$row['No_induk'] = $list->nomor_induk;
 				$row['Nama'] = $list->nama_member;
 				$row['Gender'] = $list->gender;
 				$row['tempat_lahir'] = $list->tempat_lahir;
@@ -33,7 +33,7 @@ class Masterdata extends CI_Controller {
 				$row['Posisi'] = $list->nama_posisi;
 				$row['Alamat'] = $list->alamat;
 				$row['Nohp'] = $list->telp;
-				$row['sisa_cuti'] = $list->sisa_cuti;
+				$row['sisa_cuti'] = floatval($list->sisa_cuti);
 				$row['nama_bank'] = $list->nama_bank;
 				$row['nama_rek'] = $list->nama_rek;
 				$row['no_rek'] = $list->no_rek;
@@ -41,8 +41,11 @@ class Masterdata extends CI_Controller {
 				$row['Aksi'] = $list->id_account;
 				$row['IDposisi'] = $list->id_posisi.'-';
 				$row['AlamatLengkap'] = $list->alamat;
+				$row['Level'] = $list->level;
+				$row['Bagian'] = $list->bagian;
 				$row['id_posisi'] = $list->id_posisi;
 				$row['id_kota'] = $list->id_kota;
+				$row['KotaKlinik'] = $list->nama_kota;
 				$row['tgl_masuk'] = date_format(date_create($list->tgl_mulai_kerja),"d-m-Y");
 				$data[] = $row; 
 			// }
@@ -69,6 +72,8 @@ class Masterdata extends CI_Controller {
 				'nama_bank' => $_POST['nama_bank'],
 				'nama_rek' => $_POST['nama_rek'],
 				'no_rek' => $_POST['no_rek'],
+				'level' => $_POST['level'],
+				'bagian' => $_POST['bagian'],
 				'sisa_cuti' => $_POST['sisa_cuti'],
 				'password' => password_hash('12345678', PASSWORD_DEFAULT),
 				'tgl_mulai_kerja' => date_format(date_create($_POST['tgl_masuk']),"Y-m-d"),
@@ -110,6 +115,8 @@ class Masterdata extends CI_Controller {
 					'nama_bank' => $_POST['nama_bank'],
 					'nama_rek' => $_POST['nama_rek'],
 					'no_rek' => $_POST['no_rek'],
+					'level' => $_POST['level'],
+					'bagian' => $_POST['bagian'],
 					'sisa_cuti' => $_POST['sisa_cuti'],
 					'tgl_mulai_kerja' => date_format(date_create($_POST['tgl_masuk']),"Y-m-d"),
 					'tgl_edit' => date("Y-m-d H:i:s"),
@@ -185,12 +192,12 @@ class Masterdata extends CI_Controller {
 		echo json_encode($output);
 	}
     
-	//================= LEVEL MEMBER
-	public function read_level(){
-		$level = $this->m_auth->GetAllLevel();
+	//================= Jabatan
+	public function read_jabatan(){
+		$jabatan = $this->m_auth->GetAllLevel();
 		$data = [];
 		$no = 0;
-		foreach ($level as $list) {
+		foreach ($jabatan as $list) {
 			$no++;
 			$row = [];
 			$row['No'] = $no;
@@ -198,15 +205,17 @@ class Masterdata extends CI_Controller {
 			$row['Keterangan'] = $list->keterangan;
 			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
 			$row['Aksi'] = $list->id_posisi;
+			$row['id_atasan'] = $list->id_atasan;
 			$data[] = $row; 
 		}
 		$output = [ "data" => $data ];
 		echo json_encode($output);
 	}
 
-	public function add_level(){
+	public function add_jabatan(){
 		if(!empty($_POST['numb'])){
 			$datax = [
+				'id_atasan' => $_POST['list_atasan'],
 				'nama_posisi' => $_POST['nama_posisi'],
 				'keterangan' => $_POST['keterangan'],
 				'tgl_input' => date("Y-m-d H:i:s"),
@@ -249,9 +258,10 @@ class Masterdata extends CI_Controller {
         exit();
 	}
 
-	public function edit_level(){
+	public function edit_jabatan(){
 		if(!empty($_POST['numb'])){
 			$datax = [
+				'id_atasan' => $_POST['list_atasan'],
 				'nama_posisi' => $_POST['nama_posisi'],
 				'keterangan' => $_POST['keterangan'],
 				'tgl_edit' => date("Y-m-d H:i:s"),
@@ -292,7 +302,7 @@ class Masterdata extends CI_Controller {
         exit();
 	}
 	
-	public function remove_level(){
+	public function remove_jabatan(){
 		if(!empty($_POST['id_posisi'])){
 			if($_POST['id_posisi'] == 1 || $_POST['id_posisi'] == 2){
 				$output['message'] = "Data posisi tidak dapat dihapus!";
@@ -304,18 +314,18 @@ class Masterdata extends CI_Controller {
 					'id_account' => ID_ACCOUNT,
 				];
 				$qry = $this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$data);
-				$output['message'] = "Level member berhasil di hapus!";
+				$output['message'] = "Jabatan berhasil di hapus!";
 				$output['result'] = "success";
 			}
 		}else{
-			$output['message'] = "Data id level tidak tersedia!";
+			$output['message'] = "Data id jabatan tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function restore_level(){
+	public function restore_jabatan(){
 		if(!empty($_POST['id_posisi'])){
 			$data = [
 				'status' => 1,
@@ -323,31 +333,31 @@ class Masterdata extends CI_Controller {
 				'id_account' => ID_ACCOUNT,
 			];
 			$qry = $this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$data);
-			$output['message'] = "Level member berhasil di pulihkan!";
+			$output['message'] = "Jabatan berhasil di pulihkan!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id level tidak tersedia!";
+			$output['message'] = "Data id jabatan tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function delete_level(){
+	public function delete_jabatan(){
 		if(!empty($_POST['id_posisi'])){
 			$this->m_main->deleteIN('db_posisi','id_posisi',$_POST['id_posisi']);
-			$output['message'] = "Level member berhasil di hapus permanen!";
+			$output['message'] = "Jabatan berhasil di hapus permanen!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id level tidak tersedia!";
+			$output['message'] = "Data id jabatan tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 
-	public function list_level(){
-		$id_level = $_POST['id_level'];
+	public function list_jabatan(){
+		$id_level = $_POST['id_jabatan'];
 		$html = '';
 		$no = 0;
 		$menu = $this->m_auth->GetLevelMenu();
@@ -501,7 +511,7 @@ class Masterdata extends CI_Controller {
 		echo json_encode($output);
 	}
 	
-    //================= KEGIATAN/PENGUMUMAN
+    //================= KEGIATAN
 	public function read_kegiatan(){
 		$kegiatan = $this->m_main->readIN('db_kegiatan');
 		$data = [];

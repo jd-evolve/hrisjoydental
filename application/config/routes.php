@@ -13,9 +13,13 @@ $route['newpassword'] = 'home/newpassword';
 $route['dashboard'] = 'menu/dashboard';
 $route['profil'] = 'menu/profil';
 $route['member'] = 'menu/member';
-$route['level-member'] = 'menu/level_member';
+$route['jabatan'] = 'menu/jabatan';
 $route['kota-klinik'] = 'menu/kota_klinik';
 $route['kegiatan-pengumuman'] = 'menu/kegiatan_pengumuman';
+
+$route['acc-atasan'] = 'menu/acc_atasan';
+$route['acc-personalia'] = 'menu/acc_personalia';
+$route['rekap-ijincuti'] = 'menu/rekap_ijincuti';
 $route['cuti-tahunan'] = 'menu/cuti_tahunan';
 $route['cuti-menikah'] = 'menu/cuti_menikah';
 $route['cuti-melahirkan'] = 'menu/cuti_melahirkan';

@@ -35,6 +35,9 @@
 
             <?php
                 $ijincuti = array(
+                    'acc-atasan',
+                    'acc-personalia',
+                    'rekap-ijincuti',
                     'cuti-tahunan',
                     'cuti-menikah',
                     'cuti-melahirkan',
@@ -45,7 +48,7 @@
 
                 $masterdata = array(
                     'member',
-                    'level-member',
+                    'jabatan',
                     'kota-klinik',
                     'kegiatan-pengumuman',
                 );
@@ -80,6 +83,21 @@
                     </a>
                     <div id="ijin_cuti" <?= in_array($uri_path, $ijincuti) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['acc-atasan'] ? 'gone' : '' ?> <?= $uri_path == "acc-atasan"? 'active' : '' ?>">
+                                <a href="<?= base_url('acc-atasan') ?>">
+                                    <span class="sub-item">ACC Atasan</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['acc-personalia'] ? 'gone' : '' ?> <?= $uri_path == "acc-personalia"? 'active' : '' ?>">
+                                <a href="<?= base_url('acc-personalia') ?>">
+                                    <span class="sub-item">ACC Personalia</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['rekap-ijincuti'] ? 'gone' : '' ?> <?= $uri_path == "rekap-ijincuti"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-ijincuti') ?>">
+                                    <span class="sub-item">Rekap Ijin/Cuti</span>
+                                </a>
+                            </li>
                             <li class="<?= !$cekmenu['cuti-tahunan'] ? 'gone' : '' ?> <?= $uri_path == "cuti-tahunan"? 'active' : '' ?>">
                                 <a href="<?= base_url('cuti-tahunan') ?>">
                                     <span class="sub-item">Cuti Tahunan</span>
@@ -127,9 +145,9 @@
                                     <span class="sub-item">Member</span>
                                 </a>
                             </li>
-                            <li class="<?= !$cekmenu['level-member'] ? 'gone' : '' ?> <?= $uri_path == "level-member"? 'active' : '' ?>">
-                                <a href="<?= base_url('level-member') ?>">
-                                    <span class="sub-item">Level Member</span>
+                            <li class="<?= !$cekmenu['jabatan'] ? 'gone' : '' ?> <?= $uri_path == "jabatan"? 'active' : '' ?>">
+                                <a href="<?= base_url('jabatan') ?>">
+                                    <span class="sub-item">Jabatan</span>
                                 </a>
                             </li>
                             <li class="<?= !$cekmenu['kota-klinik'] ? 'gone' : '' ?> <?= $uri_path == "kota-klinik"? 'active' : '' ?>">
@@ -139,7 +157,7 @@
                             </li>
                             <li class="<?= !$cekmenu['kegiatan-pengumuman'] ? 'gone' : '' ?> <?= $uri_path == "kegiatan-pengumuman"? 'active' : '' ?>">
                                 <a href="<?= base_url('kegiatan-pengumuman') ?>">
-                                    <span class="sub-item">Kegiatan Pengumuman</span>
+                                    <span class="sub-item">Kegiatan</span>
                                 </a>
                             </li>
                         </ul>

@@ -82,16 +82,17 @@ class Menu extends CI_Controller {
 		}
     }
 	
-    public function level_member(){
+    public function jabatan(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
 			$data['vrs'] = U_VERSI; 
-			$data['title'] = 'Level Member';
+			$data['title'] = 'Jabatan';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['kota'] = $this->m_main->getRow('db_kota','id_kota',ID_KOTA);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['atasan'] = $this->m_auth->GetAtasan();
 			$this->load->view('layout/header', $data);
-			$this->load->view('masterdata/level_member');
+			$this->load->view('masterdata/jabatan');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');
@@ -115,11 +116,56 @@ class Menu extends CI_Controller {
     public function kegiatan_pengumuman(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
 			$data['vrs'] = U_VERSI; 
-			$data['title'] = 'Kegiatan Pengumuman';
+			$data['title'] = 'Kegiatan';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['cekmenu'] = $this->DataLevel();
 			$this->load->view('layout/header', $data);
 			$this->load->view('masterdata/kegiatan_pengumuman');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function acc_atasan(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'ACC Atasan';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/acc_atasan');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function acc_personalia(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'ACC Personalia';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/acc_personalia');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function rekap_ijincuti(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Rekap Ijin Cuti';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('ijincuti/rekap_ijincuti');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');

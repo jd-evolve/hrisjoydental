@@ -153,7 +153,7 @@
             <div class="card">
                 <div class="card-body">
                     <div id="calendar" class="text-center"></div>
-                    <div class="card-title fw-mediumbold mt-2">Kegiatan Pengumuman</div>
+                    <div class="card-title fw-mediumbold mt-2">Kegiatan</div>
                     
                     <div class="tableBodyScroll" style="height: 422.7px;">
                         <ol class="activity-feed" id="list_kegiatan">

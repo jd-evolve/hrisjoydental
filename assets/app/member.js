@@ -16,7 +16,7 @@
         ],
         columnDefs: [
             {
-                "targets": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+                "targets": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
                 "orderable": false,
                 "visible": false
             },
@@ -85,6 +85,7 @@
                     +'Action'
                 +'</button>'
                 +'<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">'
+                    +'<a class="dropdown-item pointer member-lihat" data-id="'+data+'" id="member-lihat"> <i class="fas fa-eye"></i> Lihat</a>'
                     +'<a class="dropdown-item pointer member-edit" data-id="'+data+'" id="member-edit"> <i class="fas fa-pen"></i> Edit</a>'
                     +'<a class="dropdown-item pointer member-restore" data-id="'+data+'" id="member-restore"> <i class="fas fa-undo-alt"></i> Restore</a>'
                     +'<a class="dropdown-item pointer member-remove" data-id="'+data+'" id="member-remove"> <i class="fas fa-trash"></i> Remove</a>'
@@ -108,6 +109,9 @@
             { data: "id_kota" },
             { data: "tempat_lahir" },
             { data: "tgl_lahir" },
+            { data: "Bagian" },
+            { data: "KotaKlinik" },
+            { data: "Level" },
         ],
         fnDrawCallback:function(){
             $.ajax({
@@ -233,6 +237,8 @@
 		$('input[name="no_rek"]').val('');
 		$('input[name="nama_rek"]').val('');
 		$('input[name="sisa_cuti"]').val('');
+        $('select[name="level"]').val('');
+        $('select[name="bagian"]').val('');
         $('select[name="posisi"]').val('');
         $('select[name="kota"]').val('');
 		$('input[name="tgl_masuk"]').val(moment().format("DD-MM-YYYY"));
@@ -265,7 +271,32 @@
         });
     });
     
-    $('#member-edit').on('click', function(){
+    $('body').on('click','#member-lihat',function(){
+        $("#modal-lihat").modal();
+        let id_account = $(this).data('id');
+		var data = table_member.row($(this).parents("tr")).data();
+        document.getElementById("text-lihat").innerHTML = "Data account : <b>"+data["Nama"]+'</b>';
+		$("#show-kode").html(data["Kode"]);
+		$("#show-nomor_induk").html(data["No_induk"]);
+        $("#show-gender").html(data["Gender"] != 0 ? 'Laki-Laki' : 'Perempuan');
+		$("#show-tempat_lahir").html(data["tempat_lahir"]);
+		$("#show-tgl_lahir").html(data["tgl_lahir"]);
+		$("#show-nama_bank").html(data["nama_bank"]);
+		$("#show-no_rek").html(data["no_rek"]);
+		$("#show-nama_rek").html(data["nama_rek"]);
+		$("#show-sisa_cuti").html(data["sisa_cuti"]);
+		$("#show-nama").html(data["Nama"]);
+		$("#show-email").html(data["Email"]);
+		$("#show-telp").html(data["Nohp"]);
+		$("#show-alamat").html(data["AlamatLengkap"]);
+		$("#show-tgl_masuk").html(data["tgl_masuk"]);
+        $("#show-level").html(data["Level"] == 1 ? 'Staff' : 'Atasan');
+        $("#show-bagian").html(data["Bagian"]);
+        $("#show-posisi").html(data["Posisi"]);
+        $("#show-kota_klinik").html(data["KotaKlinik"]);
+    });
+    
+    $('body').on('click','#member-edit', function(){
         $("#modal-member").modal();
         let id_account = $(this).data('id');
         document.getElementById("text-member").innerHTML = "Ubah Member";
@@ -284,6 +315,8 @@
 		$('input[name="nohp"]').val(data["Nohp"]);
 		$('input[name="alamat"]').val(data["AlamatLengkap"]);
 		$('input[name="tgl_masuk"]').val(data["tgl_masuk"]);
+        $('select[name="level"]').val(data["Level"]);
+        $('select[name="bagian"]').val(data["Bagian"]);
         $('select[name="posisi"]').val(data["id_posisi"]);
         $('select[name="kota"]').val(data["id_kota"]);
 
@@ -317,17 +350,17 @@
         });
     });
 
-    $('#member-restore').on('click', function(){
+    $('body').on('click','#member-restore', function(){
         let id_account = $(this).data('id');
         action('restore_member',id_account,'Member akan dikembalikan ke daftar data aktif!');
     });
 
-    $('#member-remove').on('click', function(){
+    $('body').on('click','#member-remove', function(){
         let id_account = $(this).data('id');
         action('remove_member',id_account,'Member akan dihapus dari daftar data aktif!');
     });
 
-    $('#member-delete').on('click', function(){
+    $('body').on('click','#member-delete', function(){
         let id_account = $(this).data('id');
         action('delete_member',id_account,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });

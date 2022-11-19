@@ -1,33 +1,4 @@
-(function($) {
-    var id_ijincuti = 4; //Ijin Pribadi
-
-    $("#persetujuan").click(function() {
-        $('.notif').addClass('none');
-    });
-    $('#setuju_sop').on("click", function(){
-        if($('#persetujuan').is(":checked")){
-            $('#nav1').removeClass('active');
-            $('#nav2').addClass('active');
-            $('#nav3').removeClass('active');
-            $('#show-nav1').addClass('none');
-            $('#show-nav2').removeClass('none');
-            $('#show-nav3').addClass('none');
-        } else {
-            $('.notif').removeClass('none');
-        }
-    });
-    $('#nav2').on("click", function(){
-        if($('#persetujuan').is(":checked")){
-            $('#nav1').removeClass('active');
-            $('#nav2').addClass('active');
-            $('#nav3').removeClass('active');
-            $('#show-nav1').addClass('none');
-            $('#show-nav2').removeClass('none');
-            $('#show-nav3').addClass('none');
-        } else {
-            $('.notif').removeClass('none');
-        }
-    });
+(function ($) {
     $('#nav1').on("click", function(){
         $('#nav1').addClass('active');
         $('#nav2').removeClass('active');
@@ -35,6 +6,16 @@
         $('#show-nav1').removeClass('none');
         $('#show-nav2').addClass('none');
         $('#show-nav3').addClass('none');
+        table_accatasan('0');
+    });
+    $('#nav2').on("click", function(){
+        $('#nav1').removeClass('active');
+        $('#nav2').addClass('active');
+        $('#nav3').removeClass('active');
+        $('#show-nav1').addClass('none');
+        $('#show-nav2').removeClass('none');
+        $('#show-nav3').addClass('none');
+        table_accatasan('z');
     });
     $('#nav3').on("click", function(){
         $('#nav1').removeClass('active');
@@ -43,91 +24,30 @@
         $('#show-nav1').addClass('none');
         $('#show-nav2').addClass('none');
         $('#show-nav3').removeClass('none');
+        table_accatasan('3');
     });
 
-    Inputmask("datetime", {
-        inputFormat: "dd-mm-yyyy HH:MM",
-        placeholder: "_",
-        leapday: "-02-29",
-        alias: "tt.mm.jjjj"
-    }).mask('.tgl-wkt');
-
-    $('#setuju_sop').on("click", function(){
-        if($('#persetujuan').is(":checked")){
-            $('#nav1').removeClass('active');
-            $('#nav2').addClass('active');
-            $('#nav3').removeClass('active');
-            $('#show-nav1').addClass('none');
-            $('#show-nav2').removeClass('none');
-            $('#show-nav3').addClass('none');
-        } else {
-            $('.notif').removeClass('none');
-        }
-    });
-    
-    $('#ajukan_form').on('click',function (e) {
-        e.preventDefault();
-        var cek_tgl_mulai = $('input[name="tgl_mulai"]').val().search("_");
-        var cek_tgl_akhir = $('input[name="tgl_akhir"]').val().search("_");
-        if(cek_tgl_mulai == -1 && cek_tgl_akhir == -1){
-            let validasi = document.getElementById("form-ijincuti").reportValidity();
-            if(validasi){
-                $("#ajukan_form").prop( "disabled",true);
-                var formData = new FormData(document.querySelector("#form-ijincuti"));
-                formData.append("id_ijincuti", id_ijincuti);
-                $.ajax({
-                    url: "ijincuti/add_ijincuti",
-                    method: "POST",
-                    data: formData,
-                    dataType: "json",
-                    processData: false,
-                    contentType: false,
-                    success: function (json) {
-                        let result = json.result;
-                        let message = json.message;
-                        if (result=="error") { $("#ajukan_form").prop( "disabled",false); }
-                        notif(result, message, 1);
-                    },
-                });
-            }else{
-                $("#ajukan_form").prop( "disabled",false);
-            }
-        }else{
-            notif('error', 'Format tanggal tidak sesuai!');
-        }
-    });
-
-    $('select[name="filter-status"]').change(function() {
-        var status = $('select[name="filter-status"]').val();
-        table_ijin(status);
-    });
-
-    table_ijin('x');
-    function table_ijin(status){
-        var table_ijincuti = $("#datatable-ijincuti").DataTable({
+    table_accatasan('0');
+    function table_accatasan(status){
+        var table_accatasan = $("#datatable-accatasan").DataTable({
             ajax: {
-                url: "ijincuti/read_ijincuti",
+                url: "ijincuti/read_accatasan",
                 type: "POST",
-                data: { 
-                    id_ijincuti: id_ijincuti,
+                data: {
                     status: status
                 },
             },
             order: [],
             ordering: false,
             bDestroy: true,
+            processing: true,
             bAutoWidth: false,
             deferRender: true,
             aLengthMenu: [
-                [10, 30, 50, -1],
-                [10, 30, 50, "All"],
+                [20, 40, 60, -1],
+                [20, 40, 60, "All"],
             ],
             columnDefs: [
-                {
-                    "targets": [6,7,8,9,10,11,12,13],
-                    "orderable": false,
-                    "visible": false
-                },
                 {
                     "targets": '_all',
                     "createdCell": function(td, cellData, rowData, row, col) {
@@ -138,7 +58,7 @@
             ],
             language: {
                 search: "_INPUT_",
-                emptyTable: "Belum ada daftar ijin/cuti!",
+                emptyTable: "Belum ada daftar pengajuan!",
                 infoEmpty: "Tidak ada data untuk ditampilkan!",
                 info: "_START_ to _END_ of _TOTAL_ entries",
                 infoFiltered: ""
@@ -148,13 +68,14 @@
             columns: [
                 { data: "No" },
                 { data: "Tanggal" },
-                { data: "Cuti" },
-                { data: "Keperluan" },
+                { data: "IjinCuti" },
+                { data: "Karyawan" },
+                { data: "Bagian" },
                 { data: "Status" , render : function ( data, type, row, meta ) {
                     var stts = "";
-                    if(data == 0 || data == 1){
+                    if(data == 0){
                         stts = '<span class="btn btn-warning fw-bold btn-xs py-0 px-1">Diajukan</span>';
-                    }else if(data == 2){
+                    }else if(data == 1 || data == 2){
                         stts = '<span class="btn btn-success fw-bold btn-xs py-0 px-1">Disetujui</span>';
                     }else if(data == 3){
                         stts = '<span class="btn btn-danger fw-bold btn-xs py-0 px-1">Ditolak</span>';
@@ -163,27 +84,44 @@
                 }},
                 { data: "Aksi" , render : function ( data, type, row, meta ) {
                     return type === 'display'  ?
-                    '<a class="btn btn-default btn-sm btn-link" id="show-form" data-id="'+data+'">'
-                        +'<span class="btn-label just-icon"><i class="fas fa-eye"></i> </span>'
-                    +'</a>' : data;
+                    '<button type="button" data-id="'+data+'" id="show-detail" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
+                        '<i class="fa fa-eye"></i>'+
+                    '</button>':
+                    data;
                 }},
-                { data: "Status" },
-                { data: "tgl_create" },
-                { data: "tgl_mulai" },
-                { data: "tgl_akhir" },
-                { data: "total_hari" },
-                { data: "total_jam" },
-                { data: "file" },
-                { data: "alasan_ditolak" },
             ],
-            rowCallback:function(row,data,index){
-                $('td', row).eq(1).addClass('text-center');
-            },
         });
         
-        $('body').on('click','#show-form', function(){
+        $('#filter-search').keyup(function(){
+            var src = $('input[name="filter-search"]').val().toLowerCase();
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                if (~data[2].toLowerCase().indexOf(src))
+                    return true;
+                if (~data[3].toLowerCase().indexOf(src))
+                    return true;
+                if (~data[4].toLowerCase().indexOf(src))
+                    return true;
+                return false;
+            })
+            table_accatasan.draw(); 
+            $.fn.dataTable.ext.search.pop();
+        });
+        
+        $('body').on('click','#show-detail', function(){
             $("#modal-showform").modal();
             let id_ijincuti_list = $(this).data('id');
+            $("#btn-setujui").attr('data-id',id_ijincuti_list);
+            $("#btn-tolak").attr('data-id',id_ijincuti_list);
+            show_form(id_ijincuti_list);
+            
+        });
+
+        function show_form(id_ijincuti_list){
+            if(status != 0){
+                $("#show-button").addClass('none');
+            }else{
+                $("#show-button").removeClass('none');
+            }
             $.ajax({
                 url: 'ijincuti/detail_ijincuti',
                 method: "POST",
@@ -192,6 +130,8 @@
                     id_ijincuti_list: id_ijincuti_list
                 },
                 success: function (data) {
+                    $("#show-tgl_create").html(data.tgl_create);
+
                     var stts = "";
                     if(data.status == 0 || data.status == 1){
                         stts = '<span class="btn btn-warning fw-bold btn-xs py-0 px-1">Diajukan</span>';
@@ -207,6 +147,10 @@
                     $("#show-tgl_akhir").html(data.tgl_akhir);
                     $("#show-total_hari").html(data.total_hari);
                     $("#show-total_jam").html(data.total_jam);
+
+                    $("#show-karyawan").html(data.karyawan);
+                    $("#show-jabatan").html(data.jabatan);
+                    $("#show-bagian").html(data.bagian);
         
                     if(data.file == '-'){
                         $("#show-file").html('-');
@@ -220,7 +164,7 @@
                     }else{
                         $('.alasan-ditolak').addClass('none');
                     }
-
+                    
                     var disetujui = '<span class="btn btn-success fw-bold btn-xs py-0 px-1">Menyetujui</span>';
                     var ditolak = '<span class="btn btn-danger fw-bold btn-xs py-0 px-1">Menolak</span>';
                     var diproses = '<span class="btn btn-default fw-bold btn-xs py-0 px-1">. . . . . . .</span>';
@@ -242,10 +186,9 @@
                             $("#cek-personalia").html(diproses+'<br><span>'+data.nama_personalia+'</span>');
                         }
                     }
-
                 },
             });
-        });
+        }
         
         $('body').on('click','#btn-file' ,function(e){
             e.preventDefault();
@@ -255,6 +198,83 @@
             $('body').on('click','.close', function(){
                 $('.mask').attr('style','');
             });
+        });
+
+        $('body').on('click','#btn-setujui' ,function(e){
+            e.preventDefault();
+            let id_ijincuti_list = $(this).data('id');
+            action('accatasan_ijincuti',id_ijincuti_list,'Pastikan form pengajuan telah sesuai dengan ketentuan!');
+        });
+
+        $('body').on('click','#btn-tolak' ,function(e){
+            e.preventDefault();
+            $("#modal-showform").modal('hide');
+            $("#modal-batal").modal('show');
+            let id_ijincuti_list = $(this).data('id');
+            $("body").on("click", "#lanjutkan", function(e){
+                e.preventDefault();
+                if($("#form-alasan-batal").valid()){
+                    $("#modal-batal").modal('hide');
+                    var alasan_ditolak = document.getElementById("alasan-batal").value;
+                    $.ajax({
+                        url: 'ijincuti/tolakatasan_ijincuti',
+                        method: "POST",
+                        dataType: "json",
+                        data: {
+                            id_ijincuti_list: id_ijincuti_list,
+                            alasan_ditolak: alasan_ditolak
+                        },
+                        success: function (json) {
+                            let result = json.result;
+                            let message = json.message;
+                            notif(result, message,1);
+                        },
+                    });
+                }
+            });
+            $("body").on("click", "#kembali", function(e){
+                e.preventDefault();
+                $("#modal-showform").modal('show');
+                $("#modal-batal").modal('hide');
+                show_form(id_ijincuti_list);
+            });
+        });
+    }
+
+    function action(urlfunc,id_ijincuti_list,text){
+        swal({
+            title: "Apakah anda yakin?",
+            text: text,
+            type: "warning",
+            buttons: {
+                cancel: {
+                    visible: true,
+                    text: "Kembali",
+                    className: "btn btn-danger",
+                },
+                confirm: {
+                    text: "Setujui",
+                    className: "btn btn-success",
+                },
+            },
+        }).then((Delete) => {
+            if (Delete) {
+                $.ajax({
+                    url: "ijincuti/"+urlfunc,
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        id_ijincuti_list: id_ijincuti_list
+                    },
+                    success: function (json) {
+                        let result = json.result;
+                        let message = json.message;
+                        notif(result, message,1);
+                    },
+                });
+            } else {
+                swal.close();
+            }
         });
     }
 
@@ -272,7 +292,7 @@
                 setTimeout(() => {
                     window.location.reload();
                 }, 1000);
-            }
+            } 
         } else {
             swal("Faild", message, {
                 icon: "error",

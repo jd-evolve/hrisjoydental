@@ -16,7 +16,7 @@
         </ul>
     </div>
     
-    <div id="show-level">
+    <div id="show-jabatan">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -40,7 +40,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <table id="datatable-level" class="table-responsive display nowrap table table-striped table-hover" >
+                <table id="datatable-jabatan" class="table-responsive display nowrap table table-striped table-hover" >
                     <thead>
                         <tr>
                             <th style="width:5%;">No</th>
@@ -56,10 +56,10 @@
         </div>
     </div>
 
-    <div class="none" id="aksi-level">
+    <div class="none" id="aksi-jabatan">
         <div class="card">
             <div class="card-body">
-                <form id="form-level" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
+                <form id="form-jabatan" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                     <div class="table-responsive">
                         <div>
                             <input type="hidden" name="numb">
@@ -74,15 +74,26 @@
                                         <td style="width:20%;">Keterangan</td>
                                         <td><input type="text" class="form-control input-full" name="keterangan" placeholder="Keteranga" required></td>
                                     </tr>
+                                    <tr>
+                                        <td style="width:20%;">Atasan</td>
+                                        <td>
+                                            <select class="form-control" name="list_atasan" id="list_atasan" required>
+                                                <option value="">Pilih Atasan</option>
+                                                <?php foreach ($atasan as $list){ ?>
+                                                    <option value="<?= $list->id_atasan ?>"><?= $list->nama_atasan ?></option>
+                                                <?php } ?> 
+                                            </select>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </form>
-                <form id="form-level-list" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
+                <form id="form-jabatan-list" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                     <div class="table-responsive">
                         <div>
-                            <table class="table table-bordered table-hover cusped" id="table-level-member">
+                            <table class="table table-bordered table-hover cusped" id="table-jabatan">
                                 <tbody class="nowraping">
                                     <tr class="text-center">
                                         <th colspan="2">
@@ -99,10 +110,10 @@
                 </form>
             </div>
             <div class="card-action text-right p-3">
-                <button class="btn btn-secondary" type="submit" id="simpan_level">
+                <button class="btn btn-secondary" type="submit" id="simpan_jabatan">
                     <span class="btn-label mr-2"><i id="spin" class="fa fa-plus"></i></span>Simpan Data
                 </button>
-                <button class="btn btn-secondary" type="button" id="update_level">
+                <button class="btn btn-secondary" type="button" id="update_jabatan">
                     <span class="btn-label mr-2"><i id="spin" class="fa fa-plus"></i></span>Simpan Perubahan
                 </button>
             </div>

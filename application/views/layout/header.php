@@ -10,7 +10,7 @@
 	<meta content="" name="keywords">
 	
 	<!-- Favicons -->
-	<link rel="icon" href="<?= base_url() ?>assets/img/favicon.ico" type="image/x-icon"/>
+	<link rel="icon" href="<?= base_url() ?>assets/img/icon.png" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
 	<script src="<?= base_url() ?>assets/js/plugin/webfont/webfont.min.js"></script>

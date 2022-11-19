@@ -61,7 +61,7 @@
                 exportOptions: {
                     columns: [0,1,2,3],
                 },
-                messageTop: "List Kegiatan/Pengumuman",
+                messageTop: "List Kegiatan",
             },
             {
                 className: "btn btn-secondary wid-max-select text-white",
@@ -220,7 +220,7 @@
 
     });
     
-    $('#kegiatan-edit').on('click', function(){
+    $('body').on('click','#kegiatan-edit', function(){
         $("#modal-kegiatan").modal();
         let id_kegiatan = $(this).data('id');
         document.getElementById("text-kegiatan").innerHTML = "Ubah kegiatan";
@@ -257,17 +257,17 @@
         });
     });
 
-    $('#kegiatan-restore').on('click', function(){
+    $('body').on('click','#kegiatan-restore', function(){
         let id_kegiatan = $(this).data('id');
         action('restore_kegiatan',id_kegiatan,'Data kegiatan akan dikembalikan ke daftar kegiatan aktif!');
     });
 
-    $('#kegiatan-remove').on('click', function(){
+    $('body').on('click','#kegiatan-remove', function(){
         let id_kegiatan = $(this).data('id');
         action('remove_kegiatan',id_kegiatan,'Data kegiatan akan dihapus dari daftar kegiatan aktif');
     });
 
-    $('#kegiatan-delete').on('click', function(){
+    $('body').on('click','#kegiatan-delete', function(){
         let id_kegiatan = $(this).data('id');
         action('delete_kegiatan',id_kegiatan,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });

@@ -1,7 +1,7 @@
 (function ($) {
-    var table_level = $("#datatable-level").DataTable({
+    var table_jabatan = $("#datatable-jabatan").DataTable({
         ajax: {
-            url: "masterdata/read_level",
+            url: "masterdata/read_jabatan",
             type: "GET",
         },
         order: [],
@@ -16,7 +16,7 @@
         ],
         columnDefs: [
             {
-                "targets": [4],
+                "targets": [4,5],
                 "orderable": false,
                 "visible": false
             },
@@ -30,7 +30,7 @@
         ],
         language: {
             search: "_INPUT_",
-            emptyTable: "Belum ada daftar level member!",
+            emptyTable: "Belum ada daftar jabatan!",
             infoEmpty: "Tidak ada data untuk ditampilkan!",
             info: "_START_ to _END_ of _TOTAL_ entries",
             infoFiltered: ""
@@ -39,9 +39,9 @@
         buttons: [
             {
                 className: "btn btn-warning wid-max-select text-white",
-                text: '<i class="fas fa-plus mr-2"></i> Tambah Level',
+                text: '<i class="fas fa-plus mr-2"></i> Tambah Jabatan',
                 attr:  {
-                    id: 'tambah_level'
+                    id: 'tambah_jabatan'
                 }
             },
             {
@@ -61,13 +61,13 @@
                 exportOptions: {
                     columns: [0,1,2],
                 },
-                messageTop: "List Level Member",
+                messageTop: "List Jabatan",
             },
             {
                 className: "btn btn-secondary wid-max-select text-white",
                 text: '<i class="fas fa-sync-alt mr-2"></i> Refresh',
                 action: function (e, dt, node, config) {
-                    table_level.ajax.reload();
+                    table_jabatan.ajax.reload();
                 },
             },
         ],
@@ -82,29 +82,30 @@
                     +'Action'
                 +'</button>'
                 +'<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">'
-                    +'<a class="dropdown-item pointer level-edit" data-id="'+data+'" id="level-edit"> <i class="fas fa-pen"></i> Edit</a>'
-                    +'<a class="dropdown-item pointer level-remove" data-id="'+data+'" id="level-remove"> <i class="fas fa-trash"></i> Remove</a>'
-                    +'<a class="dropdown-item pointer level-restore" data-id="'+data+'" id="level-restore"> <i class="fas fa-undo-alt"></i> Restore</a>'
-                    +'<a class="dropdown-item pointer level-delete" data-id="'+data+'" id="level-delete"> <i class="fas fa-trash-alt"></i> Delete</a>'
+                    +'<a class="dropdown-item pointer jabatan-edit" data-id="'+data+'" id="jabatan-edit"> <i class="fas fa-pen"></i> Edit</a>'
+                    +'<a class="dropdown-item pointer jabatan-remove" data-id="'+data+'" id="jabatan-remove"> <i class="fas fa-trash"></i> Remove</a>'
+                    +'<a class="dropdown-item pointer jabatan-restore" data-id="'+data+'" id="jabatan-restore"> <i class="fas fa-undo-alt"></i> Restore</a>'
+                    +'<a class="dropdown-item pointer jabatan-delete" data-id="'+data+'" id="jabatan-delete"> <i class="fas fa-trash-alt"></i> Delete</a>'
                 +'</div>'
                 +'</div>':
                 data;
             }},
             { data: "Status" },
+            { data: "id_atasan" },
         ],
         fnDrawCallback:function(){
             var sta = $('select[name="filter-status"]').val().toLowerCase();
             let style = 'display:none;';
             if(sta == 'aktif-'){
-                $('.level-edit').attr('style','');
-                $('.level-restore').attr('style',style);
-                $('.level-remove').attr('style','');
-                $('.level-delete').attr('style',style);
+                $('.jabatan-edit').attr('style','');
+                $('.jabatan-restore').attr('style',style);
+                $('.jabatan-remove').attr('style','');
+                $('.jabatan-delete').attr('style',style);
             }else if(sta == 'hapus-'){
-                $('.level-edit').attr('style',style);
-                $('.level-restore').attr('style','');
-                $('.level-remove').attr('style',style);
-                $('.level-delete').attr('style',style);
+                $('.jabatan-edit').attr('style',style);
+                $('.jabatan-restore').attr('style','');
+                $('.jabatan-remove').attr('style',style);
+                $('.jabatan-delete').attr('style',style);
             }
         },
     });
@@ -133,7 +134,7 @@
                 
             return false;
         })
-        table_level.draw(); 
+        table_jabatan.draw(); 
         $.fn.dataTable.ext.search.pop();
     }
 
@@ -142,10 +143,10 @@
         var sta = $('select[name="filter-status"]').val().toLowerCase();
         
         if(src != undefined){
-            $('#datatable-level').DataTable().search(src).draw();
+            $('#datatable-jabatan').DataTable().search(src).draw();
         }
         if(sta != undefined){
-            $('#datatable-level').DataTable().search(sta).draw();
+            $('#datatable-jabatan').DataTable().search(sta).draw();
         }
     }
 
@@ -157,14 +158,30 @@
             $('.cb').attr("disabled",false);
         }
     });
+    
+    $("#list_atasan").select2({width: '100%'});
+    $(".select2-selection--single").css({
+        "height":"calc(2.25rem + 2px)", 
+        "padding":"0.3rem 0.4rem", 
+        "line-height":"1.5", 
+        "max-width":"100%",
+        "border": "white"
+    });
+    $(".select2-selection__arrow").css({"top":"7px"});
+    $(".select2-container").css({
+        "max-width":"100%",
+        "background": "white", 
+        "border": "1px solid #ebedf2", 
+        "border-radius": "4px"
+    });
 
-    $('#tambah_level').on('click', function(){
-        document.getElementById("show-level").style.display = "none";
-        document.getElementById("aksi-level").style.display = "unset";
-        document.getElementById("update_level").style.display = "none";
-        document.getElementById("simpan_level").style.display = "unset";
-        document.getElementById("simpan_level").type = "submit";
-        document.getElementById("update_level").type = "button";
+    $('#tambah_jabatan').on('click', function(){
+        document.getElementById("show-jabatan").style.display = "none";
+        document.getElementById("aksi-jabatan").style.display = "unset";
+        document.getElementById("update_jabatan").style.display = "none";
+        document.getElementById("simpan_jabatan").style.display = "unset";
+        document.getElementById("simpan_jabatan").type = "submit";
+        document.getElementById("update_jabatan").type = "button";
         $('.cb').attr("disabled",true);
         $('.cb').prop("checked",false);
         $('input[name="cb-0"]').prop("checked",true);
@@ -173,29 +190,29 @@
         $('input[name="id_posisi"]').val('');
         
         $.ajax({
-            url: "masterdata/list_level",
+            url: "masterdata/list_jabatan",
             method: "POST",
             dataType: "json",
             data: {
-                id_level: null
+                id_jabatan: null
             },
             success: function (jsno) {
-                $("#table-level-member tbody").html(jsno.html);
+                $("#table-jabatan tbody").html(jsno.html);
                 $('input[name="numb"]').val(jsno.numb);
             },
         });
 
-        $("#simpan_level").on("click", function (e) {
+        $("#simpan_jabatan").on("click", function (e) {
             e.preventDefault();
-            let validasi = document.getElementById("form-level").reportValidity();
+            let validasi = document.getElementById("form-jabatan").reportValidity();
             if (validasi) {
-                var formData = new FormData(document.querySelector("#form-level"));
-                var checkbox = $("#form-level-list").find("input[type=checkbox]");
+                var formData = new FormData(document.querySelector("#form-jabatan"));
+                var checkbox = $("#form-jabatan-list").find("input[type=checkbox]");
                 $.each(checkbox, function(key, val) {
                     formData.append($(val).attr('name'), $(this).is(':checked')+','+$(val).attr('value'))
                 });
                 $.ajax({
-                    url: "masterdata/add_level",
+                    url: "masterdata/add_jabatan",
                     method: "POST",
                     data: formData,
                     dataType: "json",
@@ -212,44 +229,45 @@
         });
     });
 
-    $('#level-edit').on('click', function(){
-        document.getElementById("show-level").style.display = "none";
-        document.getElementById("aksi-level").style.display = "unset";
-        document.getElementById("update_level").style.display = "unset";
-        document.getElementById("simpan_level").style.display = "none";
-        document.getElementById("simpan_level").type = "button";
-        document.getElementById("update_level").type = "submit";
+    $('body').on('click','#jabatan-edit', function(){
+        document.getElementById("show-jabatan").style.display = "none";
+        document.getElementById("aksi-jabatan").style.display = "unset";
+        document.getElementById("update_jabatan").style.display = "unset";
+        document.getElementById("simpan_jabatan").style.display = "none";
+        document.getElementById("simpan_jabatan").type = "button";
+        document.getElementById("update_jabatan").type = "submit";
 
-        let id_level = $(this).data('id');
-        let data = table_level.row($(this).parents("tr")).data();
+        let id_jabatan = $(this).data('id');
+        let data = table_jabatan.row($(this).parents("tr")).data();
         $('input[name="nama_posisi"]').val(data["Nama"]);
         $('input[name="keterangan"]').val(data["Keterangan"]);
-        $('input[name="id_posisi"]').val(id_level);
+        $('#list_atasan').val(data["id_atasan"]).trigger("change");
+        $('input[name="id_posisi"]').val(id_jabatan);
         
         $.ajax({
-            url: "masterdata/list_level",
+            url: "masterdata/list_jabatan",
             method: "POST",
             dataType: "json",
             data: {
-                id_level: id_level
+                id_jabatan: id_jabatan
             },
             success: function (jsno) {
-                $("#table-level-member tbody").html(jsno.html);
+                $("#table-jabatan tbody").html(jsno.html);
                 $('input[name="numb"]').val(jsno.numb);
             },
         });
         
-        $("#update_level").on("click", function (e) {
+        $("#update_jabatan").on("click", function (e) {
             e.preventDefault();
-            let validasi = document.getElementById("form-level").reportValidity();
+            let validasi = document.getElementById("form-jabatan").reportValidity();
             if (validasi) {
-                var formData = new FormData(document.querySelector("#form-level"));
-                var checkbox = $("#form-level-list").find("input[type=checkbox]");
+                var formData = new FormData(document.querySelector("#form-jabatan"));
+                var checkbox = $("#form-jabatan-list").find("input[type=checkbox]");
                 $.each(checkbox, function(key, val) {
                     formData.append($(val).attr('name'), $(this).is(':checked')+','+$(val).attr('value'))
                 });
                 $.ajax({
-                    url: "masterdata/edit_level",
+                    url: "masterdata/edit_jabatan",
                     method: "POST",
                     data: formData,
                     dataType: "json",
@@ -266,22 +284,22 @@
         });
     });
 
-    $('#level-restore').on('click', function(){
-        let id_level = $(this).data('id');
-        action('restore_level',id_level,'Level member akan dikembalikan ke daftar data aktif!');
+    $('body').on('click','#jabatan-restore', function(){
+        let id_jabatan = $(this).data('id');
+        action('restore_jabatan',id_jabatan,'Jabatan akan dikembalikan ke daftar data aktif!');
     });
 
-    $('#level-remove').on('click', function(){
-        let id_level = $(this).data('id');
-        action('remove_level',id_level,'Level member akan dihapus dari daftar data aktif!');
+    $('body').on('click','#jabatan-remove', function(){
+        let id_jabatan = $(this).data('id');
+        action('remove_jabatan',id_jabatan,'Jabatan akan dihapus dari daftar data aktif!');
     });
 
-    $('#level-delete').on('click', function(){
-        let id_level = $(this).data('id');
-        action('delete_level',id_level,'Data yang di hapus tidak dapat dikembalikan lagi!');
+    $('bosy').on('click','#jabatan-delete', function(){
+        let id_jabatan = $(this).data('id');
+        action('delete_jabatan',id_jabatan,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });
 
-    function action(urlfunc,id_level,text){
+    function action(urlfunc,id_jabatan,text){
         swal({
             title: "Apakah anda yakin?",
             text: text,
@@ -304,7 +322,7 @@
                     method: "POST",
                     dataType: "json",
                     data: {
-                        id_posisi: id_level
+                        id_posisi: id_jabatan
                     },
                     success: function (json) {
                         let result = json.result;
@@ -328,7 +346,7 @@
                     },
                 },
             });
-            table_level.ajax.reload();
+            table_jabatan.ajax.reload();
             if(reload == 1){
                 setTimeout(() => {
                     window.location.reload();

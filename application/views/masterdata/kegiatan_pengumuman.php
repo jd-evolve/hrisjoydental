@@ -45,7 +45,7 @@
                     <tr>
                         <th style="width:5%;">No</th>
                         <th style="width:20%;">Tanggal</th>
-                        <th style="width:55%;">Kegiatan/Pengumuman</th>
+                        <th style="width:55%;">Kegiatan</th>
                         <th style="width:15%;">Oleh</th>
                         <th style="width:10%;">Aksi</th>
                     </tr>

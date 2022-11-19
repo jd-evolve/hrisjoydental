@@ -3,10 +3,11 @@
 class M_auth extends CI_Model {
 
     public function GetAllMember(){
-        $query = $this->db->select('a.nama as nama_member, a.gender, a.kode, a.nomor_induk, a.email, a.tempat_lahir, a.tgl_lahir, 
+        $query = $this->db->select('a.nama as nama_member, a.gender, a.kode, a.nomor_induk, a.email, a.tempat_lahir, a.tgl_lahir, a.bagian, c.nama_kota, a.level,
             a.id_kota, a.id_posisi, a.nama_bank, a.no_rek, a.nama_rek, a.sisa_cuti, a.alamat, a.telp, a.status, a.id_account, a.tgl_mulai_kerja, b.nama_posisi')
             ->from('db_account a')
             ->join('db_posisi b','a.id_posisi = b.id_posisi')
+            ->join('db_kota c','a.id_kota = c.id_kota')
             ->order_by('a.tgl_edit','desc')
             ->get()->result();
         return $query;
@@ -180,6 +181,74 @@ class M_auth extends CI_Model {
             WHERE status = 1
             AND tgl_kegiatan = '".$full_date."'
             ORDER BY tgl_input asc
+        ")->result();
+        return $query;
+    }
+
+    public function GetLlistIjinCuti_ACCPersonalia($id_account, $status){
+        $stts = '';
+        if($status == '3'){
+            $stts = 'WHERE a.status = 3 AND a.id_personalia = '.$id_account;
+        }else{
+            $stts = 'WHERE a.status = '.$status;
+        }
+        $query = $this->db->query("
+            SELECT b.nama_ijincuti, c.nama as karyawan, c.bagian, a.id_ijincuti_list, a.potong_cuti, a.status, a.tgl_input
+            FROM db_ijincuti_list a
+            JOIN db_ijincuti b ON a.id_ijincuti = b.id_ijincuti
+            JOIN db_account c ON a.id_karyawan = c.id_account
+            ".$stts."
+            ORDER BY a.tgl_edit desc
+        ")->result();
+        return $query;
+    }
+    
+    public function GetLlistIjinCuti_ACCAtasan($id_account, $status){
+        $stts = '';
+        if($status == 'z'){
+            $stts = 'AND (a.status = 1 OR a.status = 2)';
+        }else{
+            $stts = 'AND a.status = '.$status;
+        }
+        $query = $this->db->query("
+            SELECT b.nama_ijincuti, c.nama as karyawan, c.bagian, a.id_ijincuti_list, a.status, a.tgl_input
+            FROM db_ijincuti_list a
+            JOIN db_ijincuti b ON a.id_ijincuti = b.id_ijincuti
+            JOIN db_account c ON a.id_karyawan = c.id_account
+            WHERE a.id_atasan = '".$id_account."'
+            ".$stts."
+            ORDER BY a.tgl_edit desc
+        ")->result();
+        return $query;
+    }
+
+    public function GetLlistIjinCuti($id_account, $id_ijincuti, $status){
+        $stts = '';
+        if($status != 'x'){
+            if($status == 'y'){
+                $stts = 'AND (status = 0 OR status = 1)';
+            }else{
+                $stts = 'AND status = '.$status;
+            }
+        }
+        $query = $this->db->query("
+            SELECT *
+            FROM db_ijincuti_list
+            WHERE id_karyawan = '".$id_account."'
+            AND id_ijincuti = '".$id_ijincuti."'
+            ".$stts."
+            ORDER BY tgl_edit desc
+        ")->result();
+        return $query;
+    }
+
+    public function GetAtasan(){
+        $query = $this->db->query("
+            SELECT id_account as id_atasan, nama as nama_atasan
+            FROM db_account
+            WHERE status = 1
+            AND level > 1
+            ORDER BY nama asc
         ")->result();
         return $query;
     }
