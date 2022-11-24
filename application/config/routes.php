@@ -12,9 +12,9 @@ $route['newpassword'] = 'home/newpassword';
 
 $route['dashboard'] = 'menu/dashboard';
 $route['profil'] = 'menu/profil';
-$route['member'] = 'menu/member';
+$route['account'] = 'menu/account';
 $route['jabatan'] = 'menu/jabatan';
-$route['kota-klinik'] = 'menu/kota_klinik';
+$route['cabang-klinik'] = 'menu/cabang_klinik';
 $route['kegiatan-pengumuman'] = 'menu/kegiatan_pengumuman';
 
 $route['acc-atasan'] = 'menu/acc_atasan';
@@ -25,5 +25,5 @@ $route['cuti-menikah'] = 'menu/cuti_menikah';
 $route['cuti-melahirkan'] = 'menu/cuti_melahirkan';
 $route['ijin-pribadi'] = 'menu/ijin_pribadi';
 $route['ijin-duka'] = 'menu/ijin_duka';
-$route['ijin-dinas'] = 'menu/ijin_dinas';
+$route['ijin-sakit'] = 'menu/ijin_sakit';
 $route['konfigurasi'] = 'menu/konfigurasi';

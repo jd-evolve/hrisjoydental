@@ -71,7 +71,7 @@
                             <table class="table-ijin-cuti">
                                 <tr>
                                     <td colspan="2" class="surat">
-                                        <p class="font-18px mt-2"><b>FORM IJIN/CUTI</b></p>
+                                        <p class="font-18px mt-2"><b><span id="show-ket_ijincuti">FORM IJIN/CUTI</span></b></p>
                                         <p class="mb-0" align="left">Yogyakarta, <span id="show-tgl_create"></span>
                                         <div class="text-left">
                                             <p class="mb-0 mt-3">Yang bertanda tangan di bawah ini : </p>
@@ -104,7 +104,7 @@
                                             </table>
                                             <p class="mb-0 mt-3" align="justify">
                                                 Dengan ini mengajukan permintaan ijin/cuti, 
-                                                terhitung mulai dari tanggal <b><span id="show-tgl_mulai"></span></b> 
+                                                terhitung mulai dari tanggal <b><span id="show-tgl_awal"></span></b> 
                                                 sampai dengan tanggal <b><span id="show-tgl_akhir"></span></b>
                                                 dengan jumlah <b><span id="show-total_hari"></span> hari</b> 
                                                 dan <b><span id="show-total_jam"></span> jam</b>.

@@ -1,7 +1,7 @@
 (function ($) {
-    var table_member = $("#datatable-member").DataTable({
+    var table_account = $("#datatable-account").DataTable({
         ajax: {
-            url: "masterdata/read_member",
+            url: "masterdata/read_account",
             type: "GET",
         },
         order: [],
@@ -16,7 +16,7 @@
         ],
         columnDefs: [
             {
-                "targets": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+                "targets": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35],
                 "orderable": false,
                 "visible": false
             },
@@ -30,7 +30,7 @@
         ],
         language: {
             search: "_INPUT_",
-            emptyTable: "Belum ada daftar member!",
+            emptyTable: "Belum ada daftar account!",
             infoEmpty: "Tidak ada data untuk ditampilkan!",
             info: "_START_ to _END_ of _TOTAL_ entries",
             infoFiltered: ""
@@ -39,9 +39,9 @@
         buttons: [
             {
                 className: "btn btn-warning wid-max-select text-white",
-                text: '<i class="fas fa-plus mr-2"></i> Tambah Member',
+                text: '<i class="fas fa-plus mr-2"></i> Tambah Account',
                 attr:  {
-                    id: 'tambah_member'
+                    id: 'tambah_account'
                 }
             },
             {
@@ -61,23 +61,23 @@
                 exportOptions: {
                     columns: [0,1,2,3,4,5],
                 },
-                messageTop: "List Member",
+                messageTop: "List Account",
             },
             {
                 className: "btn btn-secondary wid-max-select text-white",
                 text: '<i class="fas fa-sync-alt mr-2"></i> Refresh',
                 action: function (e, dt, node, config) {
-                    table_member.ajax.reload();
+                    table_account.ajax.reload();
                 },
             },
         ],
         columns: [
             { data: "No" },
-            { data: "Nama" },
-            { data: "Posisi" },
-            { data: "Nohp" },
-            { data: "Email" },
-            { data: "AlamatLengkap" },
+            { data: "nama_account" },
+            { data: "nama_posisi" },
+            { data: "telp" },
+            { data: "email" },
+            { data: "alamat" },
             { data: "Aksi" , render : function ( data, type, row, meta ) {
                 return type === 'display'  ?
                 '<div class="btn-group" role="group">'
@@ -85,71 +85,82 @@
                     +'Action'
                 +'</button>'
                 +'<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">'
-                    +'<a class="dropdown-item pointer member-lihat" data-id="'+data+'" id="member-lihat"> <i class="fas fa-eye"></i> Lihat</a>'
-                    +'<a class="dropdown-item pointer member-edit" data-id="'+data+'" id="member-edit"> <i class="fas fa-pen"></i> Edit</a>'
-                    +'<a class="dropdown-item pointer member-restore" data-id="'+data+'" id="member-restore"> <i class="fas fa-undo-alt"></i> Restore</a>'
-                    +'<a class="dropdown-item pointer member-remove" data-id="'+data+'" id="member-remove"> <i class="fas fa-trash"></i> Remove</a>'
-                    +'<a class="dropdown-item pointer member-delete" data-id="'+data+'" id="member-delete"> <i class="fas fa-trash-alt"></i> Delete</a>'
+                    +'<a class="dropdown-item pointer account-lihat" data-id="'+data+'" id="account-lihat"> <i class="fas fa-eye"></i> Lihat</a>'
+                    +'<a class="dropdown-item pointer account-edit" data-id="'+data+'" id="account-edit"> <i class="fas fa-pen"></i> Edit</a>'
+                    +'<a class="dropdown-item pointer account-restore" data-id="'+data+'" id="account-restore"> <i class="fas fa-undo-alt"></i> Restore</a>'
+                    +'<a class="dropdown-item pointer account-remove" data-id="'+data+'" id="account-remove"> <i class="fas fa-trash"></i> Remove</a>'
+                    +'<a class="dropdown-item pointer account-delete" data-id="'+data+'" id="account-delete"> <i class="fas fa-trash-alt"></i> Delete</a>'
                 +'</div>'
                 +'</div>':
                 data;
             }},
-            { data: "Status" },
+            { data: "status" },
             { data: "IDposisi" },
-            { data: "AlamatLengkap" },
+            { data: "alamat" },
             { data: "id_posisi" },
             { data: "tgl_masuk" },
-            { data: "Gender" },
+            { data: "gender" },
             { data: "Kode" },
-            { data: "No_induk" },
+            { data: "nomor_induk" },
             { data: "sisa_cuti" },
             { data: "nama_bank" },
             { data: "nama_rek" },
             { data: "no_rek" },
-            { data: "id_kota" },
+            { data: "id_cabang" },
             { data: "tempat_lahir" },
             { data: "tgl_lahir" },
-            { data: "Bagian" },
-            { data: "KotaKlinik" },
-            { data: "Level" },
+            { data: "bagian" },
+            { data: "nama_cabang" },
+            { data: "level" },
+            { data: "no_ktp" },
+            { data: "nama_ibu" },
+            { data: "telp_referensi" },
+            { data: "pendidikan_terakhir" },
+            { data: "lulus_dari" },
+            { data: "alamat_ktp" },
+            { data: "status_karyawan" },
+            { data: "tgl_evaluasi" },
+            { data: "tgl_resign" },
+            { data: "alasan_resign" },
+            { data: "masa_kerja" },
         ],
         fnDrawCallback:function(){
             $.ajax({
-                url: 'masterdata/level_member',
+                url: 'masterdata/level_account',
                 type: 'GET',
                 dataType: "json",
                 success: function (json) {
                     if(json.tambah){
-                        $("#tambah_member").removeClass("gone");
+                        $("#tambah_account").removeClass("gone");
                     }else{
-                        $("#tambah_member").addClass("gone");
+                        $("#tambah_account").addClass("gone");
                     }
                     
                     if(json.ubah){
-                        $(".member-edit").removeClass("gone");
+                        $(".account-edit").removeClass("gone");
                     }else{
-                        $(".member-edit").addClass("gone");
+                        $(".account-edit").addClass("gone");
                     }
                     
                     if(json.hapus){
-                        $(".member-remove").removeClass("gone");
+                        $(".account-remove").removeClass("gone");
                     }else{
-                        $(".member-remove").addClass("gone");
+                        $(".account-remove").addClass("gone");
                     }
                 }
             });
             var sta = $('select[name="filter-status"]').val().toLowerCase();
             let style = 'display:none;';
             if(sta == 'aktif-'){
-                $('.member-edit').attr('style','');
-                $('.member-restore').attr('style',style);
-                $('.member-remove').attr('style','');
-                $('.member-delete').attr('style',style);
+                $('.account-edit').attr('style','');
+                $('.account-restore').attr('style',style);
+                $('.account-remove').attr('style','');
+                $('.account-delete').attr('style',style);
             }else if(sta == 'hapus-'){
-                $('.member-edit').attr('style',style);
-                $('.member-restore').attr('style','');
-                $('.member-remove').attr('style',style);
-                $('.member-delete').attr('style',style);
+                $('.account-edit').attr('style',style);
+                $('.account-restore').attr('style','');
+                $('.account-remove').attr('style',style);
+                $('.account-delete').attr('style',style);
             }
         },
     });
@@ -194,7 +205,7 @@
                 
             return false;
         })
-        table_member.draw(); 
+        table_account.draw(); 
         $.fn.dataTable.ext.search.pop();
     }
 
@@ -204,13 +215,13 @@
         var pos = $('select[name="filter-posisi"]').val().toLowerCase();
         
         if(src != undefined){
-            $('#datatable-member').DataTable().search(src).draw();
+            $('#datatable-account').DataTable().search(src).draw();
         }
         if(pos != undefined){
-            $('#datatable-member').DataTable().search(pos).draw();
+            $('#datatable-account').DataTable().search(pos).draw();
         }
         if(sta != undefined){
-            $('#datatable-member').DataTable().search(sta).draw();
+            $('#datatable-account').DataTable().search(sta).draw();
         }
     }
 
@@ -221,39 +232,50 @@
         alias: "tt.mm.jjjj"
     }).mask('.tgl');
 
-    $("#tambah_member").on("click", function () {
-        $("#modal-member").modal();
-        document.getElementById("text-member").innerHTML = "Tambah Member";
+    $("#tambah_account").on("click", function () {
+        $("#modal-account").modal();
+        document.getElementById("text-account").innerHTML = "Tambah Account";
 		$('input[name="kode"]').val('');
 		$('input[name="nomor_induk"]').val('');
+		$('input[name="nomor_ktp"]').val('');
+		$('input[name="nama_ibu"]').val('');
 		$('input[name="nama"]').val('');
         $('select[name="gender"]').val('');
 		$('input[name="tempat_lahir"]').val('');
 		$('input[name="tgl_lahir"]').val('');
 		$('input[name="nohp"]').val('');
+		$('input[name="nohp2"]').val('');
+		$('input[name="sisa_cuti"]').val('');
+		$('select[name="pendidikan_terakhir"]').val('');
+		$('input[name="lulus_dari"]').val('');
 		$('input[name="email"]').val('');
 		$('input[name="alamat"]').val('');
+		$('input[name="alamat2"]').val('');
 		$('input[name="nama_bank"]').val('');
 		$('input[name="no_rek"]').val('');
 		$('input[name="nama_rek"]').val('');
-		$('input[name="sisa_cuti"]').val('');
         $('select[name="level"]').val('');
         $('select[name="bagian"]').val('');
         $('select[name="posisi"]').val('');
-        $('select[name="kota"]').val('');
-		$('input[name="tgl_masuk"]').val(moment().format("DD-MM-YYYY"));
-        $('input[name="edit_member"]').attr("type", "hidden");
-        $('input[name="add_member"]').attr("type", "submit");
+        $('select[name="status_karyawan"]').val('');
+		$('input[name="tgl_masuk"]').val('');
+		$('input[name="tgl_evaluasi"]').val('');
+		$('input[name="tgl_keluar"]').val('');
+		$('input[name="alasan_keluar"]').val('');
+        $('select[name="cabang"]').val('');
+
+        $('input[name="edit_account"]').attr("type", "hidden");
+        $('input[name="add_account"]').attr("type", "submit");
         var count = 0;
-        $("input#add_member").on("click", function (e) {
+        $("input#add_account").on("click", function (e) {
             e.preventDefault();
-            let validasi = document.getElementById("form-member").reportValidity();
+            let validasi = document.getElementById("form-account").reportValidity();
             if (validasi) {
                 count++;
                 if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-member"));
+                    var formData = new FormData(document.querySelector("#form-account"));
                     $.ajax({
-                        url: "masterdata/add_member",
+                        url: "masterdata/add_account",
                         method: "POST",
                         data: formData,
                         dataType: "json",
@@ -271,68 +293,89 @@
         });
     });
     
-    $('body').on('click','#member-lihat',function(){
+    $('body').on('click','#account-lihat',function(){
         $("#modal-lihat").modal();
         let id_account = $(this).data('id');
-		var data = table_member.row($(this).parents("tr")).data();
-        document.getElementById("text-lihat").innerHTML = "Data account : <b>"+data["Nama"]+'</b>';
+		var data = table_account.row($(this).parents("tr")).data();
+        document.getElementById("text-lihat").innerHTML = "Data account : <b>"+data["nama_account"]+'</b>';
 		$("#show-kode").html(data["Kode"]);
-		$("#show-nomor_induk").html(data["No_induk"]);
-        $("#show-gender").html(data["Gender"] != 0 ? 'Laki-Laki' : 'Perempuan');
+		$("#show-nomor_induk").html(data["nomor_induk"]);
+		$("#show-nomor_ktp").html(data["no_ktp"]);
+		$("#show-nama_ibu").html(data["nama_ibu"]);
+        $("#show-gender").html(data["gender"] != 0 ? 'Laki-Laki' : 'Perempuan');
 		$("#show-tempat_lahir").html(data["tempat_lahir"]);
 		$("#show-tgl_lahir").html(data["tgl_lahir"]);
 		$("#show-nama_bank").html(data["nama_bank"]);
 		$("#show-no_rek").html(data["no_rek"]);
 		$("#show-nama_rek").html(data["nama_rek"]);
 		$("#show-sisa_cuti").html(data["sisa_cuti"]);
-		$("#show-nama").html(data["Nama"]);
-		$("#show-email").html(data["Email"]);
-		$("#show-telp").html(data["Nohp"]);
-		$("#show-alamat").html(data["AlamatLengkap"]);
+		$("#show-nama").html(data["nama_account"]);
+		$("#show-email").html(data["email"]);
+		$("#show-telp").html(data["telp"]);
+		$("#show-telp2").html(data["telp_referensi"]);
+		$("#show-alamat").html(data["alamat"]);
+		$("#show-alamat2").html(data["alamat_ktp"]);
+		$("#show-pendidikan_terakhir").html(data["pendidikan_terakhir"]);
+		$("#show-lulus_dari").html(data["lulus_dari"]);
 		$("#show-tgl_masuk").html(data["tgl_masuk"]);
-        $("#show-level").html(data["Level"] == 1 ? 'Staff' : 'Atasan');
-        $("#show-bagian").html(data["Bagian"]);
-        $("#show-posisi").html(data["Posisi"]);
-        $("#show-kota_klinik").html(data["KotaKlinik"]);
+		$("#show-tgl_evaluasi").html(data["tgl_evaluasi"]);
+		$("#show-tgl_keluar").html(data["tgl_resign"]);
+		$("#show-status_karyawan").html(data["status_karyawan"] == 1 ? 'Tetap' : 'Percobaan');
+        $("#show-level").html(data["level"] == 1 ? 'Staff' : 'Atasan');
+        $("#show-bagian").html(data["bagian"]);
+        $("#show-posisi").html(data["nama_posisi"]);
+        $("#show-alasan_keluar").html(data["alasan_resign"]);
+        $("#show-masa_kerja").html(data["masa_kerja"]);
+        $("#show-cabang_klinik").html(data["nama_cabang"]);
     });
     
-    $('body').on('click','#member-edit', function(){
-        $("#modal-member").modal();
+    $('body').on('click','#account-edit', function(){
+        $("#modal-account").modal();
         let id_account = $(this).data('id');
-        document.getElementById("text-member").innerHTML = "Ubah Member";
-		var data = table_member.row($(this).parents("tr")).data();
+        document.getElementById("text-account").innerHTML = "Ubah Account";
+		var data = table_account.row($(this).parents("tr")).data();
 		$('input[name="kode"]').val(data["Kode"]);
-		$('input[name="nomor_induk"]').val(data["No_induk"]);
-        $('select[name="gender"]').val(data["Gender"]);
+		$('input[name="nomor_induk"]').val(data["nomor_induk"]);
+		$('input[name="nomor_ktp"]').val(data["no_ktp"]);
+		$('input[name="nama_ibu"]').val(data["nama_ibu"]);
+		$('input[name="nama"]').val(data["nama_account"]);
+        $('select[name="gender"]').val(data["gender"]);
 		$('input[name="tempat_lahir"]').val(data["tempat_lahir"]);
 		$('input[name="tgl_lahir"]').val(data["tgl_lahir"]);
+		$('input[name="nohp"]').val(data["telp"]);
+		$('input[name="nohp2"]').val(data["telp_referensi"]);
+		$('input[name="sisa_cuti"]').val(data["sisa_cuti"]);
+		$('select[name="pendidikan_terakhir"]').val(data["pendidikan_terakhir"]);
+		$('input[name="lulus_dari"]').val(data["lulus_dari"]);
+		$('input[name="email"]').val(data["email"]);
+		$('input[name="alamat"]').val(data["alamat"]);
+		$('input[name="alamat2"]').val(data["alamat_ktp"]);
 		$('input[name="nama_bank"]').val(data["nama_bank"]);
 		$('input[name="no_rek"]').val(data["no_rek"]);
 		$('input[name="nama_rek"]').val(data["nama_rek"]);
-		$('input[name="sisa_cuti"]').val(data["sisa_cuti"]);
-		$('input[name="nama"]').val(data["Nama"]);
-		$('input[name="email"]').val(data["Email"]);
-		$('input[name="nohp"]').val(data["Nohp"]);
-		$('input[name="alamat"]').val(data["AlamatLengkap"]);
-		$('input[name="tgl_masuk"]').val(data["tgl_masuk"]);
-        $('select[name="level"]').val(data["Level"]);
-        $('select[name="bagian"]').val(data["Bagian"]);
+        $('select[name="level"]').val(data["level"]);
+        $('select[name="bagian"]').val(data["bagian"]);
         $('select[name="posisi"]').val(data["id_posisi"]);
-        $('select[name="kota"]').val(data["id_kota"]);
+        $('select[name="status_karyawan"]').val(data["status_karyawan"]);
+		$('input[name="tgl_masuk"]').val(data["tgl_masuk"]);
+		$('input[name="tgl_evaluasi"]').val(data["tgl_evaluasi"]);
+		$('input[name="tgl_keluar"]').val(data["tgl_resign"]);
+		$('input[name="alasan_keluar"]').val(data["alasan_resign"]);
+        $('select[name="cabang"]').val(data["id_cabang"]);
 
-        $('input[name="edit_member"]').attr("type", "submit");
-        $('input[name="add_member"]').attr("type", "hidden");
+        $('input[name="edit_account"]').attr("type", "submit");
+        $('input[name="add_account"]').attr("type", "hidden");
         var count = 0;
-        $("input#edit_member").on("click", function (e) {
+        $("input#edit_account").on("click", function (e) {
             e.preventDefault();
-            let validasi = document.getElementById("form-member").reportValidity();
+            let validasi = document.getElementById("form-account").reportValidity();
             if (validasi) {
                 count++;
                 if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-member"));
+                    var formData = new FormData(document.querySelector("#form-account"));
                     formData.append("id_account", id_account);
                     $.ajax({
-                        url: "masterdata/edit_member",
+                        url: "masterdata/edit_account",
                         method: "POST",
                         data: formData,
                         dataType: "json",
@@ -350,19 +393,19 @@
         });
     });
 
-    $('body').on('click','#member-restore', function(){
+    $('body').on('click','#account-restore', function(){
         let id_account = $(this).data('id');
-        action('restore_member',id_account,'Member akan dikembalikan ke daftar data aktif!');
+        action('restore_account',id_account,'Account akan dikembalikan ke daftar data aktif!');
     });
 
-    $('body').on('click','#member-remove', function(){
+    $('body').on('click','#account-remove', function(){
         let id_account = $(this).data('id');
-        action('remove_member',id_account,'Member akan dihapus dari daftar data aktif!');
+        action('remove_account',id_account,'Account akan dihapus dari daftar data aktif!');
     });
 
-    $('body').on('click','#member-delete', function(){
+    $('body').on('click','#account-delete', function(){
         let id_account = $(this).data('id');
-        action('delete_member',id_account,'Data yang di hapus tidak dapat dikembalikan lagi!');
+        action('delete_account',id_account,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });
 
     function action(urlfunc,id_account,text){
@@ -412,7 +455,7 @@
                     },
                 },
             });
-            table_member.ajax.reload();
+            table_account.ajax.reload();
             if(reload == 1){
                 setTimeout(() => {
                     window.location.reload();

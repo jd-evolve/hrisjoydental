@@ -2,12 +2,16 @@
 
 class M_auth extends CI_Model {
 
-    public function GetAllMember(){
-        $query = $this->db->select('a.nama as nama_member, a.gender, a.kode, a.nomor_induk, a.email, a.tempat_lahir, a.tgl_lahir, a.bagian, c.nama_kota, a.level,
-            a.id_kota, a.id_posisi, a.nama_bank, a.no_rek, a.nama_rek, a.sisa_cuti, a.alamat, a.telp, a.status, a.id_account, a.tgl_mulai_kerja, b.nama_posisi')
+    public function GetAllAccount(){
+        $query = $this->db->select('a.nama as nama_account, a.gender, a.kode, a.nomor_induk, 
+            a.email, a.tempat_lahir, a.tgl_lahir, a.bagian, c.nama_cabang, a.level, a.no_ktp, 
+            a.nama_ibu, a.telp_referensi, a.pendidikan_terakhir, a.lulus_dari, a.alamat_ktp, 
+            a.status_karyawan, a.tgl_evaluasi, a.tgl_resign, a.alasan_resign, a.id_cabang, 
+            a.id_posisi, a.nama_bank, a.no_rek, a.nama_rek, a.sisa_cuti, a.alamat, a.telp, 
+            a.status, a.id_account, a.tgl_kerja, b.nama_posisi')
             ->from('db_account a')
             ->join('db_posisi b','a.id_posisi = b.id_posisi')
-            ->join('db_kota c','a.id_kota = c.id_kota')
+            ->join('db_cabang c','a.id_cabang = c.id_cabang')
             ->order_by('a.tgl_edit','desc')
             ->get()->result();
         return $query;
@@ -152,10 +156,10 @@ class M_auth extends CI_Model {
 
     public function GetAccountOnline(){
         $query = $this->db->query("
-            SELECT a.nama, a.email, b.nama_posisi, c.nama_kota, c.inisial_kota, if(a.foto != NULL, a.foto, 'profile.jpg') as foto 
+            SELECT a.nama, a.email, b.nama_posisi, c.nama_cabang, c.kode_cabang, if(a.foto != NULL, a.foto, 'profile.jpg') as foto 
             FROM db_account a 
             JOIN db_posisi b ON a.id_posisi = b.id_posisi 
-            JOIN db_kota c ON a.id_kota = c.id_kota 
+            JOIN db_cabang c ON a.id_cabang = c.id_cabang 
             WHERE a.status = 1 
             AND a.tgl_masuk > a.tgl_keluar 
             AND DATE(a.tgl_masuk) = '".date("Y-m-d")."' 
@@ -181,6 +185,31 @@ class M_auth extends CI_Model {
             WHERE status = 1
             AND tgl_kegiatan = '".$full_date."'
             ORDER BY tgl_input asc
+        ")->result();
+        return $query;
+    }
+
+    public function GetLlistIjinCuti_Rekap($id_ijincuti,$id_karyawan){
+        if($id_ijincuti){
+            $ijincuti = ' AND a.id_ijincuti = '.$id_ijincuti;
+        }else{
+            $ijincuti = '';
+        }
+        if($id_karyawan){
+            $karyawan = ' AND a.id_karyawan = '.$id_karyawan;
+        }else{
+            $karyawan = '';
+        }
+        $query = $this->db->query("
+            SELECT b.nama_ijincuti, c.nama as karyawan, c.bagian, a.id_ijincuti_list, a.potong_cuti, 
+            a.tgl_awal, a.tgl_akhir, a.jam_awal, a.jam_akhir, a.total_hari, a.total_jam, a.status, a.tgl_input
+            FROM db_ijincuti_list a
+            JOIN db_ijincuti b ON a.id_ijincuti = b.id_ijincuti
+            JOIN db_account c ON a.id_karyawan = c.id_account
+            WHERE a.status = 2
+            ".$ijincuti."
+            ".$karyawan."
+            ORDER BY a.tgl_edit desc
         ")->result();
         return $query;
     }
@@ -248,6 +277,16 @@ class M_auth extends CI_Model {
             FROM db_account
             WHERE status = 1
             AND level > 1
+            ORDER BY nama asc
+        ")->result();
+        return $query;
+    }
+    
+    public function GetAktifKaryawan(){
+        $query = $this->db->query("
+            SELECT *
+            FROM db_account
+            WHERE status = 1
             ORDER BY nama asc
         ")->result();
         return $query;

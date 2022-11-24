@@ -1,5 +1,5 @@
 (function($) {
-    var id_ijincuti = 3; //Cuti Melahirkan
+    var id_ijincuti = 6; //Ijin Sakit
 
     $("#persetujuan").click(function() {
         $('.notif').addClass('none');

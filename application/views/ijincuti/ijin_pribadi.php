@@ -37,12 +37,12 @@
                     <div class="" id="show-nav1">
                         <h4><b>Persyaratan :</b></h4>
                         <ol class="ml-0" type="1">
-                            <li>Karyawan tetap, yang sudah lolos evaluasi masa percobaan.</li>
-                            <li>Karyawan yang hendak menggunakan cuti tahunan, wajib memberitahukan kepada bagian HRD dengan mengajukan form permohonan cuti yang di setujui Atasan selambat-lambatanya 1 (satu) minggu sebelumnya.</li>
-                            <li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD.</li>
+                            <li>Ijin yang diajukan dengan alasan yang jelas dan dapat dipertanggungjawabkan.</li>
+                            <li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD (karena bersifat mendesak karyawan menghubungi atasan dan bagian HRD agar permohonan ijin segera diproses).</li>
                             <li>Karyawan menunggu persetujuan dari atasan.</li>
                             <li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>
-                            <li>Karyawan yang mengajukan cuti, akan dipotong cuti tahunan sejumlah ijin/cuti yang diajukan.</li>
+                            <li>Untuk karyawan tetap, cuti akan di potong sejumlah cuti yang diajukan.</li>
+                            <li>Untuk karyawan masa percobaan, akan di potongkan gaji sebesar 1 shift yang di kalikan dengan jumlah ijin yang diajukan.</li>
                         </ol>
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" id="persetujuan" style="left:20px !important;">
@@ -60,7 +60,7 @@
                             <table class="table-ijin-cuti">
                                 <tr>
                                     <td colspan="2" class="surat">
-                                        <p class="font-18px mt-2"><b>FORM IJIN/CUTI</b></p>
+                                        <p class="font-18px mt-2"><b>FORM IJIN PRIBADI</b></p>
                                         <p class="mb-0" align="left">Yogyakarta,<?= date("d F Y") ?></p>
                                         <div class="text-left">
                                             <p class="mb-0 mt-3">Yang bertanda tangan di bawah ini : </p>
@@ -96,7 +96,7 @@
                                                 <tr valign="top">
                                                     <td width="20%">Dari<span class="text-danger">**</span></td>
                                                     <td> : </td>
-                                                    <td><input type="text" name="tgl_mulai" class="input-line bg-transparent p-0 width-full tgl-wkt" placeholder="dd-mm-yyyy 00:00" required></td>
+                                                    <td><input type="text" name="tgl_awal" class="input-line bg-transparent p-0 width-full tgl-wkt" placeholder="dd-mm-yyyy 00:00" required></td>
                                                 </tr>
                                                 <tr valign="top">
                                                     <td width="20%">Sampai<span class="text-danger">**</span></td>
@@ -173,7 +173,7 @@
                             <table class="table-ijin-cuti">
                                 <tr>
                                     <td colspan="2" class="surat">
-                                        <p class="font-18px mt-2"><b>FORM IJIN/CUTI</b></p>
+                                        <p class="font-18px mt-2"><b>FORM IJIN PRIBADI</b></p>
                                         <p class="mb-0" align="left">Yogyakarta, <span id="show-tgl_create"></span>
                                         <div class="text-left">
                                             <p class="mb-0 mt-3">Yang bertanda tangan di bawah ini : </p>
@@ -206,7 +206,7 @@
                                             </table>
                                             <p class="mb-0 mt-3" align="justify">
                                                 Dengan ini mengajukan permintaan ijin/cuti, 
-                                                terhitung mulai dari tanggal <b><span id="show-tgl_mulai"></span></b> 
+                                                terhitung mulai dari tanggal <b><span id="show-tgl_awal"></span></b> 
                                                 sampai dengan tanggal <b><span id="show-tgl_akhir"></span></b>
                                                 dengan jumlah <b><span id="show-total_hari"></span> hari</b> 
                                                 dan <b><span id="show-total_jam"></span> jam</b>.

@@ -40,12 +40,14 @@
 
     <div class="card">
         <div class="card-body">
-            <table id="datatable-kota" class="table-responsive display nowrap table table-striped table-hover" >
+            <table id="datatable-cabang" class="table-responsive display table table-striped table-hover" >
                 <thead>
                     <tr>
                         <th style="width:5%;">No</th>
-                        <th style="width:30%;">Inisial Kota</th>
-                        <th style="width:60%;">Nama Kota</th>
+                        <th style="width:10%;">Kode</th>
+                        <th style="width:30%;">Nama</th>
+                        <th style="width:20%;">PT</th>
+                        <th style="width:30%;">Alamat</th>
                         <th style="width:10%;">Aksi</th>
                     </tr>
                 </thead>
@@ -56,12 +58,12 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-kota" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="modal-cabang" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
-            <form id="form-kota" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
+            <form id="form-cabang" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="text-kota">Kota</h5>
+                        <h5 class="modal-title" id="text-cabang">Cabang</h5>
                         <a type="button" class="close" href="">
                         <span aria-hidden="true">&times;</span>
                         </a>
@@ -71,20 +73,28 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label class="col-form-label">Inisial Kota : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="inisial_kota" id="inisial_kota" placeholder="Inisial Kota" required>
+                                        <label class="col-form-label">Kode Cabang : <span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" name="kode_cabang" id="kode_cabang" placeholder="Kode Cabang" required>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Nama Kota : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="nama_kota" id="nama_kota" placeholder="Nama Kota" required>
+                                        <label class="col-form-label">Nama Cabang : <span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" name="nama_cabang" id="nama_cabang" placeholder="Nama Cabang" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Nama PT : <span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" name="nama_pt" id="nama_pt" placeholder="Nama PT" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Alamat Cabang : <span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" name="alamat_cabang" id="alamat_cabang" placeholder="Alamat Cabang" required>
                                     </div>
                                 </div>
                             </div>
                         </div> 
                     </div>
                     <div class="modal-footer">
-                        <input class="btn btn-primary" type="submit" name="add_kota" id="add_kota" value="Tambah" style="padding:9px" size="7" readonly>
-                        <input class="btn btn-primary" type="hidden" name="edit_kota" id="edit_kota" value="Ubah" style="padding:9px" size="7" readonly>
+                        <input class="btn btn-primary" type="submit" name="add_cabang" id="add_cabang" value="Tambah" style="padding:9px" size="7" readonly>
+                        <input class="btn btn-primary" type="hidden" name="edit_cabang" id="edit_cabang" value="Ubah" style="padding:9px" size="7" readonly>
                     </div>
                 </div>
             </form>

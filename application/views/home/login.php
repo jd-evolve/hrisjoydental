@@ -31,7 +31,7 @@
 				</div>
 				<div class="card-login p-3 mb-3" style="margin-top: -50px;">
 				
-					<h4 class="fw-bold text-dark-blue text-center mb-3">Login Member</h4>
+					<h4 class="fw-bold text-dark-blue text-center mb-3">Login Account</h4>
 					<div class="card-sub text-center alert-login mb-2 px-1">Masukkan email & password dengan benar!</div>
 					<div class="login-form">
 						<div class="form-group form-floating-label">

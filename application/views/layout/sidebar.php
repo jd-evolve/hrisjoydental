@@ -43,13 +43,13 @@
                     'cuti-melahirkan',
                     'ijin-pribadi',
                     'ijin-duka',
-                    'ijin-dinas',
+                    'ijin-sakit',
                 );
 
                 $masterdata = array(
-                    'member',
+                    'account',
                     'jabatan',
-                    'kota-klinik',
+                    'cabang-klinik',
                     'kegiatan-pengumuman',
                 );
 
@@ -123,9 +123,9 @@
                                     <span class="sub-item">Ijin Duka</span>
                                 </a>
                             </li>
-                            <li class="<?= !$cekmenu['ijin-dinas'] ? 'gone' : '' ?> <?= $uri_path == "ijin-dinas"? 'active' : '' ?>">
-                                <a href="<?= base_url('ijin-dinas') ?>">
-                                    <span class="sub-item">Ijin Dinas Keluar</span>
+                            <li class="<?= !$cekmenu['ijin-sakit'] ? 'gone' : '' ?> <?= $uri_path == "ijin-sakit"? 'active' : '' ?>">
+                                <a href="<?= base_url('ijin-sakit') ?>">
+                                    <span class="sub-item">Ijin Sakit</span>
                                 </a>
                             </li>
                         </ul>
@@ -140,9 +140,9 @@
                     </a>
                     <div id="master_data" <?= in_array($uri_path, $masterdata) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
-                            <li class="<?= !$cekmenu['member'] ? 'gone' : '' ?> <?= $uri_path == "member"? 'active' : '' ?>">
-                                <a href="<?= base_url('member') ?>">
-                                    <span class="sub-item">Member</span>
+                            <li class="<?= !$cekmenu['account'] ? 'gone' : '' ?> <?= $uri_path == "account"? 'active' : '' ?>">
+                                <a href="<?= base_url('account') ?>">
+                                    <span class="sub-item">Account</span>
                                 </a>
                             </li>
                             <li class="<?= !$cekmenu['jabatan'] ? 'gone' : '' ?> <?= $uri_path == "jabatan"? 'active' : '' ?>">
@@ -150,9 +150,9 @@
                                     <span class="sub-item">Jabatan</span>
                                 </a>
                             </li>
-                            <li class="<?= !$cekmenu['kota-klinik'] ? 'gone' : '' ?> <?= $uri_path == "kota-klinik"? 'active' : '' ?>">
-                                <a href="<?= base_url('kota-klinik') ?>">
-                                    <span class="sub-item">Kota klinik</span>
+                            <li class="<?= !$cekmenu['cabang-klinik'] ? 'gone' : '' ?> <?= $uri_path == "cabang-klinik"? 'active' : '' ?>">
+                                <a href="<?= base_url('cabang-klinik') ?>">
+                                    <span class="sub-item">Cabang</span>
                                 </a>
                             </li>
                             <li class="<?= !$cekmenu['kegiatan-pengumuman'] ? 'gone' : '' ?> <?= $uri_path == "kegiatan-pengumuman"? 'active' : '' ?>">

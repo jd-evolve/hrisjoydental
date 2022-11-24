@@ -19,7 +19,7 @@
         <div class="col-md-9 ml-auto mr-auto">
             <div class="card">
                 <div class="card-body">
-                    <div class="card-title text-center">Pengajuan Cuti Melahirkan</div>
+                    <div class="card-title text-center">Pengajuan Ijin Sakit</div>
                     <div class="card-category text-center">Baca persyaratan standar operasional prosedur</div>
 
                     <ul class="nav nav-pills nav-primary my-4">
@@ -37,14 +37,12 @@
                     <div class="" id="show-nav1">
                         <h4><b>Persyaratan :</b></h4>
                         <ol class="ml-0" type="1">
-                            <li>Karyawan yang hendak mengambil hak cuti melahirkan, wajib menyampaikan surat permohonan istirahat selambat - lambatnya 10 (sepuluh) hari sebelum  waktu istirhat.</li>
-                            <li>Surat permohonan yang dimaksud harus disertai dengan Surat Keterangan Dokter.</li>
-                            <li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD.</li>
-                            <li>Karyawan melampirkan Surat Keterangan Dokter (berupa soft file lalu di upload dan hard file dikumpulkan ke bagian personalia) Note : jika tidak ada surat dokter/HPL gaji tidak ditanggung.</li>
+                            <li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD (karena bersifat mendesak karyawan menghubungi atasan dan bagian HRD agar permohonan ijin segera diproses).</li>
+                            <li>Karyawan melampirkan Surat Keterangan Dokter (berupa soft file lalu di upload dan hard file dikumpulkan ke bagian personalia saat masuk kerja).</li>
                             <li>Karyawan menunggu persetujuan dari atasan.</li>
                             <li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>
-                            <li>Karyawan yang mengajukan cuti melahirkan mendapatkan hak 3 bulan cuti, tanpa memotong cuti tahunan.</li>
-                            <li><b>Note : gaji tetap hanya diberikan kepada karyawan yang masa kerja lebih dari 2 tahun.</b></li>
+                            <li>Untuk karyawan tetap, cuti akan di potong sejumlah cuti yang diajukan.</li>
+                            <li>Untuk karyawan masa percobaan, akan di potongkan gaji sebesar 1 shift yang di kalikan dengan jumlah ijin yang diajukan.</li>
                         </ol>
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" id="persetujuan" style="left:20px !important;">
@@ -62,7 +60,7 @@
                             <table class="table-ijin-cuti">
                                 <tr>
                                     <td colspan="2" class="surat">
-                                        <p class="font-18px mt-2"><b>FORM CUTI MELAHIRKAN</b></p>
+                                        <p class="font-18px mt-2"><b>FORM IJIN SAKIT</b></p>
                                         <p class="mb-0" align="left">Yogyakarta,<?= date("d F Y") ?></p>
                                         <div class="text-left">
                                             <p class="mb-0 mt-3">Yang bertanda tangan di bawah ini : </p>
@@ -175,7 +173,7 @@
                             <table class="table-ijin-cuti">
                                 <tr>
                                     <td colspan="2" class="surat">
-                                        <p class="font-18px mt-2"><b>FORM CUTI MELAHIRKAN</b></p>
+                                        <p class="font-18px mt-2"><b>FORM IJIN SAKIT</b></p>
                                         <p class="mb-0" align="left">Yogyakarta, <span id="show-tgl_create"></span>
                                         <div class="text-left">
                                             <p class="mb-0 mt-3">Yang bertanda tangan di bawah ini : </p>

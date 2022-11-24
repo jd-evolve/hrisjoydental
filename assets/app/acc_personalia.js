@@ -131,6 +131,7 @@
                     id_ijincuti_list: id_ijincuti_list
                 },
                 success: function (data) {
+                    $("#show-ket_ijincuti").html(data.ijincuti);
                     $("#btn-setujui").attr('data-cutcuti',data.potong_cuti);
                     $("#show-tgl_create").html(data.tgl_create);
                     var stts = "";
@@ -144,7 +145,7 @@
                     document.getElementById("text-showform").innerHTML = 'Status : '+stts;
                     $("#show-tgl_create").html(data.tgl_input);
                     $("#show-keperluan").html(data.keperluan);
-                    $("#show-tgl_mulai").html(data.tgl_mulai);
+                    $("#show-tgl_awal").html(data.tgl_awal);
                     $("#show-tgl_akhir").html(data.tgl_akhir);
                     $("#show-total_hari").html(data.total_hari);
                     $("#show-total_jam").html(data.total_jam);

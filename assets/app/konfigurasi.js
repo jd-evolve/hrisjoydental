@@ -11,7 +11,7 @@
             $('input[name="cuti_melahirkan"]').val(json.cuti_melahirkan);
             $('input[name="ijin_pribadi"]').val(json.ijin_pribadi);
             $('input[name="ijin_duka"]').val(json.ijin_duka);
-            $('input[name="ijin_dinas"]').val(json.ijin_dinas);
+            $('input[name="ijin_sakit"]').val(json.ijin_sakit);
             $('input[name="smtp_host"]').val(json.smtp_host);
             $('input[name="smtp_port"]').val(json.smtp_port);
             $('input[name="smtp_user"]').val(json.smtp_user);

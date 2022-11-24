@@ -32,7 +32,7 @@ class Home extends CI_Controller {
 						
 						$data = [
 							'id_account' => $account['id_account'],
-							'id_kota' => $account['id_kota'],
+							'id_cabang' => $account['id_cabang'],
 							'id_posisi' => $account['id_posisi'],
 							'nama' => $account['nama'],
 							'email' => $account['email'],
@@ -70,7 +70,7 @@ class Home extends CI_Controller {
 		}
 		$data = [
 			'id_account',
-			'id_kota',
+			'id_cabang',
 			'id_posisi',
 			'nama',
 			'email',

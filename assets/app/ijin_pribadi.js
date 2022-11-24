@@ -67,9 +67,9 @@
     
     $('#ajukan_form').on('click',function (e) {
         e.preventDefault();
-        var cek_tgl_mulai = $('input[name="tgl_mulai"]').val().search("_");
+        var cek_tgl_awal = $('input[name="tgl_awal"]').val().search("_");
         var cek_tgl_akhir = $('input[name="tgl_akhir"]').val().search("_");
-        if(cek_tgl_mulai == -1 && cek_tgl_akhir == -1){
+        if(cek_tgl_awal == -1 && cek_tgl_akhir == -1){
             let validasi = document.getElementById("form-ijincuti").reportValidity();
             if(validasi){
                 $("#ajukan_form").prop( "disabled",true);
@@ -169,7 +169,7 @@
                 }},
                 { data: "Status" },
                 { data: "tgl_create" },
-                { data: "tgl_mulai" },
+                { data: "tgl_awal" },
                 { data: "tgl_akhir" },
                 { data: "total_hari" },
                 { data: "total_jam" },
@@ -203,7 +203,7 @@
                     document.getElementById("text-showform").innerHTML = 'Status : '+stts;
                     $("#show-tgl_create").html(data.tgl_input);
                     $("#show-keperluan").html(data.keperluan);
-                    $("#show-tgl_mulai").html(data.tgl_mulai);
+                    $("#show-tgl_awal").html(data.tgl_awal);
                     $("#show-tgl_akhir").html(data.tgl_akhir);
                     $("#show-total_hari").html(data.total_hari);
                     $("#show-total_jam").html(data.total_jam);

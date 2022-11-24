@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="lbl-color">Ijin Dinak Keluar</label>
-                                    <input type="number" name="ijin_dinas" step="0.1" min="0" class="form-control" placeholder="0" required>
+                                    <input type="number" name="ijin_sakit" step="0.1" min="0" class="form-control" placeholder="0" required>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                         <div class="status"><?= $list->email ?></div>
                                     </div>
                                     <div class="d-flex ml-auto align-items-center">
-                                        <p class="text-info fw-bold"><?= $list->inisial_kota ?></p>
+                                        <p class="text-info fw-bold"><?= $list->kode_cabang ?></p>
                                     </div>
                                 </div>
                                 <div class="separator-dashed m-0"></div>

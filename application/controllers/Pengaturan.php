@@ -10,7 +10,7 @@ class Pengaturan extends CI_Controller {
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
 		define('ID_POSISI',$this->session->userdata('id_posisi'));
-		define('ID_KOTA',$this->session->userdata('id_kota'));
+		define('ID_CABANG',$this->session->userdata('id_cabang'));
     }
     
 	//================= KONFIGURASI
@@ -20,7 +20,7 @@ class Pengaturan extends CI_Controller {
 		$cuti_melahirkan = $this->m_main->getRow('db_ijincuti','id_ijincuti',3);
 		$ijin_pribadi = $this->m_main->getRow('db_ijincuti','id_ijincuti',4);
 		$ijin_duka = $this->m_main->getRow('db_ijincuti','id_ijincuti',5);
-		$ijin_dinas = $this->m_main->getRow('db_ijincuti','id_ijincuti',6);
+		$ijin_sakit = $this->m_main->getRow('db_ijincuti','id_ijincuti',6);
 		$smtp_host = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','smtp_host');
 		$smtp_port = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','smtp_port');
 		$smtp_user = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','smtp_user');
@@ -33,7 +33,7 @@ class Pengaturan extends CI_Controller {
 			'cuti_melahirkan' => $cuti_melahirkan['potong_cuti'],
 			'ijin_pribadi' => $ijin_pribadi['potong_cuti'],
 			'ijin_duka' => $ijin_duka['potong_cuti'],
-			'ijin_dinas' => $ijin_dinas['potong_cuti'],
+			'ijin_sakit' => $ijin_sakit['potong_cuti'],
 			'smtp_host' => $smtp_host['isi_konfigurasi'],
 			'smtp_port' => $smtp_port['isi_konfigurasi'],
 			'smtp_user' => $smtp_user['isi_konfigurasi'],
@@ -49,7 +49,7 @@ class Pengaturan extends CI_Controller {
         $cuti_melahirkan['potong_cuti'] = $_POST['cuti_melahirkan'];
         $ijin_pribadi['potong_cuti'] = $_POST['ijin_pribadi'];
         $ijin_duka['potong_cuti'] = $_POST['ijin_duka'];
-        $ijin_dinas['potong_cuti'] = $_POST['ijin_dinas'];
+        $ijin_sakit['potong_cuti'] = $_POST['ijin_sakit'];
         $smtp_host['isi_konfigurasi'] = $_POST['smtp_host'];
         $smtp_port['isi_konfigurasi'] = $_POST['smtp_port'];
         $smtp_user['isi_konfigurasi'] = $_POST['smtp_user'];
@@ -62,7 +62,7 @@ class Pengaturan extends CI_Controller {
         $this->m_main->updateIN('db_ijincuti','id_ijincuti',3,$cuti_melahirkan);
         $this->m_main->updateIN('db_ijincuti','id_ijincuti',4,$ijin_pribadi);
         $this->m_main->updateIN('db_ijincuti','id_ijincuti',5,$ijin_duka);
-        $this->m_main->updateIN('db_ijincuti','id_ijincuti',6,$ijin_dinas);
+        $this->m_main->updateIN('db_ijincuti','id_ijincuti',6,$ijin_sakit);
 
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_host',$smtp_host);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_port',$smtp_port);

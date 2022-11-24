@@ -10,43 +10,55 @@ class Masterdata extends CI_Controller {
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
 		define('ID_POSISI',$this->session->userdata('id_posisi'));
-		define('ID_KOTA',$this->session->userdata('id_kota'));
+		define('ID_CABANG',$this->session->userdata('id_cabang'));
     }
 	
-	//================= MEMBER
-	public function read_member(){
-		$member = $this->m_auth->GetAllMember();
+	//================= ACCOUNT
+	public function read_account(){
+		$account = $this->m_auth->GetAllAccount();
 		$data = [];
 		$no = 0;
-		foreach ($member as $list) {
+		foreach ($account as $list) {
 			// if($list->id_account != 1){
 				$no++;
 				$row = [];
 				$row['No'] = $no;
 				$row['Kode'] = $list->kode;
-				$row['No_induk'] = $list->nomor_induk;
-				$row['Nama'] = $list->nama_member;
-				$row['Gender'] = $list->gender;
+				$row['nomor_induk'] = $list->nomor_induk;
+				$row['nama_account'] = $list->nama_account;
+				$row['gender'] = $list->gender;
 				$row['tempat_lahir'] = $list->tempat_lahir;
 				$row['tgl_lahir'] = date_format(date_create($list->tgl_lahir),"d-m-Y");
-				$row['Email'] = $list->email;
-				$row['Posisi'] = $list->nama_posisi;
-				$row['Alamat'] = $list->alamat;
-				$row['Nohp'] = $list->telp;
+				$row['email'] = $list->email;
+				$row['nama_posisi'] = $list->nama_posisi;
+				$row['alamat'] = $list->alamat;
+				$row['telp'] = $list->telp;
 				$row['sisa_cuti'] = floatval($list->sisa_cuti);
 				$row['nama_bank'] = $list->nama_bank;
 				$row['nama_rek'] = $list->nama_rek;
 				$row['no_rek'] = $list->no_rek;
-				$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
+				$row['status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
 				$row['Aksi'] = $list->id_account;
 				$row['IDposisi'] = $list->id_posisi.'-';
-				$row['AlamatLengkap'] = $list->alamat;
-				$row['Level'] = $list->level;
-				$row['Bagian'] = $list->bagian;
+				$row['level'] = $list->level;
+				$row['bagian'] = $list->bagian;
 				$row['id_posisi'] = $list->id_posisi;
-				$row['id_kota'] = $list->id_kota;
-				$row['KotaKlinik'] = $list->nama_kota;
-				$row['tgl_masuk'] = date_format(date_create($list->tgl_mulai_kerja),"d-m-Y");
+				$row['id_cabang'] = $list->id_cabang;
+				$row['nama_cabang'] = $list->nama_cabang;
+				$row['tgl_masuk'] = date_format(date_create($list->tgl_kerja),"d-m-Y");
+				$row['no_ktp'] = $list->no_ktp;
+				$row['nama_ibu'] = $list->nama_ibu;
+				$row['telp_referensi'] = $list->telp_referensi;
+				$row['pendidikan_terakhir'] = $list->pendidikan_terakhir;
+				$row['lulus_dari'] = $list->lulus_dari;
+				$row['alamat_ktp'] = $list->alamat_ktp;
+				$row['status_karyawan'] = $list->status_karyawan;
+				$row['tgl_evaluasi'] = $list->tgl_evaluasi != NULL ? date_format(date_create($list->tgl_evaluasi),"d-m-Y") : '';
+				$row['tgl_resign'] = $list->tgl_resign != NULL ? date_format(date_create($list->tgl_resign),"d-m-Y") : '';
+				$row['alasan_resign'] = $list->alasan_resign;
+
+				$masa_kerja = date_diff(date_create($list->tgl_kerja),date_create(date("Y-m-d")));
+				$row['masa_kerja'] = ($masa_kerja->y).' Thn, '.($masa_kerja->m).' Bln';
 				$data[] = $row; 
 			// }
 		}
@@ -54,29 +66,39 @@ class Masterdata extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	public function add_member(){
+	public function add_account(){
 		$cekData = $this->m_main->cekData('db_account','email',$_POST['email']);
 		if(!$cekData){
 			$data = [
 				'id_posisi' => $_POST['posisi'],
-				'id_kota' => $_POST['kota'],
+				'id_cabang' => $_POST['cabang'],
 				'kode' => $_POST['kode'],
 				'nomor_induk' => $_POST['nomor_induk'],
+				'no_ktp' => $_POST['nomor_ktp'],
+				'nama_ibu' => $_POST['nama_ibu'],
 				'nama' => $_POST['nama'],
 				'gender' => $_POST['gender'],
 				'tempat_lahir' => $_POST['tempat_lahir'],
 				'tgl_lahir' => date_format(date_create($_POST['tgl_lahir']),"Y-m-d"),
+				'telp' => $_POST['nohp'],
+				'telp_referensi' => $_POST['nohp2'],
+				'sisa_cuti' => $_POST['sisa_cuti'],
+				'pendidikan_terakhir' => $_POST['pendidikan_terakhir'],
+				'lulus_dari' => $_POST['lulus_dari'],
 				'email' => $_POST['email'],
 				'alamat' => $_POST['alamat'],
-				'telp' => $_POST['nohp'],
+				'alamat_ktp' => $_POST['alamat2'],
 				'nama_bank' => $_POST['nama_bank'],
 				'nama_rek' => $_POST['nama_rek'],
 				'no_rek' => $_POST['no_rek'],
 				'level' => $_POST['level'],
 				'bagian' => $_POST['bagian'],
-				'sisa_cuti' => $_POST['sisa_cuti'],
+				'status_karyawan' => $_POST['status_karyawan'],
+				'alasan_resign' => $_POST['alasan_keluar'],
 				'password' => password_hash('12345678', PASSWORD_DEFAULT),
-				'tgl_mulai_kerja' => date_format(date_create($_POST['tgl_masuk']),"Y-m-d"),
+				'tgl_kerja' => date_format(date_create($_POST['tgl_masuk']),"Y-m-d"),
+				'tgl_evaluasi' => $_POST['tgl_evaluasi'] != '' ? date_format(date_create($_POST['tgl_evaluasi']),"Y-m-d") : NULL,
+				'tgl_resign' => $_POST['tgl_keluar'] != '' ? date_format(date_create($_POST['tgl_keluar']),"Y-m-d") : NULL,
 				'tgl_masuk' => '0000-00-00 00:00:00',
 				'tgl_keluar' => '0000-00-00 00:00:00',
 				'tgl_input' => date("Y-m-d H:i:s"),
@@ -85,7 +107,7 @@ class Masterdata extends CI_Controller {
 			];
 			$this->m_main->createIN('db_account',$data);
 		
-			$output['message'] ="Data member berhasil ditambah!";
+			$output['message'] ="Data account berhasil ditambah!";
 			$output['result'] = "success";
 		}else{
 			$output['message'] ="Email sudah di gunakan, coba dengan yang lain!";
@@ -95,48 +117,58 @@ class Masterdata extends CI_Controller {
         exit();
 	}
 	
-	public function edit_member(){
+	public function edit_account(){
 		if(!empty($_POST['id_account'])){
 			$cekData = $this->m_main->cekData('db_account','email',$_POST['email']);
 			$getData = $this->m_main->getRow('db_account','id_account',$_POST['id_account']);
 			if(!$cekData || ($_POST['email']==$getData['email'])){
 				$data = [
 					'id_posisi' => $_POST['posisi'],
-					'id_kota' => $_POST['kota'],
+					'id_cabang' => $_POST['cabang'],
 					'kode' => $_POST['kode'],
 					'nomor_induk' => $_POST['nomor_induk'],
+					'no_ktp' => $_POST['nomor_ktp'],
+					'nama_ibu' => $_POST['nama_ibu'],
 					'nama' => $_POST['nama'],
 					'gender' => $_POST['gender'],
 					'tempat_lahir' => $_POST['tempat_lahir'],
 					'tgl_lahir' => date_format(date_create($_POST['tgl_lahir']),"Y-m-d"),
+					'telp' => $_POST['nohp'],
+					'telp_referensi' => $_POST['nohp2'],
+					'sisa_cuti' => $_POST['sisa_cuti'],
+					'pendidikan_terakhir' => $_POST['pendidikan_terakhir'],
+					'lulus_dari' => $_POST['lulus_dari'],
 					'email' => $_POST['email'],
 					'alamat' => $_POST['alamat'],
-					'telp' => $_POST['nohp'],
+					'alamat_ktp' => $_POST['alamat2'],
 					'nama_bank' => $_POST['nama_bank'],
 					'nama_rek' => $_POST['nama_rek'],
 					'no_rek' => $_POST['no_rek'],
 					'level' => $_POST['level'],
 					'bagian' => $_POST['bagian'],
-					'sisa_cuti' => $_POST['sisa_cuti'],
-					'tgl_mulai_kerja' => date_format(date_create($_POST['tgl_masuk']),"Y-m-d"),
+					'status_karyawan' => $_POST['status_karyawan'],
+					'alasan_resign' => $_POST['alasan_keluar'],
+					'tgl_kerja' => date_format(date_create($_POST['tgl_masuk']),"Y-m-d"),
+					'tgl_evaluasi' => $_POST['tgl_evaluasi'] != '' ? date_format(date_create($_POST['tgl_evaluasi']),"Y-m-d") : NULL,
+					'tgl_resign' => $_POST['tgl_keluar'] != '' ? date_format(date_create($_POST['tgl_keluar']),"Y-m-d") : NULL,
 					'tgl_edit' => date("Y-m-d H:i:s"),
 				];
 				$this->m_main->updateIN('db_account','id_account',$_POST['id_account'],$data);
-				$output['message'] ="Data member berhasil di ubah!";
+				$output['message'] ="Data account berhasil di ubah!";
 				$output['result'] = "success";
 			}else{
 				$output['message'] ="Email sudah di gunakan, coba dengan yang lain!";
 				$output['result'] = "error";
 			}
 		}else{
-			$output['message'] = "Data id member tidak tersedia!";
+			$output['message'] = "Data id account tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function remove_member(){
+	public function remove_account(){
 		if(!empty($_POST['id_account'])){
 			$data = [
 				'status' => 0,
@@ -144,17 +176,17 @@ class Masterdata extends CI_Controller {
 				'tgl_keluar' => date("Y-m-d H:i:s"),
 			];
 			$this->m_main->updateIN('db_account','id_account',$_POST['id_account'],$data);
-			$output['message'] = "Member berhasil di hapus!";
+			$output['message'] = "Account berhasil di hapus!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id member tidak tersedia!";
+			$output['message'] = "Data id account tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function restore_member(){
+	public function restore_account(){
 		if(!empty($_POST['id_account'])){
 			$data = [
 				'status' => 1,
@@ -162,30 +194,30 @@ class Masterdata extends CI_Controller {
 				'tgl_keluar' => date("Y-m-d H:i:s"),
 			];
 			$this->m_main->updateIN('db_account','id_account',$_POST['id_account'],$data);
-			$output['message'] = "Member berhasil di pulihkan!";
+			$output['message'] = "Account berhasil di pulihkan!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id member tidak tersedia!";
+			$output['message'] = "Data id account tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function delete_member(){
+	public function delete_account(){
 		if(!empty($_POST['id_account'])){
 			$this->m_main->deleteIN('db_account','id_account',$_POST['id_account']);
-			$output['message'] = "Member berhasil di hapus permanen!";
+			$output['message'] = "Account berhasil di hapus permanen!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id member tidak tersedia!";
+			$output['message'] = "Data id account tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 
-	public function level_member(){
+	public function level_account(){
 		$output['tambah'] = $this->m_auth->cekAksi(ID_POSISI,2,2);
 		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,2,3);
 		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,2,4);
@@ -396,18 +428,20 @@ class Masterdata extends CI_Controller {
 		return $html ;
 	}
 
-    //================= KOTA KLINIK
-	public function read_kota(){
-		$kota = $this->m_main->readIN('db_kota');
+    //================= CABANG
+	public function read_cabang(){
+		$cabang = $this->m_main->readIN('db_cabang');
 		$data = [];
 		$no = 0;
-		foreach ($kota as $list) {
+		foreach ($cabang as $list) {
 			$no++;
 			$row = [];
 			$row['No'] = $no;
-			$row['Kota'] = $list->nama_kota;
-			$row['Inisial'] = $list->inisial_kota;
-			$row['Aksi'] = $list->id_kota;
+			$row['Cabang'] = $list->nama_cabang;
+			$row['Kode'] = $list->kode_cabang;
+			$row['PT'] = $list->nama_pt;
+			$row['Alamat'] = $list->alamat_cabang;
+			$row['Aksi'] = $list->id_cabang;
 			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
 			$data[] = $row; 
 		}
@@ -415,96 +449,100 @@ class Masterdata extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	public function add_kota(){
-		if(!empty($_POST['nama_kota'])){
+	public function add_cabang(){
+		if(!empty($_POST['nama_cabang'])){
 			$data = [
-				'nama_kota' => $_POST['nama_kota'],
-				'inisial_kota' => $_POST['inisial_kota'],
+				'nama_cabang' => $_POST['nama_cabang'],
+				'kode_cabang' => $_POST['kode_cabang'],
+				'nama_pt' => $_POST['nama_pt'],
+				'alamat_cabang' => $_POST['alamat_cabang'],
 				'tgl_input' => date("Y-m-d H:i:s"),
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'status' => 1,
 				'id_account' => ID_ACCOUNT,
 			];
-			$this->m_main->createIN('db_kota',$data);
-			$output['message'] ="Data kota berhasil ditambah!";
+			$this->m_main->createIN('db_cabang',$data);
+			$output['message'] ="Data cabang berhasil ditambah!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] ="Nama kota tidak boleh kosong!";
+			$output['message'] ="Nama cabang tidak boleh kosong!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 
-	public function edit_kota(){
-		if(!empty($_POST['id_kota'])){
+	public function edit_cabang(){
+		if(!empty($_POST['id_cabang'])){
 			$data = [
-				'nama_kota' => $_POST['nama_kota'],
-				'inisial_kota' => $_POST['inisial_kota'],
+				'nama_cabang' => $_POST['nama_cabang'],
+				'kode_cabang' => $_POST['kode_cabang'],
+				'nama_pt' => $_POST['nama_pt'],
+				'alamat_cabang' => $_POST['alamat_cabang'],
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
-			$this->m_main->updateIN('db_kota','id_kota',$_POST['id_kota'],$data);
-			$output['message'] ="Data kota berhasil di ubah!";
+			$this->m_main->updateIN('db_cabang','id_cabang',$_POST['id_cabang'],$data);
+			$output['message'] ="Data cabang berhasil di ubah!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id kota tidak tersedia!";
+			$output['message'] = "Data id cabang tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function remove_kota(){
-		if(!empty($_POST['id_kota'])){
+	public function remove_cabang(){
+		if(!empty($_POST['id_cabang'])){
 			$data = [
 				'status' => 0,
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
-			$this->m_main->updateIN('db_kota','id_kota',$_POST['id_kota'],$data);
-			$output['message'] = "Kota berhasil di hapus!";
+			$this->m_main->updateIN('db_cabang','id_cabang',$_POST['id_cabang'],$data);
+			$output['message'] = "Cabang berhasil di hapus!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id kota tidak tersedia!";
+			$output['message'] = "Data id cabang tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function restore_kota(){
-		if(!empty($_POST['id_kota'])){
+	public function restore_cabang(){
+		if(!empty($_POST['id_cabang'])){
 			$data = [
 				'status' => 1,
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
-			$this->m_main->updateIN('db_kota','id_kota',$_POST['id_kota'],$data);
-			$output['message'] = "Kota berhasil di pulihkan!";
+			$this->m_main->updateIN('db_cabang','id_cabang',$_POST['id_cabang'],$data);
+			$output['message'] = "Cabang berhasil di pulihkan!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id kota tidak tersedia!";
+			$output['message'] = "Data id cabang tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 	
-	public function delete_kota(){
-		if(!empty($_POST['id_kota'])){
-			$this->m_main->deleteIN('db_kota','id_kota',$_POST['id_kota']);
-			$output['message'] = "Kota berhasil di hapus permanen!";
+	public function delete_cabang(){
+		if(!empty($_POST['id_cabang'])){
+			$this->m_main->deleteIN('db_cabang','id_cabang',$_POST['id_cabang']);
+			$output['message'] = "Cabang berhasil di hapus permanen!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] = "Data id kota tidak tersedia!";
+			$output['message'] = "Data id cabang tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);
         exit();
 	}
 
-	public function level_kota(){
+	public function level_cabang(){
 		$output['tambah'] = $this->m_auth->cekAksi(ID_POSISI,4,2);
 		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,4,3);
 		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,4,4);

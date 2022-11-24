@@ -37,18 +37,13 @@
                 <div class="col-md-8">
                     <div class="card card-dark bg-secondary-gradient shadow text-white" style="min-height:190px;">
                         <div class="card-body bubble-shadow">
-                            <h5>Klinik Gigi Joy Dental <?= $kota['nama_kota'] ?></h5>
+                            <h5>Klinik Gigi Joy Dental <?= $cabang['nama_cabang'] ?></h5>
                             <h2 class="py-4 mb-0"><?= $account['nomor_induk'] ?></h2>
                             <div class="row">
                                 <div class="col-8 pr-0">
-                                    <div class="text-small fw-bold op-8">Mulai Kerja : <?= date_format(date_create($account['tgl_mulai_kerja']),"d F Y") ?></div>
-                                    <?php 
-                                        $date1 = date_create($account['tgl_mulai_kerja']);
-                                        $date2 = date_create(date("Y-m-d"));
-                                        $diff = date_diff($date1,$date2);
-                                        $lama_kerja = ($diff->y).' Thn, '.($diff->m).' Bln';
-                                    ?>
-                                    <h3 class="fw-bold mb-0 mt-1"><?= $lama_kerja ?></h3>
+                                    <div class="text-small fw-bold op-8">Mulai Kerja : <?= date_format(date_create($account['tgl_kerja']),"d F Y") ?></div>
+                                    <?php $masa_kerja = date_diff(date_create($account['tgl_kerja']),date_create(date("Y-m-d"))); ?>
+                                    <h3 class="fw-bold mb-0 mt-1"><?= ($masa_kerja->y).' Thn, '.($masa_kerja->m).' Bln' ?></h3>
                                 </div>
                                 <div class="col-4 pl-0 text-right">
                                     <div class="text-small text-uppercase fw-bold op-8 mt-2">Status</div>
@@ -115,8 +110,8 @@
                                 <i class="fa fa-magic"></i>
                             </span>
                             <div>
-                                <h5 class="mb-1"><b>Dinas Keluar</b></h5>
-                                <small class="text-muted"><span class="fw-bold">12</span> dinas keluar</small>
+                                <h5 class="mb-1"><b>Ijin Sakit</b></h5>
+                                <small class="text-muted"><span class="fw-bold">12</span> ijin sakit</small>
                             </div>
                         </div>
                     </div>
@@ -137,7 +132,7 @@
                                                 <div class="status"><?= $list->email ?></div>
                                             </div>
                                             <div class="d-flex ml-auto align-items-center">
-                                                <p class="text-info fw-bold"><?= $list->inisial_kota ?></p>
+                                                <p class="text-info fw-bold"><?= $list->kode_cabang ?></p>
                                             </div>
                                         </div>
                                         <div class="separator-dashed m-0"></div>

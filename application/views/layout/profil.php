@@ -7,13 +7,13 @@
                         <div class="col-md-6">
                             <div class="form-group form-group-default">
                                 <label>Nama</label>
-                                <input type="text" class="form-control" name="nama" placeholder="Nama" value="<?= $member['nama_member']; ?>" required>
+                                <input type="text" class="form-control" name="nama" placeholder="Nama" value="<?= $account['nama_account']; ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-default">
                                 <label>E-Mail</label>
-                                <input type="email" class="form-control" name="email" placeholder="Email" value="<?= $member['email']; ?>" required>
+                                <input type="email" class="form-control" name="email" placeholder="Email" value="<?= $account['email']; ?>" required>
                             </div>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                         <div class="col-md-6">
                             <div class="form-group form-group-default">
                                 <label>No. HP</label>
-                                <input type="text" class="form-control" id="nohp" name="nohp" placeholder="No. Hp" value="<?= $member['telp']; ?>" required>
+                                <input type="text" class="form-control" id="nohp" name="nohp" placeholder="No. Hp" value="<?= $account['telp']; ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -35,7 +35,7 @@
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
                                 <label>Alamat</label>
-                                <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="<?= $member['alamat']; ?>" required>
+                                <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="<?= $account['alamat']; ?>" required>
                             </div>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
             <div class="card-body">
                 <div class="mx-auto d-block">
                     <?php
-                        if($member['foto_diri'] == NULL || $member['foto_diri'] == ''){ $photo = 'profile.jpg'; }
-                        else{ $photo = $member['foto_diri']; }
+                        if($account['foto_diri'] == NULL || $account['foto_diri'] == ''){ $photo = 'profile.jpg'; }
+                        else{ $photo = $account['foto_diri']; }
                     ?>
                     <img class="rounded-circle mx-auto d-block" src="<?= base_url() ?>assets/img/photo/<?= $photo; ?>" id="imgx" alt="Photo profile" width="180" height="180">
                 </div>

@@ -10,7 +10,7 @@ class Ijincuti extends CI_Controller {
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
 		define('ID_POSISI',$this->session->userdata('id_posisi'));
-		define('ID_KOTA',$this->session->userdata('id_kota'));
+		define('ID_CABANG',$this->session->userdata('id_cabang'));
     }
 
 	public function read_accatasan(){
@@ -63,9 +63,9 @@ class Ijincuti extends CI_Controller {
 				'id_karyawan' => ID_ACCOUNT,
 				'id_atasan' => $atasan['id_atasan'],
 				'keperluan' => $_POST['keperluan'],
-				'tgl_mulai' => date_format(date_create($_POST['tgl_mulai']),"Y-m-d"),
+				'tgl_awal' => date_format(date_create($_POST['tgl_awal']),"Y-m-d"),
 				'tgl_akhir' => date_format(date_create($_POST['tgl_akhir']),"Y-m-d"),
-				'jam_mulai' => date_format(date_create($_POST['tgl_mulai']),"H:i:s"),
+				'jam_awal' => date_format(date_create($_POST['tgl_awal']),"H:i:s"),
 				'jam_akhir' => date_format(date_create($_POST['tgl_akhir']),"H:i:s"),
 				'total_hari' => $_POST['total_hari'],
 				'total_jam' => $_POST['total_jam'],
@@ -116,13 +116,13 @@ class Ijincuti extends CI_Controller {
 			$no++;
 			$row = [];
 			$row['No'] = $no;
-			$row['Tanggal'] = date_format(date_create($list->tgl_mulai),"d-m-Y").' sampai '.date_format(date_create($list->tgl_akhir),"d-m-Y");
+			$row['Tanggal'] = date_format(date_create($list->tgl_awal),"d-m-Y").' sampai '.date_format(date_create($list->tgl_akhir),"d-m-Y");
 			$row['Cuti'] = $list->status == 0 || $list->status == 1 ? 'prosess' : floatval($list->potong_cuti).' Cuti';
 			$row['Keperluan'] = $list->keperluan;
 			$row['Status'] = $list->status;
 			$row['Aksi'] = $list->id_ijincuti_list;
 			$row['tgl_create'] = date_format(date_create($list->tgl_input),"d F Y");
-			$row['tgl_mulai'] = date_format(date_create($list->tgl_mulai.' '.$list->jam_mulai),"d-m-Y H:i");
+			$row['tgl_awal'] = date_format(date_create($list->tgl_awal.' '.$list->jam_awal),"d-m-Y H:i");
 			$row['tgl_akhir'] = date_format(date_create($list->tgl_akhir.' '.$list->jam_akhir),"d-m-Y H:i");
 			$row['total_hari'] = $list->total_hari;
 			$row['total_jam'] = $list->total_jam;
@@ -139,6 +139,7 @@ class Ijincuti extends CI_Controller {
 		$atasan = $this->m_main->getRow('db_account','id_account',$detail['id_atasan']);
 		$karyawan = $this->m_main->getRow('db_account','id_account',$detail['id_karyawan']);
 		$jabatan = $this->m_main->getRow('db_posisi','id_posisi',$karyawan['id_posisi']);
+		$ijincuti = $this->m_main->getRow('db_ijincuti','id_ijincuti',$detail['id_ijincuti']);
 
 		if($detail['id_personalia'] != null){
 			$getName = $this->m_main->getRow('db_account','id_account',$detail['id_personalia']);
@@ -148,12 +149,12 @@ class Ijincuti extends CI_Controller {
 		}
 
 		$data = [];
-		$data['tanggal'] = date_format(date_create($detail['tgl_mulai']),"d-m-Y").' sampai '.date_format(date_create($detail['tgl_akhir']),"d-m-Y");
+		$data['tanggal'] = date_format(date_create($detail['tgl_awal']),"d-m-Y").' sampai '.date_format(date_create($detail['tgl_akhir']),"d-m-Y");
 		$data['cuti'] = $detail['status'] == 0 ? 'prosess' : floatval($detail['potong_cuti']).' Cuti';
 		$data['keperluan'] = $detail['keperluan'];
 		$data['status'] = $detail['status'];
 		$data['tgl_create'] = date_format(date_create($detail['tgl_input']),"d F Y");
-		$data['tgl_mulai'] = date_format(date_create($detail['tgl_mulai'].' '.$detail['jam_mulai']),"d-m-Y H:i");
+		$data['tgl_awal'] = date_format(date_create($detail['tgl_awal'].' '.$detail['jam_awal']),"d-m-Y H:i");
 		$data['tgl_akhir'] = date_format(date_create($detail['tgl_akhir'].' '.$detail['jam_akhir']),"d-m-Y H:i");
 		$data['total_hari'] = $detail['total_hari'];
 		$data['total_jam'] = $detail['total_jam'];
@@ -167,6 +168,7 @@ class Ijincuti extends CI_Controller {
 		$data['nama_atasan'] = $atasan['nama'];
 		$data['nama_personalia'] = $personalia;
 		$data['potong_cuti'] = $detail['potong_cuti'];
+		$data['ijincuti'] = strtoupper('FORM '.$ijincuti['nama_ijincuti']);
 		echo json_encode($data);
 	}
 
@@ -247,5 +249,28 @@ class Ijincuti extends CI_Controller {
 		}
         echo json_encode($output);
         exit();
+	}
+
+	public function read_rekapijincuti(){
+		$ijincuti = $this->m_auth->GetLlistIjinCuti_Rekap($_POST['id_ijincuti'],$_POST['id_karyawan']);
+		$data = [];
+		$no = 0;
+		foreach ($ijincuti as $list) {
+			$no++;
+			$row = [];
+			$row['No'] = $no;
+			$row['Tanggal'] = date_format(date_create($list->tgl_input),"d-m-Y");
+			$row['Awal'] = date_format(date_create($list->tgl_awal.' '.$list->jam_awal),"d-m-Y H:i");
+			$row['Akhir'] = date_format(date_create($list->tgl_akhir.' '.$list->jam_akhir),"d-m-Y H:i");
+			$row['Hari'] = $list->total_hari;
+			$row['Jam'] = $list->total_jam;
+			$row['IjinCuti'] = $list->nama_ijincuti;
+			$row['Potongan'] = floatval($list->potong_cuti);
+			$row['Karyawan'] = $list->karyawan;
+			$row['Aksi'] = $list->id_ijincuti_list;
+			$data[] = $row; 
+		}
+		$output = [ "data" => $data ];
+		echo json_encode($output);
 	}
 }
