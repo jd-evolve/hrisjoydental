@@ -122,13 +122,11 @@
             var sta = $('select[name="filter-status"]').val().toLowerCase();
             let style = 'display:none;';
             if(sta == 'aktif-'){
-                $('.cabang-eye').attr('style','');
                 $('.cabang-edit').attr('style','');
                 $('.cabang-restore').attr('style',style);
                 $('.cabang-remove').attr('style','');
                 $('.cabang-delete').attr('style',style);
             }else if(sta == 'hapus-'){
-                $('.cabang-eye').attr('style',style);
                 $('.cabang-edit').attr('style',style);
                 $('.cabang-restore').attr('style','');
                 $('.cabang-remove').attr('style',style);

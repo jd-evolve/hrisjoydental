@@ -10324,6 +10324,11 @@ hr {
     padding: 0.25rem 0.5rem !important;
     height: auto;
 }
+.form-jm {
+    padding: 0.25rem 0.5rem !important;
+    height: auto;
+    width: 70px;
+}
 .form-nota {
     max-width: 300px;
     font-size: 12px;

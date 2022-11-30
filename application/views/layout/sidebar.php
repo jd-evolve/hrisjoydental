@@ -59,6 +59,8 @@
 
                 $absensi = array(
                     'rekap-scanlog',
+                    'jam-kerja',
+                    'jadwal-kerja',
                 );
 
                 $uri_path = $this->uri->segment(1);
@@ -147,6 +149,16 @@
                             <li class="<?= !$cekmenu['rekap-scanlog'] ? 'gone' : '' ?> <?= $uri_path == "rekap-scanlog"? 'active' : '' ?>">
                                 <a href="<?= base_url('rekap-scanlog') ?>">
                                     <span class="sub-item">Rekap Scanlog</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['jam-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jam-kerja"? 'active' : '' ?>">
+                                <a href="<?= base_url('jam-kerja') ?>">
+                                    <span class="sub-item">Jam Kerja</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['jadwal-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jadwal-kerja"? 'active' : '' ?>">
+                                <a href="<?= base_url('jadwal-kerja') ?>">
+                                    <span class="sub-item">jadwal Kerja</span>
                                 </a>
                             </li>
                         </ul>

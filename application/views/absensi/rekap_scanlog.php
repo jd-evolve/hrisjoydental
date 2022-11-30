@@ -171,7 +171,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="tabel-harilibur" class="table table-scanlog table-bordered table-bordered-bd-gray mb-0">
+                        <table id="tabel-hlibur" class="table table-scanlog table-bordered table-bordered-bd-gray mb-0">
                             <thead>
                                 <tr style="background: #f7f8fa">
                                     <th class="text-center">No</th>

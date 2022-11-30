@@ -170,7 +170,7 @@
             });
             
             function DataHariLibur(dataLibur){
-                $("#tabel-harilibur tbody").html("");
+                $("#tabel-hlibur tbody").html("");
                 var html = "";
                 for (var i=0; i<dataLibur.length; i++) {
                     html += '<tr>' +
@@ -180,11 +180,11 @@
                         '</tr>';
                 }
                 if (dataLibur == 0) {
-                    $("#tabel-harilibur tbody").html(
+                    $("#tabel-hlibur tbody").html(
                         '<tr><td class="text-center" colspan="4">Belum ada libur di lain hari minggu</td></tr>'
                     );
                 } else {
-                    $("#tabel-harilibur tbody").html(html);
+                    $("#tabel-hlibur tbody").html(html);
                 }
             }
 

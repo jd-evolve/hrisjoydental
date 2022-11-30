@@ -280,6 +280,36 @@ class Menu extends CI_Controller {
 		}
     }
 	
+    public function jam_kerja(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Jam Kerja';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('absensi/jam_kerja');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function jadwal_kerja(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Jadwal Kerja';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('absensi/jadwal_kerja');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
     public function konfigurasi(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
 			$data['vrs'] = U_VERSI; 

@@ -121,13 +121,11 @@
             var sta = $('select[name="filter-status"]').val().toLowerCase();
             let style = 'display:none;';
             if(sta == 'aktif-'){
-                $('.kegiatan-eye').attr('style','');
                 $('.kegiatan-edit').attr('style','');
                 $('.kegiatan-restore').attr('style',style);
                 $('.kegiatan-remove').attr('style','');
                 $('.kegiatan-delete').attr('style',style);
             }else if(sta == 'hapus-'){
-                $('.kegiatan-eye').attr('style',style);
                 $('.kegiatan-edit').attr('style',style);
                 $('.kegiatan-restore').attr('style','');
                 $('.kegiatan-remove').attr('style',style);
@@ -223,7 +221,7 @@
     $('body').on('click','#kegiatan-edit', function(){
         $("#modal-kegiatan").modal();
         let id_kegiatan = $(this).data('id');
-        document.getElementById("text-kegiatan").innerHTML = "Ubah kegiatan";
+        document.getElementById("text-kegiatan").innerHTML = "Ubah Pengumuman/Kegiatan";
 		var data = table_kegiatan.row($(this).parents("tr")).data();
 		$('input[name="tgl_kegiatan"]').val(data["Tanggal"]);
 		$('input[name="kegiatan"]').val(data["Kegiatan"]);

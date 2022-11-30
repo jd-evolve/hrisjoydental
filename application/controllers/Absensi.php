@@ -16,6 +16,7 @@ class Absensi extends CI_Controller {
 		define('ID_CABANG',$this->session->userdata('id_cabang'));
     }
 
+    //================= SCAN LOG
 	function read_periode(){
 		$periode = $this->m_main->getResult('db_periode','status',1);
 		$data = [];
@@ -238,7 +239,7 @@ class Absensi extends CI_Controller {
 							$lpp = 0;
 							foreach($jdwk as $list_jdwk){
 								$lpp = $lpp+1;
-								$jk = $this->m_main->getRow('db_jam_kerja','id_jam_kerja', $list_jdwk->id_jam_kerja);
+								$jk = $this->m_main->getData('db_jam_kerja','id_jam_kerja = '. $list_jdwk->id_jam_kerja. ' AND status = 1');
 								if($jk){
 									$idx_tgl = date_format(date_create($date_range[$i]),"Ymd").$account['kode'];
 									if(!empty($scanlist[$idx_tgl]['tgl'])){
@@ -368,5 +369,136 @@ class Absensi extends CI_Controller {
 			'status' => 1,
 		];
 		$this->m_main->createIN('db_scanlog',$datax);
+	}
+	
+    //================= JAM KERJA
+	function read_jamkerja(){
+		$jamkerja = $this->m_main->readIN('db_jam_kerja','id_jam_kerja != null','tgl_edit desc');
+		$data = [];
+		$no = 0;
+		foreach ($jamkerja as $list) {
+			$no++;
+			$row = [];
+			$row['No'] = $no;
+			$row['Nama'] = $list->nama_jam_kerja;
+			$row['Keterangan'] = $list->keterangan;
+			$row['Masuk'] = $list->jam_masuk;
+			$row['Pulang'] = $list->jam_pulang;
+			$row['Dihitung'] = $list->dihitung;
+			$row['sb_jm'] = $list->sb_jm;
+			$row['st_jm'] = $list->st_jm;
+			$row['sb_jp'] = $list->sb_jp;
+			$row['st_jp'] = $list->st_jp;
+			$row['Aksi'] = $list->id_jam_kerja;
+			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
+			$data[] = $row; 
+		}
+		$output = [ "data" => $data ];
+		echo json_encode($output);
+	}
+
+	function add_jamkerja(){
+		$data = [
+			'nama_jam_kerja' => $_POST['nama'],
+			'keterangan' => $_POST['keterangan'],
+			'jam_masuk' => $_POST['masuk'],
+			'jam_pulang' => $_POST['pulang'],
+			'dihitung' => $_POST['dihitung'],
+			'sb_jm' => $_POST['sb_jm'],
+			'st_jm' => $_POST['st_jm'],
+			'sb_jp' => $_POST['sb_jp'],
+			'st_jp' => $_POST['st_jp'],
+			'tgl_input' => date("Y-m-d H:i:s"),
+			'tgl_edit' => date("Y-m-d H:i:s"),
+			'status' => 1,
+			'id_account' => ID_ACCOUNT,
+		];
+		$this->m_main->createIN('db_jam_kerja',$data);
+		$output['message'] ="Data jam kerja berhasil ditambah!";
+		$output['result'] = "success";
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function edit_jamkerja(){
+		if(!empty($_POST['id_jam_kerja'])){
+			$data = [
+				'nama_jam_kerja' => $_POST['nama'],
+				'keterangan' => $_POST['keterangan'],
+				'jam_masuk' => $_POST['masuk'],
+				'jam_pulang' => $_POST['pulang'],
+				'dihitung' => $_POST['dihitung'],
+				'sb_jm' => $_POST['sb_jm'],
+				'st_jm' => $_POST['st_jm'],
+				'sb_jp' => $_POST['sb_jp'],
+				'st_jp' => $_POST['st_jp'],
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'id_account' => ID_ACCOUNT,
+			];
+			$this->m_main->updateIN('db_jam_kerja','id_jam_kerja',$_POST['id_jam_kerja'],$data);
+			$output['message'] ="Data jam kerja berhasil di ubah!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id jam kerja tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+
+	public function remove_jamkerja(){
+		if(!empty($_POST['id_jam_kerja'])){
+			$data = [
+				'status' => 0,
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'id_account' => ID_ACCOUNT,
+			];
+			$this->m_main->updateIN('db_jam_kerja','id_jam_kerja',$_POST['id_jam_kerja'],$data);
+			$output['message'] = "Jam kerja berhasil di hapus!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id jam kerja tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function restore_jamkerja(){
+		if(!empty($_POST['id_jam_kerja'])){
+			$data = [
+				'status' => 1,
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'id_account' => ID_ACCOUNT,
+			];
+			$this->m_main->updateIN('db_jam_kerja','id_jam_kerja',$_POST['id_jam_kerja'],$data);
+			$output['message'] = "Jam kerja berhasil di pulihkan!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id jam kerja tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function delete_jamkerja(){
+		if(!empty($_POST['id_jam_kerja'])){
+			$this->m_main->deleteIN('db_jam_kerja','id_jam_kerja',$_POST['id_jam_kerja']);
+			$output['message'] = "Jam kerja berhasil di hapus permanen!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id jam kerja tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+
+	public function level_jamkerja(){
+		$output['tambah'] = $this->m_auth->cekAksi(ID_POSISI,17,2);
+		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,17,3);
+		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,17,4);
+		echo json_encode($output);
 	}
 }
