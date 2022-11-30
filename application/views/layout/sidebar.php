@@ -35,15 +35,19 @@
 
             <?php
                 $ijincuti = array(
+                    'rekap-ijincuti',
                     'acc-atasan',
                     'acc-personalia',
-                    'rekap-ijincuti',
                     'cuti-tahunan',
                     'cuti-menikah',
                     'cuti-melahirkan',
                     'ijin-pribadi',
                     'ijin-duka',
                     'ijin-sakit',
+                );
+
+                $pengaturan = array(
+                    'konfigurasi',
                 );
 
                 $masterdata = array(
@@ -53,8 +57,8 @@
                     'kegiatan-pengumuman',
                 );
 
-                $pengaturan = array(
-                    'konfigurasi',
+                $absensi = array(
+                    'rekap-scanlog',
                 );
 
                 $uri_path = $this->uri->segment(1);
@@ -83,6 +87,11 @@
                     </a>
                     <div id="ijin_cuti" <?= in_array($uri_path, $ijincuti) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['rekap-ijincuti'] ? 'gone' : '' ?> <?= $uri_path == "rekap-ijincuti"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-ijincuti') ?>">
+                                    <span class="sub-item">Rekap Ijin/Cuti</span>
+                                </a>
+                            </li>
                             <li class="<?= !$cekmenu['acc-atasan'] ? 'gone' : '' ?> <?= $uri_path == "acc-atasan"? 'active' : '' ?>">
                                 <a href="<?= base_url('acc-atasan') ?>">
                                     <span class="sub-item">ACC Atasan</span>
@@ -91,11 +100,6 @@
                             <li class="<?= !$cekmenu['acc-personalia'] ? 'gone' : '' ?> <?= $uri_path == "acc-personalia"? 'active' : '' ?>">
                                 <a href="<?= base_url('acc-personalia') ?>">
                                     <span class="sub-item">ACC Personalia</span>
-                                </a>
-                            </li>
-                            <li class="<?= !$cekmenu['rekap-ijincuti'] ? 'gone' : '' ?> <?= $uri_path == "rekap-ijincuti"? 'active' : '' ?>">
-                                <a href="<?= base_url('rekap-ijincuti') ?>">
-                                    <span class="sub-item">Rekap Ijin/Cuti</span>
                                 </a>
                             </li>
                             <li class="<?= !$cekmenu['cuti-tahunan'] ? 'gone' : '' ?> <?= $uri_path == "cuti-tahunan"? 'active' : '' ?>">
@@ -126,6 +130,23 @@
                             <li class="<?= !$cekmenu['ijin-sakit'] ? 'gone' : '' ?> <?= $uri_path == "ijin-sakit"? 'active' : '' ?>">
                                 <a href="<?= base_url('ijin-sakit') ?>">
                                     <span class="sub-item">Ijin Sakit</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item <?= !$cekmenu['menu_absensi'] ? 'gone' : '' ?><?= in_array($uri_path, $absensi) ? 'active submenu' : '' ?>">
+                    <a data-toggle="collapse" href="#absensi">
+                        <i class="fas fa-user-clock"></i>
+                        <p>Absensi</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div id="absensi" <?= in_array($uri_path, $absensi) ? 'class="collapse show"' : 'class="collapse"' ?>>
+                        <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['rekap-scanlog'] ? 'gone' : '' ?> <?= $uri_path == "rekap-scanlog"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-scanlog') ?>">
+                                    <span class="sub-item">Rekap Scanlog</span>
                                 </a>
                             </li>
                         </ul>

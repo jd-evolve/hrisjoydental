@@ -10576,3 +10576,14 @@ hr {
 .select-wilayah ul li {
     cursor: default;
 }
+.box-bg-grey {
+    border: 1px solid #eee !important;
+    background-color: #e8ebf1;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.table-scanlog td,
+.table-scanlog th {
+    padding: 4px 6px !important;
+}

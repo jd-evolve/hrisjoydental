@@ -154,6 +154,18 @@ class M_auth extends CI_Model {
         }
     }
 
+    public function getCountScanKryn(){
+        $query = $this->db->query("
+            SELECT COUNT(x.id_karyawan) as total
+            FROM (
+                SELECT id_karyawan
+                FROM db_scanlog
+                GROUP BY id_karyawan
+            ) x
+        ")->row_array();
+        return $query;
+    }
+
     public function GetAccountOnline(){
         $query = $this->db->query("
             SELECT a.nama, a.email, b.nama_posisi, c.nama_cabang, c.kode_cabang, if(a.foto != NULL, a.foto, 'profile.jpg') as foto 

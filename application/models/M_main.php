@@ -42,6 +42,15 @@ class M_main extends CI_Model {
     public function getResult($in,$wr,$val){
         return $this->db->get_where($in,[$wr => $val])->result();
     }
+    
+    public function getResultData($in,$wr,$by){
+        $query = $this->db->select('*')
+            ->from($in)
+            ->where($wr)
+            ->order_by($by)
+            ->get()->result();
+        return $query;
+    }
 
     public function getData($in,$wr){
         return $this->db->select('*')
