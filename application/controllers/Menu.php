@@ -302,6 +302,7 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['data_jamkerja'] = $this->m_auth->GetAllJamKerja();
 			$this->load->view('layout/header', $data);
 			$this->load->view('absensi/jadwal_kerja');
 			$this->load->view('layout/footer');

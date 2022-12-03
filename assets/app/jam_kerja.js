@@ -188,12 +188,13 @@
 		$('input[name="masuk"]').val('');
 		$('input[name="pulang"]').val('');
 		$('input[name="dihitung"]').val('');
-		$('input[name="st_jm"]').val('');
 		$('input[name="sb_jm"]').val('');
-		$('input[name="st_jp"]').val('');
+		$('input[name="st_jm"]').val('');
 		$('input[name="sb_jp"]').val('');
+		$('input[name="st_jp"]').val('');
         $('input[name="edit_jamkerja"]').attr("type", "hidden");
         $('input[name="add_jamkerja"]').attr("type", "submit");
+        change_time();
         var count = 0;
         $("input#add_jamkerja").on("click", function (e) {
             e.preventDefault();
@@ -225,7 +226,6 @@
                 }
             }
         });
-
     });
     
     $('body').on('click','#jamkerja-edit', function(){
@@ -238,12 +238,17 @@
 		$('input[name="masuk"]').val(data['Masuk']);
 		$('input[name="pulang"]').val(data['Pulang']);
 		$('input[name="dihitung"]').val(data['Dihitung']);
-		$('input[name="st_jm"]').val(data['st_jm']);
 		$('input[name="sb_jm"]').val(data['sb_jm']);
-		$('input[name="st_jp"]').val(data['st_jp']);
+		$('input[name="st_jm"]').val(data['st_jm']);
 		$('input[name="sb_jp"]').val(data['sb_jp']);
+		$('input[name="st_jp"]').val(data['st_jp']);
+        $("#sb_jm").attr("max",max_time('sebelum',data['Masuk']));
+        $("#st_jm").attr("max",max_time('setelah',data['Masuk']));
+        $("#sb_jp").attr("max",max_time('sebelum',data['Pulang']));
+        $("#st_jp").attr("max",max_time('setelah',data['Pulang']));
         $('input[name="edit_jamkerja"]').attr("type", "submit");
         $('input[name="add_jamkerja"]').attr("type", "hidden");
+        change_time();
         var count = 0;
         $("input#edit_jamkerja").on("click", function (e) {
             e.preventDefault();
@@ -292,6 +297,41 @@
         let id_jam_kerja = $(this).data('id');
         action('delete_jamkerja',id_jam_kerja,'Data yang di hapus tidak dapat dikembalikan lagi!');
     });
+
+    function change_time(){
+        $('#masuk').keyup(function(){
+            var time = max_time('sebelum',$('#masuk').val());
+            if(!isNaN(time))
+                $("#sb_jm").attr("max",time);
+        });
+        $('#masuk').keyup(function(){
+            var time = max_time('setelah',$('#masuk').val());
+            if(!isNaN(time))
+                $("#st_jm").attr("max",time);
+        });
+        $('#pulang').keyup(function(){
+            var time = max_time('sebelum',$('#pulang').val());
+            if(!isNaN(time))
+                $("#sb_jp").attr("max",time);
+        });
+        $('#pulang').keyup(function(){
+            var time = max_time('setelah',$('#pulang').val());
+            if(!isNaN(time))
+                $("#st_jp").attr("max",time);
+        });
+    }
+
+    function max_time(stsb,time){
+        var timemax = new Date();
+        if(stsb == "sebelum"){
+            var timemax = new Date('1/1/1 00:00:00');
+        }else if(stsb == "setelah"){
+            var timemax = new Date('1/1/1 23:59:00');
+        }
+        var diff = Math.abs(new Date('1/1/1 '+time) - timemax);
+        var minutes = Math.floor((diff/1000)/60);
+        return minutes;
+    }
 
     function action(urlfunc,id_jam_kerja,text){
         swal({
@@ -346,7 +386,6 @@
                     window.location.reload();
                 }, 1000);
             }
-            
         } else {
             swal("Faild", message, {
                 icon: "error",

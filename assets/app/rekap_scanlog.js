@@ -150,6 +150,7 @@
         $("body").on("click", "#btn-back", function () {
             $('#show-1').removeClass('none');
             $('#show-2').addClass('none');
+            window.location.reload();
         });
 
         function data_scanlog(id_periode){

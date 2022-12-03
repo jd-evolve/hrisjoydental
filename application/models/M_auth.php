@@ -180,6 +180,16 @@ class M_auth extends CI_Model {
         return $query;
     }
 
+    public function GetAllJamKerja(){
+        $query = $this->db->query("
+            SELECT *
+            FROM db_jam_kerja
+            WHERE status = 1
+            GROUP BY tgl_input
+        ")->result();
+        return $query;
+    }
+
     public function GetAllKegiatan(){
         $query = $this->db->query("
             SELECT *

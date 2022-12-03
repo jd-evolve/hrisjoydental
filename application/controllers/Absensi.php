@@ -231,7 +231,7 @@ class Absensi extends CI_Controller {
 						$id_hari = date_format(date_create($date_range[$i]),"w");
 						$jdwk = $this->m_main->getResultData(
 							'db_jadwal_kerja_list',
-							'id_jadwal_kerja = '.$account['id_jadwal_kerja'].' AND id_hari = '.$id_hari.' AND status = 1',
+							'id_jadwal_kerja = '.$account['id_jadwal_kerja'].' AND id_hari = '.$id_hari,
 							'urutan asc'
 						);
 						if(count($jdwk)>0){
@@ -499,6 +499,162 @@ class Absensi extends CI_Controller {
 		$output['tambah'] = $this->m_auth->cekAksi(ID_POSISI,17,2);
 		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,17,3);
 		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,17,4);
+		echo json_encode($output);
+	}
+	
+    //================= JADWAL KERJA
+	function read_jadwalkerja(){
+		$jadwalkerja = $this->m_main->readIN('db_jadwal_kerja','id_jadwal_kerja != null','tgl_edit desc');
+		$data = [];
+		$no = 0;
+		foreach ($jadwalkerja as $list) {
+			$no++;
+			$row = [];
+			$row['No'] = $no;
+			$row['Nama'] = $list->nama_jadwal_kerja;
+			$row['Keterangan'] = $list->keterangan;
+			$row['Aksi'] = $list->id_jadwal_kerja;
+			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
+			$data[] = $row; 
+		}
+		$output = [ "data" => $data ];
+		echo json_encode($output);
+	}
+
+	function list_jadwalkerja(){
+		$jdwk_list = $this->m_main->getResultData(
+			'db_jadwal_kerja_list',
+			'id_jadwal_kerja = '.$_POST['id_jadwal_kerja'],
+			'id_hari asc'
+		);
+		$data = [];
+		if($jdwk_list){
+			foreach($jdwk_list as $jdwk){
+				if($jdwk->libur != 1){
+					$idx = 'jk'.$jdwk->id_hari.'-'.$jdwk->urutan;
+				}else{
+					$idx = 'lbr-'.$jdwk->id_hari;
+				}
+				$row = [];
+				$row['libur'] = $jdwk->libur;
+				$row['id'] = $idx;
+				$row['id_jk'] = $jdwk->id_jam_kerja;
+				$data[] = $row; 
+			}
+		}
+		echo json_encode($data);
+	}
+
+	function edit_add_jadwalkerja(){
+		$data_list = json_decode($_POST['list']);
+		if($_POST['id_jadwal_kerja'] == null){
+			$jdwk = [
+				'nama_jadwal_kerja' => $_POST['nama'],
+				'keterangan' => $_POST['keterangan'],
+				'tgl_input' => date("Y-m-d H:i:s"),
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'status' => 1,
+				'id_account' => ID_ACCOUNT,
+			];
+			$idjdwk = $this->m_main->createIN('db_jadwal_kerja',$jdwk);
+			$id_jadwal_kerja = $idjdwk['result'];
+
+			foreach($data_list as $list){
+				$list_jdwk = [
+					'id_jadwal_kerja' => $id_jadwal_kerja,
+					'id_hari' => $list->id_hari,
+					'id_jam_kerja' => $list->id_jam_kerja,
+					'libur' => $list->libur,
+					'urutan' => $list->urutan,
+				];
+				$this->m_main->createIN('db_jadwal_kerja_list',$list_jdwk);
+			}
+
+			$output['message'] = "Jadwal kerja berhasil di tambah!";
+			$output['result'] = "success";
+		}
+		else{
+			$id_jadwal_kerja = $_POST['id_jadwal_kerja'];
+			$this->m_main->deleteIN('db_jadwal_kerja_list','id_jadwal_kerja',$id_jadwal_kerja);
+			
+			$jdwk = [
+				'nama_jadwal_kerja' => $_POST['nama'],
+				'keterangan' => $_POST['keterangan'],
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'id_account' => ID_ACCOUNT,
+			];
+			$this->m_main->updateIN('db_jadwal_kerja','id_jadwal_kerja',$id_jadwal_kerja,$jdwk);
+
+			foreach($data_list as $list){
+				$list_jdwk = [
+					'id_jadwal_kerja' => $id_jadwal_kerja,
+					'id_hari' => $list->id_hari,
+					'id_jam_kerja' => $list->id_jam_kerja,
+					'libur' => $list->libur,
+					'urutan' => $list->urutan,
+				];
+				$this->m_main->createIN('db_jadwal_kerja_list',$list_jdwk);
+			}
+			$output['message'] = "Jadwal kerja berhasil di ubah";
+			$output['result'] = "success";
+		}
+        echo json_encode($output);
+        exit();
+	}
+
+	public function remove_jadwalkerja(){
+		if(!empty($_POST['id_jadwal_kerja'])){
+			$data = [
+				'status' => 0,
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'id_account' => ID_ACCOUNT,
+			];
+			$this->m_main->updateIN('db_jadwal_kerja','id_jadwal_kerja',$_POST['id_jadwal_kerja'],$data);
+			$output['message'] = "Jadwal kerja berhasil di hapus!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id jadwal kerja tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function restore_jadwalkerja(){
+		if(!empty($_POST['id_jadwal_kerja'])){
+			$data = [
+				'status' => 1,
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'id_account' => ID_ACCOUNT,
+			];
+			$this->m_main->updateIN('db_jadwal_kerja','id_jadwal_kerja',$_POST['id_jadwal_kerja'],$data);
+			$output['message'] = "Jadwal kerja berhasil di pulihkan!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id jadwal kerja tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function delete_jadwalkerja(){
+		if(!empty($_POST['id_jadwal_kerja'])){
+			$this->m_main->deleteIN('db_jadwal_kerja','id_jadwal_kerja',$_POST['id_jadwal_kerja']);
+			$output['message'] = "Jadwal kerja berhasil di hapus permanen!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id jadwal kerja tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+
+	public function level_jadwalkerja(){
+		$output['tambah'] = $this->m_auth->cekAksi(ID_POSISI,18,2);
+		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,18,3);
+		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,18,4);
 		echo json_encode($output);
 	}
 }

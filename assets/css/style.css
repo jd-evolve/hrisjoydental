@@ -10322,7 +10322,7 @@ hr {
 }
 .form-rm {
     padding: 0.25rem 0.5rem !important;
-    height: auto;
+    height: auto !important;
 }
 .form-jm {
     padding: 0.25rem 0.5rem !important;
