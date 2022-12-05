@@ -138,7 +138,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-head-row">
-                            <button class="btn btn-xs mr-3" id="btn-back" title="Kembali ke rekap scanlog"><span class="fa fa-chevron-left"></span></button>
+                            <button class="btn btn-xs mr-3" id="btn-back" title="Kembali ke data scanlog"><span class="fa fa-chevron-left"></span></button>
                             <h4 class="card-title">Data Hasil Scanlog</h4>
                         </div>
                     </div>

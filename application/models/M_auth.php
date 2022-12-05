@@ -8,10 +8,11 @@ class M_auth extends CI_Model {
             a.nama_ibu, a.telp_referensi, a.pendidikan_terakhir, a.lulus_dari, a.alamat_ktp, 
             a.status_karyawan, a.tgl_evaluasi, a.tgl_resign, a.alasan_resign, a.id_cabang, 
             a.id_posisi, a.nama_bank, a.no_rek, a.nama_rek, a.sisa_cuti, a.alamat, a.telp, 
-            a.status, a.id_account, a.tgl_kerja, b.nama_posisi')
+            a.status, a.id_account, a.tgl_kerja, b.nama_posisi, a.id_jadwal_kerja, d.nama_jadwal_kerja')
             ->from('db_account a')
             ->join('db_posisi b','a.id_posisi = b.id_posisi')
             ->join('db_cabang c','a.id_cabang = c.id_cabang')
+            ->join('db_jadwal_kerja d','a.id_jadwal_kerja = d.id_jadwal_kerja')
             ->order_by('a.tgl_edit','desc')
             ->get()->result();
         return $query;

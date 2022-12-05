@@ -119,7 +119,7 @@
             ],
             language: {
                 search: "_INPUT_",
-                emptyTable: "Belum ada daftar rekap scanlog!",
+                emptyTable: "Belum ada daftar data scanlog!",
                 infoEmpty: "Tidak ada data!",
                 info: "_START_ to _END_ of _TOTAL_ entries",
                 infoFiltered: ""

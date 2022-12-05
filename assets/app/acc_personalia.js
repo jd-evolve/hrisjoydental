@@ -118,11 +118,20 @@
         });
 
         function show_form(id_ijincuti_list){
-            if(status != 1){
+            if(status == 3){
                 $("#show-button").addClass('none');
             }else{
                 $("#show-button").removeClass('none');
+                if(status == 2){
+                    $("#btn-tolak").html('Batalkan')
+                    $("#btn-tolak").removeClass('none');
+                    $("#btn-setujui").addClass('none');
+                }else{
+                    $("#btn-tolak").removeClass('none');
+                    $("#btn-setujui").removeClass('none');
+                }
             }
+
             $.ajax({
                 url: 'ijincuti/detail_ijincuti',
                 method: "POST",

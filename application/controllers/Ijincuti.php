@@ -179,7 +179,7 @@ class Ijincuti extends CI_Controller {
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
-			$qry = $this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
+			$this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
 			$output['message'] = "Pengajuan Ijin/Cuti telah disetujui!";
 			$output['result'] = "success";
 		}else{
@@ -199,7 +199,16 @@ class Ijincuti extends CI_Controller {
 				'id_account' => ID_ACCOUNT,
 				'id_personalia' => ID_ACCOUNT,
 			];
-			$qry = $this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
+			$this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
+			
+			$ijincuti = $this->m_main->getRow('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list']);
+			$karyawan = $this->m_main->getRow('db_account','id_account',$ijincuti['id_karyawan']);
+
+			$cuti = [
+				'sisa_cuti' => $karyawan['sisa_cuti'] - $_POST['potong_cuti'],
+			];
+			$this->m_main->updateIN('db_account','id_account',$karyawan['id_account'],$cuti);
+
 			$output['message'] = "Pengajuan Ijin/Cuti telah disetujui!";
 			$output['result'] = "success";
 		}else{
@@ -219,7 +228,7 @@ class Ijincuti extends CI_Controller {
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
-			$qry = $this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
+			$this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
 			$output['message'] = "Pengajuan ijin/cuti telah ditolak!";
 			$output['result'] = "success";
 		}else{
@@ -232,6 +241,16 @@ class Ijincuti extends CI_Controller {
 
 	public function tolakpersonalia_ijincuti(){
 		if(!empty($_POST['id_ijincuti_list'])){
+			$ijincuti = $this->m_main->getRow('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list']);
+			$karyawan = $this->m_main->getRow('db_account','id_account',$ijincuti['id_karyawan']);
+
+			if($ijincuti['status']==2){
+				$cuti = [
+					'sisa_cuti' => $karyawan['sisa_cuti'] + $ijincuti['potong_cuti'],
+				];
+				$this->m_main->updateIN('db_account','id_account',$karyawan['id_account'],$cuti);
+			}
+
 			$data = [
 				'status' => 3,
 				'potong_cuti' => 0,
@@ -240,7 +259,7 @@ class Ijincuti extends CI_Controller {
 				'id_account' => ID_ACCOUNT,
 				'id_personalia' => ID_ACCOUNT,
 			];
-			$qry = $this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
+			$this->m_main->updateIN('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list'],$data);
 			$output['message'] = "Pengajuan ijin/cuti telah ditolak!";
 			$output['result'] = "success";
 		}else{

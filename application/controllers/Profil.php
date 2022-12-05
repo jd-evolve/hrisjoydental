@@ -17,8 +17,7 @@ class Profil extends CI_Controller {
 		$data = [
 			'password' => password_hash($_POST['pass1'], PASSWORD_DEFAULT)
 		];
-		$qry = $this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
-
+		$this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
 		$output['message'] = "Password Berhasil di Simpan!";
 		$output['result'] = "success";
 		echo json_encode($output);
@@ -54,7 +53,7 @@ class Profil extends CI_Controller {
 				}
 				
 				$data['foto'] = $uploadData['file_name'];
-				$qry = $this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
+				$this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
 
 				$output['message'] ="Foto profil berhasil di ganti!";
 				$output['result'] = "success";

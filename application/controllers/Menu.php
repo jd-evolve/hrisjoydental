@@ -74,6 +74,7 @@ class Menu extends CI_Controller {
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_posisi'] = $this->m_main->getResult('db_posisi','status',1);
 			$data['data_cabang'] = $this->m_main->getResult('db_cabang','status',1);
+			$data['data_jadwal_kerja'] = $this->m_main->getResult('db_jadwal_kerja','status',1);
 			$this->load->view('layout/header', $data);
 			$this->load->view('masterdata/account');
 			$this->load->view('layout/footer');
@@ -264,16 +265,16 @@ class Menu extends CI_Controller {
 		}
     }
 	
-    public function rekap_scanlog(){
+    public function data_scanlog(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
 			$data['vrs'] = U_VERSI; 
-			$data['title'] = 'Rekap Scanlog';
+			$data['title'] = 'Data Scanlog';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
 			$this->load->view('layout/header', $data);
-			$this->load->view('absensi/rekap_scanlog');
+			$this->load->view('absensi/data_scanlog');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');

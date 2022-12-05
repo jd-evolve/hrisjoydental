@@ -58,7 +58,7 @@
                 );
 
                 $absensi = array(
-                    'rekap-scanlog',
+                    'data-scanlog',
                     'jam-kerja',
                     'jadwal-kerja',
                 );
@@ -146,9 +146,9 @@
                     </a>
                     <div id="absensi" <?= in_array($uri_path, $absensi) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
-                            <li class="<?= !$cekmenu['rekap-scanlog'] ? 'gone' : '' ?> <?= $uri_path == "rekap-scanlog"? 'active' : '' ?>">
-                                <a href="<?= base_url('rekap-scanlog') ?>">
-                                    <span class="sub-item">Rekap Scanlog</span>
+                            <li class="<?= !$cekmenu['data-scanlog'] ? 'gone' : '' ?> <?= $uri_path == "data-scanlog"? 'active' : '' ?>">
+                                <a href="<?= base_url('data-scanlog') ?>">
+                                    <span class="sub-item">Data Scanlog</span>
                                 </a>
                             </li>
                             <li class="<?= !$cekmenu['jam-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jam-kerja"? 'active' : '' ?>">

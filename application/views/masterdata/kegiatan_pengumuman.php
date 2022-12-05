@@ -58,7 +58,7 @@
     </div>
 
     <div class="modal fade" id="modal-kegiatan" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
             <form id="form-kegiatan" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -71,13 +71,22 @@
                         <div class="card-group">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Tanggal Kegiatan : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control tgl" name="tgl_kegiatan" id="tgl_kegiatan" placeholder="Tanggal Kegiatan" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Kegiatan : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="kegiatan" id="kegiatan" placeholder="Kegiatan" required>
+                                    <div class="box-bg-grey">
+                                        <div class="table-responsive">
+                                            <table class="mb-0" width="100%">
+                                                <tbody class="nowraping">
+                                                    <tr>
+                                                        <td width="10%">Tanggal <span class="text-danger">*</span></td>
+                                                        <td width="2%">&nbsp;:&nbsp;</td>
+                                                        <td><input type="text" class="form-control form-rm tgl" name="tgl_kegiatan" id="tgl_kegiatan" placeholder="Tanggal Kegiatan" required></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kegiatan <span class="text-danger">*</span></td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><textarea class="form-control" name="kegiatan" id="kegiatan" style="padding: 0.25rem 0.5rem; min-height: 92px;" required></textarea></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

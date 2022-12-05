@@ -45,6 +45,8 @@ class Masterdata extends CI_Controller {
 				$row['id_posisi'] = $list->id_posisi;
 				$row['id_cabang'] = $list->id_cabang;
 				$row['nama_cabang'] = $list->nama_cabang;
+				$row['nama_jadwal_kerja'] = $list->nama_jadwal_kerja;
+				$row['id_jadwal_kerja'] = $list->id_jadwal_kerja;
 				$row['tgl_masuk'] = date_format(date_create($list->tgl_kerja),"d-m-Y");
 				$row['no_ktp'] = $list->no_ktp;
 				$row['nama_ibu'] = $list->nama_ibu;
@@ -72,6 +74,7 @@ class Masterdata extends CI_Controller {
 			$data = [
 				'id_posisi' => $_POST['posisi'],
 				'id_cabang' => $_POST['cabang'],
+				'id_jadwal_kerja' => $_POST['jadwal_kerja'],
 				'kode' => $_POST['kode'],
 				'nomor_induk' => $_POST['nomor_induk'],
 				'no_ktp' => $_POST['nomor_ktp'],
@@ -125,6 +128,7 @@ class Masterdata extends CI_Controller {
 				$data = [
 					'id_posisi' => $_POST['posisi'],
 					'id_cabang' => $_POST['cabang'],
+					'id_jadwal_kerja' => $_POST['jadwal_kerja'],
 					'kode' => $_POST['kode'],
 					'nomor_induk' => $_POST['nomor_induk'],
 					'no_ktp' => $_POST['nomor_ktp'],
@@ -299,7 +303,7 @@ class Masterdata extends CI_Controller {
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
-			$qry = $this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$datax);
+			$this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$datax);
 
 			for($i=0; $i<$_POST['numb']; $i++){
 				$level = $_POST['lvl'.$i];
@@ -345,7 +349,7 @@ class Masterdata extends CI_Controller {
 					'tgl_edit' => date("Y-m-d H:i:s"),
 					'id_account' => ID_ACCOUNT,
 				];
-				$qry = $this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$data);
+				$this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$data);
 				$output['message'] = "Jabatan berhasil di hapus!";
 				$output['result'] = "success";
 			}
@@ -364,7 +368,7 @@ class Masterdata extends CI_Controller {
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
-			$qry = $this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$data);
+			$this->m_main->updateIN('db_posisi','id_posisi',$_POST['id_posisi'],$data);
 			$output['message'] = "Jabatan berhasil di pulihkan!";
 			$output['result'] = "success";
 		}else{
@@ -441,6 +445,7 @@ class Masterdata extends CI_Controller {
 			$row['Kode'] = $list->kode_cabang;
 			$row['PT'] = $list->nama_pt;
 			$row['Alamat'] = $list->alamat_cabang;
+			$row['SN'] = $list->sn_mesin;
 			$row['Aksi'] = $list->id_cabang;
 			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
 			$data[] = $row; 
@@ -456,6 +461,7 @@ class Masterdata extends CI_Controller {
 				'kode_cabang' => $_POST['kode_cabang'],
 				'nama_pt' => $_POST['nama_pt'],
 				'alamat_cabang' => $_POST['alamat_cabang'],
+				'sn_mesin' => $_POST['sn_mesin'],
 				'tgl_input' => date("Y-m-d H:i:s"),
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'status' => 1,
@@ -479,6 +485,7 @@ class Masterdata extends CI_Controller {
 				'kode_cabang' => $_POST['kode_cabang'],
 				'nama_pt' => $_POST['nama_pt'],
 				'alamat_cabang' => $_POST['alamat_cabang'],
+				'sn_mesin' => $_POST['sn_mesin'],
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];

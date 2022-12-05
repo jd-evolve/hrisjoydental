@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="card-action text-right p-3">
-                        <button class="btn btn-warning btn-sm px-3" type="submit" id="simpan_konfigurasi">
+                        <button class="btn btn-secondary btn-sm px-3" type="submit" id="simpan_konfigurasi">
                             <span class="btn-label mr-2"><i class="fa fa-plus"></i></span>Simpan Perubahan
                         </button>
                     </div>
@@ -92,7 +92,7 @@
                 <div class="card-header">
                     <div class="card-title fw-bold">Online Account</div>
                     <p class="card-category" style="line-height: 1.5;">Menampilkan seluruh daftar account yang sedang aktif.</p>
-                    <a id="logout_all_account" class="btn btn-warning btn-sm mt-3 px-4">Keluarkan semua akun</a>
+                    <a id="logout_all_account" class="btn btn-danger btn-sm mt-3 px-4 text-white">Keluarkan semua akun</a>
                 </div>
                 <div class="tableBodyScroll mb-3">
                     <div class="card-body py-0">

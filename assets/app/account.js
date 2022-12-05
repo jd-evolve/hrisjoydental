@@ -16,7 +16,7 @@
         ],
         columnDefs: [
             {
-                "targets": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35],
+                "targets": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37],
                 "orderable": false,
                 "visible": false
             },
@@ -123,6 +123,8 @@
             { data: "tgl_resign" },
             { data: "alasan_resign" },
             { data: "masa_kerja" },
+            { data: "id_jadwal_kerja" },
+            { data: "nama_jadwal_kerja" },
         ],
         fnDrawCallback:function(){
             $.ajax({
@@ -257,6 +259,7 @@
         $('select[name="level"]').val('');
         $('select[name="bagian"]').val('');
         $('select[name="posisi"]').val('');
+        $('select[name="jadwal_kerja"]').val('');
         $('select[name="status_karyawan"]').val('');
 		$('input[name="tgl_masuk"]').val('');
 		$('input[name="tgl_evaluasi"]').val('');
@@ -324,6 +327,7 @@
         $("#show-level").html(data["level"] == 1 ? 'Staff' : 'Atasan');
         $("#show-bagian").html(data["bagian"]);
         $("#show-posisi").html(data["nama_posisi"]);
+        $("#show-jadwal_kerja").html(data["nama_jadwal_kerja"]);
         $("#show-alasan_keluar").html(data["alasan_resign"]);
         $("#show-masa_kerja").html(data["masa_kerja"]);
         $("#show-cabang_klinik").html(data["nama_cabang"]);
@@ -356,6 +360,7 @@
         $('select[name="level"]').val(data["level"]);
         $('select[name="bagian"]').val(data["bagian"]);
         $('select[name="posisi"]').val(data["id_posisi"]);
+        $('select[name="jadwal_kerja"]').val(data["id_jadwal_kerja"]);
         $('select[name="status_karyawan"]').val(data["status_karyawan"]);
 		$('input[name="tgl_masuk"]').val(data["tgl_masuk"]);
 		$('input[name="tgl_evaluasi"]').val(data["tgl_evaluasi"]);

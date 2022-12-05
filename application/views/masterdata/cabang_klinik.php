@@ -45,21 +45,21 @@
                     <tr>
                         <th style="width:5%;">No</th>
                         <th style="width:10%;">Kode</th>
-                        <th style="width:30%;">Nama</th>
+                        <th style="width:20%;">Nama</th>
                         <th style="width:20%;">PT</th>
                         <th style="width:30%;">Alamat</th>
+                        <th style="width:10%;">SN</th>
                         <th style="width:10%;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
         </div>
     </div>
 
     <div class="modal fade" id="modal-cabang" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
             <form id="form-cabang" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -72,21 +72,37 @@
                         <div class="card-group">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Kode Cabang : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="kode_cabang" id="kode_cabang" placeholder="Kode Cabang" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Nama Cabang : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="nama_cabang" id="nama_cabang" placeholder="Nama Cabang" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Nama PT : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="nama_pt" id="nama_pt" placeholder="Nama PT" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Alamat Cabang : <span class="text-danger">*</span> </label>
-                                        <input type="text" class="form-control" name="alamat_cabang" id="alamat_cabang" placeholder="Alamat Cabang" required>
+                                    <div class="box-bg-grey">
+                                        <div class="table-responsive">
+                                            <table class="mb-0" width="100%">
+                                                <tbody class="nowraping">
+                                                    <tr>
+                                                        <td width="10%">Kode Cabang <span class="text-danger">*</span></td>
+                                                        <td width="2%">&nbsp;:&nbsp;</td>
+                                                        <td><input type="text" class="form-control form-rm" name="kode_cabang" id="kode_cabang" placeholder="Kode Cabang" required></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nama Cabang <span class="text-danger">*</span></td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><input type="text" class="form-control form-rm" name="nama_cabang" id="nama_cabang" placeholder="Nama Cabang" required></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nama PT <span class="text-danger">*</span></td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><input type="text" class="form-control form-rm" name="nama_pt" id="nama_pt" placeholder="Nama PT" required></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Alamat Cabang <span class="text-danger">*</span></td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><textarea class="form-control" name="alamat_cabang" id="alamat_cabang" placeholder="Alamat Cabang" style="padding: 0.25rem 0.5rem; min-height: 92px;" required></textarea></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SN Mesin <span class="text-danger">*</span></td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><input type="text" class="form-control form-rm" name="sn_mesin" id="sn_mesin" placeholder="SN Mesin" required></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

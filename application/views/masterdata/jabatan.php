@@ -64,29 +64,34 @@
                         <div>
                             <input type="hidden" name="numb">
                             <input type="hidden" name="id_posisi">
-                            <table class="table table-bordered table-hover cusped">
-                                <tbody class="nowraping">
-                                    <tr>
-                                        <td style="width:20%;">Nama Posisi</td>
-                                        <td><input type="text" class="form-control input-full" name="nama_posisi" placeholder="Nama Posisi" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:20%;">Keterangan</td>
-                                        <td><input type="text" class="form-control input-full" name="keterangan" placeholder="Keteranga" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width:20%;">Atasan</td>
-                                        <td>
-                                            <select class="form-control" name="list_atasan" id="list_atasan" required>
-                                                <option value="">Pilih Atasan</option>
-                                                <?php foreach ($atasan as $list){ ?>
-                                                    <option value="<?= $list->id_atasan ?>"><?= $list->nama_atasan ?></option>
-                                                <?php } ?> 
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="box-bg-grey mb-3">
+                                <table class="mb-0" width="100%">
+                                    <tbody class="nowraping">
+                                        <tr>
+                                            <td width="10%">Nama Posisi <span class="text-danger">*</span></td>
+                                            <td width="2%">&nbsp;:&nbsp;</td>
+                                            <td><input type="text" class="form-control" name="nama_posisi" placeholder="Nama Posisi" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Keterangan <span class="text-danger">*</span></td>
+                                            <td>&nbsp;:&nbsp;</td>
+                                            <td><input type="text" class="form-control" name="keterangan" placeholder="Keteranga" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Atasan <span class="text-danger">*</span></td>
+                                            <td>&nbsp;:&nbsp;</td>
+                                            <td>
+                                                <select class="form-control" name="list_atasan" id="list_atasan" required>
+                                                    <option value="">Pilih Atasan</option>
+                                                    <?php foreach ($atasan as $list){ ?>
+                                                        <option value="<?= $list->id_atasan ?>"><?= $list->nama_atasan ?></option>
+                                                    <?php } ?> 
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </form>

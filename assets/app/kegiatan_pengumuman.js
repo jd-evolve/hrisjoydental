@@ -187,7 +187,7 @@
         $("#modal-kegiatan").modal();
         document.getElementById("text-kegiatan").innerHTML = "Tambah Pengumuman/Kegiatan";
 		$('input[name="tgl_kegiatan"]').val('');
-		$('input[name="kegiatan"]').val('');
+		$('#kegiatan').val('');
         $('input[name="edit_kegiatan"]').attr("type", "hidden");
         $('input[name="add_kegiatan"]').attr("type", "submit");
         var count = 0;
@@ -224,7 +224,7 @@
         document.getElementById("text-kegiatan").innerHTML = "Ubah Pengumuman/Kegiatan";
 		var data = table_kegiatan.row($(this).parents("tr")).data();
 		$('input[name="tgl_kegiatan"]').val(data["Tanggal"]);
-		$('input[name="kegiatan"]').val(data["Kegiatan"]);
+		$('#kegiatan').val(data["Kegiatan"]);
         $('input[name="edit_kegiatan"]').attr("type", "submit");
         $('input[name="add_kegiatan"]').attr("type", "hidden");
         var count = 0;

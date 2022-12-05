@@ -72,7 +72,7 @@
                                 <div class="card-body">
                                     <div class="box-bg-grey mb-3">
                                         <div class="table-responsive">
-                                            <table class="mb-0">
+                                            <table class="mb-0" width="100%">
                                                 <tbody class="nowraping">
                                                     <tr>
                                                         <td width="10%">Nama</td>

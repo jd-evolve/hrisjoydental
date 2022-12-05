@@ -150,15 +150,20 @@
                     <div id="calendar" class="text-center"></div>
                     <div class="card-title fw-mediumbold mt-2">Kegiatan</div>
                     
-                    <div class="tableBodyScroll" style="height: 422.7px;">
+                    <div class="tableBodyScroll" style="height: 150px;">
                         <ol class="activity-feed" id="list_kegiatan">
                         </ol>
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body" style="min-height: 244px;">
+                    <p class="card-category text-warning mb-1 mt-0">Warning!</p>
+                    <h3 class="card-title">Hubungi Personalia!</h3>
+                    <p class="card-text">Anda dapat menghubungi bagian personalia untuk melakukan konfirmasi atau mengubah data pribadi anda.</p>
+                    <a href="#" class="btn btn-success btn-rounded btn-sm"><span class="btn-label"><i class="fab fa-whatsapp mr-1"></i></span>Whatsapp</a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-    </div>
-
 </div>

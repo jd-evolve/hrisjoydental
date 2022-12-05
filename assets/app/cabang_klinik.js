@@ -16,7 +16,7 @@
         ],
         columnDefs: [
             {
-                "targets": [6],
+                "targets": [7],
                 "orderable": false,
                 "visible": false
             },
@@ -77,6 +77,7 @@
             { data: "Cabang" },
             { data: "PT" },
             { data: "Alamat" },
+            { data: "SN" },
             { data: "Aksi" , render : function ( data, type, row, meta ) {
                 return type === 'display'  ?
                 '<div class="btn-group" role="group">'
@@ -151,13 +152,13 @@
         var sta = $('select[name="filter-status"]').val().toLowerCase();
         $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
             if (~data[1].toLowerCase().indexOf(src) && 
-                ~data[4].toLowerCase().indexOf(sta))
+                ~data[7].toLowerCase().indexOf(sta))
                 return true;
             if (~data[2].toLowerCase().indexOf(src) && 
-                ~data[4].toLowerCase().indexOf(sta))
+                ~data[7].toLowerCase().indexOf(sta))
                 return true;
             if (~data[3].toLowerCase().indexOf(src) && 
-                ~data[4].toLowerCase().indexOf(sta))
+                ~data[7].toLowerCase().indexOf(sta))
                 return true;
             return false;
         })
@@ -183,7 +184,8 @@
 		$('input[name="kode_cabang"]').val('');
 		$('input[name="nama_cabang"]').val('');
 		$('input[name="nama_pt"]').val('');
-		$('input[name="alamat_cabang"]').val('');
+		$('#alamat_cabang').val('');
+		$('input[name="sn_mesin"]').val('');
         $('input[name="edit_cabang"]').attr("type", "hidden");
         $('input[name="add_cabang"]').attr("type", "submit");
         var count = 0;
@@ -222,7 +224,8 @@
 		$('input[name="kode_cabang"]').val(data["Kode"]);
 		$('input[name="nama_cabang"]').val(data["Cabang"]);
 		$('input[name="nama_pt"]').val(data["PT"]);
-		$('input[name="alamat_cabang"]').val(data["Alamat"]);
+		$('#alamat_cabang').val(data["Alamat"]);
+		$('input[name="sn_mesin"]').val(data["SN"]);
         $('input[name="edit_cabang"]').attr("type", "submit");
         $('input[name="add_cabang"]').attr("type", "hidden");
         var count = 0;
