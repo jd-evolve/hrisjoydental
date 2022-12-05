@@ -88,232 +88,232 @@
                         <div class="card-group">
                         <div class="card">
                             <div class="card-body">
-                                    <div class="box-bg-grey mb-3">
-                                        <div class="table-responsive">
-                                            <table class="mb-0" width="100%">
-                                                <tbody class="nowraping">
-                                                    <tr>
-                                                        <td style="width:10%;"><b>Kode</b></td>
-                                                        <td style="width:2%;"><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="kode" placeholder="Kode"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>No. Induk</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="nomor_induk" placeholder="No. Induk"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>No. KTP</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="nomor_ktp" placeholder="No. KTP"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Nama Ibu</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="nama_ibu" placeholder="Nama Ibu"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Nama</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="nama" placeholder="Nama" required></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Gender</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="gender" id="gender" style="padding: 0.4rem 0.5rem !important;" required>
-                                                                <option value="">Pilih Gender</option>
-                                                                <option value="1">L</option>
-                                                                <option value="0">P</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Tempat Lahir</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="tempat_lahir" placeholder="Tempat Lahir" required></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Tgl. Lahir</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm tgl" name="tgl_lahir" placeholder="Tgl Lahir" required></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>No. Hp</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" id="nohp" name="nohp" placeholder="No. Hp" required></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Telp Referensi</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" id="nohp2" name="nohp2" placeholder="No. Hp Referensi"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Email</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="email" class="form-control form-rm" name="email" placeholder="Email"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Alamat Domisili</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" id="alamat" name="alamat" placeholder="Alamat Domisili" required></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Alamat KTP</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" id="alamat2" name="alamat2" placeholder="Alamat KTP"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Pendidikan Terakhir</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="pendidikan_terakhir" id="pendidikan_terakhir" style="padding: 0.4rem 0.5rem !important;">
-                                                                <option value="">Pilih Pendidikan</option>
-                                                                <option value="SMA">SMA</option>
-                                                                <option value="SMK">SMK</option>
-                                                                <option value="D1">D1</option>
-                                                                <option value="D2">D2</option>
-                                                                <option value="D3">D3</option>
-                                                                <option value="D4">D4</option>
-                                                                <option value="S1">S1</option>
-                                                                <option value="Profesi">Profesi</option>
-                                                                <option value="S2">S2</option>
-                                                                <option value="Spesialis">Spesialis</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Lulus Dari</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" id="lulus_dari" name="lulus_dari" placeholder="Lulus Dari"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Nama Bank</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="nama_bank" placeholder="Nama Bank"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Nama Rek</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="nama_rek" placeholder="Nama Rek"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>No. Rek</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="no_rek" placeholder="No. Rek"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Sisa Cuti</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" name="sisa_cuti" placeholder="Sisa Cuti" required></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Status Karyawan</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="status_karyawan" id="status_karyawan" style="padding: 0.4rem 0.5rem !important;" required>
-                                                                <option value="">Pilih Status</option>
-                                                                <option value="1">Tetap</option>
-                                                                <option value="0">Percobaan</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Level</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="level" id="level" style="padding: 0.4rem 0.5rem !important;">
-                                                                <option value="">Pilih Level</option>
-                                                                <option value="1">Staff</option>
-                                                                <option value="2">Atasan</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Bagian</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="bagian" id="bagian" style="padding: 0.4rem 0.5rem !important;">
-                                                                <option value="">Pilih Bagian</option>
-                                                                <option value="Office">Office</option>
-                                                                <option value="FO">FO</option>
-                                                                <option value="Perawat">Perawat</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Jabatan</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="posisi" id="posisi" style="padding: 0.4rem 0.5rem !important;" required>
-                                                                <option value="">Pilih Jabatan</option>
-                                                                <?php foreach ($data_posisi as $list) { ?>
-                                                                    <option value="<?= $list->id_posisi ?>"><?= $list->nama_posisi ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Jadwal Kerja</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="jadwal_kerja" id="jadwal_kerja" style="padding: 0.4rem 0.5rem !important;" required>
-                                                                <option value="">Pilih Jadwal Kerja</option>
-                                                                <?php foreach ($data_jadwal_kerja as $list) { ?>
-                                                                    <option value="<?= $list->id_jadwal_kerja ?>"><?= $list->nama_jadwal_kerja ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Tgl. Masuk</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm tgl" id="tgl_masuk" name="tgl_masuk" required></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Tgl. Evaluasi</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm tgl" id="tgl_evaluasi" name="tgl_evaluasi"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Tgl. Keluar</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm tgl" id="tgl_keluar" name="tgl_keluar"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Alasan Keluar</b></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><input type="text" class="form-control form-rm" id="alasan_keluar" name="alasan_keluar" placeholder="Alasan Keluar"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Cabang</b> <span class="text-danger">*</span></td>
-                                                        <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td>
-                                                            <select class="form-control form-rm" name="cabang" id="cabang" style="padding: 0.4rem 0.5rem !important;" required>
-                                                                <option value="">Pilih Cabang</option>
-                                                                <?php foreach ($data_cabang as $list) { ?>
-                                                                    <option value="<?= $list->id_cabang ?>"><?= $list->nama_cabang ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                <div class="box-bg-grey mb-3">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td style="width:10%;"><b>Kode</b></td>
+                                                    <td style="width:2%;"><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="kode" placeholder="Kode"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>No. Induk</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nomor_induk" placeholder="No. Induk"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>No. KTP</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nomor_ktp" placeholder="No. KTP"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Nama Ibu</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nama_ibu" placeholder="Nama Ibu"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Nama</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nama" placeholder="Nama" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Gender</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="gender" id="gender" style="padding: 0.4rem 0.5rem !important;" required>
+                                                            <option value="">Pilih Gender</option>
+                                                            <option value="1">L</option>
+                                                            <option value="0">P</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tempat Lahir</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="tempat_lahir" placeholder="Tempat Lahir" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tgl. Lahir</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm tgl" name="tgl_lahir" placeholder="Tgl Lahir" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>No. Hp</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" id="nohp" name="nohp" placeholder="No. Hp" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Telp Referensi</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" id="nohp2" name="nohp2" placeholder="No. Hp Referensi"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Email</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="email" class="form-control form-rm" name="email" placeholder="Email"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Alamat Domisili</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" id="alamat" name="alamat" placeholder="Alamat Domisili" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Alamat KTP</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" id="alamat2" name="alamat2" placeholder="Alamat KTP"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Pendidikan Terakhir</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="pendidikan_terakhir" id="pendidikan_terakhir" style="padding: 0.4rem 0.5rem !important;">
+                                                            <option value="">Pilih Pendidikan</option>
+                                                            <option value="SMA">SMA</option>
+                                                            <option value="SMK">SMK</option>
+                                                            <option value="D1">D1</option>
+                                                            <option value="D2">D2</option>
+                                                            <option value="D3">D3</option>
+                                                            <option value="D4">D4</option>
+                                                            <option value="S1">S1</option>
+                                                            <option value="Profesi">Profesi</option>
+                                                            <option value="S2">S2</option>
+                                                            <option value="Spesialis">Spesialis</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Lulus Dari</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" id="lulus_dari" name="lulus_dari" placeholder="Lulus Dari"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Nama Bank</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nama_bank" placeholder="Nama Bank"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Nama Rek</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nama_rek" placeholder="Nama Rek"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>No. Rek</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="no_rek" placeholder="No. Rek"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Sisa Cuti</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="sisa_cuti" placeholder="Sisa Cuti" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Status Karyawan</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="status_karyawan" id="status_karyawan" style="padding: 0.4rem 0.5rem !important;" required>
+                                                            <option value="">Pilih Status</option>
+                                                            <option value="1">Tetap</option>
+                                                            <option value="0">Percobaan</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Level</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="level" id="level" style="padding: 0.4rem 0.5rem !important;">
+                                                            <option value="">Pilih Level</option>
+                                                            <option value="1">Staff</option>
+                                                            <option value="2">Atasan</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Bagian</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="bagian" id="bagian" style="padding: 0.4rem 0.5rem !important;">
+                                                            <option value="">Pilih Bagian</option>
+                                                            <option value="Office">Office</option>
+                                                            <option value="FO">FO</option>
+                                                            <option value="Perawat">Perawat</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Jabatan</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="posisi" id="posisi" style="padding: 0.4rem 0.5rem !important;" required>
+                                                            <option value="">Pilih Jabatan</option>
+                                                            <?php foreach ($data_posisi as $list) { ?>
+                                                                <option value="<?= $list->id_posisi ?>"><?= $list->nama_posisi ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Jadwal Kerja</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="jadwal_kerja" id="jadwal_kerja" style="padding: 0.4rem 0.5rem !important;" required>
+                                                            <option value="">Pilih Jadwal Kerja</option>
+                                                            <?php foreach ($data_jadwal_kerja as $list) { ?>
+                                                                <option value="<?= $list->id_jadwal_kerja ?>"><?= $list->nama_jadwal_kerja ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tgl. Masuk</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm tgl" id="tgl_masuk" name="tgl_masuk" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tgl. Evaluasi</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm tgl" id="tgl_evaluasi" name="tgl_evaluasi"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tgl. Keluar</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm tgl" id="tgl_keluar" name="tgl_keluar"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Alasan Keluar</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" id="alasan_keluar" name="alasan_keluar" placeholder="Alasan Keluar"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Cabang</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td>
+                                                        <select class="form-control form-rm" name="cabang" id="cabang" style="padding: 0.4rem 0.5rem !important;" required>
+                                                            <option value="">Pilih Cabang</option>
+                                                            <?php foreach ($data_cabang as $list) { ?>
+                                                                <option value="<?= $list->id_cabang ?>"><?= $list->nama_cabang ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div> 
                     </div>
@@ -340,161 +340,175 @@
                         <div class="card-group">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="table-responsive nowraping">
-                                        <table class="table tabped">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width:10%;"><b>Kode</b></td>
-                                                    <td style="width:2%;"><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-kode"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>No. Induk</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-nomor_induk"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>No. KTP</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-nomor_ktp"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Nama Ibu</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-nama_ibu"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Nama</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-nama"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Gender</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-gender"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Tempat Lahir</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-tempat_lahir"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Tgl. Lahir</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-tgl_lahir"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>No. Hp</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-telp"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Telp Referensi</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-telp2"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Email</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-email"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Alamat Domisili</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-alamat"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Alamat KTP</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-alamat2"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Pendidikan Terakhir</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-pendidikan_terakhir"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Lulus Dari</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-lulus_dari"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Nama Bank</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-nama_bank"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Nama Rek</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-nama_rek"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>No. Rek</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-no_rek"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Sisa Cuti</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-sisa_cuti"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Status Karyawan</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-status_karyawan"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Level</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-level"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Bagian</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-bagian"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Jabatan</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-posisi"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Jadwal Kerja</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-jadwal_kerja"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Tgl. Masuk</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-tgl_masuk"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Tgl. Evaluasi</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-tgl_evaluasi"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Tgl. Keluar</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-tgl_keluar"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Alasan Keluar</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-alasan_keluar"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Masa Kerja</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-masa_kerja"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Cabang</b></td>
-                                                    <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><span id="show-cabang_klinik"></span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="box-bg-grey mb-3">
+                                        <div class="table-responsive nowraping">
+                                            <table class="mb-0" width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width:10%;"><b>Kode</b></td>
+                                                        <td style="width:2%;"><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-kode"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>No. Induk</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-nomor_induk"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>No. KTP</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-nomor_ktp"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Nama Ibu</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-nama_ibu"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Nama</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-nama"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Gender</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-gender"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Tempat Lahir</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-tempat_lahir"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Tgl. Lahir</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-tgl_lahir"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>No. Hp</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-telp"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Telp Referensi</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-telp2"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Email</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-email"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Alamat Domisili</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-alamat"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Alamat KTP</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-alamat2"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Pendidikan Terakhir</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-pendidikan_terakhir"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Lulus Dari</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-lulus_dari"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Nama Bank</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-nama_bank"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Nama Rek</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-nama_rek"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>No. Rek</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-no_rek"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Sisa Cuti</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-sisa_cuti"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Status Karyawan</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-status_karyawan"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Level</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-level"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Bagian</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-bagian"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Jabatan</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-posisi"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Jadwal Kerja</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-jadwal_kerja"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Tgl. Masuk</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-tgl_masuk"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Tgl. Evaluasi</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-tgl_evaluasi"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Tgl. Keluar</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-tgl_keluar"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Alasan Keluar</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-alasan_keluar"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Masa Kerja</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-masa_kerja"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Cabang</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-cabang_klinik"></span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

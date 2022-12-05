@@ -17,131 +17,6 @@
     </div>
     
     <div class="row">
-        <div class="col-md">
-            <form id="ubah_profil" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
-                <div class="card">
-                    <div class="card-list p-3">
-                        <div class="item-list py-2">
-                            <div class="info-user">
-                                <div class="card-title">Profil Saya</div>
-                                <div class="card-category mt-0">Pastikan data yang anda lengkapi benar dan masih aktif</div>
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Kode</label>
-                                            <input type="text" class="form-control" name="kode" placeholder="kode" value="<?= $account['kode']; ?>" style="background: transparent !important;opacity: 1 !important;" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Nama</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Nama" value="<?= $account['nama']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="Email" value="<?= $account['email']; ?>" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Tempat Lahir</label>
-                                            <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir" value="<?= $account['tempat_lahir']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Tgl. Lahir</label>
-                                            <input type="text" class="form-control" name="tgl_lahir" id="tgl_lahir" placeholder="Tgl. Lahir" value="<?= date_format(date_create($account['tgl_lahir']),"d-m-Y"); ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Gender</label>
-                                            <select class="form-control" name="gender">
-                                                <option value="1" <?= $account['gender'] == 1 ? 'selected' : '' ?>>Laki-Laki</option>
-                                                <option value="0" <?= $account['gender'] == 0 ? 'selected' : '' ?>>Perempuan</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>No. Hp</label>
-                                            <input type="text" class="form-control" name="telp" placeholder="telp" value="<?= $account['telp']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group form-group-default">
-                                            <label>Alamat</label>
-                                            <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="<?= $account['alamat']; ?>" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Nama Bank</label>
-                                            <input type="text" class="form-control" name="nama_bank" placeholder="Nama Bank" value="<?= $account['nama_bank']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>Nama Rek</label>
-                                            <input type="text" class="form-control" name="nama_rek" placeholder="Nama Rek" value="<?= $account['nama_rek']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group form-group-default">
-                                            <label>No. Rek</label>
-                                            <input type="text" class="form-control" name="no_rek" placeholder="No. Rek" value="<?= $account['no_rek']; ?>" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-action text-right p-3">
-                        <input type="submit" id="edit_profile" class="btn btn-secondary" value="Simpan">
-                    </div>
-                </div>
-            </form>
-            
-            <form id="form_edit_password" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
-                <div class="card">
-                    <div class="card-list p-3">
-                        <div class="item-list py-2">
-                            <div class="info-user">
-                                <div class="card-title">Ubah Password</div>
-                                <div class="card-category mt-0">Anda dapat mengubah kata sandi sesuai keinginan Anda</div>
-                                <div class="row mt-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Password Baru</label>
-                                            <input type="password" class="form-control" name="new_password1" placeholder="Password Baru">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Ulangi Password</label>
-                                            <input type="password" class="form-control" name="new_password2" placeholder="Ulangi Password">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-action text-right p-3">
-                        <button class="btn btn-secondary" id="simpan_password">Simpan</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
@@ -166,6 +41,179 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            
+            <form id="form_edit_password" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
+                <div class="card">
+                    <div class="card-list p-3">
+                        <div class="item-list py-2">
+                            <div class="info-user">
+                                <div class="card-title">Ubah Password</div>
+                                <div class="card-category mt-0">Anda dapat mengubah kata sandi sesuai keinginan Anda</div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="form-group form-group-default">
+                                            <label>Password Baru</label>
+                                            <input type="password" class="form-control" name="new_password1" placeholder="Password Baru">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group form-group-default">
+                                            <label>Ulangi Password</label>
+                                            <input type="password" class="form-control" name="new_password2" placeholder="Ulangi Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-secondary" id="simpan_password" style="padding:0 8px 0 8px; height:calc(2.25rem + 2px)">Simpan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Profil Saya</div>
+                    <div class="card-category mt-0">Pastikan data yang anda lengkapi benar dan masih aktif</div>
+                    <div class="box-bg-grey mb-3 mt-3">
+                        <div class="table-responsive nowraping">
+                            <table class="mb-0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="width:10%;"><b>Kode</b></td>
+                                        <td style="width:2%;"><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['kode']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>No. Induk</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['nomor_induk']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>No. KTP</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['no_ktp']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Nama Ibu</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['nama_ibu']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Nama</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['nama']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Gender</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['gender']==1? 'Laki-laki':'Perempuan'; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tempat Lahir</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['tempat_lahir']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tgl. Lahir</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= date_format(date_create($account['tgl_lahir']),"d-m-Y"); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>No. Hp</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['telp']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Telp Referensi</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['telp_referensi']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Email</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['email']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Alamat Domisili</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['alamat']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Alamat KTP</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['alamat_ktp']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Pendidikan Terakhir</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['pendidikan_terakhir']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Lulus Dari</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['lulus_dari']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Nama Bank</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['nama_bank']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Nama Rek</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['nama_rek']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>No. Rek</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account['no_rek']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Sisa Cuti</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= floatval($account['sisa_cuti']); ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tgl. Masuk</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= date_format(date_create($account['tgl_kerja']),"d-m-Y"); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tgl. Evaluasi</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= date_format(date_create($account['tgl_evaluasi']),"d-m-Y"); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Masa Kerja</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td>
+                                            <?php $masa_kerja = date_diff(date_create($account['tgl_kerja']),date_create(date("Y-m-d"))); ?>
+                                            <?= ($masa_kerja->y).' Thn, '.($masa_kerja->m).' Bln' ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Cabang</b></td>
+                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                        <td><?= $account_cabang['nama_cabang']; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

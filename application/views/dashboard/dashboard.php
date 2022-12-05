@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="min-width: 110px !important; margin-top:16px">
-                                    <a href="<?= base_url('profil') ?>" class="btn btn-info btn-border btn-round btn-sm btn-block">Edit Profile</a>
+                                    <a href="<?= base_url('profil') ?>" class="btn btn-info btn-border btn-round btn-sm btn-block">Profile Saya</a>
                                 </div>
                             </div>
                             <div class="card-footer mt-3 p-0 pt-2" style="line-height:20px;">

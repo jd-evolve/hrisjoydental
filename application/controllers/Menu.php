@@ -55,6 +55,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Profil';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['account_cabang'] = $this->m_main->getRow('db_cabang','id_cabang',$data['account']['id_cabang']);
 			$data['cekmenu'] = $this->DataLevel();
 			$this->load->view('layout/header', $data);
 			$this->load->view('profil/profil');

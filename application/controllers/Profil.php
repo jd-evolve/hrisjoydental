@@ -65,27 +65,5 @@ class Profil extends CI_Controller {
 		echo json_encode($output);
 		exit();
 	}
-	
-    public function update_profile(){ 
-		$data = [
-			'nama' => $_POST['nama'],
-			'email' => $_POST['email'],
-			'tempat_lahir' => $_POST['tempat_lahir'],
-			'tgl_lahir' => date_format(date_create($_POST['tgl_lahir']),"Y-m-d"),
-			'gender' => $_POST['gender'],
-			'telp' => $_POST['telp'],
-			'alamat' => $_POST['alamat'],
-			'nama_bank' => $_POST['nama_bank'],
-			'nama_rek' => $_POST['nama_rek'],
-			'no_rek' => $_POST['no_rek'],
-			'telp' => $_POST['telp'],
-		];
-		$this->m_main->updateIN('db_account','id_account',ID_ACCOUNT,$data);
-		$this->session->set_userdata('email', $_POST['email']);
-		$output['message'] ="Data profile berhasil diganti!";
-		$output['result'] = "success";
-        echo json_encode($output);
-        exit();
-	}
 
 }

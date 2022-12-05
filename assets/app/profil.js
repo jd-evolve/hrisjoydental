@@ -60,29 +60,6 @@
         }
     });
 
-    $("input#edit_profile").on("click", function() {
-        $.validator.setDefaults({
-            submitHandler: function() {
-                var formData = new FormData(document.querySelector("#ubah_profil"));
-                $.ajax({
-                    url: "profil/update_profile",
-                    method: "POST",
-                    dataType: "json",
-                    data: formData,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function(json) {
-                        let result = json.result;
-                        let message = json.message;
-                        notif(result, message);
-                    },
-                });
-            },
-        });
-        $("form#ubah_profil").validate();
-    });
-
     $('#simpan_password').on('click', function(e) {
         e.preventDefault();
         let new_pass = $('input[name="new_password1"]').val();
