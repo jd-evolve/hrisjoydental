@@ -1,0 +1,204 @@
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title"><?= $title ?></h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="<?= base_url('dashboard') ?>">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href=""><?= $title ?></a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-9 ml-auto mr-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title text-center">Pengajuan From Lembur</div>
+                    <div class="card-category text-center">Baca persyaratan standar operasional prosedur</div>
+
+                    <ul class="nav nav-pills nav-primary my-4">
+                        <li class="nav-item col-sm-6 px-0">
+                            <a class="nav-link text-center m-0 active" id="nav1"><b><i class="fas fa-feather-alt mr-2"></i>SOP</b></a>
+                        </li>
+                        <li class="nav-item col-sm-6 px-0">
+                            <a class="nav-link text-center m-0" id="nav2"><b><i class="fas fa-file-invoice mr-2"></i>Pengajuan</b></a>
+                        </li>
+                    </ul>
+
+                    <div class="" id="show-nav1">
+                        <h4><b>Persyaratan :</b></h4>
+                        <ol class="ml-0" type="1">
+                            <li>Lembur di bedakan menjadi 2 kategori, yaitu <b>range jam kerja</b> dan <b>diluar jam kerja</b>.</li>
+                            <li><b>Range Jam Kerja</b> adalah lembur dimana waktu masih berada dalam jangkauan waktu jam kerja.</li>
+                            <li><b>Diluar Jam Kerja</b> adalah lembur dimana waktu tidak berada dalam jangkauan waktu jam kerja.</li>
+                            <li>Perbedaan antara 2 kategori form lembur berpengaruh terhadap selisih form lembur dengan lembur di mesin.</li>
+                            <li>Jika selisih antara lembur mesin dan pengajuan form lembur minus maka yang di akumulasi adalah lembur mesin.</li>
+                            <li>Jika selisih antara lembur mesin dan pengajuan form lembur plus maka yang di akumulasi adalah lembur form.</li>
+                            <li>Rumus untuk menentukan selisih jam kerja (Sx).</li>
+                            <li><i>Sx = (lembur mesin + diluar jam kerja) - (range jam kerja + dilular jam kerja)</i></li>
+                        </ol>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="persetujuan" style="left:20px !important;">
+                            <span class="card-category mt-0 ml-4 mb-1">Saya menyetujui persyaratan diatas.</span>
+                        </label>
+                        <small class="form-text text-danger mt-0 notif none">Check persetujuan untuk melanjutkan.</small>
+
+                        <div class="text-right">
+                            <button class="btn btn-warning btn-sm" type="button" id="setuju_sop">Next</button>
+                        </div>
+                    </div>
+
+                    <div class="none" id="show-nav2">
+                        <table width="100%">
+                            <tr>
+                                <td width="800%">
+                                    <div class="btn-group border-option mb-0">
+                                        <label class="label-filter">Tanggal: </label>&nbsp;&nbsp;
+                                        <input type="hidden" name="start-date" value="">
+                                        <input type="hidden" name="end-date" value="">
+                                        <div class="btn-block">
+                                            <div style="width:100%">
+                                                <input type="text" class="form-control input-full pointer" id="bulan1" name="bulan1" style="background: white !important; opacity: 1 !important" readonly="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>&nbsp;&nbsp;</td>
+                                <td>
+                                    <button class="btn btn-primary" id="tambah_lembur" style="padding:10px 18px;">
+                                        <span class="btn-label mr-2"><i class="fa fa-plus"></i></span>Tambah
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table id="datatable-ijincuti" class="table-responsive display table table-striped table-hover" >
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;">No</th>
+                                    <th style="width:10%;">Tanggal</th>
+                                    <th style="width:10%;">Dipotong</th>
+                                    <th style="width:60%;">Keperluan</th>
+                                    <th style="width:10%;">Status</th>
+                                    <th style="width:10%;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-lembur" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <form id="form-lembur" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="text-lembur">Lembur</h5>
+                        <a type="button" class="close" href="">
+                        <span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="box-bg-grey">
+                                        <div class="table-responsive">
+                                            <table class="mb-0">
+                                                <tbody class="nowraping">
+                                                    <tr>
+                                                        <td width="10%">Nama</td>
+                                                        <td width="2%">&nbsp;:&nbsp;</td>
+                                                        <td><?= $account['nama'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jabatan</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><?= $posisi['nama_posisi'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bagian</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><?= $account['bagian'] ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="separator-solid" style="border-color: #a9a9a9"></div>
+                                            <table class="mb-0">
+                                                <tbody class="nowraping">
+                                                    <tr>
+                                                        <td width="10%">Tanggal</td>
+                                                        <td width="2%">&nbsp;:&nbsp;</td>
+                                                        <td><input type="text" class="form-control form-jm tgl" name="tanggal" id="tanggal" style="width: 149px !important;" required></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kategori</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td>
+                                                            <select class="form-control form-rm" name="kategori" id="kategori" style="padding: 0.4rem 0.5rem !important; width: 149px;" required>
+                                                                <option value="">Pilih Kategori</option>
+                                                                <option value="1">diluar jam kerja</option>
+                                                                <option value="0">range jam kerja</option>
+                                                            </select>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Waktu</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <input type="text" class="form-control form-jm waktu" name="waktu_mulai" id="waktu_mulai" style="width: 50px !important;" required> 
+                                                                <span class="mt-1">&nbsp;sampai&nbsp;</span>
+                                                                <input type="text" class="form-control form-jm waktu" name="waktu_selesai" id="waktu_selesai" style="width: 50px !important;" required>
+                                                            </div>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <input type="text" min="0" class="form-control form-jm text-right" name="jumlah" id="jumlah" style="width: 111px !important; background: #fff !important;" required readonly>
+                                                                <span class="mt-1">&nbsp;menit&nbsp;</span>
+                                                            </div>
+                                                        <td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keterangan</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><textarea class="form-control" name="keterangan" id="keterangan" style="padding: 0.25rem 0.5rem; min-height: 92px; height: 17px;" required=""></textarea></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" name="add_lembur" id="add_lembur" value="Tambah" style="padding:9px" size="7" readonly>
+                        <input class="btn btn-primary" type="hidden" name="edit_lembur" id="edit_lembur" value="Ubah" style="padding:9px" size="7" readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

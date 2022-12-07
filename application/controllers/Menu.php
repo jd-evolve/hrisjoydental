@@ -265,6 +265,21 @@ class Menu extends CI_Controller {
 			redirect('logout');
 		}
     }
+
+	public function form_lembur(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Form Lembur';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$this->load->view('layout/header', $data);
+			$this->load->view('absensi/form_lembur');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+	}
 	
     public function data_scanlog(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
