@@ -87,6 +87,7 @@
                 +'<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">'
                     +'<a class="dropdown-item pointer account-lihat" data-id="'+data+'" id="account-lihat"> <i class="fas fa-eye"></i> Lihat</a>'
                     +'<a class="dropdown-item pointer account-edit" data-id="'+data+'" id="account-edit"> <i class="fas fa-pen"></i> Edit</a>'
+                    +'<a class="dropdown-item pointer account-salary" data-id="'+data+'" id="account-salary"> <i class="fas fa-file-invoice-dollar"></i> Salary</a>'
                     +'<a class="dropdown-item pointer account-restore" data-id="'+data+'" id="account-restore"> <i class="fas fa-undo-alt"></i> Restore</a>'
                     +'<a class="dropdown-item pointer account-remove" data-id="'+data+'" id="account-remove"> <i class="fas fa-trash"></i> Remove</a>'
                     +'<a class="dropdown-item pointer account-delete" data-id="'+data+'" id="account-delete"> <i class="fas fa-trash-alt"></i> Delete</a>'
@@ -140,8 +141,10 @@
                     
                     if(json.ubah){
                         $(".account-edit").removeClass("gone");
+                        $(".account-salary").removeClass("gone");
                     }else{
                         $(".account-edit").addClass("gone");
+                        $(".account-salary").addClass("gone");
                     }
                     
                     if(json.hapus){
@@ -155,11 +158,13 @@
             let style = 'display:none;';
             if(sta == 'aktif-'){
                 $('.account-edit').attr('style','');
+                $('.account-salary').attr('style','');
                 $('.account-restore').attr('style',style);
                 $('.account-remove').attr('style','');
                 $('.account-delete').attr('style',style);
             }else if(sta == 'hapus-'){
                 $('.account-edit').attr('style',style);
+                $('.account-salary').attr('style',style);
                 $('.account-restore').attr('style','');
                 $('.account-remove').attr('style',style);
                 $('.account-delete').attr('style',style);
@@ -381,6 +386,58 @@
                     formData.append("id_account", id_account);
                     $.ajax({
                         url: "masterdata/edit_account",
+                        method: "POST",
+                        data: formData,
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                        success: function (json) {
+                            let result = json.result;
+                            let message = json.message;
+                            if (result=="error") { count=0; }
+                            notif(result, message, 1);
+                        },
+                    });
+                }
+            }
+        });
+    });
+
+    $('body').on('click','#account-salary', function(){
+        $("#modal-salary").modal();
+        let id_account = $(this).data('id');
+		var data = table_account.row($(this).parents("tr")).data();
+		$('input[name="gaji_tetap"]').val(data["gaji_tetap"]);
+		$('input[name="insentif"]').val(data["insentif"]);
+		$('input[name="uang_makan"]').val(data["uang_makan"]);
+		$('input[name="uang_transport"]').val(data["uang_transport"]);
+		$('input[name="uang_hlibur"]').val(data["uang_hlibur"]);
+		$('input[name="uang_lembur"]').val(data["uang_lembur"]);
+		$('input[name="uang_shift"]').val(data["uang_shift"]);
+		$('input[name="tunjangan_jabatan"]').val(data["tunjangan_jabatan"]);
+		$('input[name="tunjangan_str"]').val(data["tunjangan_str"]);
+		$('input[name="bpjs_kesehatan"]').val(data["bpjs_kesehatan"]);
+		$('input[name="bpjs_tk"]').val(data["bpjs_tk"]);
+
+        $('#gaji_tetap').keyup(function(){
+            var gaji = $(this).val().split('.').join('');
+            var u_lembur = parseInt(gaji/173).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            var u_shift = parseInt(gaji/25).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            $('input[name="uang_lembur"]').val(u_lembur);
+            $('input[name="uang_shift"]').val(u_shift);
+        });
+        
+        var count = 0;
+        $("input#edit_salary").on("click", function (e) {
+            e.preventDefault();
+            let validasi = document.getElementById("form-salary").reportValidity();
+            if (validasi) {
+                count++;
+                if (count == 1) {
+                    var formData = new FormData(document.querySelector("#form-salary"));
+                    formData.append("id_account", id_account);
+                    $.ajax({
+                        url: "masterdata/edit_account_salary",
                         method: "POST",
                         data: formData,
                         dataType: "json",

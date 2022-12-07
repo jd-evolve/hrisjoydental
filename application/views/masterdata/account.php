@@ -519,4 +519,93 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-salary" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <form id="form-salary" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="text-salary">Account Salary</h5>
+                        <a type="button" class="close" href="">
+                        <span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-group">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="box-bg-grey mb-3">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td style="width:10%;"><b>Gaji Tetap</b> (n)</td>
+                                                    <td style="width:2%;"><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="gaji_tetap" id="gaji_tetap" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Insentif</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="insentif" id="insentif" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Uang Makan</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="uang_makan" id="uang_makan" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Uang Transport</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="uang_transport" id="uang_transport" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Uang Masuk Hari Libur</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="uang_hlibur" id="uang_hlibur" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Uang Lembur</b> (n/173)</td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="uang_lembur" id="uang_lembur" placeholder="0" data-type="currency" required readonly style="background: #fff !important;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Uang Per Shift</b> (n/25)</td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="uang_shift" id="uang_shift" placeholder="0" data-type="currency" required readonly style="background: #fff !important;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tunjangan Jabatan</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="tunjangan_jabatan" id="tunjangan_jabatan" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tunjangan STR</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="tunjangan_str" id="tunjangan_str" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>BPJS Kesehatan</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="bpjs_kesehatan" id="bpjs_kesehatan" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>BPJS TK</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="bpjs_tk" id="bpjs_tk" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" name="edit_salary" id="edit_salary" value="Ubah" style="padding:9px" size="7" readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>

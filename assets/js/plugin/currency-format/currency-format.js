@@ -1,9 +1,14 @@
-$("input[data-type='currency']").on({keyup: function(){ formatCurrency($(this)); } });
-function formatNumber(n) {
-    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-}
-function formatCurrency(input) {
-    var input_val = input.val();
-    if (input_val === "") { return; }
-    input.val(formatNumber(input_val));
-}
+$("input[data-type='currency']").on({
+    keyup: function(){ 
+        var input_val = $(this).val();
+        if(input_val === ""){ return; }
+
+        var sign = input_val.charAt(0);
+        var numb = input_val.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if(sign == '-'){ 
+            numb = '-'+numb; 
+        }
+        
+        $(this).val(numb);
+    } 
+});

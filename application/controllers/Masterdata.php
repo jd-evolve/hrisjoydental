@@ -58,6 +58,17 @@ class Masterdata extends CI_Controller {
 				$row['tgl_evaluasi'] = $list->tgl_evaluasi != NULL ? date_format(date_create($list->tgl_evaluasi),"d-m-Y") : '';
 				$row['tgl_resign'] = $list->tgl_resign != NULL ? date_format(date_create($list->tgl_resign),"d-m-Y") : '';
 				$row['alasan_resign'] = $list->alasan_resign;
+				$row['gaji_tetap'] = number_format($list->gaji_tetap,0,',','.');
+				$row['insentif'] = number_format($list->insentif,0,',','.');
+				$row['uang_makan'] = number_format($list->uang_makan,0,',','.');
+				$row['uang_transport'] = number_format($list->uang_transport,0,',','.');
+				$row['uang_hlibur'] = number_format($list->uang_hlibur,0,',','.');
+				$row['uang_lembur'] = number_format($list->uang_lembur,0,',','.');
+				$row['uang_shift'] = number_format($list->uang_shift,0,',','.');
+				$row['tunjangan_jabatan'] = number_format($list->tunjangan_jabatan,0,',','.');
+				$row['tunjangan_str'] = number_format($list->tunjangan_str,0,',','.');
+				$row['bpjs_kesehatan'] = number_format($list->bpjs_kesehatan,0,',','.');
+				$row['bpjs_tk'] = number_format($list->bpjs_tk,0,',','.');
 
 				$masa_kerja = date_diff(date_create($list->tgl_kerja),date_create(date("Y-m-d")));
 				$row['masa_kerja'] = ($masa_kerja->y).' Thn, '.($masa_kerja->m).' Bln';
@@ -164,6 +175,34 @@ class Masterdata extends CI_Controller {
 				$output['message'] ="Email sudah di gunakan, coba dengan yang lain!";
 				$output['result'] = "error";
 			}
+		}else{
+			$output['message'] = "Data id account tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function edit_account_salary(){
+		if(!empty($_POST['id_account'])){
+			$cekData = $this->m_main->cekData('db_account','id_account',$_POST['id_account']);
+			$data = [
+				'gaji_tetap' => str_replace(".","",$_POST['gaji_tetap']),
+				'insentif' => str_replace(".","",$_POST['insentif']),
+				'uang_makan' => str_replace(".","",$_POST['uang_makan']),
+				'uang_transport' => str_replace(".","",$_POST['uang_transport']),
+				'uang_hlibur' => str_replace(".","",$_POST['uang_hlibur']),
+				'uang_lembur' => str_replace(".","",$_POST['uang_lembur']),
+				'uang_shift' => str_replace(".","",$_POST['uang_shift']),
+				'tunjangan_jabatan' => str_replace(".","",$_POST['tunjangan_jabatan']),
+				'tunjangan_str' => str_replace(".","",$_POST['tunjangan_str']),
+				'bpjs_kesehatan' => str_replace(".","",$_POST['bpjs_kesehatan']),
+				'bpjs_tk' => str_replace(".","",$_POST['bpjs_tk']),
+				'tgl_edit' => date("Y-m-d H:i:s"),
+			];
+			$this->m_main->updateIN('db_account','id_account',$_POST['id_account'],$data);
+			$output['message'] ="Data account salary berhasil di ubah!";
+			$output['result'] = "success";
 		}else{
 			$output['message'] = "Data id account tidak tersedia!";
 			$output['result'] = "error";

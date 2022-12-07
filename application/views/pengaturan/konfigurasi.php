@@ -23,30 +23,43 @@
                         <div class="item-list py-2">
                             <div class="info-user">
                                 <div class="card-title">Setting Ijin/Cuti</div>
-                                <div class="card-category">Menyesuaikan potongan cuti dari masing-masing ijin/cuti</div>
-                                <div class="form-group">
-                                    <label class="lbl-color">Cuti Tahunan</label>
-                                    <input type="number" name="cuti_tahunan" step="0.1" min="0" class="form-control" placeholder="0" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">Cuti Menikah</label>
-                                    <input type="number" name="cuti_menikah" step="0.1" min="0" class="form-control" placeholder="0" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">Cuti Melahirkan</label>
-                                    <input type="number" name="cuti_melahirkan" step="0.1" min="0" class="form-control" placeholder="0" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">Ijin Pribadi</label>
-                                    <input type="number" name="ijin_pribadi" step="0.1" min="0" class="form-control" placeholder="0" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">Ijin Duka</label>
-                                    <input type="number" name="ijin_duka" step="0.1" min="0" class="form-control" placeholder="0" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">Ijin Dinak Keluar</label>
-                                    <input type="number" name="ijin_sakit" step="0.1" min="0" class="form-control" placeholder="0" required>
+                                <div class="card-category mt-0">Menyesuaikan potongan cuti dari masing-masing ijin/cuti</div>
+                                <div class="box-bg-grey mt-2">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td width="10%">Cuti Tahunan <span class="text-danger">*</span></td>
+                                                    <td width="2%">&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="cuti_tahunan" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cuti Menikah <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="cuti_menikah" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cuti Melahirkan <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="cuti_melahirkan" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ijin Pribadi <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="ijin_pribadi" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ijin Duka <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="ijin_duka" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ijin Sakit <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="ijin_sakit" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -54,26 +67,38 @@
                         <div class="item-list py-2">
                             <div class="info-user">
                                 <div class="card-title">Email Lupa Password</div>
-                                <div class="card-category">Konfigurasi email admin untuk mengirim pesan lupa password.</div>
-                                <div class="form-group">
-                                    <label class="lbl-color">smtp_host</label>
-                                    <input type="text" class="form-control" name="smtp_host" placeholder="smtp.domain.com" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">smtp_port</label>
-                                    <input type="text" class="form-control" name="smtp_port" placeholder="465" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">smtp_user</label>
-                                    <input type="text" class="form-control" name="smtp_user" placeholder="user@email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">smtp_pass</label>
-                                    <input type="text" class="form-control" name="smtp_pass" placeholder="password" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="lbl-color">initial_name</label>
-                                    <input type="text" class="form-control" name="initial_name" placeholder="username" required>
+                                <div class="card-category mt-0">Konfigurasi email admin untuk mengirim pesan lupa password.</div>
+                                <div class="box-bg-grey mt-2">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td width="10%">smtp_host <span class="text-danger">*</span></td>
+                                                    <td width="2%">&nbsp;:&nbsp;</td>
+                                                    <td><input type="text" class="form-control form-rm" name="smtp_host" placeholder="smtp.domain.com" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>smtp_port <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="text" class="form-control form-rm" name="smtp_port" placeholder="465" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>smtp_user <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="text" class="form-control form-rm" name="smtp_user" placeholder="user@email" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>smtp_pass <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="text" class="form-control form-rm" name="smtp_pass" placeholder="password" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>initial_name <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="text" class="form-control form-rm" name="initial_name" placeholder="username" required></td>
+                                                </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

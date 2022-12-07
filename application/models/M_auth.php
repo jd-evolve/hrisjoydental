@@ -3,12 +3,12 @@
 class M_auth extends CI_Model {
 
     public function GetAllAccount(){
-        $query = $this->db->select('a.nama as nama_account, a.gender, a.kode, a.nomor_induk, 
-            a.email, a.tempat_lahir, a.tgl_lahir, a.bagian, c.nama_cabang, a.level, a.no_ktp, 
-            a.nama_ibu, a.telp_referensi, a.pendidikan_terakhir, a.lulus_dari, a.alamat_ktp, 
-            a.status_karyawan, a.tgl_evaluasi, a.tgl_resign, a.alasan_resign, a.id_cabang, 
-            a.id_posisi, a.nama_bank, a.no_rek, a.nama_rek, a.sisa_cuti, a.alamat, a.telp, 
-            a.status, a.id_account, a.tgl_kerja, b.nama_posisi, a.id_jadwal_kerja, d.nama_jadwal_kerja')
+        $query = $this->db->select('a.nama as nama_account, a.gender, a.kode, a.nomor_induk, a.email, a.tempat_lahir,
+            a.tgl_lahir, a.bagian, a.level, a.no_ktp, a.nama_ibu, a.telp_referensi, a.pendidikan_terakhir, a.lulus_dari,
+            a.alamat_ktp, a.status_karyawan, a.tgl_evaluasi, a.tgl_resign, a.alasan_resign, a.id_cabang, a.alamat, a.telp, 
+            a.id_posisi, a.nama_bank, a.no_rek, a.nama_rek, a.sisa_cuti, a.status, a.id_account, a.tgl_kerja, a.id_jadwal_kerja,
+            a.gaji_tetap, a.insentif, a.uang_makan, a.uang_transport, a.uang_hlibur, a.uang_lembur, a.uang_shift, a.tunjangan_jabatan,
+            a.tunjangan_str, a.bpjs_kesehatan, a.bpjs_tk, b.nama_posisi, c.nama_cabang,  d.nama_jadwal_kerja')
             ->from('db_account a')
             ->join('db_posisi b','a.id_posisi = b.id_posisi')
             ->join('db_cabang c','a.id_cabang = c.id_cabang')
