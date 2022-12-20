@@ -123,7 +123,7 @@
                             <p class="mt-2 mb-0 text-muted"><span class="text-danger">*</span>) Batas maksimal file yang dapat di upload adalah 2,5MB dan format jpg/png.</p>
                             <p class="mt-0 mb-0 text-muted"><span class="text-danger">**</span>) Pastikan format tanggal waktu yang di inputkan telah sesuai. Contoh <b><?= date("d-m-Y")?> 00:00</b></p>
                             <div class="text-right mt-3">
-                                <button class="btn btn-warning btn-sm" type="button" id="ajukan_form">Ajukan</button>
+                                <button class="btn btn-success btn-sm" type="button" id="ajukan_form">Ajukan</button>
                             </div>
                         </form>
                     </div>

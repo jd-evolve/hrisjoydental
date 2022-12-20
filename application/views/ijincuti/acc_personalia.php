@@ -139,8 +139,8 @@
                     </div>
                     <div class="modal-footer">
                         <div id="show-button">
-                            <button type="button" class="btn btn-danger" id="btn-tolak">Tolak</button>
-                            <button type="button" class="btn btn-success" id="btn-setujui">Setujui</button>
+                            <button type="button" class="btn btn-danger btn-sm" id="btn-tolak">Tolak</button>
+                            <button type="button" class="btn btn-success btn-sm" id="btn-setujui">Setujui</button>
                         </div>
                     </div>
                 </div>
@@ -159,8 +159,8 @@
                             <input type="number" class="form-control mt-2" name="potong_cuti" step="0.01" min="0">
                         </div>
                         <div class="py-3">
-                            <button type="button" class="btn btn-danger" id="kembali1">Kembali</button>
-                            <button type="submit" class="btn btn-success" id="lanjutkan1">Lanjutkan</button>
+                            <button type="button" class="btn btn-danger btn-sm" id="kembali1">Kembali</button>
+                            <button type="submit" class="btn btn-success btn-sm" id="lanjutkan1">Lanjutkan</button>
                         </div>
                     </div>
                 </form>
@@ -179,8 +179,8 @@
                             <textarea id="alasan-batal" style="min-height:100px;" class="form-control mt-2" placeholder="Alasan di batalkan . . ." required></textarea>
                         </div>
                         <div class="py-3">
-                            <button type="button" class="btn btn-danger" id="kembali2">Kembali</button>
-                            <button type="submit" class="btn btn-success" id="lanjutkan2">Lanjutkan</button>
+                            <button type="button" class="btn btn-danger btn-sm" id="kembali2">Kembali</button>
+                            <button type="submit" class="btn btn-success btn-sm" id="lanjutkan2">Lanjutkan</button>
                         </div>
                     </div>
                 </form>

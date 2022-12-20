@@ -111,8 +111,9 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_cabang">
-                        <input class="btn btn-primary" type="submit" name="add_cabang" id="add_cabang" value="Tambah" style="padding:9px" size="7" readonly>
-                        <input class="btn btn-primary" type="hidden" name="edit_cabang" id="edit_cabang" value="Ubah" style="padding:9px" size="7" readonly>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <input class="btn btn-success btn-sm" type="submit" name="add_cabang" id="add_cabang" value="Tambah" readonly>
+                        <input class="btn btn-success btn-sm" type="hidden" name="edit_cabang" id="edit_cabang" value="Ubah" readonly>
                     </div>
                 </div>
             </form>

@@ -149,8 +149,9 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_jam_kerja">
-                        <input class="btn btn-primary" type="submit" name="add_jamkerja" id="add_jamkerja" value="Tambah" style="padding:9px" size="7" readonly>
-                        <input class="btn btn-primary" type="hidden" name="edit_jamkerja" id="edit_jamkerja" value="Ubah" style="padding:9px" size="7" readonly>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <input class="btn btn-success btn-sm" type="submit" name="add_jamkerja" id="add_jamkerja" value="Tambah" readonly>
+                        <input class="btn btn-success btn-sm" type="hidden" name="edit_jamkerja" id="edit_jamkerja" value="Ubah" readonly>
                     </div>
                 </div>
             </form>

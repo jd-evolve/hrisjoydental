@@ -201,8 +201,8 @@
                         </div> 
                     </div>
                     <div class="modal-footer">
-                        <input class="btn btn-primary" type="submit" name="add_lembur" id="add_lembur" value="Tambah" style="padding:9px" size="7" readonly>
-                        <input class="btn btn-primary" type="hidden" name="edit_lembur" id="edit_lembur" value="Ubah" style="padding:9px" size="7" readonly>
+                        <input class="btn btn-primary" type="submit" name="add_lembur" id="add_lembur" value="Tambah" readonly>
+                        <input class="btn btn-primary" type="hidden" name="edit_lembur" id="edit_lembur" value="Ubah" readonly>
                     </div>
                 </div>
             </form>
