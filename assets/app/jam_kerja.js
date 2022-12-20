@@ -195,37 +195,34 @@
         $('input[name="edit_jamkerja"]').attr("type", "hidden");
         $('input[name="add_jamkerja"]').attr("type", "submit");
         change_time();
-        var count = 0;
-        $("input#add_jamkerja").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-jamkerja").reportValidity();
-            if(validasi){
-                var masuk = $('input[name="masuk"]').val();
-                var pulang = $('input[name="pulang"]').val();
-                if(masuk.search("_") == -1 && pulang.search("_") == -1){
-                    count++;
-                    if (count == 1) {
-                        var formData = new FormData(document.querySelector("#form-jamkerja"));
-                        $.ajax({
-                            url: "absensi/add_jamkerja",
-                            method: "POST",
-                            data: formData,
-                            dataType: "json",
-                            processData: false,
-                            contentType: false,
-                            success: function (json) {
-                                let result = json.result;
-                                let message = json.message;
-                                if (result=="error") { count=0; }
-                                notif(result, message, 1);
-                            },
-                        });
-                    }
-                }else{
-                    notif('error', 'Format jam tidak sesuai!');
-                }
+    });
+    
+    $("input#add_jamkerja").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-jamkerja").reportValidity();
+        if(validasi){
+            var masuk = $('input[name="masuk"]').val();
+            var pulang = $('input[name="pulang"]').val();
+            if(masuk.search("_") == -1 && pulang.search("_") == -1){
+                var formData = new FormData(document.querySelector("#form-jamkerja"));
+                $.ajax({
+                    url: "absensi/add_jamkerja",
+                    method: "POST",
+                    data: formData,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    success: function (json) {
+                        let result = json.result;
+                        let message = json.message;
+                        $("#modal-jamkerja").modal('hide');
+                        notif(result, message);
+                    },
+                });
+            }else{
+                notif('error', 'Format jam tidak sesuai!');
             }
-        });
+        }
     });
     
     $('body').on('click','#jamkerja-edit', function(){
@@ -242,6 +239,7 @@
 		$('input[name="st_jm"]').val(data['st_jm']);
 		$('input[name="sb_jp"]').val(data['sb_jp']);
 		$('input[name="st_jp"]').val(data['st_jp']);
+		$('input[name="id_jam_kerja"]').val(id_jam_kerja);
         $("#sb_jm").attr("max",max_time('sebelum',data['Masuk']));
         $("#st_jm").attr("max",max_time('setelah',data['Masuk']));
         $("#sb_jp").attr("max",max_time('sebelum',data['Pulang']));
@@ -249,38 +247,34 @@
         $('input[name="edit_jamkerja"]').attr("type", "submit");
         $('input[name="add_jamkerja"]').attr("type", "hidden");
         change_time();
-        var count = 0;
-        $("input#edit_jamkerja").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-jamkerja").reportValidity();
-            if (validasi) {
-                var masuk = $('input[name="masuk"]').val();
-                var pulang = $('input[name="pulang"]').val();
-                if(masuk.search("_") == -1 && pulang.search("_") == -1){
-                count++;
-                    if (count == 1) {
-                        var formData = new FormData(document.querySelector("#form-jamkerja"));
-                        formData.append("id_jam_kerja", id_jam_kerja);
-                        $.ajax({
-                            url: "absensi/edit_jamkerja",
-                            method: "POST",
-                            data: formData,
-                            dataType: "json",
-                            processData: false,
-                            contentType: false,
-                            success: function (json) {
-                                let result = json.result;
-                                let message = json.message;
-                                if (result=="error") { count=0; }
-                                notif(result, message, 1);
-                            },
-                        });
-                    }
-                }else{
-                    notif('error', 'Format jam tidak sesuai!');
-                }
+    });
+
+    $("input#edit_jamkerja").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-jamkerja").reportValidity();
+        if (validasi) {
+            var masuk = $('input[name="masuk"]').val();
+            var pulang = $('input[name="pulang"]').val();
+            if(masuk.search("_") == -1 && pulang.search("_") == -1){
+                var formData = new FormData(document.querySelector("#form-jamkerja"));
+                $.ajax({
+                    url: "absensi/edit_jamkerja",
+                    method: "POST",
+                    data: formData,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    success: function (json) {
+                        let result = json.result;
+                        let message = json.message;
+                        $("#modal-jamkerja").modal('hide');
+                        notif(result, message);
+                    },
+                });
+            }else{
+                notif('error', 'Format jam tidak sesuai!');
             }
-        });
+        }
     });
 
     $('body').on('click','#jamkerja-restore', function(){

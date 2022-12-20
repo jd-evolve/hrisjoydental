@@ -46,49 +46,22 @@
     $("#tambah_lembur").on("click", function () {
         $("#modal-lembur").modal();
         document.getElementById("text-lembur").innerHTML = "Tambah Lembur";
-		// $('input[name="nama"]').val('');
-		// $('input[name="keterangan"]').val('');
-		// $('input[name="masuk"]').val('');
-		// $('input[name="pulang"]').val('');
-		// $('input[name="dihitung"]').val('');
-		// $('input[name="sb_jm"]').val('');
-		// $('input[name="st_jm"]').val('');
-		// $('input[name="sb_jp"]').val('');
-		// $('input[name="st_jp"]').val('');
-        // $('input[name="edit_lembur"]').attr("type", "hidden");
-        // $('input[name="add_lembur"]').attr("type", "submit");
-        // change_time();
-        // var count = 0;
-        // $("input#add_lembur").on("click", function (e) {
-        //     e.preventDefault();
-        //     let validasi = document.getElementById("form-lembur").reportValidity();
-        //     if(validasi){
-        //         var masuk = $('input[name="masuk"]').val();
-        //         var pulang = $('input[name="pulang"]').val();
-        //         if(masuk.search("_") == -1 && pulang.search("_") == -1){
-        //             count++;
-        //             if (count == 1) {
-        //                 var formData = new FormData(document.querySelector("#form-lembur"));
-        //                 $.ajax({
-        //                     url: "absensi/add_lembur",
-        //                     method: "POST",
-        //                     data: formData,
-        //                     dataType: "json",
-        //                     processData: false,
-        //                     contentType: false,
-        //                     success: function (json) {
-        //                         let result = json.result;
-        //                         let message = json.message;
-        //                         if (result=="error") { count=0; }
-        //                         notif(result, message, 1);
-        //                     },
-        //                 });
-        //             }
-        //         }else{
-        //             notif('error', 'Format jam tidak sesuai!');
-        //         }
-        //     }
-        // });
+        
+        $('#jam_mulai').keyup(function(){
+            range_jam();
+        });
+        $('#jam_selesai').keyup(function(){
+            range_jam();
+        });
+        function range_jam(){
+            var jam_mulai = $('#jam_mulai').val();
+            var jam_selesai = $('#jam_selesai').val();
+            if(jam_mulai.search("_") == -1 && jam_mulai != '' && jam_selesai.search("_") == -1 && jam_selesai != ''){
+                var diff = Math.abs(new Date('1/1/1 '+jam_mulai) - new Date('1/1/1 '+jam_selesai));
+                var minutes = Math.floor((diff/1000)/60);
+                $('#jumlah').val(minutes);
+            }
+        }
     });
     
 

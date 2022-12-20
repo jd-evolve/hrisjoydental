@@ -62,9 +62,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="text-jadwalkerja">Jadwal</h5>
-                        <a type="button" class="close" href="">
-                        <span aria-hidden="true">&times;</span>
-                        </a>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="card-group">
@@ -127,6 +127,7 @@
                         </div> 
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" name="id_jadwal_kerja">
                         <input class="btn btn-primary" type="submit" name="add-edit" id="add-edit" value="Tambah" style="padding:9px" size="7" readonly>
                     </div>
                 </div>

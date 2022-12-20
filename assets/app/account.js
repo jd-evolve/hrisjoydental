@@ -271,39 +271,34 @@
 		$('input[name="tgl_keluar"]').val('');
 		$('input[name="alasan_keluar"]').val('');
         $('select[name="cabang"]').val('');
-
         $('input[name="edit_account"]').attr("type", "hidden");
         $('input[name="add_account"]').attr("type", "submit");
-        var count = 0;
-        $("input#add_account").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-account").reportValidity();
-            if (validasi) {
-                count++;
-                if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-account"));
-                    $.ajax({
-                        url: "masterdata/add_account",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
-                }
-            }
-        });
+    });
+    
+    $("input#add_account").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-account").reportValidity();
+        if (validasi) {
+            var formData = new FormData(document.querySelector("#form-account"));
+            $.ajax({
+                url: "masterdata/add_account",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    notif(result, message);
+                    $("#modal-account").modal('hide');
+                },
+            });
+        }
     });
     
     $('body').on('click','#account-lihat',function(){
         $("#modal-lihat").modal();
-        let id_account = $(this).data('id');
 		var data = table_account.row($(this).parents("tr")).data();
         document.getElementById("text-lihat").innerHTML = "Data account : <b>"+data["nama_account"]+'</b>';
 		$("#show-kode").html(data["Kode"]);
@@ -372,35 +367,31 @@
 		$('input[name="tgl_keluar"]').val(data["tgl_resign"]);
 		$('input[name="alasan_keluar"]').val(data["alasan_resign"]);
         $('select[name="cabang"]').val(data["id_cabang"]);
-
+		$('input[name="id_account"]').val(id_account);
         $('input[name="edit_account"]').attr("type", "submit");
         $('input[name="add_account"]').attr("type", "hidden");
-        var count = 0;
-        $("input#edit_account").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-account").reportValidity();
-            if (validasi) {
-                count++;
-                if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-account"));
-                    formData.append("id_account", id_account);
-                    $.ajax({
-                        url: "masterdata/edit_account",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
-                }
-            }
-        });
+    });
+    
+    $("input#edit_account").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-account").reportValidity();
+        if (validasi) {
+            var formData = new FormData(document.querySelector("#form-account"));
+            $.ajax({
+                url: "masterdata/edit_account",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    notif(result, message);
+                    $("#modal-account").modal('hide');
+                },
+            });
+        }
     });
 
     $('body').on('click','#account-salary', function(){
@@ -418,7 +409,7 @@
 		$('input[name="tunjangan_str"]').val(data["tunjangan_str"]);
 		$('input[name="bpjs_kesehatan"]').val(data["bpjs_kesehatan"]);
 		$('input[name="bpjs_tk"]').val(data["bpjs_tk"]);
-
+		$('input[name="id_account"]').val(id_account);
         $('#gaji_tetap').keyup(function(){
             var gaji = $(this).val().split('.').join('');
             var u_lembur = parseInt(gaji/173).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -426,33 +417,28 @@
             $('input[name="uang_lembur"]').val(u_lembur);
             $('input[name="uang_shift"]').val(u_shift);
         });
-        
-        var count = 0;
-        $("input#edit_salary").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-salary").reportValidity();
-            if (validasi) {
-                count++;
-                if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-salary"));
-                    formData.append("id_account", id_account);
-                    $.ajax({
-                        url: "masterdata/edit_account_salary",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
-                }
-            }
-        });
+    });
+    
+    $("input#edit_salary").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-salary").reportValidity();
+        if (validasi) {
+            var formData = new FormData(document.querySelector("#form-salary"));
+            $.ajax({
+                url: "masterdata/edit_account_salary",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    notif(result, message);
+                    $("#modal-salary").modal('hide');
+                },
+            });
+        }
     });
 
     $('body').on('click','#account-restore', function(){

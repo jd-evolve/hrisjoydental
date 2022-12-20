@@ -34,6 +34,7 @@
                     <div class="" id="show-nav1">
                         <h4><b>Persyaratan :</b></h4>
                         <ol class="ml-0" type="1">
+                            <li>Sebelum mengisi form lembur pastikan data periode sudah tersedia.</li>
                             <li>Lembur di bedakan menjadi 2 kategori, yaitu <b>range jam kerja</b> dan <b>diluar jam kerja</b>.</li>
                             <li><b>Range Jam Kerja</b> adalah lembur dimana waktu masih berada dalam jangkauan waktu jam kerja.</li>
                             <li><b>Diluar Jam Kerja</b> adalah lembur dimana waktu tidak berada dalam jangkauan waktu jam kerja.</li>
@@ -59,14 +60,12 @@
                             <tr>
                                 <td width="800%">
                                     <div class="btn-group border-option mb-0">
-                                        <label class="label-filter">Tanggal: </label>&nbsp;&nbsp;
-                                        <input type="hidden" name="start-date" value="">
-                                        <input type="hidden" name="end-date" value="">
-                                        <div class="btn-block">
-                                            <div style="width:100%">
-                                                <input type="text" class="form-control input-full pointer" id="bulan1" name="bulan1" style="background: white !important; opacity: 1 !important" readonly="">
-                                            </div>
-                                        </div>
+                                        <label class="label-filter">Periode: </label>&nbsp;&nbsp;
+                                        <select class="form-control" name="filter-periode" id="filter-periode">
+                                                <?php foreach ($data_periode as $list) { ?>
+                                                    <option value="<?= $list->id_periode ?>"><?= $list->keterangan ?></option>
+                                                <?php }?>
+                                        </select>
                                     </div>
                                 </td>
                                 <td>&nbsp;&nbsp;</td>
@@ -98,15 +97,15 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-lembur" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="modal-lembur" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
         <div class="modal-dialog modal-md" role="document">
             <form id="form-lembur" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="text-lembur">Lembur</h5>
-                        <a type="button" class="close" href="">
-                        <span aria-hidden="true">&times;</span>
-                        </a>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="card-group">
@@ -137,9 +136,18 @@
                                             <table class="mb-0">
                                                 <tbody class="nowraping">
                                                     <tr>
-                                                        <td width="10%">Tanggal</td>
+                                                        <td width="10%">Periode</td>
                                                         <td width="2%">&nbsp;:&nbsp;</td>
-                                                        <td><input type="text" class="form-control form-jm tgl" name="tanggal" id="tanggal" style="width: 149px !important;" required></td>
+                                                        <td>
+                                                            <input type="hidden" name="id_periode" value="<?= $on_periode ? $on_periode['id_periode']:'' ?>">
+                                                            <input type="text" class="form-control form-jm" name="periode" id="periode" value="<?= $on_periode ? $on_periode['keterangan']:'' ?>" placeholder="Belum tersedia" style="width: 149px !important; background: #fff !important;" readonly>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tanggal</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><input type="text" class="form-control form-jm tgl" name="tanggal" id="tanggal" placeholder="__-__-____" style="width: 149px !important;" required></td>
                                                         <td></td>
                                                     </tr>
                                                     <tr>
@@ -159,9 +167,9 @@
                                                         <td>&nbsp;:&nbsp;</td>
                                                         <td>
                                                             <div class="d-flex">
-                                                                <input type="text" class="form-control form-jm waktu" name="waktu_mulai" id="waktu_mulai" style="width: 50px !important;" required> 
+                                                                <input type="text" class="form-control form-jm waktu" name="jam_mulai" id="jam_mulai" placeholder="__:__" style="width: 50px !important;" required> 
                                                                 <span class="mt-1">&nbsp;sampai&nbsp;</span>
-                                                                <input type="text" class="form-control form-jm waktu" name="waktu_selesai" id="waktu_selesai" style="width: 50px !important;" required>
+                                                                <input type="text" class="form-control form-jm waktu" name="jam_selesai" id="jam_selesai" placeholder="__:__" style="width: 50px !important;" required>
                                                             </div>
                                                         </td>
                                                         <td></td>
@@ -180,7 +188,7 @@
                                                     <tr>
                                                         <td>Keterangan</td>
                                                         <td>&nbsp;:&nbsp;</td>
-                                                        <td><textarea class="form-control" name="keterangan" id="keterangan" style="padding: 0.25rem 0.5rem; min-height: 92px; height: 17px;" required=""></textarea></td>
+                                                        <td><textarea class="form-control" name="keterangan" id="keterangan" style="padding: 0.25rem 0.5rem; min-height: 92px; height: 17px;" required></textarea></td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>

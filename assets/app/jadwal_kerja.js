@@ -217,6 +217,7 @@
 
     $("#tambah_jadwalkerja").on("click", function () {
         $("#modal-jadwalkerja").modal();
+		$('input[name="id_jadwal_kerja"]').val('');
         document.getElementById("text-jadwalkerja").innerHTML = "Tambah Jadwal Kerja";
 		$('input[name="nama"]').val('');
 		$('input[name="keterangan"]').val('');
@@ -228,12 +229,17 @@
         $("#lbr-5").prop("checked", true);
         $("#lbr-6").prop("checked", true);
         $("#lbr-0").prop("checked", true);
-        saveORupdate(null);
+        for (var i=0; i<=6; i++) {
+            for(var x=1; x<=5; x++){
+                $('select[name="jk'+i+'-'+x+'"]').val('');
+            }
+        }
     });
     
     $('body').on('click','#jadwalkerja-edit', function(){
         $("#modal-jadwalkerja").modal();
         let id_jadwal_kerja = $(this).data('id');
+		$('input[name="id_jadwal_kerja"]').val(id_jadwal_kerja);
         document.getElementById("text-jadwalkerja").innerHTML = "Ubah Jadwal Kerja";
 		var data = table_jadwalkerja.row($(this).parents("tr")).data();
 		$('input[name="nama"]').val(data['Nama']);
@@ -247,6 +253,20 @@
                 id_jadwal_kerja: id_jadwal_kerja
             },
             success: function (data) {
+                //Null all data
+                $("#lbr-1").prop("checked", false);
+                $("#lbr-2").prop("checked", false);
+                $("#lbr-3").prop("checked", false);
+                $("#lbr-4").prop("checked", false);
+                $("#lbr-5").prop("checked", false);
+                $("#lbr-6").prop("checked", false);
+                $("#lbr-0").prop("checked", false);
+                for (var i=0; i<=6; i++) {
+                    for(var x=1; x<=5; x++){
+                        $('select[name="jk'+i+'-'+x+'"]').val('');
+                    }
+                }
+                //Show all data
                 for (var i=0; i<data.length; i++) {
                     if(data[i].libur != 1){
                         $('select[name="'+data[i].id+'"]').val(data[i].id_jk);
@@ -256,71 +276,64 @@
                 }
             },
         });
-        saveORupdate(id_jadwal_kerja);
     });
 
-    function saveORupdate(id_jadwal_kerja){
-        var count = 0;
-        $("input#add-edit").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-jadwalkerja").reportValidity();
-            if(validasi){
-                count++;
-                if (count == 1) {
-                    let list = [];
-                    for (var id_hari=0; id_hari<=6; id_hari++) {
-                        var jk1 = $('select[name="jk'+id_hari+'-1"]').val();
-                        var jk2 = $('select[name="jk'+id_hari+'-2"]').val();
-                        var jk3 = $('select[name="jk'+id_hari+'-3"]').val();
-                        var jk4 = $('select[name="jk'+id_hari+'-4"]').val();
-                        var jk5 = $('select[name="jk'+id_hari+'-5"]').val();
-                        let data = {};
-                        if (!jk1 && !jk2 && !jk3 && !jk4 && !jk5){
+    $("input#add-edit").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-jadwalkerja").reportValidity();
+        if(validasi){
+            let list = [];
+            for (var id_hari=0; id_hari<=6; id_hari++) {
+                var jk1 = $('select[name="jk'+id_hari+'-1"]').val();
+                var jk2 = $('select[name="jk'+id_hari+'-2"]').val();
+                var jk3 = $('select[name="jk'+id_hari+'-3"]').val();
+                var jk4 = $('select[name="jk'+id_hari+'-4"]').val();
+                var jk5 = $('select[name="jk'+id_hari+'-5"]').val();
+                let data = {};
+                if (!jk1 && !jk2 && !jk3 && !jk4 && !jk5){
+                    data = {
+                        'id_hari' : id_hari,
+                        'id_jam_kerja' : 0,
+                        'libur' : 1,
+                        'urutan' : 1,
+                    };
+                    list.push(data);
+                } else if (jk1 || jk2 || jk3 ||jk4 || jk5){
+                    var urutan = 1;
+                    for(var x=1; x<=5; x++){
+                        var jk = $('select[name="jk'+id_hari+'-'+x+'"]').val();
+                        if(jk){
                             data = {
                                 'id_hari' : id_hari,
-                                'id_jam_kerja' : 0,
-                                'libur' : 1,
-                                'urutan' : 1,
+                                'id_jam_kerja' : jk,
+                                'libur' : 0,
+                                'urutan' : urutan,
                             };
                             list.push(data);
-                        } else if (jk1 || jk2 || jk3 ||jk4 || jk5){
-                            var urutan = 1;
-                            for(var x=1; x<=5; x++){
-                                var jk = $('select[name="jk'+id_hari+'-'+x+'"]').val();
-                                if(jk){
-                                    data = {
-                                        'id_hari' : id_hari,
-                                        'id_jam_kerja' : jk,
-                                        'libur' : 0,
-                                        'urutan' : urutan,
-                                    };
-                                    list.push(data);
-                                    urutan++;
-                                }
-                            }
+                            urutan++;
                         }
                     }
-                    $.ajax({
-                        url: "absensi/edit_add_jadwalkerja",
-                        method: "POST",
-                        dataType: "json",
-                        data: {
-                            nama: $('input[name="nama"]').val(),
-                            keterangan: $('input[name="keterangan"]').val(),
-                            id_jadwal_kerja: id_jadwal_kerja,
-                            list: JSON.stringify(list)
-                        },
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
                 }
             }
-        });
-    }
+            $.ajax({
+                url: "absensi/edit_add_jadwalkerja",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    nama: $('input[name="nama"]').val(),
+                    keterangan: $('input[name="keterangan"]').val(),
+                    id_jadwal_kerja: $('input[name="id_jadwal_kerja"]').val(),
+                    list: JSON.stringify(list)
+                },
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    $("#modal-jadwalkerja").modal('hide');
+                    notif(result, message);
+                },
+            });
+        }
+    });
 
     $('body').on('click','#jadwalkerja-restore', function(){
         let id_jadwal_kerja = $(this).data('id');

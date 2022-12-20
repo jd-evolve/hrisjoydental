@@ -35,6 +35,8 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" name="id_ijincuti_list">
     
     <div class="card">
         <div class="card-body">
@@ -157,8 +159,8 @@
                             <input type="number" class="form-control mt-2" name="potong_cuti" step="0.01" min="0">
                         </div>
                         <div class="py-3">
-                            <button type="button" class="btn btn-danger" id="kembali">Kembali</button>
-                            <button type="submit" class="btn btn-success" id="lanjutkan">Lanjutkan</button>
+                            <button type="button" class="btn btn-danger" id="kembali1">Kembali</button>
+                            <button type="submit" class="btn btn-success" id="lanjutkan1">Lanjutkan</button>
                         </div>
                     </div>
                 </form>
@@ -177,8 +179,8 @@
                             <textarea id="alasan-batal" style="min-height:100px;" class="form-control mt-2" placeholder="Alasan di batalkan . . ." required></textarea>
                         </div>
                         <div class="py-3">
-                            <button type="button" class="btn btn-danger" id="kembali">Kembali</button>
-                            <button type="submit" class="btn btn-success" id="lanjutkan">Lanjutkan</button>
+                            <button type="button" class="btn btn-danger" id="kembali2">Kembali</button>
+                            <button type="submit" class="btn btn-success" id="lanjutkan2">Lanjutkan</button>
                         </div>
                     </div>
                 </form>

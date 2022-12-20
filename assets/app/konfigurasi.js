@@ -35,7 +35,6 @@
                 success: function (json) {
                     let result = json.result;
                     let message = json.message;
-                    if (result=="error") { count=0; }
                     notif(result, message);
                 },
             });
@@ -68,7 +67,7 @@
                     success: function (json) {
                         let result = json.result;
                         let message = json.message;
-                        notif(result, message);
+                        notif(result, message, 1);
                     },
                 });
             } else {
@@ -77,7 +76,7 @@
         });
     });
     
-    function notif(result, message) {
+    function notif(result, message, reload = null) {
         if (result == "success") {
             swal("Success", message, {
                 icon: "success",
@@ -87,9 +86,11 @@
                     },
                 },
             });
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+            if(reload == 1){
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
         } else {
             swal("Faild", message, {
                 icon: "error",

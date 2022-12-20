@@ -111,10 +111,8 @@
         $('body').on('click','#show-detail', function(){
             $("#modal-showform").modal();
             let id_ijincuti_list = $(this).data('id');
-            $("#btn-setujui").attr('data-id',id_ijincuti_list);
-            $("#btn-tolak").attr('data-id',id_ijincuti_list);
+            $('input[name="id_ijincuti_list"]').val(id_ijincuti_list);
             show_form(id_ijincuti_list);
-            
         });
 
         function show_form(id_ijincuti_list){
@@ -215,97 +213,106 @@
             e.preventDefault();
             $("#modal-showform").modal('hide');
             $("#modal-setuju").modal('show');
-            let id_ijincuti_list = $(this).data('id');
             let cut_cuti = $(this).data('cutcuti');
             $('input[name="potong_cuti"]').val(cut_cuti);
-            $("body").on("click", "#lanjutkan", function(e){
-                e.preventDefault();
-                if($("#form-alasan-setuju").valid()){
-                    $("#modal-setuju").modal('hide');
-                    var potong_cuti = $('input[name="potong_cuti"]').val();
-                    $.ajax({
-                        url: 'ijincuti/accpersonalia_ijincuti',
-                        method: "POST",
-                        dataType: "json",
-                        data: {
-                            id_ijincuti_list: id_ijincuti_list,
-                            potong_cuti: potong_cuti
-                        },
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            notif(result, message,1);
-                        },
-                    });
-                }
-            });
-            $("body").on("click", "#kembali", function(e){
-                e.preventDefault();
-                $("#modal-showform").modal('show');
+        });
+
+        $("body").on("click", "#lanjutkan1", function(e){
+            e.preventDefault();
+            if($("#form-alasan-setuju").valid()){
                 $("#modal-setuju").modal('hide');
-                show_form(id_ijincuti_list);
-            });
+                var potong_cuti = $('input[name="potong_cuti"]').val();
+                var id_ijincuti_list = $('input[name="id_ijincuti_list"]').val();
+                $.ajax({
+                    url: 'ijincuti/accpersonalia_ijincuti',
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        potong_cuti: potong_cuti,
+                        id_ijincuti_list: id_ijincuti_list,
+                    },
+                    success: function (json) {
+                        let result = json.result;
+                        let message = json.message;
+                        notif(result, message);
+                        $("#modal-setuju").modal('hide');
+                    },
+                });
+            }
         });
 
         $('body').on('click','#btn-tolak' ,function(e){
             e.preventDefault();
             $("#modal-showform").modal('hide');
             $("#modal-batal").modal('show');
-            let id_ijincuti_list = $(this).data('id');
-            $("body").on("click", "#lanjutkan", function(e){
-                e.preventDefault();
-                if($("#form-alasan-batal").valid()){
-                    $("#modal-batal").modal('hide');
-                    var alasan_ditolak = document.getElementById("alasan-batal").value;
-                    $.ajax({
-                        url: 'ijincuti/tolakpersonalia_ijincuti',
-                        method: "POST",
-                        dataType: "json",
-                        data: {
-                            id_ijincuti_list: id_ijincuti_list,
-                            alasan_ditolak: alasan_ditolak
-                        },
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            notif(result, message,1);
-                        },
-                    });
-                }
-            });
-            $("body").on("click", "#kembali", function(e){
-                e.preventDefault();
-                $("#modal-showform").modal('show');
-                $("#modal-batal").modal('hide');
-                show_form(id_ijincuti_list);
-            });
+            $("#alasan-batal").val('');
         });
-    }
 
-    function notif(result, message, reload = null) {
-        if (result == "success") {
-            swal("Success", message, {
-                icon: "success",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-success",
+        $("body").on("click", "#lanjutkan2", function(e){
+            e.preventDefault();
+            if($("#form-alasan-batal").valid()){
+                $("#modal-batal").modal('hide');
+                var id_ijincuti_list = $('input[name="id_ijincuti_list"]').val();
+                var alasan_ditolak = document.getElementById("alasan-batal").value;
+                $.ajax({
+                    url: 'ijincuti/tolakpersonalia_ijincuti',
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        id_ijincuti_list: id_ijincuti_list,
+                        alasan_ditolak: alasan_ditolak
                     },
-                },
-            });
-            if(reload == 1){
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            } 
-        } else {
-            swal("Faild", message, {
-                icon: "error",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-danger",
+                    success: function (json) {
+                        let result = json.result;
+                        let message = json.message;
+                        notif(result, message);
                     },
-                },
-            });
+                });
+            }
+        });
+
+        $("body").on("click", "#kembali1", function(e){
+            e.preventDefault();
+            $("#modal-showform").modal('show');
+            $("#modal-setuju").modal('hide');
+            var id_ijincuti_list = $('input[name="id_ijincuti_list"]').val();
+            show_form(id_ijincuti_list);
+        });
+
+        $("body").on("click", "#kembali2", function(e){
+            e.preventDefault();
+            $("#modal-showform").modal('show');
+            $("#modal-batal").modal('hide');
+            var id_ijincuti_list = $('input[name="id_ijincuti_list"]').val();
+            show_form(id_ijincuti_list);
+        });
+
+        function notif(result, message, reload = null) {
+            if (result == "success") {
+                swal("Success", message, {
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            className: "btn btn-success",
+                        },
+                    },
+                });
+                table_accpersonalia.ajax.reload();
+                if(reload == 1){
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } 
+            } else {
+                swal("Faild", message, {
+                    icon: "error",
+                    buttons: {
+                        confirm: {
+                            className: "btn btn-danger",
+                        },
+                    },
+                });
+            }
         }
     }
 })(jQuery);

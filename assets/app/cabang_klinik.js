@@ -188,32 +188,28 @@
 		$('input[name="sn_mesin"]').val('');
         $('input[name="edit_cabang"]').attr("type", "hidden");
         $('input[name="add_cabang"]').attr("type", "submit");
-        var count = 0;
-        $("input#add_cabang").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-cabang").reportValidity();
-            if (validasi) {
-                count++;
-                if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-cabang"));
-                    $.ajax({
-                        url: "masterdata/add_cabang",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
-                }
-            }
-        });
-
+    });
+    
+    $("input#add_cabang").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-cabang").reportValidity();
+        if (validasi) {
+            var formData = new FormData(document.querySelector("#form-cabang"));
+            $.ajax({
+                url: "masterdata/add_cabang",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    notif(result, message);
+                    $("#modal-cabang").modal('hide');
+                },
+            });
+        }
     });
     
     $('body').on('click','#cabang-edit', function(){
@@ -226,34 +222,31 @@
 		$('input[name="nama_pt"]').val(data["PT"]);
 		$('#alamat_cabang').val(data["Alamat"]);
 		$('input[name="sn_mesin"]').val(data["SN"]);
+		$('input[name="id_cabang"]').val(id_cabang);
         $('input[name="edit_cabang"]').attr("type", "submit");
         $('input[name="add_cabang"]').attr("type", "hidden");
-        var count = 0;
-        $("input#edit_cabang").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-cabang").reportValidity();
-            if (validasi) {
-                count++;
-                if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-cabang"));
-                    formData.append("id_cabang", id_cabang);
-                    $.ajax({
-                        url: "masterdata/edit_cabang",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
-                }
-            }
-        });
+    });
+
+    $("input#edit_cabang").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-cabang").reportValidity();
+        if (validasi) {
+            var formData = new FormData(document.querySelector("#form-cabang"));
+            $.ajax({
+                url: "masterdata/edit_cabang",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    notif(result, message);
+                    $("#modal-cabang").modal('hide');
+                },
+            });
+        }
     });
 
     $('body').on('click','#cabang-restore', function(){

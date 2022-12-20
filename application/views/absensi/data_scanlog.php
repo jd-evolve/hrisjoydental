@@ -18,109 +18,49 @@
 
     <div id="show-1" class="">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Data Periode</div>
-                        <div class="card-category mt-0 mb-2">Tentukan periode cut off dan total jumlah shift.</div>
+                        <div class="card-category mt-0 mb-2">Tentukan periode cut off dalam sebulan.</div>
                         <div class="box-bg-grey">
-                            <table class="mb-0" width="100%">
-                                <tbody class="nowraping">
-                                    <tr valign="top">
-                                        <td width="10%">Periode Awal<span class="text-danger">*</span></td>
-                                        <td width="2%">&nbsp:&nbsp</td>
-                                        <td width="88%"><input type="text" name="tgl_awal" class="tgl input-line bg-transparent p-0 width-full tgl-wkt" placeholder="dd-mm-yyyy" required></td>
-                                    </tr>
-                                    <tr valign="top">
-                                        <td>Periode Akhir<span class="text-danger">*</span></td>
-                                        <td>&nbsp:&nbsp</td>
-                                        <td><input type="text" name="tgl_akhir" class="tgl input-line bg-transparent p-0 width-full tgl-wkt" placeholder="dd-mm-yyyy" required></td>
-                                    </tr>
-                                    <tr valign="top">
-                                        <td>Jumlah Shift<span class="text-danger">*</span></td>
-                                        <td>&nbsp:&nbsp</td>
-                                        <td><input type="number" name="total_hari" class="input-line bg-transparent p-0 text-right" style="width:35px;" min="0" required> Shift</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="separator-solid"></div>
-                        <div class="card-title">Hari Libur</div>
-                        <div class="card-category mt-0 mb-2">Masukan hari libur selain hari minggu (optional).</div>
-                        <div class="box-bg-grey">
-                            <table class="mb-0" width="100%">
-                                <tbody class="nowraping">
-                                    <tr valign="top">
-                                        <td width="10%">Tgl Hari</td>
-                                        <td width="2%">&nbsp:&nbsp</td>
-                                        <td width="88%"><input type="text" name="tgl_libur" class="tgl input-line bg-transparent p-0 width-full tgl-wkt" placeholder="dd-mm-yyyy"></td>
-                                    </tr>
-                                    <tr valign="top">
-                                        <td>Keterangan</td>
-                                        <td>&nbsp:&nbsp</td>
-                                        <td><input type="text" name="ket_libur" class="input-line bg-transparent p-0 width-full tgl-wkt" placeholder=". . ."></td>
-                                    </tr>
-                                    <tr valign="top">
-                                        <td colspan="3"><button id="add-harilibur" class="btn btn-default btn-xs">Tambah</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="table-responsive">
-                                <table id="tabel-harilibur" class="table table-scanlog table-bordered table-bordered-bd-gray mt-2 mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">No</th>
-                                            <th>Tanggal</th>
-                                            <th>Keterangan</th>
-                                            <th class="text-center">Hapus</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center" colspan="4">Belum ada libur di lain hari minggu</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="form-group form-group-default mt-0 mb-1" style="padding: 4px 10px;">
+                                <label>Periode Awal<span class="text-danger">*</span></label>
+                                <input type="text" name="tgl_awal" class="tgl form-control" placeholder="dd-mm-yyyy" required>
+                            </div>
+                            <div class="form-group form-group-default my-1" style="padding: 4px 10px;">
+                                <label>Periode Akhir<span class="text-danger">*</span></label>
+                                <input type="text" name="tgl_akhir" class="tgl form-control" placeholder="dd-mm-yyyy" required>
+                            </div>
+                            <div class="form-group form-group-default my-1" style="padding: 4px 10px;">
+                                <label>Jumlah Shift<span class="text-danger">*</span></label>
+                                <input type="number" name="total_hari" class="form-control" placeholder="0" min="0" required>
+                            </div>
+                            <div class="form-group form-group-default mt-1 mb-0" style="padding: 4px 10px;">
+                                <label>Keterangan<span class="text-danger">*</span></label>
+                                <input type="text" name="keterangan" class="form-control" placeholder="Periode" readonly style="opacity: 1 !important;background: transparent !important;">
                             </div>
                         </div>
-                        <div class="separator-solid"></div>
-                        <div class="card-title">Upload Scanlog</div>
-                        <div class="card-category mt-0 mb-2">Upload data scanlog dengan format excel.</div>
-                        <div class="box-bg-grey">
-                            <b>Penting!</b>
-                            <ol class="m-0 pl-4" class="s">
-                                <li>Pastika file excel yang di import sesuai dengan format data yang telah ditentukan.</li>
-                                <li>Data file header pada excel dimulai dari baris ke 1.</li>
-                                <li>Format header : | Tanggal Scan | Tanggal | Jam | PIN | Nama | SN |</li>
-                            </ol>
-                            <div class="form-group">
-                                <label class="control-label">File Scanlog<span class="text-danger">*</span></label>
-                                <br>
-                                <input type="file" name="file_scanlog" id="file_scanlog" accept=".xls, .xlsx" required="">      
-                            </div> 
-                        </div>
-                        <div class="separator-solid"></div>
                         <div class="text-right mt-3">
-                            <span class="load-spin p-4 text-secondary none"><i class="fa fa-spinner fa-spin m-1"></i>Loading. . .</span>
-                            <div id="button-footer" class="">
-                                <button class="btn btn-danger btn-sm" type="button" id="reset">Reset</button>
-                                <button class="btn btn-success btn-sm" type="button" id="simpan-scanlog">Simpan</button>
-                            </div>
+                            <button class="btn btn-danger btn-sm" type="button" id="reset-periode">Reset</button>
+                            <button class="btn btn-success btn-sm" type="button" id="add-periode">Simpan</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <div class="card">
                     <div class="card-body">
-                        <table id="datatable-periode" class="table-responsive display table table-striped table-hover" >
+                        <table id="datatable-periode" class="table-responsive display table table-striped table-hover nowraping">
                             <thead>
                                 <tr>
                                     <th style="width:5%;">No</th>
-                                    <th style="width:40%;">P.Awal</th>
-                                    <th style="width:40%;">P.Akhir</th>
-                                    <th style="width:10%;">J.Shift</th>
-                                    <th style="width:5%;">Aksi</th>
+                                    <th style="width:20%;">P.Awal</th>
+                                    <th style="width:20%;">P.Akhir</th>
+                                    <th style="width:10%;">Shift</th>
+                                    <th style="width:30%;">Keterangan</th>
+                                    <th style="width:10%;" class="text-center">Status</th>
+                                    <th style="width:5%;" class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -278,6 +218,138 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-editperiode" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
+        <div class="modal-dialog modal-md" role="document">
+            <form id="form-editperiode" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="text-editperiode">Edit Data Periode</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="box-bg-grey">
+                                        <div class="form-group form-group-default mt-0 mb-1" style="padding: 4px 10px;">
+                                            <label>Periode Awal<span class="text-danger">*</span></label>
+                                            <input type="text" name="edit_tgl_awal" class="tgl form-control" placeholder="dd-mm-yyyy" required>
+                                        </div>
+                                        <div class="form-group form-group-default my-1" style="padding: 4px 10px;">
+                                            <label>Periode Akhir<span class="text-danger">*</span></label>
+                                            <input type="text" name="edit_tgl_akhir" class="tgl form-control" placeholder="dd-mm-yyyy" required>
+                                        </div>
+                                        <div class="form-group form-group-default my-1" style="padding: 4px 10px;">
+                                            <label>Jumlah Shift<span class="text-danger">*</span></label>
+                                            <input type="number" name="edit_total_hari" class="form-control" placeholder="0" min="0" required>
+                                        </div>
+                                        <div class="form-group form-group-default mt-1 mb-0" style="padding: 4px 10px;">
+                                            <label>Keterangan<span class="text-danger">*</span></label>
+                                            <input type="text" name="edit_keterangan" class="form-control" placeholder="Periode" readonly style="opacity: 1 !important;background: transparent !important;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id_periode">
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-success btn-sm" type="button" id="edit-periode">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-scanlog" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <form id="form-scanlog" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="text-scanlog">Upload Data Scanlog</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="box-bg-grey">
+                                        <p class="mb-1"><u><b>Hari Libur!</b></u></p>
+                                        <ol class="m-0 pl-4" class="s">
+                                            <li>Masukan hari libur selain hari minggu.</li>
+                                            <li>Bersifat optional dapat di inputkan atau tidak.</li>
+                                        </ol>
+                                        <table class="mb-0 mt-2" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr valign="top">
+                                                    <td width="10%">Tgl Hari</td>
+                                                    <td width="2%">&nbsp:&nbsp</td>
+                                                    <td width="88%"><input type="text" name="tgl_libur" class="tgl input-line bg-transparent p-0 width-full tgl-wkt" placeholder="__-__-____"></td>
+                                                </tr>
+                                                <tr valign="top">
+                                                    <td>Keterangan</td>
+                                                    <td>&nbsp:&nbsp</td>
+                                                    <td><input type="text" name="ket_libur" class="input-line bg-transparent p-0 width-full tgl-wkt" placeholder=". . ."></td>
+                                                </tr>
+                                                <tr valign="top">
+                                                    <td colspan="3"><button id="add-harilibur" class="btn btn-default btn-xs">Tambah</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="table-responsive">
+                                            <table id="tabel-harilibur" class="table table-scanlog table-bordered table-bordered-bd-gray mt-2 mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">No</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Keterangan</th>
+                                                        <th class="text-center">Hapus</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center" colspan="4">Belum ada libur di lain hari minggu</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="m-3"></div>
+                                    <div class="box-bg-grey">
+                                        <p class="mb-1"><u><b>Upload Scanlog!</b></u></p>
+                                        <ol class="m-0 pl-4" class="s">
+                                            <li>Pastika file excel sesuai dengan format yang ditentukan.</li>
+                                            <li>Data file header pada excel dimulai dari baris ke 1.</li>
+                                            <li>Format : | Tanggal Scan | Tanggal | Jam | PIN | Nama | SN |</li>
+                                        </ol>
+                                        <div class="form-group">
+                                            <label class="control-label">File Scanlog<span class="text-danger">*</span></label>
+                                            <br>
+                                            <input type="file" name="file_scanlog" id="file_scanlog" accept=".xls, .xlsx" required="">      
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id_periode_x">
+                        <span class="load-spin p-2 text-secondary none"><i class="fa fa-spinner fa-spin m-1"></i>Loading. . .</span>
+                        <div id="button-footer" class="">
+                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Kembali</button>
+                            <button class="btn btn-success btn-sm" type="button" id="simpan-scanlog">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

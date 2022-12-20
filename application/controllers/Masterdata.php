@@ -473,7 +473,7 @@ class Masterdata extends CI_Controller {
 
     //================= CABANG
 	public function read_cabang(){
-		$cabang = $this->m_main->readIN('db_cabang');
+		$cabang = $this->m_main->getResultData('db_cabang','status IS NOT NULL','tgl_edit desc');
 		$data = [];
 		$no = 0;
 		foreach ($cabang as $list) {
@@ -597,7 +597,7 @@ class Masterdata extends CI_Controller {
 	
     //================= KEGIATAN
 	public function read_kegiatan(){
-		$kegiatan = $this->m_main->readIN('db_kegiatan');
+		$kegiatan = $this->m_main->getResultData('db_kegiatan','status IS NOT NULL','tgl_edit desc');
 		$data = [];
 		$no = 0;
 		foreach ($kegiatan as $list) {

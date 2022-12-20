@@ -56,6 +56,8 @@
         </div>
     </div>
     
+    <input type="hidden" name="id_ijincuti_list">
+    
     <div class="modal fade" id="modal-showform" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
         <div class="modal-dialog modal-md" role="document">
             <form id="form-showform" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">

@@ -18,7 +18,7 @@ class Absensi extends CI_Controller {
 
     //================= SCAN LOG
 	function read_periode(){
-		$periode = $this->m_main->getResult('db_periode','status',1);
+		$periode = $this->m_main->getResultData('db_periode','status = 1','tgl_edit desc');
 		$data = [];
 		$no = 0;
 		foreach ($periode as $list) {
@@ -28,11 +28,87 @@ class Absensi extends CI_Controller {
 			$row['Awal'] = date_format(date_create($list->periode_awal),"d-m-Y");
 			$row['Akhir'] = date_format(date_create($list->periode_akhir),"d-m-Y");
 			$row['Shift'] = $list->jumlah_shift;
+			$row['Ket'] = $list->keterangan;
+			$row['Status'] = $list->status_periode;
 			$row['Aksi'] = $list->id_periode;
 			$data[] = $row; 
 		}
 		$output = [ "data" => $data ];
 		echo json_encode($output);
+	}
+
+	function add_periode(){
+		$tgl_awal = date_format(date_create($_POST['tgl_awal']),"Y-m-d");
+		$tgl_akhir = date_format(date_create($_POST['tgl_akhir']),"Y-m-d");
+		$total_hari = $_POST['total_hari'];
+		$keterangan = $_POST['keterangan'];
+		
+		$cekData = $this->m_main->cekData('db_periode','status_periode',0);
+		if(!$cekData){
+			$periode = [
+				'periode_awal' => $tgl_awal,
+				'periode_akhir' => $tgl_akhir,
+				'jumlah_shift' => $total_hari,
+				'keterangan' => $keterangan,
+				'status_periode' => 0,
+				'tgl_input' => date("Y-m-d H:i:s"),
+				'tgl_edit' => date("Y-m-d H:i:s"),
+				'status' => 1,
+				'id_account' => ID_ACCOUNT,
+			];
+			$this->m_main->createIN('db_periode',$periode);
+			$output['message'] = "Data periode berhasil ditambah!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Masih terdapat status 'process' harap selesaikan terlebih dahulu!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+
+	function edit_periode(){
+		$tgl_awal = date_format(date_create($_POST['tgl_awal']),"Y-m-d");
+		$tgl_akhir = date_format(date_create($_POST['tgl_akhir']),"Y-m-d");
+		$total_hari = $_POST['total_hari'];
+		$keterangan = $_POST['keterangan'];
+		$periode = [
+			'periode_awal' => $tgl_awal,
+			'periode_akhir' => $tgl_akhir,
+			'jumlah_shift' => $total_hari,
+			'keterangan' => $keterangan,
+			'tgl_edit' => date("Y-m-d H:i:s"),
+			'id_account' => ID_ACCOUNT,
+		];
+		$this->m_main->updateIN('db_periode','id_periode',$_POST['id_periode'],$periode);
+		$output['message'] = "Data periode berhasil diubah!";
+		$output['result'] = "success";
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function stop_periode(){
+		if(!empty($_POST['id_periode'])){
+			$cekData = $this->m_main->cekData('db_periode','status_periode',1);
+			if(!$cekData){
+				$data = [
+					'status_periode' => 1,
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'id_account' => ID_ACCOUNT,
+				];
+				$this->m_main->updateIN('db_periode','id_periode',$_POST['id_periode'],$data);
+				$output['message'] = "Proses periode berhasil di hentikan dan status menjadi 'waiting'!";
+				$output['result'] = "success";
+			}else{
+				$output['message'] = "Masih terdapat status 'waiting' harap selesaikan terlebih dahulu!";
+				$output['result'] = "error";
+			}
+		}else{
+			$output['message'] = "Data id periode tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
 	}
 
 	function detail_scanlog(){
@@ -123,7 +199,7 @@ class Absensi extends CI_Controller {
 			'tgl_edit' => date("Y-m-d H:i:s"),
 		];
 		$this->m_main->updateIN('db_scanlog','id_scanlog',$_POST['id_scanlog'],$data);
-		$output['message'] ="List scanlog berhasil di ubah!";
+		$output['message'] = "List scanlog berhasil di ubah!";
 		$output['result'] = "success";
         echo json_encode($output);
         exit();
@@ -131,21 +207,12 @@ class Absensi extends CI_Controller {
     
 	function add_scanlog(){
 		if (isset($_FILES["file_scanlog"]["name"])) {
-			//insert data periode
-			$tgl_awal = date_format(date_create($_POST['tgl_awal']),"Y-m-d");
-			$tgl_akhir = date_format(date_create($_POST['tgl_akhir']),"Y-m-d");
-			$total_hari = $_POST['total_hari'];
-			$periode = [
-				'periode_awal' => $tgl_awal,
-				'periode_akhir' => $tgl_akhir,
-				'jumlah_shift' => $total_hari,
-				'tgl_input' => date("Y-m-d H:i:s"),
-				'tgl_edit' => date("Y-m-d H:i:s"),
-				'status' => 1,
-				'id_account' => ID_ACCOUNT,
-			];
-			$prd = $this->m_main->createIN('db_periode',$periode);
-			$id_periode = $prd['result'];
+			//get data periode
+			$id_periode = $_POST['id_periode'];
+			$this->m_main->updateIN('db_periode','id_periode',$id_periode,['status_periode' => 2]);
+			$periode = $this->m_main->getRow('db_periode','id_periode',$id_periode);
+			$tgl_awal = $periode['periode_awal'];
+			$tgl_akhir = $periode['periode_akhir'];
 
 			//insert data hari libur
 			$harilibur = [];
@@ -342,7 +409,7 @@ class Absensi extends CI_Controller {
 			$output['message'] = "Scanlog berhasil di buat!";
 			$output['result'] = "success";
 		}else{
-			$output['message'] ="Data file tidak tersedia!";
+			$output['message'] = "Data file tidak tersedia!";
 			$output['result'] = "error";
 		}
 		echo json_encode($output);
@@ -373,7 +440,7 @@ class Absensi extends CI_Controller {
 	
     //================= JAM KERJA
 	function read_jamkerja(){
-		$jamkerja = $this->m_main->readIN('db_jam_kerja','id_jam_kerja != null','tgl_edit desc');
+		$jamkerja = $this->m_main->getResultData('db_jam_kerja','id_jam_kerja IS NOT NULL','tgl_edit desc');
 		$data = [];
 		$no = 0;
 		foreach ($jamkerja as $list) {
@@ -414,7 +481,7 @@ class Absensi extends CI_Controller {
 			'id_account' => ID_ACCOUNT,
 		];
 		$this->m_main->createIN('db_jam_kerja',$data);
-		$output['message'] ="Data jam kerja berhasil ditambah!";
+		$output['message'] = "Data jam kerja berhasil ditambah!";
 		$output['result'] = "success";
         echo json_encode($output);
         exit();
@@ -436,7 +503,7 @@ class Absensi extends CI_Controller {
 				'id_account' => ID_ACCOUNT,
 			];
 			$this->m_main->updateIN('db_jam_kerja','id_jam_kerja',$_POST['id_jam_kerja'],$data);
-			$output['message'] ="Data jam kerja berhasil di ubah!";
+			$output['message'] = "Data jam kerja berhasil di ubah!";
 			$output['result'] = "success";
 		}else{
 			$output['message'] = "Data id jam kerja tidak tersedia!";
@@ -504,7 +571,7 @@ class Absensi extends CI_Controller {
 	
     //================= JADWAL KERJA
 	function read_jadwalkerja(){
-		$jadwalkerja = $this->m_main->readIN('db_jadwal_kerja','id_jadwal_kerja != null','tgl_edit desc');
+		$jadwalkerja = $this->m_main->getResultData('db_jadwal_kerja','id_jadwal_kerja IS NOT NULL','tgl_edit desc');
 		$data = [];
 		$no = 0;
 		foreach ($jadwalkerja as $list) {

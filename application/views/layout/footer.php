@@ -11,11 +11,9 @@
     </div>
 </div>
 
-<input type="hidden" name="base_url" value="<?= base_url() ?>">
-<?php require_once('corejs.php'); ?>
-
 <div class="mask"></div>
 <input type="hidden" name="base_url" value="<?= base_url() ?>">
+<?php require_once('corejs.php'); ?>
 
 </body>
 </html>

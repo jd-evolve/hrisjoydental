@@ -57,15 +57,15 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-kegiatan" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="modal-kegiatan" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
         <div class="modal-dialog modal-md" role="document">
             <form id="form-kegiatan" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="text-kegiatan">Kegiatan</h5>
-                        <a type="button" class="close" href="">
-                        <span aria-hidden="true">&times;</span>
-                        </a>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="card-group">
@@ -93,6 +93,7 @@
                         </div> 
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" name="id_kegiatan">
                         <input class="btn btn-primary" type="submit" name="add_kegiatan" id="add_kegiatan" value="Tambah" style="padding:9px" size="7" readonly>
                         <input class="btn btn-primary" type="hidden" name="edit_kegiatan" id="edit_kegiatan" value="Ubah" style="padding:9px" size="7" readonly>
                     </div>

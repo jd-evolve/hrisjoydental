@@ -74,15 +74,15 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-account" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="modal-account" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
         <div class="modal-dialog modal-lg" role="document">
             <form id="form-account" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title" id="text-account">Account</h5>
-                        <a type="button" class="close" href="">
-                        <span aria-hidden="true">&times;</span>
-                        </a>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="card-group">
@@ -318,6 +318,7 @@
                     </div> 
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" name="id_account">
                         <input class="btn btn-primary" type="submit" name="add_account" id="add_account" value="Tambah" style="padding:9px" size="7" readonly>
                         <input class="btn btn-primary" type="hidden" name="edit_account" id="edit_account" value="Ubah" style="padding:9px" size="7" readonly>
                     </div>
@@ -332,9 +333,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="text-lihat">Data Account</h5>
-                        <a type="button" class="close" href="">
-                        <span aria-hidden="true">&times;</span>
-                        </a>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="card-group">
@@ -519,15 +520,15 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-salary" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="modal-salary" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
         <div class="modal-dialog modal-md" role="document">
             <form id="form-salary" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title" id="text-salary">Account Salary</h5>
-                        <a type="button" class="close" href="">
-                        <span aria-hidden="true">&times;</span>
-                        </a>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="card-group">
@@ -601,6 +602,7 @@
                     </div> 
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" name="id_account">
                         <input class="btn btn-primary" type="submit" name="edit_salary" id="edit_salary" value="Ubah" style="padding:9px" size="7" readonly>
                     </div>
                 </div>

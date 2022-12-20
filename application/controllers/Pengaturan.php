@@ -28,12 +28,12 @@ class Pengaturan extends CI_Controller {
 		$initial_name = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','initial_name');
 		
 		$output = [
-			'cuti_tahunan' => $cuti_tahunan['potong_cuti'],
-			'cuti_menikah' => $cuti_menikah['potong_cuti'],
-			'cuti_melahirkan' => $cuti_melahirkan['potong_cuti'],
-			'ijin_pribadi' => $ijin_pribadi['potong_cuti'],
-			'ijin_duka' => $ijin_duka['potong_cuti'],
-			'ijin_sakit' => $ijin_sakit['potong_cuti'],
+			'cuti_tahunan' => floatval($cuti_tahunan['potong_cuti']),
+			'cuti_menikah' => floatval($cuti_menikah['potong_cuti']),
+			'cuti_melahirkan' => floatval($cuti_melahirkan['potong_cuti']),
+			'ijin_pribadi' => floatval($ijin_pribadi['potong_cuti']),
+			'ijin_duka' => floatval($ijin_duka['potong_cuti']),
+			'ijin_sakit' => floatval($ijin_sakit['potong_cuti']),
 			'smtp_host' => $smtp_host['isi_konfigurasi'],
 			'smtp_port' => $smtp_port['isi_konfigurasi'],
 			'smtp_user' => $smtp_user['isi_konfigurasi'],

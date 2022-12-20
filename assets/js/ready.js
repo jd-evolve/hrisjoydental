@@ -9,8 +9,6 @@ if(check){
 
 $(document).ready(function() {
 	if(document.getElementById('realtime')){
-		var rep = true;
-		var count = 0;
 		setInterval(function() {
 			$('#realtime').removeClass('loading-trans');
 			$('#realtime').html(moment().format('DD MMM YYYY') + '<i class="ml-1 mr-1"></i>' + moment().format('hh:mm:ss A'));

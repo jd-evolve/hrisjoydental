@@ -164,7 +164,7 @@
                             </li>
                             <li class="<?= !$cekmenu['jadwal-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jadwal-kerja"? 'active' : '' ?>">
                                 <a href="<?= base_url('jadwal-kerja') ?>">
-                                    <span class="sub-item">jadwal Kerja</span>
+                                    <span class="sub-item">Jadwal Kerja</span>
                                 </a>
                             </li>
                         </ul>

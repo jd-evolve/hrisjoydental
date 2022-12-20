@@ -314,4 +314,15 @@ class M_auth extends CI_Model {
         ")->result();
         return $query;
     }
+    
+    public function onPeriode(){
+        $query = $this->db->query("
+            SELECT *
+            FROM db_periode
+            WHERE status_periode = 0
+            ORDER BY tgl_input desc
+            LIMIT 1
+        ")->row_array();
+        return $query;
+    }
 }

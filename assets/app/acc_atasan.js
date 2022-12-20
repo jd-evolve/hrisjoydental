@@ -110,8 +110,7 @@
         $('body').on('click','#show-detail', function(){
             $("#modal-showform").modal();
             let id_ijincuti_list = $(this).data('id');
-            $("#btn-setujui").attr('data-id',id_ijincuti_list);
-            $("#btn-tolak").attr('data-id',id_ijincuti_list);
+            $('input[name="id_ijincuti_list"]').val(id_ijincuti_list);
             show_form(id_ijincuti_list);
             
         });
@@ -203,106 +202,108 @@
 
         $('body').on('click','#btn-setujui' ,function(e){
             e.preventDefault();
-            let id_ijincuti_list = $(this).data('id');
-            action('accatasan_ijincuti',id_ijincuti_list,'Pastikan form pengajuan telah sesuai dengan ketentuan!');
+            swal({
+                title: "Apakah anda yakin?",
+                text: "Pastikan form pengajuan telah sesuai dengan ketentuan!",
+                type: "warning",
+                buttons: {
+                    cancel: {
+                        visible: true,
+                        text: "Kembali",
+                        className: "btn btn-danger",
+                    },
+                    confirm: {
+                        text: "Setujui",
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((Delete) => {
+                if (Delete) {
+                    $.ajax({
+                        url: "ijincuti/accatasan_ijincuti",
+                        method: "POST",
+                        dataType: "json",
+                        data: {
+                            id_ijincuti_list: $('input[name="id_ijincuti_list"]').val()
+                        },
+                        success: function (json) {
+                            let result = json.result;
+                            let message = json.message;
+                            notif(result, message);
+                        },
+                    });
+                } else {
+                    swal.close();
+                }
+            });
         });
 
         $('body').on('click','#btn-tolak' ,function(e){
             e.preventDefault();
             $("#modal-showform").modal('hide');
             $("#modal-batal").modal('show');
-            let id_ijincuti_list = $(this).data('id');
-            $("body").on("click", "#lanjutkan", function(e){
-                e.preventDefault();
-                if($("#form-alasan-batal").valid()){
-                    $("#modal-batal").modal('hide');
-                    var alasan_ditolak = document.getElementById("alasan-batal").value;
-                    $.ajax({
-                        url: 'ijincuti/tolakatasan_ijincuti',
-                        method: "POST",
-                        dataType: "json",
-                        data: {
-                            id_ijincuti_list: id_ijincuti_list,
-                            alasan_ditolak: alasan_ditolak
-                        },
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            notif(result, message,1);
-                        },
-                    });
-                }
-            });
-            $("body").on("click", "#kembali", function(e){
-                e.preventDefault();
-                $("#modal-showform").modal('show');
-                $("#modal-batal").modal('hide');
-                show_form(id_ijincuti_list);
-            });
+            $("#alasan-batal").val('');
         });
-    }
 
-    function action(urlfunc,id_ijincuti_list,text){
-        swal({
-            title: "Apakah anda yakin?",
-            text: text,
-            type: "warning",
-            buttons: {
-                cancel: {
-                    visible: true,
-                    text: "Kembali",
-                    className: "btn btn-danger",
-                },
-                confirm: {
-                    text: "Setujui",
-                    className: "btn btn-success",
-                },
-            },
-        }).then((Delete) => {
-            if (Delete) {
+        $("body").on("click", "#lanjutkan", function(e){
+            e.preventDefault();
+            if($("#form-alasan-batal").valid()){
+                $("#modal-batal").modal('hide');
+                var alasan_ditolak = document.getElementById("alasan-batal").value;
+                var id_ijincuti_list =  $('input[name="id_ijincuti_list"]').val();
                 $.ajax({
-                    url: "ijincuti/"+urlfunc,
+                    url: 'ijincuti/tolakatasan_ijincuti',
                     method: "POST",
                     dataType: "json",
                     data: {
-                        id_ijincuti_list: id_ijincuti_list
+                        id_ijincuti_list: id_ijincuti_list,
+                        alasan_ditolak: alasan_ditolak
                     },
                     success: function (json) {
                         let result = json.result;
                         let message = json.message;
-                        notif(result, message,1);
+                        notif(result, message);
                     },
                 });
-            } else {
-                swal.close();
             }
         });
-    }
 
-    function notif(result, message, reload = null) {
-        if (result == "success") {
-            swal("Success", message, {
-                icon: "success",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-success",
+        $("body").on("click", "#kembali", function(e){
+            e.preventDefault();
+            $("#modal-showform").modal('show');
+            $("#modal-batal").modal('hide');
+            var id_ijincuti_list =  $('input[name="id_ijincuti_list"]').val();
+            show_form(id_ijincuti_list);
+        });
+
+        function notif(result, message, reload = null) {
+            if (result == "success") {
+                swal("Success", message, {
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            className: "btn btn-success",
+                        },
                     },
-                },
-            });
-            if(reload == 1){
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            } 
-        } else {
-            swal("Faild", message, {
-                icon: "error",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-danger",
+                });
+                table_accatasan.ajax.reload();
+                $("#modal-showform").modal('hide');
+                if(reload == 1){
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } 
+            } else {
+                swal("Faild", message, {
+                    icon: "error",
+                    buttons: {
+                        confirm: {
+                            className: "btn btn-danger",
+                        },
                     },
-                },
-            });
+                });
+            }
         }
     }
+
 })(jQuery);

@@ -95,7 +95,6 @@
 					},
 				});
 			} else{
-				console.log('ok')
 				$.ajax({
 					type: "POST",
 					url: "home/login",

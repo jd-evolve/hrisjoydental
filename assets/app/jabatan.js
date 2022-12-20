@@ -352,7 +352,6 @@
                     window.location.reload();
                 }, 1000);
             }
-            
         } else {
             swal("Faild", message, {
                 icon: "error",

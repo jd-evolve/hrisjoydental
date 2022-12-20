@@ -29,7 +29,7 @@ class M_main extends CI_Model {
             'result' => $query,
             'string' => $this->db->last_query(),
         );
-    }
+    } 
 
     public function deleteIN($in,$wr,$id){
         return $this->db->delete($in, array($wr => $id)); 

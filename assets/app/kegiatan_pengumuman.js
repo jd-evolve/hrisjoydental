@@ -190,32 +190,28 @@
 		$('#kegiatan').val('');
         $('input[name="edit_kegiatan"]').attr("type", "hidden");
         $('input[name="add_kegiatan"]').attr("type", "submit");
-        var count = 0;
-        $("input#add_kegiatan").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-kegiatan").reportValidity();
-            if (validasi) {
-                count++;
-                if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-kegiatan"));
-                    $.ajax({
-                        url: "masterdata/add_kegiatan",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
-                }
-            }
-        });
+    });
 
+    $("input#add_kegiatan").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-kegiatan").reportValidity();
+        if (validasi) {
+            var formData = new FormData(document.querySelector("#form-kegiatan"));
+            $.ajax({
+                url: "masterdata/add_kegiatan",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    notif(result, message);
+                    $("#modal-kegiatan").modal('hide');
+                },
+            });
+        }
     });
     
     $('body').on('click','#kegiatan-edit', function(){
@@ -225,34 +221,31 @@
 		var data = table_kegiatan.row($(this).parents("tr")).data();
 		$('input[name="tgl_kegiatan"]').val(data["Tanggal"]);
 		$('#kegiatan').val(data["Kegiatan"]);
+		$('input[name="id_kegiatan"]').val(id_kegiatan);
         $('input[name="edit_kegiatan"]').attr("type", "submit");
         $('input[name="add_kegiatan"]').attr("type", "hidden");
-        var count = 0;
-        $("input#edit_kegiatan").on("click", function (e) {
-            e.preventDefault();
-            let validasi = document.getElementById("form-kegiatan").reportValidity();
-            if (validasi) {
-                count++;
-                if (count == 1) {
-                    var formData = new FormData(document.querySelector("#form-kegiatan"));
-                    formData.append("id_kegiatan", id_kegiatan);
-                    $.ajax({
-                        url: "masterdata/edit_kegiatan",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            if (result=="error") { count=0; }
-                            notif(result, message, 1);
-                        },
-                    });
-                }
-            }
-        });
+    });
+    
+    $("input#edit_kegiatan").on("click", function (e) {
+        e.preventDefault();
+        let validasi = document.getElementById("form-kegiatan").reportValidity();
+        if (validasi) {
+            var formData = new FormData(document.querySelector("#form-kegiatan"));
+            $.ajax({
+                url: "masterdata/edit_kegiatan",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                success: function (json) {
+                    let result = json.result;
+                    let message = json.message;
+                    notif(result, message);
+                    $("#modal-kegiatan").modal('hide');
+                },
+            });
+        }
     });
 
     $('body').on('click','#kegiatan-restore', function(){
