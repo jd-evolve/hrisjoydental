@@ -47,7 +47,7 @@
 
     <div class="card">
         <div class="card-body">
-            <table id="datatable-rekapijincuti" class="table-responsive display table table-striped table-hover" >
+            <table id="datatable-rekapijincuti" class="table-responsive display table table-striped table-hover">
                 <thead>
                     <tr>
                         <th style="width:5%;">No</th>

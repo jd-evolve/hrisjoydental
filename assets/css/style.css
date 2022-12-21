@@ -9235,6 +9235,15 @@ table.dataTable {
     max-width: none !important;
     border-collapse: separate !important;
     line-height: 1.15 !important;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0), 0 4px 10px 0 rgba(1, 41, 112, 0.1);
+}
+table.dataTable th {
+    background: #6176b1;
+    color: white;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    font-weight: 400;
+    border-radius: 2px;
 }
 table.dataTable td,
 table.dataTable th {

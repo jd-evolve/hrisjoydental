@@ -17,7 +17,7 @@ class Absensi extends CI_Controller {
     }
 
     //================= SCAN LOG
-	function read_periode(){
+	public function read_periode(){
 		$periode = $this->m_main->getResultData('db_periode','status = 1','tgl_edit desc');
 		$data = [];
 		$no = 0;
@@ -37,7 +37,7 @@ class Absensi extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	function add_periode(){
+	public function add_periode(){
 		$tgl_awal = date_format(date_create($_POST['tgl_awal']),"Y-m-d");
 		$tgl_akhir = date_format(date_create($_POST['tgl_akhir']),"Y-m-d");
 		$total_hari = $_POST['total_hari'];
@@ -67,7 +67,7 @@ class Absensi extends CI_Controller {
         exit();
 	}
 
-	function edit_periode(){
+	public function edit_periode(){
 		$tgl_awal = date_format(date_create($_POST['tgl_awal']),"Y-m-d");
 		$tgl_akhir = date_format(date_create($_POST['tgl_akhir']),"Y-m-d");
 		$total_hari = $_POST['total_hari'];
@@ -111,7 +111,7 @@ class Absensi extends CI_Controller {
         exit();
 	}
 
-	function detail_scanlog(){
+	public function detail_scanlog(){
 		$periode = $this->m_main->getRow('db_periode','id_periode',$_POST['id_periode']);
 		$scan_count_kawryawan = $this->m_auth->getCountScanKryn();
 
@@ -138,7 +138,7 @@ class Absensi extends CI_Controller {
 		exit();
 	}
 
-	function scanlog_karyawan(){
+	public function scanlog_karyawan(){
 		$scanlog = $this->m_main->getResultData(
 			('db_scanlog'),
 			(
@@ -188,7 +188,7 @@ class Absensi extends CI_Controller {
 		exit();
 	}
 
-	function edit_scanlog(){
+	public function edit_scanlog(){
 		$data = [
 			'jam_masuk' => $_POST['masuk'],
 			'jam_pulang' => $_POST['pulang'],
@@ -205,7 +205,7 @@ class Absensi extends CI_Controller {
         exit();
 	}
     
-	function add_scanlog(){
+	public function add_scanlog(){
 		if (isset($_FILES["file_scanlog"]["name"])) {
 			//get data periode
 			$id_periode = $_POST['id_periode'];
@@ -439,7 +439,7 @@ class Absensi extends CI_Controller {
 	}
 	
     //================= JAM KERJA
-	function read_jamkerja(){
+	public function read_jamkerja(){
 		$jamkerja = $this->m_main->getResultData('db_jam_kerja','id_jam_kerja IS NOT NULL','tgl_edit desc');
 		$data = [];
 		$no = 0;
@@ -464,7 +464,7 @@ class Absensi extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	function add_jamkerja(){
+	public function add_jamkerja(){
 		$data = [
 			'nama_jam_kerja' => $_POST['nama'],
 			'keterangan' => $_POST['keterangan'],
@@ -570,7 +570,7 @@ class Absensi extends CI_Controller {
 	}
 	
     //================= JADWAL KERJA
-	function read_jadwalkerja(){
+	public function read_jadwalkerja(){
 		$jadwalkerja = $this->m_main->getResultData('db_jadwal_kerja','id_jadwal_kerja IS NOT NULL','tgl_edit desc');
 		$data = [];
 		$no = 0;
@@ -588,7 +588,7 @@ class Absensi extends CI_Controller {
 		echo json_encode($output);
 	}
 
-	function list_jadwalkerja(){
+	public function list_jadwalkerja(){
 		$jdwk_list = $this->m_main->getResultData(
 			'db_jadwal_kerja_list',
 			'id_jadwal_kerja = '.$_POST['id_jadwal_kerja'],
@@ -612,7 +612,7 @@ class Absensi extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	function edit_add_jadwalkerja(){
+	public function edit_add_jadwalkerja(){
 		$data_list = json_decode($_POST['list']);
 		if($_POST['id_jadwal_kerja'] == null){
 			$jdwk = [
@@ -723,5 +723,77 @@ class Absensi extends CI_Controller {
 		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,18,3);
 		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,18,4);
 		echo json_encode($output);
+	}
+	
+    //================= JADWAL KERJA
+	public function read_lembur(){
+		$lembur = $this->m_auth->GetLemburPeriode($_POST['id_periode']);
+		$data = [];
+		$no = 0;
+		foreach ($lembur as $list) {
+			$no++;
+			$row = [];
+			$row['No'] = $no;
+			$row['Tanggal'] = date_format(date_create($list->tgl_lembur),"d-m-Y");
+			$row['Waktu'] = date_format(date_create($list->jam_mulai),"H:i").'-'.date_format(date_create($list->jam_selesai),"H:i");
+			$row['Mulai'] = date_format(date_create($list->jam_mulai),"H:i");
+			$row['Selesai'] = date_format(date_create($list->jam_selesai),"H:i");
+			$row['Jumlah'] = $list->jumlah;
+			$row['Kategori'] = $list->kategori;
+			$row['Keterangan'] = $list->keterangan;
+			$row['Ket_periode'] = $list->ket_periode;
+			$row['Status'] = $list->status;
+			$row['Alasan'] = $list->alasan_ditolak;
+			$row['Aksi'] = $list->id_lembur;
+			$row['st_periode'] = $list->status_periode;
+			$data[] = $row; 
+		}
+		$output = [ "data" => $data ];
+		echo json_encode($output);
+	}
+
+	public function add_lembur(){
+		$atasan = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+		$data = [
+			'id_periode' => $_POST['id_periode'],
+			'id_karyawan' => ID_ACCOUNT,
+			'id_atasan' => $atasan['id_atasan'],
+			'kategori' => $_POST['kategori'],
+			'tgl_lembur' => date_format(date_create($_POST['tgl_lembur']),"Y-m-d"),
+			'jam_mulai' => $_POST['jam_mulai'],
+			'jam_selesai' => $_POST['jam_selesai'],
+			'jumlah' => $_POST['jumlah'],
+			'keterangan' => $_POST['keterangan'],
+			'tgl_input' => date("Y-m-d H:i:s"),
+			'tgl_edit' => date("Y-m-d H:i:s"),
+			'status' => 1
+		];
+		$this->m_main->createIN('db_lembur',$data);
+		$output['message'] = "Form lembur berhasil diajukan!";
+		$output['result'] = "success";
+        echo json_encode($output);
+        exit();
+	}
+	
+	public function edit_lembur(){
+		if(!empty($_POST['id_lembur'])){
+			$data = [
+				'kategori' => $_POST['kategori'],
+				'tgl_lembur' => date_format(date_create($_POST['tgl_lembur']),"Y-m-d"),
+				'jam_mulai' => $_POST['jam_mulai'],
+				'jam_selesai' => $_POST['jam_selesai'],
+				'jumlah' => $_POST['jumlah'],
+				'keterangan' => $_POST['keterangan'],
+				'tgl_edit' => date("Y-m-d H:i:s"),
+			];
+			$this->m_main->updateIN('db_lembur','id_lembur',$_POST['id_lembur'],$data);
+			$output['message'] = "Form lembur berhasil di ubah!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data id form lembur tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
 	}
 }

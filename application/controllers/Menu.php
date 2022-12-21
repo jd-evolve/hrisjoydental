@@ -7,7 +7,7 @@ class Menu extends CI_Controller {
         parent::__construct();
 		$this->load->model('M_main', 'm_main');
 		$this->load->model('M_auth', 'm_auth');
-		define('U_VERSI', '01.01.10'); //Setiap edit program wajib di ganti untuk clear chace!
+		define('U_VERSI', '01.01.20'); //Setiap edit program wajib di ganti untuk clear chace!
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
 		define('ID_POSISI',$this->session->userdata('id_posisi'));

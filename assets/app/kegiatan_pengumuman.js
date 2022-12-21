@@ -46,7 +46,7 @@
             },
             {
                 extend: 'pageLength',
-                className: "btn btn-primary btn-icon-text wid-max-select mb-1",
+                className: "btn btn-primary btn-icon-text wid-max-select",
                 text: '<i class="fa fa-angle-down mr-2" data-feather="check"></i>'
                         +' Entries',
                 init:function(api,node,config){
@@ -79,7 +79,7 @@
             { data: "Aksi" , render : function ( data, type, row, meta ) {
                 return type === 'display'  ?
                 '<div class="btn-group" role="group">'
-                +'<button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+                +'<button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
                     +'Action'
                 +'</button>'
                 +'<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">'

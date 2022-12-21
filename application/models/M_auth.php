@@ -325,4 +325,15 @@ class M_auth extends CI_Model {
         ")->row_array();
         return $query;
     }
+
+    public function GetLemburPeriode($id_periode){
+        $query = $this->db->query("
+            SELECT a.*, b.status_periode, b.keterangan as ket_periode
+            FROM db_lembur a
+            JOIN db_periode b ON a.id_periode = b.id_periode
+            WHERE a.id_periode = '".$id_periode."'
+            ORDER BY tgl_lembur desc
+        ")->result();
+        return $query;
+    }
 }

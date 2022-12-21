@@ -139,7 +139,7 @@
                             </select>
                         </div>
 
-                        <table id="datatable-ijincuti" class="table-responsive display table table-striped table-hover" >
+                        <table id="datatable-ijincuti" class="table-responsive display table table-striped table-hover mt-1">
                             <thead>
                                 <tr>
                                     <th style="width:5%;">No</th>
