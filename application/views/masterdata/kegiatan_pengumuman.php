@@ -94,7 +94,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_kegiatan">
-                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Kembali</button>
                         <input class="btn btn-success btn-sm" type="submit" name="add_kegiatan" id="add_kegiatan" value="Tambah" readonly>
                         <input class="btn btn-success btn-sm" type="hidden" name="edit_kegiatan" id="edit_kegiatan" value="Ubah" readonly>
                     </div>

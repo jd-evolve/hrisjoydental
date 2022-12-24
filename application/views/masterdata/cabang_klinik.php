@@ -111,7 +111,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_cabang">
-                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Kembali</button>
                         <input class="btn btn-success btn-sm" type="submit" name="add_cabang" id="add_cabang" value="Tambah" readonly>
                         <input class="btn btn-success btn-sm" type="hidden" name="edit_cabang" id="edit_cabang" value="Ubah" readonly>
                     </div>

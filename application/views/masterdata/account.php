@@ -319,7 +319,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_account">
-                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Kembali</button>
                         <input class="btn btn-success btn-sm" type="submit" name="add_account" id="add_account" value="Tambah" readonly>
                         <input class="btn btn-success btn-sm" type="hidden" name="edit_account" id="edit_account" value="Ubah" readonly>
                     </div>
@@ -604,7 +604,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_account">
-                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Kembali</button>
                         <input class="btn btn-success btn-sm" type="submit" name="edit_salary" id="edit_salary" value="Ubah" readonly>
                     </div>
                 </div>

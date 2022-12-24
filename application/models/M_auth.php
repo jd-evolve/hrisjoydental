@@ -336,4 +336,34 @@ class M_auth extends CI_Model {
         ")->result();
         return $query;
     }
+
+    public function GetLlistLembur_ACC($id_account, $status, $periode){
+        $stts = '';
+        if($status == 'z'){
+            $stts = 'AND (a.status = 2 OR a.status = 3)';
+        }else{
+            $stts = 'AND a.status = '.$status;
+        }
+
+        $prde = '';
+        if($periode == 'x'){
+            $prde = '';
+        }else{
+            $prde = 'AND a.id_periode = '.$periode;
+        }
+
+        $query = $this->db->query("
+            SELECT b.keterangan as ket_periode, c.nama as karyawan, c.bagian, b.status, b.id_periode, a.id_karyawan, d.nama_posisi as jabatan, 
+                SUM(IF(a.status = 2, a.jumlah, 0)) as total_lembur
+            FROM db_lembur a
+            JOIN db_periode b ON a.id_periode = b.id_periode
+            JOIN db_account c ON a.id_karyawan = c.id_account
+            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            WHERE b.status_periode = 1
+            AND a.id_atasan = '".$id_account."'
+            ".$stts." ".$prde."
+            GROUP BY a.id_karyawan
+        ")->result();
+        return $query;
+    }
 }

@@ -166,15 +166,14 @@
             </div>
         </div>
         
-        <div class="modal fade" id="modal-editscanlog" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal fade" id="modal-editscanlog" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg" role="document">
                 <form id="form-editscanlog" novalidate="novalidate" enctype="multipart/form-data" accept-charset="utf-8">
-                    <input type="hidden" name="id_scanlog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Edit Data Scan</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -211,8 +210,9 @@
                                 </div>
                             </div> 
                         </div>
-                        <div class="modal-footer py-2">
-                            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <div class="modal-footer">
+                            <input type="hidden" name="id_scanlog">
+                            <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">Kembali</button>
                             <button class="btn btn-success btn-sm" id="edit_scanlog">Ubah</button>
                         </div>
                     </div>

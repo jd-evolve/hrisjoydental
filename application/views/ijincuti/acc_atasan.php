@@ -46,7 +46,7 @@
                         <th style="width:15%;">Ijin/Cuti</th>
                         <th style="width:40%;">Karyawan</th>
                         <th style="width:15%;">Bagian</th>
-                        <th style="width:1p%;">Status</th>
+                        <th style="width:10%;">Status</th>
                         <th style="width:10%;">Aksi</th>
                     </tr>
                 </thead>

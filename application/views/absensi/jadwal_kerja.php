@@ -128,7 +128,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_jadwal_kerja">
-                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Kembali</button>
                         <input class="btn btn-success btn-sm" type="submit" name="add-edit" id="add-edit" value="Tambah" readonly>
                     </div>
                 </div>

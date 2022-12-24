@@ -151,6 +151,8 @@
                 var diff = Math.abs(new Date('1/1/1 '+jam_mulai) - new Date('1/1/1 '+jam_selesai));
                 var minutes = Math.floor((diff/1000)/60);
                 $('#jumlah').val(minutes);
+            }else{
+                $('#jumlah').val('');
             }
         }
 
@@ -179,21 +181,27 @@
             let date = new Date(dt[2]+'-'+dt[1]+'-'+dt[0]).getTime();
             if (validasi) {
                 if(date >= awal && date <= akhir){
-                    var formData = new FormData(document.querySelector("#form-lembur"));
-                    $.ajax({
-                        url: "absensi/add_lembur",
-                        method: "POST",
-                        data: formData,
-                        dataType: "json",
-                        processData: false,
-                        contentType: false,
-                        success: function (json) {
-                            let result = json.result;
-                            let message = json.message;
-                            notif(result, message);
-                            $("#modal-lembur").modal('hide');
-                        },
-                    });
+                    var mulai = $('#jam_mulai').val();
+                    var selesai = $('#jam_selesai').val();
+                    if(mulai.search("_") == -1 && selesai.search("_") == -1){
+                        var formData = new FormData(document.querySelector("#form-lembur"));
+                        $.ajax({
+                            url: "absensi/add_lembur",
+                            method: "POST",
+                            data: formData,
+                            dataType: "json",
+                            processData: false,
+                            contentType: false,
+                            success: function (json) {
+                                let result = json.result;
+                                let message = json.message;
+                                notif(result, message);
+                                $("#modal-lembur").modal('hide');
+                            },
+                        });
+                    }else{
+                        notif('error', 'Format jam tidak sesuai!');
+                    }
                 }else{
                     let tgl1 = new Date($('#periode_awal').val()).toLocaleDateString("es-CL");
                     let tgl2 = new Date($('#periode_akhir').val()).toLocaleDateString("es-CL");

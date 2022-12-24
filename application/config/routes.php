@@ -28,6 +28,7 @@ $route['ijin-duka'] = 'menu/ijin_duka';
 $route['ijin-sakit'] = 'menu/ijin_sakit';
 $route['konfigurasi'] = 'menu/konfigurasi';
 
+$route['acc-lembur'] = 'menu/acc_lembur';
 $route['form-lembur'] = 'menu/form_lembur';
 $route['data-scanlog'] = 'menu/data_scanlog';
 $route['jam-kerja'] = 'menu/jam_kerja';

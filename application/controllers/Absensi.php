@@ -115,7 +115,7 @@ class Absensi extends CI_Controller {
 		$periode = $this->m_main->getRow('db_periode','id_periode',$_POST['id_periode']);
 		$scan_count_kawryawan = $this->m_auth->getCountScanKryn();
 
-		$harilibur = $this->m_main->getResult('db_hari_libur','id_periode',$_POST['id_periode']);
+		$harilibur = $this->m_main->getResultData('db_hari_libur','id_periode = '.$_POST['id_periode'],'tgl_hari_libur asc');
 		$data_libur = [];
 		$no = 0;
 		foreach ($harilibur as $list) {
@@ -791,6 +791,80 @@ class Absensi extends CI_Controller {
 			$output['result'] = "success";
 		}else{
 			$output['message'] = "Data id form lembur tidak tersedia!";
+			$output['result'] = "error";
+		}
+        echo json_encode($output);
+        exit();
+	}
+
+    //================= ACC LEMBUR
+	public function read_acclembur(){
+		$lembur = $this->m_auth->GetLlistLembur_ACC(ID_ACCOUNT,$_POST['status'],$_POST['periode']);
+		$data = [];
+		$no = 0;
+		foreach ($lembur as $list) {
+			$no++;
+			$row = [];
+			$row['No'] = $no;
+			$row['Periode'] = $list->ket_periode;
+			$row['Karyawan'] = $list->karyawan;
+			$row['Bagian'] = $list->bagian;
+			$row['Jabatan'] = $list->jabatan;
+			$row['Total'] = $list->total_lembur.' menit';
+			$row['Status'] = $list->status;
+			$row['Aksi'] = $list->id_periode;
+			$row['id_karyawan'] = $list->id_karyawan;
+			$row['id_atasan'] = ID_ACCOUNT;
+			$data[] = $row; 
+		}
+		$output = [ "data" => $data ];
+		echo json_encode($output);
+	}
+
+	public function karyawan_lembur(){
+		$listlembur = $this->m_main->getResultData(
+			'db_lembur',
+			('id_periode = '.$_POST['id_periode'].' AND id_atasan = '.$_POST['id_atasan'].' AND id_karyawan = '.$_POST['id_karyawan']),
+			'tgl_lembur asc'
+		);
+		$data = [];
+		foreach ($listlembur as $list) {
+			$row = [];
+			$row['tanggal'] = date_format(date_create($list->tgl_lembur),"d-m-Y");
+			$row['jm_mulai'] = date_format(date_create($list->jam_mulai),"H:i");
+			$row['jm_selesai'] = date_format(date_create($list->jam_selesai),"H:i");
+			$row['jumlah'] = $list->jumlah;
+			$row['kategori'] = $list->kategori;
+			$row['keterangan'] = $list->keterangan;
+			$row['id_lembur'] = $list->id_lembur;
+			$row['status'] = $list->status;
+			$row['alasan'] = $list->alasan_ditolak;
+			$data[] = $row;
+		}
+		echo json_encode($data);
+	}
+
+	public function acc_lembur(){
+		if(!empty($_POST['count_lembur'])){
+			for($i=0; $i<$_POST['count_lembur']; $i++){
+				$data = [];
+				$data = [
+					'kategori' => $_POST['kategori'.$i],
+					'jam_mulai' => $_POST['mulai'.$i],
+					'jam_selesai' => $_POST['selesai'.$i],
+					'jumlah' => $_POST['jumlah'.$i],
+					'keterangan' => $_POST['keterangan'.$i],
+					'status' => $_POST['status'.$i],
+					'alasan_ditolak' => $_POST['alasan'.$i],
+					'tgl_edit' => date("Y-m-d H:i:s"),
+				];
+				$this->m_main->updateIN('db_lembur','id_lembur',$_POST['id_lembur'.$i],$data);
+			}
+
+			$output['message'] = "Pengajuan lembur telah disetujui!";
+			$output['result'] = "success";
+		}else{
+			$output['message'] = "Data form lembur tidak tersedia!";
 			$output['result'] = "error";
 		}
         echo json_encode($output);

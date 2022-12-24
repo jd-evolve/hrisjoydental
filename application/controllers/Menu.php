@@ -7,7 +7,7 @@ class Menu extends CI_Controller {
         parent::__construct();
 		$this->load->model('M_main', 'm_main');
 		$this->load->model('M_auth', 'm_auth');
-		define('U_VERSI', '01.01.20'); //Setiap edit program wajib di ganti untuk clear chace!
+		define('U_VERSI', '01.01.25'); //Setiap edit program wajib di ganti untuk clear chace!
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
 		define('ID_POSISI',$this->session->userdata('id_posisi'));
@@ -265,6 +265,23 @@ class Menu extends CI_Controller {
 			redirect('logout');
 		}
     }
+
+	public function acc_lembur(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'ACC Lembur';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$this->load->view('layout/header', $data);
+			$this->load->view('absensi/acc_lembur');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+	}
 
 	public function form_lembur(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){

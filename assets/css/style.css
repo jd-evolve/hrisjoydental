@@ -10408,6 +10408,9 @@ hr {
 .text-grey {
     color: #9a9a9a;
 }
+.text-line-through {
+    text-decoration: line-through;
+}
 .alert-login {
     color: #777f9e;
     background-color: #f3efff;

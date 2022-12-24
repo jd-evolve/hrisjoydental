@@ -149,7 +149,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_jam_kerja">
-                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Kembali</button>
                         <input class="btn btn-success btn-sm" type="submit" name="add_jamkerja" id="add_jamkerja" value="Tambah" readonly>
                         <input class="btn btn-success btn-sm" type="hidden" name="edit_jamkerja" id="edit_jamkerja" value="Ubah" readonly>
                     </div>

@@ -112,7 +112,6 @@
             let id_ijincuti_list = $(this).data('id');
             $('input[name="id_ijincuti_list"]').val(id_ijincuti_list);
             show_form(id_ijincuti_list);
-            
         });
 
         function show_form(id_ijincuti_list){

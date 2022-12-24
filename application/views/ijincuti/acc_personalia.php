@@ -49,7 +49,7 @@
                         <th style="width:5%;">Potongan</th>
                         <th style="width:35%;">Karyawan</th>
                         <th style="width:15%;">Bagian</th>
-                        <th style="width:1p%;">Status</th>
+                        <th style="width:10%;">Status</th>
                         <th style="width:10%;">Aksi</th>
                     </tr>
                 </thead>

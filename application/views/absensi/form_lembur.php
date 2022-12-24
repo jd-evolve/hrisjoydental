@@ -210,7 +210,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id_lembur">
-                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Batal</button>
+                        <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">Kembali</button>
                         <input class="btn btn-success btn-sm" type="submit" name="add_lembur" id="add_lembur" value="Tambah" readonly>
                         <input class="btn btn-success btn-sm" type="hidden" name="edit_lembur" id="edit_lembur" value="Ubah" readonly>
                     </div>
