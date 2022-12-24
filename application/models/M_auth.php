@@ -353,15 +353,44 @@ class M_auth extends CI_Model {
         }
 
         $query = $this->db->query("
-            SELECT b.keterangan as ket_periode, c.nama as karyawan, c.bagian, b.status, b.id_periode, a.id_karyawan, d.nama_posisi as jabatan, 
+            SELECT b.keterangan as ket_periode, c.nama as karyawan, c.bagian, b.status_periode as status, b.id_periode, a.id_karyawan, d.nama_posisi as jabatan, 
                 SUM(IF(a.status = 2, a.jumlah, 0)) as total_lembur
             FROM db_lembur a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
             JOIN db_posisi d ON c.id_posisi = d.id_posisi
-            WHERE b.status_periode = 1
+            WHERE b.status_periode != 0
             AND a.id_atasan = '".$id_account."'
             ".$stts." ".$prde."
+            GROUP BY a.id_karyawan
+        ")->result();
+        return $query;
+    }
+
+    public function GetLlistLembur_Rekap($id_periode, $status, $id_karyawan){
+        if($id_karyawan){
+            $karyawan = ' AND a.id_karyawan = '.$id_karyawan;
+        }else{
+            $karyawan = '';
+        }
+
+        if($status == 1){
+            $status = ' AND a.status = 1';
+        }else{
+            $status = ' AND a.status != 1';
+        }
+        $query = $this->db->query("
+            SELECT b.keterangan as ket_periode, c.nama as karyawan, e.nama as atasan, c.bagian, a.status, b.id_periode, a.id_karyawan, d.id_atasan, d.nama_posisi as jabatan, 
+                SUM(IF(a.status = 2, a.jumlah, 0)) as total_lembur
+            FROM db_lembur a
+            JOIN db_periode b ON a.id_periode = b.id_periode
+            JOIN db_account c ON a.id_karyawan = c.id_account
+            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            JOIN db_account e ON d.id_atasan = e.id_account
+            WHERE a.id_periode = ".$id_periode."
+            AND b.status_periode != 0
+            ".$karyawan."
+            ".$status."
             GROUP BY a.id_karyawan
         ")->result();
         return $query;

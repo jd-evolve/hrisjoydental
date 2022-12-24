@@ -58,6 +58,7 @@
                 );
 
                 $absensi = array(
+                    'rekap-lembur',
                     'acc-lembur',
                     'form-lembur',
                     'data-scanlog',
@@ -148,6 +149,11 @@
                     </a>
                     <div id="absensi" <?= in_array($uri_path, $absensi) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['rekap-lembur'] ? 'gone' : '' ?> <?= $uri_path == "rekap-lembur"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-lembur') ?>">
+                                    <span class="sub-item">Rekap Lembur</span>
+                                </a>
+                            </li>
                             <li class="<?= !$cekmenu['acc-lembur'] ? 'gone' : '' ?> <?= $uri_path == "acc-lembur"? 'active' : '' ?>">
                                 <a href="<?= base_url('acc-lembur') ?>">
                                     <span class="sub-item">ACC Lembur</span>

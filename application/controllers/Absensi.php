@@ -797,7 +797,7 @@ class Absensi extends CI_Controller {
         exit();
 	}
 
-    //================= ACC LEMBUR
+    //================= LEMBUR
 	public function read_acclembur(){
 		$lembur = $this->m_auth->GetLlistLembur_ACC(ID_ACCOUNT,$_POST['status'],$_POST['periode']);
 		$data = [];
@@ -869,5 +869,29 @@ class Absensi extends CI_Controller {
 		}
         echo json_encode($output);
         exit();
+	}
+
+	public function read_rekaplembur(){
+		$lembur = $this->m_auth->GetLlistLembur_Rekap($_POST['periode'],$_POST['status'],$_POST['id_karyawan']);
+		$data = [];
+		$no = 0;
+		foreach ($lembur as $list) {
+			$no++;
+			$row = [];
+			$row['No'] = $no;
+			$row['Periode'] = $list->ket_periode;
+			$row['Atasan'] = $list->atasan;
+			$row['Karyawan'] = $list->karyawan;
+			$row['Bagian'] = $list->bagian;
+			$row['Jabatan'] = $list->jabatan;
+			$row['Total'] = $list->total_lembur.' menit';
+			$row['Status'] = $list->status;
+			$row['Aksi'] = $list->id_periode;
+			$row['id_karyawan'] = $list->id_karyawan;
+			$row['id_atasan'] = $list->id_karyawan;
+			$data[] = $row; 
+		}
+		$output = [ "data" => $data ];
+		echo json_encode($output);
 	}
 }
