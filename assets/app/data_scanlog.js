@@ -159,7 +159,7 @@
             buttons: {
                 cancel: {
                     visible: true,
-                    text: "Batal",
+                    text: "Kembali",
                     className: "btn btn-danger",
                 },
                 confirm: {
@@ -239,13 +239,49 @@
     const arrHlibur = [];
     $("body").on("click", "#periode-upload", function (e) {
         e.preventDefault();
-        $("#modal-scanlog").modal();
-        $('input[name="tgl_libur"]').val('');
-        $('input[name="ket_libur"]').val('');
-        $("#file_scanlog").val('');
-        $('input[name="id_periode_x"]').val($(this).data('id'));
-        arrHlibur.splice(0, arrHlibur.length);
-        listHlibur();
+        var id_periode = $(this).data('id');
+        $.ajax({
+            url: 'absensi/cek_lembur',
+            method: "POST",
+            dataType: "json",
+            data: {
+                id_periode: id_periode
+            },
+            success: function (cek_acc) {
+                if(parseInt(cek_acc) < 1 ){
+                    $("#modal-scanlog").modal();
+                    $('input[name="tgl_libur"]').val('');
+                    $('input[name="ket_libur"]').val('');
+                    $("#file_scanlog").val('');
+                    $('input[name="id_periode_x"]').val(id_periode);
+                    arrHlibur.splice(0, arrHlibur.length);
+                    listHlibur();
+                }else{
+                    swal({
+                        title: "ACC Form Lembur",
+                        type: "warning",
+                        text: ' ',
+                        buttons: {
+                            cancel: {
+                                visible: true,
+                                text: "Kembali",
+                                className: "btn btn-danger",
+                            },
+                            confirm: {
+                                text: "Lanjutkan",
+                                className: "btn btn-success",
+                            },
+                        },
+                    }).then((Delete) => {
+                        var base_url = $('input[name="base_url"]').val();
+                        document.location.href = base_url + 'rekap-lembur';
+                    });
+                    $('.swal-text').html('<div class="style1"> Masih terdapat pengajuan form lembur yang belum di ACC oleh atasannya! Lanjutkan untuk lihat pengajuan form lembur? </div>');
+                    $('.style1').attr('style','width:100% !important; padding:15px; border-radius:4px; font-size:13px; background-color:#d9e2f7;');
+                    $('.style2').attr('style','width:100% !important; padding:15px; border-radius:4px; font-weight:600;');
+                }
+            },
+        });
     });
     
     $('#add-harilibur').on('click', function(e){
@@ -310,7 +346,7 @@
             buttons: {
                 cancel: {
                     visible: true,
-                    text: "Batal",
+                    text: "Kembali",
                     className: "btn btn-danger",
                 },
                 confirm: {

@@ -894,4 +894,9 @@ class Absensi extends CI_Controller {
 		$output = [ "data" => $data ];
 		echo json_encode($output);
 	}
+
+	public function cek_lembur(){
+		$ceklembur = $this->m_main->countData('db_lembur','id_periode = '.$_POST['id_periode'].' AND status = 1');
+		echo json_encode($ceklembur['count']);
+	}
 }

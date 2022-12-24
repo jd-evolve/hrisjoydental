@@ -354,7 +354,7 @@ class M_auth extends CI_Model {
 
         $query = $this->db->query("
             SELECT b.keterangan as ket_periode, c.nama as karyawan, c.bagian, b.status_periode as status, b.id_periode, a.id_karyawan, d.nama_posisi as jabatan, 
-                SUM(IF(a.status = 2, a.jumlah, 0)) as total_lembur
+                SUM(IF(a.status != 3, a.jumlah, 0)) as total_lembur
             FROM db_lembur a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
@@ -381,7 +381,7 @@ class M_auth extends CI_Model {
         }
         $query = $this->db->query("
             SELECT b.keterangan as ket_periode, c.nama as karyawan, e.nama as atasan, c.bagian, a.status, b.id_periode, a.id_karyawan, d.id_atasan, d.nama_posisi as jabatan, 
-                SUM(IF(a.status = 2, a.jumlah, 0)) as total_lembur
+                SUM(IF(a.status != 3, a.jumlah, 0)) as total_lembur
             FROM db_lembur a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account

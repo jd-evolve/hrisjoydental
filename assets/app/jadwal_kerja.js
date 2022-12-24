@@ -358,7 +358,7 @@
             buttons: {
                 cancel: {
                     visible: true,
-                    text: "Batal",
+                    text: "Kembali",
                     className: "btn btn-danger",
                 },
                 confirm: {
