@@ -141,6 +141,23 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <div class="separator-solid" style="border-color: #a9a9a9"></div>
+                                            <table class="mb-0">
+                                                <tbody class="nowraping">
+                                                    <tr>
+                                                        <td width="10%">Durasi dihitung lembur masuk</td>
+                                                        <td width="2%">&nbsp;:&nbsp;</td>
+                                                        <td width="10%"><input type="number" min="0" class="form-control form-jm" name="dl_jm" id="dl_jm" required></td>
+                                                        <td>&nbsp;menit</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Durasi dihitung lembur pulang</td>
+                                                        <td>&nbsp;:&nbsp;</td>
+                                                        <td><input type="number" min="0" class="form-control form-jm" name="dl_jp" id="dl_jp" required></td>
+                                                        <td>&nbsp;menit</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

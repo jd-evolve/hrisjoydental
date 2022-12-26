@@ -190,8 +190,10 @@
 		$('input[name="dihitung"]').val('');
 		$('input[name="sb_jm"]').val('');
 		$('input[name="st_jm"]').val('');
+		$('input[name="dl_jm"]').val('');
 		$('input[name="sb_jp"]').val('');
 		$('input[name="st_jp"]').val('');
+		$('input[name="dl_jp"]').val('');
         $('input[name="edit_jamkerja"]').attr("type", "hidden");
         $('input[name="add_jamkerja"]').attr("type", "submit");
         change_time();
@@ -237,13 +239,17 @@
 		$('input[name="dihitung"]').val(data['Dihitung']);
 		$('input[name="sb_jm"]').val(data['sb_jm']);
 		$('input[name="st_jm"]').val(data['st_jm']);
+		$('input[name="dl_jm"]').val(data['dl_jm']);
 		$('input[name="sb_jp"]').val(data['sb_jp']);
 		$('input[name="st_jp"]').val(data['st_jp']);
+		$('input[name="dl_jp"]').val(data['dl_jp']);
 		$('input[name="id_jam_kerja"]').val(id_jam_kerja);
         $("#sb_jm").attr("max",max_time('sebelum',data['Masuk']));
         $("#st_jm").attr("max",max_time('setelah',data['Masuk']));
+        $("#dl_jm").attr("max",max_time('sebelum',data['Masuk']));
         $("#sb_jp").attr("max",max_time('sebelum',data['Pulang']));
         $("#st_jp").attr("max",max_time('setelah',data['Pulang']));
+        $("#dl_jp").attr("max",max_time('setelah',data['Pulang']));
         $('input[name="edit_jamkerja"]').attr("type", "submit");
         $('input[name="add_jamkerja"]').attr("type", "hidden");
         change_time();

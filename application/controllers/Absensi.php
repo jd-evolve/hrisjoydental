@@ -338,9 +338,11 @@ class Absensi extends CI_Controller {
 										$jm = $jk['jam_masuk'];
 										$sb_jm = date('H:i:s', strtotime("-".$jk['sb_jm']." minutes", strtotime($jm)));
 										$st_jm = date('H:i:s', strtotime("+".$jk['st_jm']." minutes", strtotime($jm)));
+										$dl_jm = date('H:i:s', strtotime("-".$jk['dl_jm']." minutes", strtotime($jm)));
 										$jp = $jk['jam_pulang'];
 										$sb_jp = date('H:i:s', strtotime("-".$jk['sb_jp']." minutes", strtotime($jp)));
 										$st_jp = date('H:i:s', strtotime("+".$jk['st_jp']." minutes", strtotime($jp)));
+										$dl_jp = date('H:i:s', strtotime("+".$jk['dl_jp']." minutes", strtotime($jp)));
 
 										$jamscan = explode("-",$scanlist[$idx_tgl]['jam']);
 										if(count($jamscan)>1){
@@ -355,16 +357,23 @@ class Absensi extends CI_Controller {
 												$jamscanx = strtotime($jamscan[$x]);
 												$sb_jmx = strtotime($sb_jm);
 												$st_jmx = strtotime($st_jm);
+												$dl_jmx = strtotime($dl_jm);
 												$sb_jpx = strtotime($sb_jp);
 												$st_jpx = strtotime($st_jp);
+												$dl_jpx = strtotime($dl_jp);
 												
 												if($jamscanx>$sb_jmx && $jamscanx<$st_jmx){
 													$jmy = true;
 													$jmx = strtotime($jm);
+													$jmx_dl = strtotime($jm);
 													$lembur = 0;
 													if($jamscanx<=$jmx){
 														//lembur pagi or tepat waktu
-														$lembur += intval(($jmx - $jamscanx) / 60);
+														if($jamscanx<=$dl_jmx){
+															$lembur += intval(($jmx - $jamscanx) / 60);
+														}else{
+															$lembur += 0;
+														}
 													}else if($jamscanx>$jmx){
 														//terlambat
 														$terlambat = intval(($jamscanx - $jmx) / 60);
@@ -380,7 +389,11 @@ class Absensi extends CI_Controller {
 														$pulangawal = intval(($jpx - $jamscanx) / 60);
 													}else if($jamscanx>$jpx){
 														//lembur sore or tepat waktu
-														$lembur += intval(($jamscanx - $jpx) / 60);
+														if($jamscanx>$dl_jpx){
+															$lembur += intval(($jamscanx - $jpx) / 60);
+														}else{
+															$lembur += 0;
+														}
 													}
 													$jam_pulang = $jamscan[$x];
 												}
@@ -478,8 +491,10 @@ class Absensi extends CI_Controller {
 			$row['Dihitung'] = $list->dihitung;
 			$row['sb_jm'] = $list->sb_jm;
 			$row['st_jm'] = $list->st_jm;
+			$row['dl_jm'] = $list->dl_jm;
 			$row['sb_jp'] = $list->sb_jp;
 			$row['st_jp'] = $list->st_jp;
+			$row['dl_jp'] = $list->dl_jp;
 			$row['Aksi'] = $list->id_jam_kerja;
 			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
 			$data[] = $row; 
@@ -497,8 +512,10 @@ class Absensi extends CI_Controller {
 			'dihitung' => $_POST['dihitung'],
 			'sb_jm' => $_POST['sb_jm'],
 			'st_jm' => $_POST['st_jm'],
+			'dl_jm' => $_POST['dl_jm'],
 			'sb_jp' => $_POST['sb_jp'],
 			'st_jp' => $_POST['st_jp'],
+			'dl_jp' => $_POST['dl_jp'],
 			'tgl_input' => date("Y-m-d H:i:s"),
 			'tgl_edit' => date("Y-m-d H:i:s"),
 			'status' => 1,
@@ -521,8 +538,10 @@ class Absensi extends CI_Controller {
 				'dihitung' => $_POST['dihitung'],
 				'sb_jm' => $_POST['sb_jm'],
 				'st_jm' => $_POST['st_jm'],
+				'dl_jm' => $_POST['dl_jm'],
 				'sb_jp' => $_POST['sb_jp'],
 				'st_jp' => $_POST['st_jp'],
+				'dl_jp' => $_POST['dl_jp'],
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'id_account' => ID_ACCOUNT,
 			];
