@@ -162,6 +162,7 @@ class Ijincuti extends CI_Controller {
 		$data['alasan_ditolak'] = $detail['alasan_ditolak'];
 		$data['karyawan'] = $karyawan['nama'];
 		$data['bagian'] = $karyawan['bagian'];
+		$data['jam_perhari'] = $karyawan['jam_perhari'];
 		$data['jabatan'] = $jabatan['nama_posisi'];
 		$data['id_atasan'] = $detail['id_atasan'];
 		$data['id_personalia'] = $detail['id_personalia'];

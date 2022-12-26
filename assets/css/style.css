@@ -10603,3 +10603,12 @@ hr {
     border: 0 !important;
     white-space: nowrap;
 }
+
+.hidearrow::-webkit-outer-spin-button,
+.hidearrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.hidearrow[type=number] {
+  -moz-appearance: textfield;
+}

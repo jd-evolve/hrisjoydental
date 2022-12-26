@@ -140,6 +140,7 @@
                 success: function (data) {
                     $("#show-ket_ijincuti").html(data.ijincuti);
                     $("#btn-setujui").attr('data-cutcuti',data.potong_cuti);
+                    $("#btn-setujui").attr('data-jamperhari',data.jam_perhari);
                     $("#show-tgl_create").html(data.tgl_create);
                     var stts = "";
                     if(data.status == 0 || data.status == 1){
@@ -214,7 +215,15 @@
             $("#modal-showform").modal('hide');
             $("#modal-setuju").modal('show');
             let cut_cuti = $(this).data('cutcuti');
+            let jam_perhari = $(this).data('jamperhari');
+            $("#t_jam").html(jam_perhari);
+            $("#potong_jam").val(jam_perhari*cut_cuti);
             $('input[name="potong_cuti"]').val(cut_cuti);
+            
+            $('#potong_jam').keyup(function(){
+                var potong = ($(this).val()/jam_perhari).toFixed(2);
+                $('input[name="potong_cuti"]').val(parseFloat(potong));
+            });
         });
 
         $("body").on("click", "#lanjutkan1", function(e){

@@ -156,7 +156,25 @@
                         <h5 class="modal-title py-3" style="color:rgba(0,0,0,.65);font-weight:600;font-size:27px;line-height:normal;">Setujui Pengajuan</h5>
                         <div class="" style="width:100% !important; padding:15px; border-radius:4px; font-size:13px; background-color:#f1d9f7; border-color:#ebbcf1;">
                             <span>Tentukan cuti yang di potong sebelum menyetujui pengajuan?</span><br>
-                            <input type="number" class="form-control mt-2" name="potong_cuti" step="0.01" min="0">
+                            <span>1 Hari = <span id="t_jam"></span> jam</span><br>
+                            
+                            <table class="mb-0 mt-2" width="100%">
+                                <tbody class="nowraping">
+                                    <tr>
+                                        <td style="width:35%;">
+                                            <div class="input-group">
+                                                <input type="number" class="form-control hidearrow" id="potong_jam" step="0.1" min="0">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">jam</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control text-right" name="potong_cuti" style="background: #fff !important;" readonly>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="py-3">
                             <button type="button" class="btn btn-danger btn-sm" id="kembali1">Kembali</button>
