@@ -10594,8 +10594,12 @@ hr {
     padding: 10px;
     border-radius: 3px;
 }
-
 .table-scanlog td,
 .table-scanlog th {
     padding: 4px 6px !important;
+}
+.table-nostyle td {
+    padding: 0 !important;
+    border: 0 !important;
+    white-space: nowrap;
 }

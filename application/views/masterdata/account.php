@@ -217,6 +217,11 @@
                                                     <td><input type="text" class="form-control form-rm" name="sisa_cuti" placeholder="Sisa Cuti" required></td>
                                                 </tr>
                                                 <tr>
+                                                    <td><b>Jam Perhari</b> <span class="text-danger">*</span></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="jam_perhari" placeholder="Jam Perhari" required></td>
+                                                </tr>
+                                                <tr>
                                                     <td><b>Status Karyawan</b> <span class="text-danger">*</span></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
                                                     <td>
@@ -449,6 +454,11 @@
                                                         <td><b>Sisa Cuti</b></td>
                                                         <td><b>&nbsp;:&nbsp;</b></td>
                                                         <td><span id="show-sisa_cuti"></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Jam Perhari</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-jam_perhari"></span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Status Karyawan</b></td>

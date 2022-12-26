@@ -477,13 +477,55 @@
                         for(var i=0; i<data.length; i++) {
                             if(data.length == (i+1)){
                                 html += '<tr style="background: #f7f8fa">' +
-                                            '<th colspan="4" class="text-right"> Total Rekap : </th>'+
-                                            '<th>'+data[i].lembur+'</th>' +
-                                            '<th>'+data[i].terlambat+'</th>' +
-                                            '<th>'+data[i].shift+'</th>' +
-                                            '<th>'+data[i].libur+'</th>' +
-                                            '<th colspan="2"></th>' +
+                                            '<td colspan="12">'+
+                                                '<b>Rekap Total Data Scanlog</b>'+
+                                                '<table class="ml-3 mb-0 table-nostyle" width="80%">'+
+                                                    '<tbody>'+
+                                                        '<tr>'+
+                                                            '<td style="width:10%;">Lembur</td>'+
+                                                            '<td style="width:2%;">&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].lembur+' menit</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Terlambat</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].terlambat+' menit</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Pulang Awal</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].pulangawal+' menit</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Tatal Shift</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].shift+' hari</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Masuk Hari Libur</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].libur+' hari</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Jumlah Terlambat</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].jumterlambat+' hari</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Berturut 5x Terlambat</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].urutterlambat+'</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Lupa Absen</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].lupa+'</td>'+
+                                                        '</tr>'+
+                                                    '</tbody>'+
+                                                '</table>'+
+                                            '</td>' +
                                         '</tr>';
+
                             }else{
                                 html += '<tr>' +
                                             '<td>'+(i+1)+'</td>'+
@@ -492,8 +534,10 @@
                                             '<td>'+data[i].jam_pulang+'</td>' +
                                             '<td>'+data[i].lembur+'</td>' +
                                             '<td>'+data[i].terlambat+'</td>' +
+                                            '<td>'+data[i].pulangawal+'</td>' +
                                             '<td>'+data[i].shift+'</td>' +
-                                            '<td>'+data[i].libur+'</td>' +
+                                            '<td class="text-center">'+data[i].lupa+'</td>' +
+                                            '<td class="text-center">'+data[i].libur+'</td>' +
                                             '<td>'+data[i].keterangan+'</td>' +
                                             '<td class="text-center"><a id="edit_scan" '+
                                                 'data-id="'+data[i].id_scanlog+'" '+
@@ -502,8 +546,10 @@
                                                 'data-jp="'+data[i].jam_pulang+'" '+
                                                 'data-lm="'+data[i].lembur+'" '+
                                                 'data-tr="'+data[i].terlambat+'" '+
+                                                'data-pl="'+data[i].pulangawal+'" '+
                                                 'data-sf="'+data[i].shift+'" '+
                                                 'data-kt="'+data[i].keterangan+'" '+
+                                                'data-lp="'+(data[i].lupa == '' ? false : true)+'" '+
                                             'class="text-warning pointer"><i class="fa fa-edit"></i></a></td>'+
                                         '</tr>';
                             }
@@ -522,8 +568,10 @@
             $('input[name="pulang"]').val('');
             $('input[name="lbr"]').val('');
             $('input[name="tlt"]').val('');
+            $('input[name="pla"]').val('');
             $('input[name="sft"]').val('');
             $('input[name="ket"]').val('');
+            $("#lupa-absen").prop("checked", true);
             $("#modal-editscanlog").modal();
             Inputmask("datetime", {
                 inputFormat: "HH:MM:ss",
@@ -538,16 +586,26 @@
             let jam_pulang = $(this).data('jp');
             let lembur = $(this).data('lm');
             let terlambat = $(this).data('tr');
+            let pulangawal = $(this).data('pl');
             let shift = $(this).data('sf');
             let keterangan = $(this).data('kt');
+            $("#lupa-absen").prop("checked", $(this).data('lp'));
             $("#tgl-scn").html(tanggal);
             $('input[name="masuk"]').val(jam_masuk);
             $('input[name="pulang"]').val(jam_pulang);
             $('input[name="lbr"]').val(lembur);
             $('input[name="tlt"]').val(terlambat);
+            $('input[name="pla"]').val(pulangawal);
             $('input[name="sft"]').val(shift);
             $('input[name="ket"]').val(keterangan);
             $('input[name="id_scanlog"]').val(id_scan);
+            $("#lupa-absen").click(function() {
+                if($(this).is(":checked")){
+                    $('input[name="lupa"]').val(1);
+                } else {
+                    $('input[name="lupa"]').val(0);
+                }
+            });
         });
         
         $('body').on('click','#edit_scanlog',function(e){
@@ -559,8 +617,10 @@
                 var pulang = $('input[name="pulang"]').val();
                 var lbr = $('input[name="lbr"]').val();
                 var tlt = $('input[name="tlt"]').val();
+                var pla = $('input[name="pla"]').val();
                 var sft = $('input[name="sft"]').val();
                 var ket = $('input[name="ket"]').val();
+                var lupa = $('input[name="lupa"]').val();
                 if(masuk.search("_") == -1 && pulang.search("_") == -1){
                     $.ajax({
                         url: "absensi/edit_scanlog",
@@ -572,8 +632,10 @@
                             pulang: pulang,
                             lbr: lbr,
                             tlt: tlt,
+                            pla: pla,
                             sft: sft,
                             ket: ket,
+                            lupa: lupa,
                         },
                         success: function (json) {
                             $("#modal-editscanlog").modal('hide');

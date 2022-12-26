@@ -145,19 +145,21 @@
                                 <thead>
                                     <tr style="background: #f7f8fa">
                                         <th style="width:5%;">No</th>
-                                        <th style="width:15%;">Tanggal</th>
+                                        <th style="width:10%;">Tanggal</th>
                                         <th style="width:10%;">Masuk</th>
                                         <th style="width:10%;">Pulang</th>
                                         <th style="width:10%;">Lbr</th>
                                         <th style="width:10%;">Tlt</th>
+                                        <th style="width:10%;">Pla</th>
                                         <th style="width:10%;">Sft</th>
-                                        <th style="width:10%;">Libur</th>
-                                        <th style="width:20%;">Keterangan</th>
+                                        <th style="width:5%;">Lupa</th>
+                                        <th style="width:5%;">Libur</th>
+                                        <th style="width:15%;">Keterangan</th>
                                         <th style="width:5%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td colspan="10" style="margin:2px; width:100%; font-size:14px; height:40px; background-color:#f4f4f4;"><center>Pilih karyawan untuk menampilkan data!</center></td></tr>
+                                    <tr><td colspan="12" style="margin:2px; width:100%; font-size:14px; height:40px; background-color:#f4f4f4;"><center>Pilih karyawan untuk menampilkan data!</center></td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -185,10 +187,11 @@
                                                 <thead>
                                                     <tr style="background: #f7f8fa">
                                                         <th style="width:15%;">Tanggal</th>
-                                                        <th style="width:15%;">Masuk</th>
-                                                        <th style="width:15%;">Pulang</th>
+                                                        <th style="width:10%;">Masuk</th>
+                                                        <th style="width:10%;">Pulang</th>
                                                         <th style="width:10%;">Lbr</th>
                                                         <th style="width:10%;">Tlt</th>
+                                                        <th style="width:10%;">Pla</th>
                                                         <th style="width:10%;">Sft</th>
                                                         <th style="width:25%;">Keterangan</th>
                                                     </tr>
@@ -200,12 +203,18 @@
                                                         <td><input type="text" class="form-control form-rm min-rm2 waktu" name="pulang" id="pulang" required></td>
                                                         <td><input type="number" class="form-control form-rm min-rm" min="0" name="lbr" id="lbr" required></td>
                                                         <td><input type="number" class="form-control form-rm min-rm" min="0" name="tlt" id="tlt" required></td>
+                                                        <td><input type="number" class="form-control form-rm min-rm" min="0" name="pla" id="pla" required></td>
                                                         <td><input type="number" class="form-control form-rm min-rm" min="0" name="sft" id="sft" required></td>
                                                         <td><input type="text" class="form-control form-rm" name="ket" id="ket"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <label class="form-check-label mt-2">
+                                            <input type="hidden" name="lupa">
+                                            <input class="form-check-input" type="checkbox" id="lupa-absen" style="left:20px !important;">
+                                            <span class="card-category ml-4 my-0">Apakah karyawan lupa absen?</span>
+                                        </label>
                                     </div>
                                 </div>
                             </div> 

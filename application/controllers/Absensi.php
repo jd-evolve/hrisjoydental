@@ -151,13 +151,28 @@ class Absensi extends CI_Controller {
 		$data = [];
 		$lembur = 0;
 		$terlambat = 0;
+		$pulangawal = 0;
 		$shift = 0;
 		$libur = 0;
+		$lupa = 0;
+		$jumterlambat = 0;
+		$urutterlambat = 0;
 		foreach ($scanlog as $list) {
 			$lembur = $lembur + intval($list->lembur);
 			$terlambat = $terlambat + intval($list->terlambat);
+			$pulangawal = $pulangawal + intval($list->pulangawal);
 			$shift = $shift + intval($list->shift);
 			$libur = $libur + ($list->libur == 1 ? intval($list->shift) : 0);
+			$lupa = $lupa + ($list->lupa == 1 ? intval($list->shift) : 0);
+			$jumterlambat = $jumterlambat + ($list->terlambat > 0 ? 1 : 0);
+
+			if($urutterlambat <= 4){
+				if($list->terlambat > 0){
+					$urutterlambat = $urutterlambat + 1;
+				}else{
+					$urutterlambat = 0;
+				}
+			}
 
 			$row = [];
 			$row['tanggal'] = date_format(date_create($list->tanggal),"d-m-Y");
@@ -165,8 +180,10 @@ class Absensi extends CI_Controller {
 			$row['jam_pulang'] = $list->jam_pulang == null ? '' : $list->jam_pulang;
 			$row['lembur'] = $list->jam_masuk == null ? '' : $list->lembur;
 			$row['terlambat'] = $list->jam_masuk == null ? '' : $list->terlambat;
+			$row['pulangawal'] = $list->jam_masuk == null ? '' : $list->pulangawal;
 			$row['shift'] = $list->jam_masuk == null ? '' : $list->shift;
-			$row['libur'] = $list->libur == 1 ? 'Ya' : 'Tidak';
+			$row['libur'] = $list->libur == 1 ? '<i class="text-danger fas fa-check-circle">' : '';
+			$row['lupa'] = $list->lupa == 1 ? '<i class="text-default fas fa-exclamation-triangle">' : '';
 			$row['keterangan'] = $list->keterangan == null ? '' : $list->keterangan;
 			$row['id_scanlog'] = $list->id_scanlog;
 			$data[] = $row; 
@@ -178,8 +195,12 @@ class Absensi extends CI_Controller {
 		$row['jam_pulang'] = '';
 		$row['lembur'] = $lembur;
 		$row['terlambat'] = $terlambat;
+		$row['pulangawal'] = $pulangawal;
 		$row['shift'] = $shift;
 		$row['libur'] = $libur;
+		$row['lupa'] = $lupa > 0 ? 'Ya' : 'Tidak';
+		$row['jumterlambat'] = $jumterlambat;
+		$row['urutterlambat'] = $urutterlambat > 4 ? 'Ya' : 'Tidak';
 		$row['keterangan'] = '';
 		$row['id_scanlog'] = '';
 		$data[] = $row; 
@@ -194,7 +215,9 @@ class Absensi extends CI_Controller {
 			'jam_pulang' => $_POST['pulang'],
 			'lembur' => $_POST['lbr'],
 			'terlambat' => $_POST['tlt'],
+			'pulangawal' => $_POST['pla'],
 			'shift' => $_POST['sft'],
+			'lupa' => $_POST['lupa'],
 			'keterangan' => $_POST['ket'],
 			'tgl_edit' => date("Y-m-d H:i:s"),
 		];
@@ -204,7 +227,7 @@ class Absensi extends CI_Controller {
         echo json_encode($output);
         exit();
 	}
-    
+
 	public function add_scanlog(){
 		if (isset($_FILES["file_scanlog"]["name"])) {
 			//get data periode
@@ -380,6 +403,7 @@ class Absensi extends CI_Controller {
 																'shift' => $jk['dihitung'],
 																'keterangan' => !empty($harilibur[$hdkey]['ket']) ? $harilibur[$hdkey]['ket'] : NULL,
 																'libur' => !empty($harilibur[$hdkey]['ket']) ? 1 : ($id_hari==0?1:0),
+																'lupa' => 0,
 																'tgl_input' => date("Y-m-d H:i:s"),
 																'tgl_edit' => date("Y-m-d H:i:s"),
 																'status' => 1,

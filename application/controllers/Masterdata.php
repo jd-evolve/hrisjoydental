@@ -34,6 +34,7 @@ class Masterdata extends CI_Controller {
 				$row['alamat'] = $list->alamat;
 				$row['telp'] = $list->telp;
 				$row['sisa_cuti'] = floatval($list->sisa_cuti);
+				$row['jam_perhari'] = $list->jam_perhari;
 				$row['nama_bank'] = $list->nama_bank;
 				$row['nama_rek'] = $list->nama_rek;
 				$row['no_rek'] = $list->no_rek;
@@ -97,6 +98,7 @@ class Masterdata extends CI_Controller {
 				'telp' => $_POST['nohp'],
 				'telp_referensi' => $_POST['nohp2'],
 				'sisa_cuti' => $_POST['sisa_cuti'],
+				'jam_perhari' => $_POST['jam_perhari'],
 				'pendidikan_terakhir' => $_POST['pendidikan_terakhir'],
 				'lulus_dari' => $_POST['lulus_dari'],
 				'email' => $_POST['email'],
@@ -151,6 +153,7 @@ class Masterdata extends CI_Controller {
 					'telp' => $_POST['nohp'],
 					'telp_referensi' => $_POST['nohp2'],
 					'sisa_cuti' => $_POST['sisa_cuti'],
+					'jam_perhari' => $_POST['jam_perhari'],
 					'pendidikan_terakhir' => $_POST['pendidikan_terakhir'],
 					'lulus_dari' => $_POST['lulus_dari'],
 					'email' => $_POST['email'],

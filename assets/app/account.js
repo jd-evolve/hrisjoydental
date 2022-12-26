@@ -253,6 +253,7 @@
 		$('input[name="nohp"]').val('');
 		$('input[name="nohp2"]').val('');
 		$('input[name="sisa_cuti"]').val('');
+		$('input[name="jam_perhari"]').val('');
 		$('select[name="pendidikan_terakhir"]').val('');
 		$('input[name="lulus_dari"]').val('');
 		$('input[name="email"]').val('');
@@ -312,6 +313,7 @@
 		$("#show-no_rek").html(data["no_rek"]);
 		$("#show-nama_rek").html(data["nama_rek"]);
 		$("#show-sisa_cuti").html(data["sisa_cuti"]);
+		$("#show-jam_perhari").html(data["jam_perhari"]);
 		$("#show-nama").html(data["nama_account"]);
 		$("#show-email").html(data["email"]);
 		$("#show-telp").html(data["telp"]);
@@ -349,6 +351,7 @@
 		$('input[name="nohp"]').val(data["telp"]);
 		$('input[name="nohp2"]').val(data["telp_referensi"]);
 		$('input[name="sisa_cuti"]').val(data["sisa_cuti"]);
+		$('input[name="jam_perhari"]').val(data["jam_perhari"]);
 		$('select[name="pendidikan_terakhir"]').val(data["pendidikan_terakhir"]);
 		$('input[name="lulus_dari"]').val(data["lulus_dari"]);
 		$('input[name="email"]').val(data["email"]);
