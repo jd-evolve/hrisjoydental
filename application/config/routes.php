@@ -17,7 +17,6 @@ $route['jabatan'] = 'menu/jabatan';
 $route['cabang-klinik'] = 'menu/cabang_klinik';
 $route['kegiatan-pengumuman'] = 'menu/kegiatan_pengumuman';
 
-$route['rekap-ijincuti'] = 'menu/rekap_ijincuti';
 $route['acc-atasan'] = 'menu/acc_atasan';
 $route['acc-personalia'] = 'menu/acc_personalia';
 $route['cuti-tahunan'] = 'menu/cuti_tahunan';
@@ -28,9 +27,13 @@ $route['ijin-duka'] = 'menu/ijin_duka';
 $route['ijin-sakit'] = 'menu/ijin_sakit';
 $route['konfigurasi'] = 'menu/konfigurasi';
 
-$route['rekap-lembur'] = 'menu/rekap_lembur';
 $route['acc-lembur'] = 'menu/acc_lembur';
 $route['form-lembur'] = 'menu/form_lembur';
 $route['data-scanlog'] = 'menu/data_scanlog';
 $route['jam-kerja'] = 'menu/jam_kerja';
 $route['jadwal-kerja'] = 'menu/jadwal_kerja';
+
+$route['rekap-ijincuti'] = 'menu/rekap_ijincuti';
+$route['rekap-lembur'] = 'menu/rekap_lembur';
+$route['rekap-keterlambatan'] = 'menu/rekap_keterlambatan';
+$route['rekap-lupaabsen'] = 'menu/rekap_lupaabsen';

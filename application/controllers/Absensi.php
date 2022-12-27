@@ -196,6 +196,7 @@ class Absensi extends CI_Controller {
 			$data_terlambat = $this->m_main->getData('db_keterlambatan','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
 			if($data_terlambat){
 				$dtrlmbt = [
+					'terlambat' => $terlambat,
 					'jum_terlambat' => $jumterlambat,
 					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
 					'tgl_edit' => date("Y-m-d H:i:s"),
@@ -206,6 +207,7 @@ class Absensi extends CI_Controller {
 				$dtrlmbt = [
 					'id_periode' => $_POST['id_periode'],
 					'id_karyawan' => $_POST['id_karyawan'],
+					'terlambat' => $terlambat,
 					'jum_terlambat' => $jumterlambat,
 					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
 					'tgl_input' => date("Y-m-d H:i:s"),
@@ -218,6 +220,7 @@ class Absensi extends CI_Controller {
 			$data_terlambat = $this->m_main->getData('db_keterlambatan','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
 			if($data_terlambat){
 				$dtrlmbt = [
+					'terlambat' => 0,
 					'jum_terlambat' => 0,
 					'urut5x_terlambat' => 0,
 					'tgl_edit' => date("Y-m-d H:i:s"),
@@ -355,6 +358,7 @@ class Absensi extends CI_Controller {
 			foreach($scankryn as $list){
 				$account = $this->m_main->getRow('db_account','kode',$list['pin']);
 				if($account){
+					$hitungterlambat = 0;
 					$jumterlambat = 0;
 					$urutterlambat = 0;
 					for($i=0; $i<count($date_range); $i++){
@@ -443,6 +447,7 @@ class Absensi extends CI_Controller {
 														if(!$next){
 															//Cek keterlambatan
 															if($jk['dihitung'] > 0){
+																$hitungterlambat = $hitungterlambat + intval($terlambat);
 																$jumterlambat = $jumterlambat + ($terlambat > 0 ? 1 : 0);
 																if($urutterlambat <= 4){
 																	if($terlambat > 0){
@@ -499,6 +504,7 @@ class Absensi extends CI_Controller {
 						$dtrlmbt = [
 							'id_periode' => $id_periode,
 							'id_karyawan' => $account['id_account'],
+							'terlambat' => $hitungterlambat,
 							'jum_terlambat' => $jumterlambat,
 							'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
 							'tgl_input' => date("Y-m-d H:i:s"),

@@ -59,4 +59,24 @@ class Rekapdata extends CI_Controller {
 		$output = [ "data" => $data ];
 		echo json_encode($output);
 	}
+
+	public function read_rekapketerlambatan(){
+		$terlambat = $this->m_auth->GetLlistTerlambat_Rekap($_POST['periode'],$_POST['status'],$_POST['id_karyawan']);
+		$data = [];
+		$no = 0;
+		foreach ($terlambat as $list) {
+			$no++;
+			$row = [];
+			$row['No'] = $no;
+			$row['Periode'] = $list->ket_periode;
+			$row['Karyawan'] = $list->karyawan;
+			$row['Bagian'] = $list->bagian;
+			$row['Total'] = $list->terlambat.' menit';
+			$row['Terlambat'] = $list->jum_terlambat;
+			$row['Status'] = $list->jum_terlambat < 8 ? 1 : ($list->urut5x_terlambat == 1 ? 3 : 2);
+			$data[] = $row; 
+		}
+		$output = [ "data" => $data ];
+		echo json_encode($output);
+	}
 }

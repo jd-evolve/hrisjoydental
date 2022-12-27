@@ -397,4 +397,41 @@ class M_auth extends CI_Model {
         ->where('id_karyawan', $id_karyawan)
         ->update('db_keterlambatan', $data);
     }
+
+    public function GetLlistTerlambat_Rekap($id_periode, $status, $id_karyawan){
+        if($id_karyawan){
+            $karyawan = ' AND a.id_karyawan = '.$id_karyawan;
+        }else{
+            $karyawan = '';
+        }
+
+        switch($status) {
+            case 0:
+                $kategori = "";
+                break;
+            case 1:
+                $kategori = "AND a.jum_terlambat < 8";
+                break;
+            case 2:
+                $kategori = "AND a.jum_terlambat > 7 AND a.urut5x_terlambat = 0";
+                break;
+            case 3:
+                $kategori = "AND a.urut5x_terlambat = 1";
+                break;
+        }
+
+        $query = $this->db->query("
+            SELECT a.*, b.keterangan as ket_periode, c.nama as karyawan, c.bagian
+            FROM db_keterlambatan a
+            JOIN db_periode b ON a.id_periode = b.id_periode
+            JOIN db_account c ON a.id_karyawan = c.id_account
+            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            WHERE a.id_periode = ".$id_periode."
+            AND a.status = 1
+            ".$karyawan."
+            ".$kategori."
+            ORDER BY a.id_karyawan asc
+        ")->result();
+        return $query;
+    }
 }

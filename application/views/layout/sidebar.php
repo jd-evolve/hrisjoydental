@@ -67,6 +67,8 @@
                 $rekapdata = array(
                     'rekap-ijincuti',
                     'rekap-lembur',
+                    'rekap-keterlambatan',
+                    'rekap-lupaabsen',
                 );
 
                 $uri_path = $this->uri->segment(1);
@@ -192,6 +194,16 @@
                             <li class="<?= !$cekmenu['rekap-lembur'] ? 'gone' : '' ?> <?= $uri_path == "rekap-lembur"? 'active' : '' ?>">
                                 <a href="<?= base_url('rekap-lembur') ?>">
                                     <span class="sub-item">Rekap Lembur</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['rekap-keterlambatan'] ? 'gone' : '' ?> <?= $uri_path == "rekap-keterlambatan"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-keterlambatan') ?>">
+                                    <span class="sub-item">Rekap Keterlambatan</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['rekap-lupaabsen'] ? 'gone' : '' ?> <?= $uri_path == "rekap-lupaabsen"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-lupaabsen') ?>">
+                                    <span class="sub-item">Rekap Lupa Absen</span>
                                 </a>
                             </li>
                         </ul>
