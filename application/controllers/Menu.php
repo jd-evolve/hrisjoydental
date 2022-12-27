@@ -129,23 +129,6 @@ class Menu extends CI_Controller {
 		}
     }
 	
-    public function rekap_ijincuti(){
-		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
-			$data['vrs'] = U_VERSI; 
-			$data['title'] = 'Rekap Ijin Cuti';
-			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
-			$data['cekmenu'] = $this->DataLevel();
-			$data['data_ijincuti'] = $this->m_main->getResult('db_ijincuti','status',1);
-			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
-			$this->load->view('layout/header', $data);
-			$this->load->view('ijincuti/rekap_ijincuti');
-			$this->load->view('layout/footer');
-		}else{
-			redirect('logout');
-		}
-    }
-	
     public function acc_atasan(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
 			$data['vrs'] = U_VERSI; 
@@ -266,24 +249,6 @@ class Menu extends CI_Controller {
 		}
     }
 
-	public function rekap_lembur(){
-		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
-			$data['vrs'] = U_VERSI; 
-			$data['title'] = 'Rekap Lembur';
-			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
-			$data['cekmenu'] = $this->DataLevel();
-			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
-			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
-			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
-			$this->load->view('layout/header', $data);
-			$this->load->view('absensi/rekap_lembur');
-			$this->load->view('layout/footer');
-		}else{
-			redirect('logout');
-		}
-	}
-
 	public function acc_lembur(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
 			$data['vrs'] = U_VERSI; 
@@ -364,6 +329,41 @@ class Menu extends CI_Controller {
 			redirect('logout');
 		}
     }
+	
+    public function rekap_ijincuti(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Rekap Ijin Cuti';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$data['data_ijincuti'] = $this->m_main->getResult('db_ijincuti','status',1);
+			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
+			$this->load->view('layout/header', $data);
+			$this->load->view('rekapdata/rekap_ijincuti');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+
+	public function rekap_lembur(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Rekap Lembur';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
+			$this->load->view('layout/header', $data);
+			$this->load->view('rekapdata/rekap_lembur');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+	}
 	
     public function konfigurasi(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){

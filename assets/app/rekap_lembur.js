@@ -30,7 +30,7 @@
 
         var table_rekaplembur = $("#datatable-rekaplembur").DataTable({
             ajax: {
-                url: "absensi/read_rekaplembur",
+                url: "rekapdata/read_rekaplembur",
                 type: "POST",
                 data: {
                     periode: periode,

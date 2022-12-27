@@ -149,6 +149,7 @@
                         </div> 
                     </div>
                     <div class="modal-footer">
+                        <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">Kembali</button>
                     </div>
                 </div>
             </form>

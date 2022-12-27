@@ -35,7 +35,6 @@
 
             <?php
                 $ijincuti = array(
-                    'rekap-ijincuti',
                     'acc-atasan',
                     'acc-personalia',
                     'cuti-tahunan',
@@ -58,12 +57,16 @@
                 );
 
                 $absensi = array(
-                    'rekap-lembur',
                     'acc-lembur',
                     'form-lembur',
                     'data-scanlog',
                     'jam-kerja',
                     'jadwal-kerja',
+                );
+
+                $rekapdata = array(
+                    'rekap-ijincuti',
+                    'rekap-lembur',
                 );
 
                 $uri_path = $this->uri->segment(1);
@@ -92,11 +95,6 @@
                     </a>
                     <div id="ijin_cuti" <?= in_array($uri_path, $ijincuti) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
-                            <li class="<?= !$cekmenu['rekap-ijincuti'] ? 'gone' : '' ?> <?= $uri_path == "rekap-ijincuti"? 'active' : '' ?>">
-                                <a href="<?= base_url('rekap-ijincuti') ?>">
-                                    <span class="sub-item">Rekap Ijin/Cuti</span>
-                                </a>
-                            </li>
                             <li class="<?= !$cekmenu['acc-atasan'] ? 'gone' : '' ?> <?= $uri_path == "acc-atasan"? 'active' : '' ?>">
                                 <a href="<?= base_url('acc-atasan') ?>">
                                     <span class="sub-item">ACC Atasan</span>
@@ -149,11 +147,6 @@
                     </a>
                     <div id="absensi" <?= in_array($uri_path, $absensi) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
-                            <li class="<?= !$cekmenu['rekap-lembur'] ? 'gone' : '' ?> <?= $uri_path == "rekap-lembur"? 'active' : '' ?>">
-                                <a href="<?= base_url('rekap-lembur') ?>">
-                                    <span class="sub-item">Rekap Lembur</span>
-                                </a>
-                            </li>
                             <li class="<?= !$cekmenu['acc-lembur'] ? 'gone' : '' ?> <?= $uri_path == "acc-lembur"? 'active' : '' ?>">
                                 <a href="<?= base_url('acc-lembur') ?>">
                                     <span class="sub-item">ACC Lembur</span>
@@ -177,6 +170,28 @@
                             <li class="<?= !$cekmenu['jadwal-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jadwal-kerja"? 'active' : '' ?>">
                                 <a href="<?= base_url('jadwal-kerja') ?>">
                                     <span class="sub-item">Jadwal Kerja</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item <?= !$cekmenu['menu_rekapdata'] ? 'gone' : '' ?><?= in_array($uri_path, $rekapdata) ? 'active submenu' : '' ?>">
+                    <a data-toggle="collapse" href="#rekap_data">
+                        <i class="fas fa-chart-bar"></i>
+                        <p>Rekap Data</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div id="rekap_data" <?= in_array($uri_path, $rekapdata) ? 'class="collapse show"' : 'class="collapse"' ?>>
+                        <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['rekap-ijincuti'] ? 'gone' : '' ?> <?= $uri_path == "rekap-ijincuti"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-ijincuti') ?>">
+                                    <span class="sub-item">Rekap Ijin/Cuti</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['rekap-lembur'] ? 'gone' : '' ?> <?= $uri_path == "rekap-lembur"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-lembur') ?>">
+                                    <span class="sub-item">Rekap Lembur</span>
                                 </a>
                             </li>
                         </ul>

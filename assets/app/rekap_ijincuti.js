@@ -26,7 +26,7 @@
 
         var table_rekapijincuti = $("#datatable-rekapijincuti").DataTable({
             ajax: {
-                url: "ijincuti/read_rekapijincuti",
+                url: "rekapdata/read_rekapijincuti",
                 type: "POST",
                 data: {
                     id_ijincuti: id_ijincuti,

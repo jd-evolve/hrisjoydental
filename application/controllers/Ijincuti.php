@@ -270,27 +270,4 @@ class Ijincuti extends CI_Controller {
         echo json_encode($output);
         exit();
 	}
-
-	public function read_rekapijincuti(){
-		$ijincuti = $this->m_auth->GetLlistIjinCuti_Rekap($_POST['id_ijincuti'],$_POST['id_karyawan']);
-		$data = [];
-		$no = 0;
-		foreach ($ijincuti as $list) {
-			$no++;
-			$row = [];
-			$row['No'] = $no;
-			$row['Tanggal'] = date_format(date_create($list->tgl_input),"d-m-Y");
-			$row['Awal'] = date_format(date_create($list->tgl_awal.' '.$list->jam_awal),"d-m-Y H:i");
-			$row['Akhir'] = date_format(date_create($list->tgl_akhir.' '.$list->jam_akhir),"d-m-Y H:i");
-			$row['Hari'] = $list->total_hari;
-			$row['Jam'] = $list->total_jam;
-			$row['IjinCuti'] = $list->nama_ijincuti;
-			$row['Potongan'] = floatval($list->potong_cuti);
-			$row['Karyawan'] = $list->karyawan;
-			$row['Aksi'] = $list->id_ijincuti_list;
-			$data[] = $row; 
-		}
-		$output = [ "data" => $data ];
-		echo json_encode($output);
-	}
 }
