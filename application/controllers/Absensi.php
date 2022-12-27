@@ -164,13 +164,15 @@ class Absensi extends CI_Controller {
 			$shift = $shift + intval($list->shift);
 			$libur = $libur + ($list->libur == 1 ? intval($list->shift) : 0);
 			$lupa = $lupa + ($list->lupa == 1 ? intval($list->shift) : 0);
-			$jumterlambat = $jumterlambat + ($list->terlambat > 0 ? 1 : 0);
 
-			if($urutterlambat <= 4){
-				if($list->terlambat > 0){
-					$urutterlambat = $urutterlambat + 1;
-				}else{
-					$urutterlambat = 0;
+			if(intval($list->shift) > 0){
+				$jumterlambat = $jumterlambat + ($list->terlambat > 0 ? 1 : 0);
+				if($urutterlambat <= 4){
+					if($list->terlambat > 0){
+						$urutterlambat = $urutterlambat + 1;
+					}else{
+						$urutterlambat = 0;
+					}
 				}
 			}
 
@@ -187,6 +189,42 @@ class Absensi extends CI_Controller {
 			$row['keterangan'] = $list->keterangan == null ? '' : $list->keterangan;
 			$row['id_scanlog'] = $list->id_scanlog;
 			$data[] = $row; 
+		}
+
+		//Triger update keterlambatan
+		if($jumterlambat > 0){
+			$data_terlambat = $this->m_main->getData('db_keterlambatan','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
+			if($data_terlambat){
+				$dtrlmbt = [
+					'jum_terlambat' => $jumterlambat,
+					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'status' => 1,
+				];
+				$this->m_auth->updateKeterlambatan($_POST['id_periode'],$_POST['id_karyawan'],$dtrlmbt);
+			}else{
+				$dtrlmbt = [
+					'id_periode' => $_POST['id_periode'],
+					'id_karyawan' => $_POST['id_karyawan'],
+					'jum_terlambat' => $jumterlambat,
+					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
+					'tgl_input' => date("Y-m-d H:i:s"),
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'status' => 1,
+				];
+				$this->m_main->createIN('db_keterlambatan',$dtrlmbt);
+			}
+		}else{
+			$data_terlambat = $this->m_main->getData('db_keterlambatan','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
+			if($data_terlambat){
+				$dtrlmbt = [
+					'jum_terlambat' => 0,
+					'urut5x_terlambat' => 0,
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'status' => 0,
+				];
+				$this->m_auth->updateKeterlambatan($_POST['id_periode'],$_POST['id_karyawan'],$dtrlmbt);
+			}
 		}
 
 		$row = [];
@@ -317,6 +355,8 @@ class Absensi extends CI_Controller {
 			foreach($scankryn as $list){
 				$account = $this->m_main->getRow('db_account','kode',$list['pin']);
 				if($account){
+					$jumterlambat = 0;
+					$urutterlambat = 0;
 					for($i=0; $i<count($date_range); $i++){
 						$id_hari = date_format(date_create($date_range[$i]),"w");
 						$jdwk = $this->m_main->getResultData(
@@ -401,6 +441,19 @@ class Absensi extends CI_Controller {
 												if($loop==count($jamscan)){
 													if($jmy && $jpy){
 														if(!$next){
+															//Cek keterlambatan
+															if($jk['dihitung'] > 0){
+																$jumterlambat = $jumterlambat + ($terlambat > 0 ? 1 : 0);
+																if($urutterlambat <= 4){
+																	if($terlambat > 0){
+																		$urutterlambat = $urutterlambat + 1;
+																	}else{
+																		$urutterlambat = 0;
+																	}
+																}
+															}
+
+															//Simpan data scanlog
 															$next = true;
 															$hdkey = date_format(date_create($date_range[$i]),"Ymd");
 															$datax = [
@@ -440,6 +493,19 @@ class Absensi extends CI_Controller {
 								}else{ $this->NullScan($id_periode,$account['id_account'],$date_range[$i],$id_hari,$harilibur); }
 							}
 						}else{ $this->NullScan($id_periode,$account['id_account'],$date_range[$i],$id_hari,$harilibur); }
+					}
+					//Simpan data keterlambatan
+					if($jumterlambat > 0){
+						$dtrlmbt = [
+							'id_periode' => $id_periode,
+							'id_karyawan' => $account['id_account'],
+							'jum_terlambat' => $jumterlambat,
+							'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
+							'tgl_input' => date("Y-m-d H:i:s"),
+							'tgl_edit' => date("Y-m-d H:i:s"),
+							'status' => 1,
+						];
+						$this->m_main->createIN('db_keterlambatan',$dtrlmbt);
 					}
 				}
 			}

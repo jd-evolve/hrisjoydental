@@ -390,4 +390,11 @@ class M_auth extends CI_Model {
         ")->result();
         return $query;
     }
+
+    public function updateKeterlambatan($id_periode, $id_karyawan, $data){
+        return $this->db
+        ->where('id_periode', $id_periode)
+        ->where('id_karyawan', $id_karyawan)
+        ->update('db_keterlambatan', $data);
+    }
 }
