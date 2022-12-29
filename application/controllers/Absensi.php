@@ -183,7 +183,7 @@ class Absensi extends CI_Controller {
 			$row['lembur'] = $list->jam_masuk == null ? '' : $list->lembur;
 			$row['terlambat'] = $list->jam_masuk == null ? '' : $list->terlambat;
 			$row['pulangawal'] = $list->jam_masuk == null ? '' : $list->pulangawal;
-			$row['shift'] = $list->jam_masuk == null ? '' : $list->shift;
+			$row['shift'] = $list->shift == 0 ? '' : $list->shift;
 			$row['libur'] = $list->libur == 1 ? '<i class="text-danger fas fa-check-circle">' : '';
 			$row['lupa'] = $list->lupa == 1 ? '<i class="text-default fas fa-exclamation-triangle">' : '';
 			$row['keterangan'] = $list->keterangan == null ? '' : $list->keterangan;
@@ -227,6 +227,39 @@ class Absensi extends CI_Controller {
 					'status' => 0,
 				];
 				$this->m_auth->updateKeterlambatan($_POST['id_periode'],$_POST['id_karyawan'],$dtrlmbt);
+			}
+		}
+
+		//Triger update lupa absen
+		if($lupa > 0){
+			$data_lupa = $this->m_main->getData('db_lupa_absen','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
+			if($data_lupa){
+				$dtrlpa = [
+					'jum_lupa_absen' => $lupa,
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'status' => 1,
+				];
+				$this->m_auth->updateLupaAbsen($_POST['id_periode'],$_POST['id_karyawan'],$dtrlpa);
+			}else{
+				$dtrlpa = [
+					'id_periode' => $_POST['id_periode'],
+					'id_karyawan' => $_POST['id_karyawan'],
+					'jum_lupa_absen' => $lupa,
+					'tgl_input' => date("Y-m-d H:i:s"),
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'status' => 1,
+				];
+				$this->m_main->createIN('db_lupa_absen',$dtrlpa);
+			}
+		}else{
+			$data_lupa = $this->m_main->getData('db_lupa_absen','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
+			if($data_lupa){
+				$dtrlpa = [
+					'jum_lupa_absen' => 0,
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'status' => 0,
+				];
+				$this->m_auth->updateLupaAbsen($_POST['id_periode'],$_POST['id_karyawan'],$dtrlpa);
 			}
 		}
 

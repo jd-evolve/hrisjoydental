@@ -89,6 +89,43 @@
                     <h4 class="text-section">Menu</h4>
                 </li>
 
+                <li class="nav-item <?= !$cekmenu['menu_absensi'] ? 'gone' : '' ?><?= in_array($uri_path, $absensi) ? 'active submenu' : '' ?>">
+                    <a data-toggle="collapse" href="#absensi">
+                        <i class="fas fa-user-clock"></i>
+                        <p>Absensi</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div id="absensi" <?= in_array($uri_path, $absensi) ? 'class="collapse show"' : 'class="collapse"' ?>>
+                        <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['acc-lembur'] ? 'gone' : '' ?> <?= $uri_path == "acc-lembur"? 'active' : '' ?>">
+                                <a href="<?= base_url('acc-lembur') ?>">
+                                    <span class="sub-item">ACC Lembur</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['form-lembur'] ? 'gone' : '' ?> <?= $uri_path == "form-lembur"? 'active' : '' ?>">
+                                <a href="<?= base_url('form-lembur') ?>">
+                                    <span class="sub-item">Form Lembur</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['data-scanlog'] ? 'gone' : '' ?> <?= $uri_path == "data-scanlog"? 'active' : '' ?>">
+                                <a href="<?= base_url('data-scanlog') ?>">
+                                    <span class="sub-item">Data Scanlog</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['jam-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jam-kerja"? 'active' : '' ?>">
+                                <a href="<?= base_url('jam-kerja') ?>">
+                                    <span class="sub-item">Jam Kerja</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['jadwal-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jadwal-kerja"? 'active' : '' ?>">
+                                <a href="<?= base_url('jadwal-kerja') ?>">
+                                    <span class="sub-item">Jadwal Kerja</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="nav-item <?= !$cekmenu['menu_ijincuti'] ? 'gone' : '' ?><?= in_array($uri_path, $ijincuti) ? 'active submenu' : '' ?>">
                     <a data-toggle="collapse" href="#ijin_cuti">
                         <i class="fas fa-file-signature"></i>
@@ -135,43 +172,6 @@
                             <li class="<?= !$cekmenu['ijin-sakit'] ? 'gone' : '' ?> <?= $uri_path == "ijin-sakit"? 'active' : '' ?>">
                                 <a href="<?= base_url('ijin-sakit') ?>">
                                     <span class="sub-item">Ijin Sakit</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item <?= !$cekmenu['menu_absensi'] ? 'gone' : '' ?><?= in_array($uri_path, $absensi) ? 'active submenu' : '' ?>">
-                    <a data-toggle="collapse" href="#absensi">
-                        <i class="fas fa-user-clock"></i>
-                        <p>Absensi</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div id="absensi" <?= in_array($uri_path, $absensi) ? 'class="collapse show"' : 'class="collapse"' ?>>
-                        <ul class="nav nav-collapse">
-                            <li class="<?= !$cekmenu['acc-lembur'] ? 'gone' : '' ?> <?= $uri_path == "acc-lembur"? 'active' : '' ?>">
-                                <a href="<?= base_url('acc-lembur') ?>">
-                                    <span class="sub-item">ACC Lembur</span>
-                                </a>
-                            </li>
-                            <li class="<?= !$cekmenu['form-lembur'] ? 'gone' : '' ?> <?= $uri_path == "form-lembur"? 'active' : '' ?>">
-                                <a href="<?= base_url('form-lembur') ?>">
-                                    <span class="sub-item">Form Lembur</span>
-                                </a>
-                            </li>
-                            <li class="<?= !$cekmenu['data-scanlog'] ? 'gone' : '' ?> <?= $uri_path == "data-scanlog"? 'active' : '' ?>">
-                                <a href="<?= base_url('data-scanlog') ?>">
-                                    <span class="sub-item">Data Scanlog</span>
-                                </a>
-                            </li>
-                            <li class="<?= !$cekmenu['jam-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jam-kerja"? 'active' : '' ?>">
-                                <a href="<?= base_url('jam-kerja') ?>">
-                                    <span class="sub-item">Jam Kerja</span>
-                                </a>
-                            </li>
-                            <li class="<?= !$cekmenu['jadwal-kerja'] ? 'gone' : '' ?> <?= $uri_path == "jadwal-kerja"? 'active' : '' ?>">
-                                <a href="<?= base_url('jadwal-kerja') ?>">
-                                    <span class="sub-item">Jadwal Kerja</span>
                                 </a>
                             </li>
                         </ul>

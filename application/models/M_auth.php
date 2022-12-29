@@ -398,6 +398,13 @@ class M_auth extends CI_Model {
         ->update('db_keterlambatan', $data);
     }
 
+    public function updateLupaAbsen($id_periode, $id_karyawan, $data){
+        return $this->db
+        ->where('id_periode', $id_periode)
+        ->where('id_karyawan', $id_karyawan)
+        ->update('db_lupa_absen', $data);
+    }
+
     public function GetLlistTerlambat_Rekap($id_periode, $status, $id_karyawan){
         if($id_karyawan){
             $karyawan = ' AND a.id_karyawan = '.$id_karyawan;
@@ -430,6 +437,27 @@ class M_auth extends CI_Model {
             AND a.status = 1
             ".$karyawan."
             ".$kategori."
+            ORDER BY a.id_karyawan asc
+        ")->result();
+        return $query;
+    }
+
+    public function GetLlistLupaAbsen_Rekap($id_periode, $id_karyawan){
+        if($id_karyawan){
+            $karyawan = ' AND a.id_karyawan = '.$id_karyawan;
+        }else{
+            $karyawan = '';
+        }
+
+        $query = $this->db->query("
+            SELECT a.*, b.keterangan as ket_periode, c.nama as karyawan, c.bagian
+            FROM db_lupa_absen a
+            JOIN db_periode b ON a.id_periode = b.id_periode
+            JOIN db_account c ON a.id_karyawan = c.id_account
+            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            WHERE a.id_periode = ".$id_periode."
+            AND a.status = 1
+            ".$karyawan."
             ORDER BY a.id_karyawan asc
         ")->result();
         return $query;
