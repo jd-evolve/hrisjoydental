@@ -110,7 +110,7 @@
                                                 terhitung mulai dari tanggal <b><span id="show-tgl_awal"></span></b> 
                                                 sampai dengan tanggal <b><span id="show-tgl_akhir"></span></b>
                                                 dengan jumlah <b><span id="show-total_hari"></span> hari</b> 
-                                                dan <b><span id="show-total_jam"></span> jam</b>.
+                                                dan <b><span id="show-total_menit"></span> menit</b>.
                                             </p>
                                             <br>
                                             <p class="" align="justify">Demikian permintaan ini saya buat dengan penuh kesadaran untuk dapat dipertimbangkan sebagaimana mestinya.</p>
@@ -177,6 +177,8 @@
                             </table>
                         </div>
                         <div class="py-3">
+                            <input type="hidden" id="cutcuti">
+                            <input type="hidden" id="jamperhari">
                             <button type="button" class="btn btn-danger btn-sm" id="kembali1">Kembali</button>
                             <button type="submit" class="btn btn-success btn-sm" id="lanjutkan1">Lanjutkan</button>
                         </div>

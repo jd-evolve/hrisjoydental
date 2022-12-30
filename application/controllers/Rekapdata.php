@@ -25,7 +25,7 @@ class Rekapdata extends CI_Controller {
 			$row['Awal'] = date_format(date_create($list->tgl_awal.' '.$list->jam_awal),"d-m-Y H:i");
 			$row['Akhir'] = date_format(date_create($list->tgl_akhir.' '.$list->jam_akhir),"d-m-Y H:i");
 			$row['Hari'] = $list->total_hari;
-			$row['Jam'] = $list->total_jam;
+			$row['Jam'] = $list->total_menit;
 			$row['IjinCuti'] = $list->nama_ijincuti;
 			$row['Potongan'] = floatval($list->potong_cuti);
 			$row['Karyawan'] = $list->karyawan;

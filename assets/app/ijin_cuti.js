@@ -1,5 +1,5 @@
 (function($) {
-    var id_ijincuti = 3; //Cuti Melahirkan
+    var id_ijincuti = $('#id_ijincuti').val();
 
     $("#persetujuan").click(function() {
         $('.notif').addClass('none');
@@ -45,13 +45,6 @@
         $('#show-nav3').removeClass('none');
     });
 
-    Inputmask("datetime", {
-        inputFormat: "dd-mm-yyyy HH:MM",
-        placeholder: "_",
-        leapday: "-02-29",
-        alias: "tt.mm.jjjj"
-    }).mask('.tgl-wkt');
-
     $('#setuju_sop').on("click", function(){
         if($('#persetujuan').is(":checked")){
             $('#nav1').removeClass('active');
@@ -64,12 +57,118 @@
             $('.notif').removeClass('none');
         }
     });
+        
+    $("input[type=radio][name='pilih_ijincuti']").change(function(){
+        var pilih = $('input[name="pilih_ijincuti"]:checked').val();
+        if(pilih == '1'){
+            $('#per_shift').removeClass('none');
+            $('#per_jam').addClass('none');
+            $('#tanggal').attr('required',false);
+            $('#tanggal').val('');
+            $('#tgl_awal').val('');
+            $('#tgl_akhir').val('');
+            $('#jam_awal').val('');
+            $('#jam_akhir').val('');
+            $('#total_hari').val('');
+            $('#total_menit').val('');
+            $('#show-thari').html(0);
+            $('#show-tmenit').html(0);
+        }else{
+            $('#per_shift').addClass('none');
+            $('#per_jam').removeClass('none');
+            $('#tanggal').attr('required',true);
+            $('#tanggal').val('');
+            $('#tgl_awal').val('');
+            $('#tgl_akhir').val('');
+            $('#jam_awal').val('');
+            $('#jam_akhir').val('');
+            $('#total_hari').val('');
+            $('#total_menit').val('');
+            $('#show-thari').html(0);
+            $('#show-tmenit').html(0);
+        }
+    });
+
+    Inputmask("datetime", {
+        inputFormat: "dd-mm-yyyy",
+        placeholder: "_",
+        leapday: "-02-29",
+        alias: "tt.mm.jjjj"
+    }).mask('.tgl');
+
+    Inputmask("datetime", {
+        inputFormat: "HH:MM",
+        placeholder: "_",
+        leapday: "-02-29",
+        alias: "tt.mm.jjjj"
+    }).mask('.wkt');
     
+    $('#tgl_awal').keyup(function(){
+        range_tanggal();
+    });
+    $('#tgl_akhir').keyup(function(){
+        range_tanggal();
+    });
+    function range_tanggal(){
+        var date1i = $('#tgl_awal').val();
+        var date2i = $('#tgl_akhir').val();
+        if(date1i.search("_") == -1 && date2i.search("_") == -1 && date1i && date2i){
+            var date1x = date1i.split('-');
+            var date2x = date2i.split('-');
+            var date1 = date1x[2]+'-'+date1x[1]+'-'+date1x[0];
+            var date2 = date2x[2]+'-'+date2x[1]+'-'+date2x[0];
+            var ONE_DAY = 1000 * 60 * 60 * 24;
+            var diff1 = Math.abs(new Date(date1) - new Date(date2));
+            var day = Math.round((diff1/ONE_DAY)+1);
+            $('#jam_awal').val('00:00');
+            $('#jam_akhir').val('00:00');
+            $('#total_hari').val(day);
+            $('#total_menit').val(0);
+            $('#show-thari').html(day);
+            $('#show-tmenit').html(0);
+        }else{
+            $('#total_hari').val('');
+            $('#total_menit').val('');
+            $('#show-thari').html(0);
+            $('#show-tmenit').html(0);
+        }
+    }
+
+    $('#jam_awal').keyup(function(){
+        range_jam();
+    });
+    $('#jam_akhir').keyup(function(){
+        range_jam();
+    });
+    $('#tanggal').keyup(function(){
+        $('#tgl_awal').val($(this).val());
+        $('#tgl_akhir').val($(this).val());
+    });
+    function range_jam(){
+        var date1i = $('#jam_awal').val();
+        var date2i = $('#jam_akhir').val();
+        if(date1i.search("_") == -1 && date2i.search("_") == -1 && date1i && date2i){
+            var diff2 = Math.abs(new Date('1/1/1 '+date1i) - new Date('1/1/1 '+date2i));
+            var minutes = Math.floor((diff2/1000)/60);
+            $('#total_hari').val(0);
+            $('#total_menit').val(minutes);
+            $('#show-thari').html(0);
+            $('#show-tmenit').html(minutes);
+        }else{
+            $('#total_hari').val('');
+            $('#total_menit').val(''); 
+            $('#show-thari').html(0);
+            $('#show-tmenit').html(0);
+        }
+    }
+
     $('#ajukan_form').on('click',function (e) {
         e.preventDefault();
-        var cek_tgl_awal = $('input[name="tgl_awal"]').val().search("_");
-        var cek_tgl_akhir = $('input[name="tgl_akhir"]').val().search("_");
-        if(cek_tgl_awal == -1 && cek_tgl_akhir == -1){
+        var tgl1 = $('input[name="tgl_awal"]').val().search("_");
+        var tgl2 = $('input[name="tgl_akhir"]').val().search("_");
+        var jam1 = $('input[name="jam_awal"]').val().search("_");
+        var jam2 = $('input[name="jam_akhir"]').val().search("_");
+        if(tgl1 == -1 && tgl2 == -1 && jam1 == -1 && jam2 == -1){
             let validasi = document.getElementById("form-ijincuti").reportValidity();
             if(validasi){
                 $("#ajukan_form").prop( "disabled",true);
@@ -172,7 +271,7 @@
                 { data: "tgl_awal" },
                 { data: "tgl_akhir" },
                 { data: "total_hari" },
-                { data: "total_jam" },
+                { data: "total_menit" },
                 { data: "file" },
                 { data: "alasan_ditolak" },
             ],
@@ -201,12 +300,12 @@
                         stts = '<span class="btn btn-danger fw-bold btn-xs py-0 px-1">Ditolak</span>';
                     }
                     document.getElementById("text-showform").innerHTML = 'Status : '+stts;
-                    $("#show-tgl_create").html(data.tgl_input);
+                    $("#show-tgl_create").html(data.tgl_create);
                     $("#show-keperluan").html(data.keperluan);
                     $("#show-tgl_awal").html(data.tgl_awal);
                     $("#show-tgl_akhir").html(data.tgl_akhir);
                     $("#show-total_hari").html(data.total_hari);
-                    $("#show-total_jam").html(data.total_jam);
+                    $("#show-total_menit").html(data.total_menit);
         
                     if(data.file == '-'){
                         $("#show-file").html('-');

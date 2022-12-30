@@ -62,9 +62,9 @@
                                     <div class="btn-group border-option mb-0">
                                         <label class="label-filter">Periode: </label>&nbsp;&nbsp;
                                         <select class="form-control" name="filter-periode" id="filter-periode">
-                                                <?php foreach ($data_periode as $list) { ?>
-                                                    <option value="<?= $list->id_periode ?>"><?= $list->keterangan ?></option>
-                                                <?php }?>
+                                            <?php foreach ($data_periode as $list) { ?>
+                                                <option value="<?= $list->id_periode ?>"><?= $list->keterangan ?></option>
+                                            <?php }?>
                                         </select>
                                     </div>
                                 </td>

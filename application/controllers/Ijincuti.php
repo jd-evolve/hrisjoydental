@@ -55,20 +55,21 @@ class Ijincuti extends CI_Controller {
 	}
 
     public function add_ijincuti(){
-		if(!empty($_POST['id_ijincuti'])){
+		if(!empty($_POST['id_ijincuti']) && !empty($_POST['id_periode'])){
 			$potongancuti = $this->m_main->getRow('db_ijincuti','id_ijincuti',$_POST['id_ijincuti']);
 			$atasan = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data = [
 				'id_ijincuti' => $_POST['id_ijincuti'],
+				'id_periode' => $_POST['id_periode'],
 				'id_karyawan' => ID_ACCOUNT,
 				'id_atasan' => $atasan['id_atasan'],
 				'keperluan' => $_POST['keperluan'],
 				'tgl_awal' => date_format(date_create($_POST['tgl_awal']),"Y-m-d"),
 				'tgl_akhir' => date_format(date_create($_POST['tgl_akhir']),"Y-m-d"),
-				'jam_awal' => date_format(date_create($_POST['tgl_awal']),"H:i:s"),
-				'jam_akhir' => date_format(date_create($_POST['tgl_akhir']),"H:i:s"),
+				'jam_awal' => date_format(date_create($_POST['jam_awal']),"H:i:s"),
+				'jam_akhir' => date_format(date_create($_POST['jam_akhir']),"H:i:s"),
 				'total_hari' => $_POST['total_hari'],
-				'total_jam' => $_POST['total_jam'],
+				'total_menit' => $_POST['total_menit'],
 				'tgl_input' => date("Y-m-d H:i:s"),
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'potong_cuti' => $potongancuti['potong_cuti'],
@@ -96,9 +97,8 @@ class Ijincuti extends CI_Controller {
 					$data['file'] = $uploadData['file_name'];
 				}
 			}
-			$ArrIjinCuti = explode("|","-|cuti tahunan|cuti menikah|cuti melahirkan|ijin pribadi|ijin duka");
 			$this->m_main->createIN('db_ijincuti_list',$data);
-			$output['message'] ="Data ". $ArrIjinCuti[$_POST['id_ijincuti']]." berhasil ditambah!";
+			$output['message'] ="Data Ijin/Cuti berhasil diajukan!";
 			$output['result'] = "success";
 		}else{
 			$output['message'] ="Ijin/Cuti tidak diketahui!";
@@ -125,7 +125,7 @@ class Ijincuti extends CI_Controller {
 			$row['tgl_awal'] = date_format(date_create($list->tgl_awal.' '.$list->jam_awal),"d-m-Y H:i");
 			$row['tgl_akhir'] = date_format(date_create($list->tgl_akhir.' '.$list->jam_akhir),"d-m-Y H:i");
 			$row['total_hari'] = $list->total_hari;
-			$row['total_jam'] = $list->total_jam;
+			$row['total_menit'] = $list->total_menit;
 			$row['file'] = $list->file == NULL ? '-' : $list->file;
 			$row['alasan_ditolak'] = $list->alasan_ditolak;
 			$data[] = $row; 
@@ -157,7 +157,7 @@ class Ijincuti extends CI_Controller {
 		$data['tgl_awal'] = date_format(date_create($detail['tgl_awal'].' '.$detail['jam_awal']),"d-m-Y H:i");
 		$data['tgl_akhir'] = date_format(date_create($detail['tgl_akhir'].' '.$detail['jam_akhir']),"d-m-Y H:i");
 		$data['total_hari'] = $detail['total_hari'];
-		$data['total_jam'] = $detail['total_jam'];
+		$data['total_menit'] = $detail['total_menit'];
 		$data['file'] = $detail['file'] == NULL ? '-' : $detail['file'];
 		$data['alasan_ditolak'] = $detail['alasan_ditolak'];
 		$data['karyawan'] = $karyawan['nama'];

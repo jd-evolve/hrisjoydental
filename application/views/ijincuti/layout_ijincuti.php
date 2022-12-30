@@ -15,11 +15,14 @@
             </li>
         </ul>
     </div>
+
+    <input type="hidden" id="id_ijincuti" value="<?= $id_ijincuti ?>">
+
     <div class="row">
         <div class="col-md-9 ml-auto mr-auto">
             <div class="card">
                 <div class="card-body">
-                    <div class="card-title text-center">Pengajuan Ijin Duka</div>
+                    <div class="card-title text-center">Pengajuan <?= $title ?></div>
                     <div class="card-category text-center">Baca persyaratan standar operasional prosedur</div>
 
                     <ul class="nav nav-pills nav-primary my-4">
@@ -36,9 +39,7 @@
 
                     <div class="" id="show-nav1">
                         <h4><b>Persyaratan :</b></h4>
-                        <ol class="ml-0" type="1">
-                            <li>Progress. . .</li>
-                        </ol>
+                        <ol class="ml-0" type="1"><?= $persyaratan ?></ol>
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" id="persetujuan" style="left:20px !important;">
                             <span class="card-category mt-0 ml-4 mb-1">Saya menyetujui persyaratan diatas.</span>
@@ -55,8 +56,10 @@
                             <table class="table-ijin-cuti">
                                 <tr>
                                     <td colspan="2" class="surat">
-                                        <p class="font-18px mt-2"><b>FORM IJIN DUKA</b></p>
+                                        <p class="font-18px mt-2"><b>FORM <span class="text-uppercase"><?= $title ?></span></b></p>
                                         <p class="mb-0" align="left">Yogyakarta,<?= date("d F Y") ?></p>
+                                        <p class="mb-0" align="left">Periode : <u><?= $on_periode ? $on_periode['keterangan'] : 'Belum Tersedia' ?></u></p>
+                                        <input type="hidden" name="id_periode" value="<?= $on_periode ? $on_periode['id_periode']:'' ?>">
                                         <div class="text-left">
                                             <p class="mb-0 mt-3">Yang bertanda tangan di bawah ini : </p>
                                             <table class="mb-0" width="100%">
@@ -86,26 +89,53 @@
                                                     <td><input type="file" accept=".jpg, .jpeg, .png" class="form-control-file" name="file_ijincuti"></td>
                                                 </tr>
                                             </table>
-                                            <p class="mb-0 mt-3">Dengan ini mengajukan permintaan ijin/cuti, </p>
+                                            <p class="mb-0 mt-3">Dengan ini mengajukan permintaan ijin/cuti, 
+                                                
+                                                <span class="ml-3">
+                                                    <label class="checkbox-inline mr-1"><input type="radio" name="pilih_ijincuti" value="1" require checked> Per Shift </label>
+                                                    <label class="checkbox-inline mr-1"><input type="radio" name="pilih_ijincuti" value="0" required> Per Jam </label>
+                                                </span>
+                                            </p>
                                             <table class="mb-0" width="100%">
-                                                <tr valign="top">
-                                                    <td width="20%">Dari<span class="text-danger">**</span></td>
-                                                    <td> : </td>
-                                                    <td><input type="text" name="tgl_awal" class="input-line bg-transparent p-0 width-full tgl-wkt" placeholder="dd-mm-yyyy 00:00" required></td>
-                                                </tr>
-                                                <tr valign="top">
-                                                    <td width="20%">Sampai<span class="text-danger">**</span></td>
-                                                    <td> : </td>
-                                                    <td><input type="text" name="tgl_akhir" class="input-line bg-transparent p-0 width-full tgl-wkt" placeholder="dd-mm-yyyy 00:00" required></td>
-                                                </tr>
-                                                <tr valign="top">
-                                                    <td width="20%">Jumlah</td>
-                                                    <td> : </td>
-                                                    <td>
-                                                        <input type="number" name="total_hari" class="input-line bg-transparent p-0 text-right" style="width:35px;" min="0" value="0" required> Hari, 
-                                                        <input type="number" name="total_jam" class="input-line bg-transparent p-0 text-right" style="width:35px;" min="0" value="0" required> Jam
-                                                    </td>
-                                                </tr>
+                                                <tbody id="per_shift">
+                                                    <tr valign="top">
+                                                        <td width="20%">Dari</td>
+                                                        <td> : </td>
+                                                        <td><input type="text" name="tgl_awal" id="tgl_awal" class="input-line bg-transparent p-0 width-full tgl" placeholder="dd-mm-yyyy" required></td>
+                                                    </tr>
+                                                    <tr valign="top">
+                                                        <td width="20%">Sampai</td>
+                                                        <td> : </td>
+                                                        <td><input type="text" name="tgl_akhir" id="tgl_akhir" class="input-line bg-transparent p-0 width-full tgl" placeholder="dd-mm-yyyy" required></td>
+                                                    </tr>
+                                                </tbody>
+                                                <tbody id="per_jam" class="none">
+                                                    <tr valign="top">
+                                                        <td width="20%">Tanggal</td>
+                                                        <td> : </td>
+                                                        <td><input type="text" id="tanggal" class="input-line bg-transparent p-0 width-full tgl" placeholder="dd-mm-yyyy"></td>
+                                                    </tr>
+                                                    <tr valign="top">
+                                                        <td width="20%">Dari</td>
+                                                        <td> : </td>
+                                                        <td><input type="text" name="jam_awal" id="jam_awal" class="input-line bg-transparent p-0 width-full wkt" placeholder="00:00" required></td>
+                                                    </tr>
+                                                    <tr valign="top">
+                                                        <td width="20%">Sampai</td>
+                                                        <td> : </td>
+                                                        <td><input type="text" name="jam_akhir" id="jam_akhir" class="input-line bg-transparent p-0 width-full wkt" placeholder="00:00" required></td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr valign="top">
+                                                        <td width="20%">Jumlah</td>
+                                                        <td> : </td>
+                                                        <td><span id="show-thari">0</span> Hari, <span id="show-tmenit">0</span> Menit
+                                                            <input type="hidden" name="total_hari" id="total_hari" required> 
+                                                            <input type="hidden" name="total_menit" id="total_menit" required> 
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
                                             </table>
                                             <br>
                                             <p align="justify">Demikian permintaan ini saya buat dengan penuh kesadaran untuk dapat dipertimbangkan sebagaimana mestinya.</p>
@@ -113,11 +143,12 @@
                                     </td>
                                 </tr>
                             </table>
-                            <p class="mt-2 mb-0 text-muted"><span class="text-danger">*</span>) Batas maksimal file yang dapat di upload adalah 2,5MB dan format jpg/png.</p>
-                            <p class="mt-0 mb-0 text-muted"><span class="text-danger">**</span>) Pastikan format tanggal waktu yang di inputkan telah sesuai. Contoh <b><?= date("d-m-Y")?> 00:00</b></p>
+                            <p class="mt-2 mb-0 text-muted"><span class="text-danger">*</span>) Batas maksimal file yang dapat di upload adalah 2,5MB dan format jpg/png. Optional.</p>
+                            <?php if($on_periode){ ?>
                             <div class="text-right mt-3">
                                 <button class="btn btn-success btn-sm" type="button" id="ajukan_form">Ajukan</button>
                             </div>
+                            <?php } ?>
                         </form>
                     </div>
 
@@ -168,8 +199,8 @@
                             <table class="table-ijin-cuti">
                                 <tr>
                                     <td colspan="2" class="surat">
-                                        <p class="font-18px mt-2"><b>FORM IJIN DUKA</b></p>
-                                        <p class="mb-0" align="left">Yogyakarta, <span id="show-tgl_create"></span>
+                                        <p class="font-18px mt-2"><b>FORM <span class="text-uppercase"><?= $title ?></span></b></p>
+                                        <p class="mb-0" align="left">Yogyakarta, <span id="show-tgl_create"></span></p>
                                         <div class="text-left">
                                             <p class="mb-0 mt-3">Yang bertanda tangan di bawah ini : </p>
                                             <table class="mb-0" width="100%">
@@ -204,7 +235,7 @@
                                                 terhitung mulai dari tanggal <b><span id="show-tgl_awal"></span></b> 
                                                 sampai dengan tanggal <b><span id="show-tgl_akhir"></span></b>
                                                 dengan jumlah <b><span id="show-total_hari"></span> hari</b> 
-                                                dan <b><span id="show-total_jam"></span> jam</b>.
+                                                dan <b><span id="show-total_menit"></span> jam</b>.
                                             </p>
                                             <br>
                                             <p class="" align="justify">Demikian permintaan ini saya buat dengan penuh kesadaran untuk dapat dipertimbangkan sebagaimana mestinya.</p>
@@ -233,10 +264,10 @@
                         </div> 
                     </div>
                     <div class="modal-footer">
+                        <button class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">Kembali</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
 </div>

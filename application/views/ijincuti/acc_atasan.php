@@ -109,7 +109,7 @@
                                                 terhitung mulai dari tanggal <b><span id="show-tgl_awal"></span></b> 
                                                 sampai dengan tanggal <b><span id="show-tgl_akhir"></span></b>
                                                 dengan jumlah <b><span id="show-total_hari"></span> hari</b> 
-                                                dan <b><span id="show-total_jam"></span> jam</b>.
+                                                dan <b><span id="show-total_menit"></span> menit</b>.
                                             </p>
                                             <br>
                                             <p class="" align="justify">Demikian permintaan ini saya buat dengan penuh kesadaran untuk dapat dipertimbangkan sebagaimana mestinya.</p>

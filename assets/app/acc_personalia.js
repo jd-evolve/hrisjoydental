@@ -139,8 +139,8 @@
                 },
                 success: function (data) {
                     $("#show-ket_ijincuti").html(data.ijincuti);
-                    $("#btn-setujui").attr('data-cutcuti',data.potong_cuti);
-                    $("#btn-setujui").attr('data-jamperhari',data.jam_perhari);
+                    $("#cutcuti").val(data.potong_cuti);
+                    $("#jamperhari").val(data.jam_perhari);
                     $("#show-tgl_create").html(data.tgl_create);
                     var stts = "";
                     if(data.status == 0 || data.status == 1){
@@ -156,7 +156,7 @@
                     $("#show-tgl_awal").html(data.tgl_awal);
                     $("#show-tgl_akhir").html(data.tgl_akhir);
                     $("#show-total_hari").html(data.total_hari);
-                    $("#show-total_jam").html(data.total_jam);
+                    $("#show-total_menit").html(data.total_menit);
 
                     $("#show-karyawan").html(data.karyawan);
                     $("#show-jabatan").html(data.jabatan);
@@ -214,11 +214,11 @@
             e.preventDefault();
             $("#modal-showform").modal('hide');
             $("#modal-setuju").modal('show');
-            let cut_cuti = $(this).data('cutcuti');
-            let jam_perhari = $(this).data('jamperhari');
+            let cut_cuti = $("#cutcuti").val();
+            let jam_perhari = $('#jamperhari').val();
             $("#t_jam").html(jam_perhari);
             $("#potong_jam").val(jam_perhari*cut_cuti);
-            $('input[name="potong_cuti"]').val(cut_cuti);
+            $('input[name="potong_cuti"]').val(parseFloat(cut_cuti));
             
             $('#potong_jam').keyup(function(){
                 var potong = ($(this).val()/jam_perhari).toFixed(2);

@@ -107,7 +107,7 @@
                     $("#show-tgl_awal").html(data.tgl_awal);
                     $("#show-tgl_akhir").html(data.tgl_akhir);
                     $("#show-total_hari").html(data.total_hari);
-                    $("#show-total_jam").html(data.total_jam);
+                    $("#show-total_menit").html(data.total_menit);
         
                     if(data.file == '-'){
                         $("#show-file").html('-');

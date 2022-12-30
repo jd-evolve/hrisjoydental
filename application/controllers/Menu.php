@@ -166,8 +166,19 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['id_ijincuti'] = 1;
+			$data['persyaratan'] =
+				'<li>Sebelum mengisi form ijin/cuti pastikan data periode sudah tersedia.</li>'.
+				'<li>Karyawan tetap, yang sudah lolos evaluasi masa percobaan.</li>'.
+				'<li>Karyawan yang hendak menggunakan cuti tahunan, wajib memberitahukan kepada bagian HRD dengan mengajukan form permohonan cuti yang di setujui Atasan selambat-lambatanya 1 (satu) minggu sebelumnya.</li>'.
+				'<li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD.</li>'.
+				'<li>Karyawan menunggu persetujuan dari atasan.</li>'.
+				'<li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>'.
+				'<li>Karyawan yang mengajukan cuti, akan dipotong cuti tahunan sejumlah ijin/cuti yang diajukan.</li>';
 			$this->load->view('layout/header', $data);
-			$this->load->view('ijincuti/cuti_tahunan');
+			$this->load->view('ijincuti/layout_ijincuti');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');
@@ -181,8 +192,19 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['id_ijincuti'] = 2;
+			$data['persyaratan'] = 
+				'<li>Sebelum mengisi form ijin/cuti pastikan data periode sudah tersedia.</li>'.
+				'<li>Karyawan yang hendak menggunakan cuti menikah, wajib memberitahukan kepada bagian HRD dengan mengajukan form permohonan cuti yang di setujui Atasan selambat-lambatanya 1 (satu) minggu.</li>'.
+				'<li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD.</li>'.
+				'<li>Karyawan menunggu persetujuan dari atasan.</li>'.
+				'<li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>'.
+				'<li>Karyawan yang mengajukan cuti menikah mendapatkan hak 3 hari cuti tanpa memotong cuti tahunan.</li>'.
+				'<li>Karyawan yang mengajukan cuti lebih dari 3 hari, akan dipotongkan cuti tahunan sejumlah cuti yang diajukan.</li>';
 			$this->load->view('layout/header', $data);
-			$this->load->view('ijincuti/cuti_menikah');
+			$this->load->view('ijincuti/layout_ijincuti');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');
@@ -196,8 +218,21 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['id_ijincuti'] = 3;
+			$data['persyaratan'] = 
+				'<li>Sebelum mengisi form ijin/cuti pastikan data periode sudah tersedia.</li>'.
+				'<li>Karyawan yang hendak mengambil hak cuti melahirkan, wajib menyampaikan surat permohonan istirahat selambat - lambatnya 10 (sepuluh) hari sebelum  waktu istirhat.</li>'.
+				'<li>Surat permohonan yang dimaksud harus disertai dengan Surat Keterangan Dokter.</li>'.
+				'<li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD.</li>'.
+				'<li>Karyawan melampirkan Surat Keterangan Dokter (berupa soft file lalu di upload dan hard file dikumpulkan ke bagian personalia) Note : jika tidak ada surat dokter/HPL gaji tidak ditanggung.</li>'.
+				'<li>Karyawan menunggu persetujuan dari atasan.</li>'.
+				'<li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>'.
+				'<li>Karyawan yang mengajukan cuti melahirkan mendapatkan hak 3 bulan cuti, tanpa memotong cuti tahunan.</li>'.
+				'<li><b>Note : gaji tetap hanya diberikan kepada karyawan yang masa kerja lebih dari 2 tahun.</b></li>';
 			$this->load->view('layout/header', $data);
-			$this->load->view('ijincuti/cuti_melahirkan');
+			$this->load->view('ijincuti/layout_ijincuti');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');
@@ -211,8 +246,19 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['id_ijincuti'] = 4;
+			$data['persyaratan'] = 
+				'<li>Sebelum mengisi form ijin/cuti pastikan data periode sudah tersedia.</li>'.
+				'<li>Ijin yang diajukan dengan alasan yang jelas dan dapat dipertanggungjawabkan.</li>'.
+				'<li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD (karena bersifat mendesak karyawan menghubungi atasan dan bagian HRD agar permohonan ijin segera diproses).</li>'.
+				'<li>Karyawan menunggu persetujuan dari atasan.</li>'.
+				'<li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>'.
+				'<li>Untuk karyawan tetap, cuti akan di potong sejumlah cuti yang diajukan.</li>'.
+				'<li>Untuk karyawan masa percobaan, akan di potongkan gaji sebesar 1 shift yang di kalikan dengan jumlah ijin yang diajukan.</li>';
 			$this->load->view('layout/header', $data);
-			$this->load->view('ijincuti/ijin_pribadi');
+			$this->load->view('ijincuti/layout_ijincuti');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');
@@ -226,8 +272,14 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['id_ijincuti'] = 5;
+			$data['persyaratan'] = 
+				'<li>Sebelum mengisi form ijin/cuti pastikan data periode sudah tersedia.</li>'.
+				'<li>Progress. . .</li>';
 			$this->load->view('layout/header', $data);
-			$this->load->view('ijincuti/ijin_duka');
+			$this->load->view('ijincuti/layout_ijincuti');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');
@@ -241,8 +293,19 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['id_ijincuti'] = 6;
+			$data['persyaratan'] = 
+				'<li>Sebelum mengisi form ijin/cuti pastikan data periode sudah tersedia.</li>'.
+				'<li>Karyawan mengisi form permohonan cuti ditunjukkan kepada atasan yang bersangkutan dan bagian HRD (karena bersifat mendesak karyawan menghubungi atasan dan bagian HRD agar permohonan ijin segera diproses).</li>'.
+				'<li>Karyawan melampirkan Surat Keterangan Dokter (berupa soft file lalu di upload dan hard file dikumpulkan ke bagian personalia saat masuk kerja).</li>'.
+				'<li>Karyawan menunggu persetujuan dari atasan.</li>'.
+				'<li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>'.
+				'<li>Untuk karyawan tetap, cuti akan di potong sejumlah cuti yang diajukan.</li>'.
+				'<li>Untuk karyawan masa percobaan, akan di potongkan gaji sebesar 1 shift yang di kalikan dengan jumlah ijin yang diajukan.</li>';
 			$this->load->view('layout/header', $data);
-			$this->load->view('ijincuti/ijin_sakit');
+			$this->load->view('ijincuti/layout_ijincuti');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');
