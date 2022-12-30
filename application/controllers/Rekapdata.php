@@ -14,21 +14,23 @@ class Rekapdata extends CI_Controller {
     }
 
 	public function read_rekapijincuti(){
-		$ijincuti = $this->m_auth->GetLlistIjinCuti_Rekap($_POST['id_ijincuti'],$_POST['id_karyawan']);
+		$ijincuti = $this->m_auth->GetLlistIjinCuti_Rekap($_POST['id_ijincuti'],$_POST['id_karyawan'],$_POST['periode'],$_POST['status']);
 		$data = [];
 		$no = 0;
 		foreach ($ijincuti as $list) {
 			$no++;
 			$row = [];
 			$row['No'] = $no;
-			$row['Tanggal'] = date_format(date_create($list->tgl_input),"d-m-Y");
+			$row['Periode'] = $list->ket_periode;
 			$row['Awal'] = date_format(date_create($list->tgl_awal.' '.$list->jam_awal),"d-m-Y H:i");
 			$row['Akhir'] = date_format(date_create($list->tgl_akhir.' '.$list->jam_akhir),"d-m-Y H:i");
 			$row['Hari'] = $list->total_hari;
 			$row['Jam'] = $list->total_menit;
 			$row['IjinCuti'] = $list->nama_ijincuti;
-			$row['Potongan'] = floatval($list->potong_cuti);
+			$row['Potong'] = floatval($list->potong_cuti);
+			$row['Atasan'] = $list->atasan;
 			$row['Karyawan'] = $list->karyawan;
+			$row['Status'] = $list->status;
 			$row['Aksi'] = $list->id_ijincuti_list;
 			$data[] = $row; 
 		}

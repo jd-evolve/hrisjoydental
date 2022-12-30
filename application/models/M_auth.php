@@ -207,7 +207,7 @@ class M_auth extends CI_Model {
         return $query;
     }
 
-    public function GetLlistIjinCuti_Rekap($id_ijincuti,$id_karyawan){
+    public function GetLlistIjinCuti_Rekap($id_ijincuti,$id_karyawan,$id_periode,$status){
         if($id_ijincuti){
             $ijincuti = ' AND a.id_ijincuti = '.$id_ijincuti;
         }else{
@@ -218,15 +218,23 @@ class M_auth extends CI_Model {
         }else{
             $karyawan = '';
         }
+        if($status == 1){
+            $status = ' AND (a.status = 0 OR a.status = 1)';
+        }else{
+            $status = ' AND a.status = '.$status;
+        }
         $query = $this->db->query("
-            SELECT b.nama_ijincuti, c.nama as karyawan, c.bagian, a.id_ijincuti_list, a.potong_cuti, 
-            a.tgl_awal, a.tgl_akhir, a.jam_awal, a.jam_akhir, a.total_hari, a.total_menit, a.status, a.tgl_input
+            SELECT a.*, b.keterangan as ket_periode, c.nama_ijincuti, f.nama as atasan, d.nama as karyawan, d.bagian
             FROM db_ijincuti_list a
-            JOIN db_ijincuti b ON a.id_ijincuti = b.id_ijincuti
-            JOIN db_account c ON a.id_karyawan = c.id_account
-            WHERE a.status = 2
+            JOIN db_periode b ON a.id_periode = b.id_periode
+            JOIN db_ijincuti c ON a.id_ijincuti = c.id_ijincuti
+            JOIN db_account d ON a.id_karyawan = d.id_account
+            JOIN db_posisi e ON d.id_posisi = e.id_posisi
+            JOIN db_account f ON e.id_atasan = f.id_account
+            WHERE a.id_periode = ".$id_periode."
             ".$ijincuti."
             ".$karyawan."
+            ".$status."
             ORDER BY a.tgl_edit desc
         ")->result();
         return $query;

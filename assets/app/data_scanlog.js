@@ -241,22 +241,14 @@
         e.preventDefault();
         var id_periode = $(this).data('id');
         $.ajax({
-            url: 'absensi/cek_lembur',
+            url: 'absensi/cek_form_pengajuan',
             method: "POST",
             dataType: "json",
             data: {
                 id_periode: id_periode
             },
-            success: function (cek_acc) {
-                if(parseInt(cek_acc) < 1 ){
-                    $("#modal-scanlog").modal();
-                    $('input[name="tgl_libur"]').val('');
-                    $('input[name="ket_libur"]').val('');
-                    $("#file_scanlog").val('');
-                    $('input[name="id_periode_x"]').val(id_periode);
-                    arrHlibur.splice(0, arrHlibur.length);
-                    listHlibur();
-                }else{
+            success: function (json) {
+                if(json.val == 'ada-lembur'){
                     swal({
                         title: "ACC Form Lembur",
                         type: "warning",
@@ -273,13 +265,52 @@
                             },
                         },
                     }).then((Delete) => {
-                        var base_url = $('input[name="base_url"]').val();
-                        document.location.href = base_url + 'rekap-lembur';
+                        if (Delete) {
+                            var base_url = $('input[name="base_url"]').val();
+                            document.location.href = base_url + 'rekap-lembur';
+                        } else {
+                            swal.close();
+                        }
                     });
                     $('.swal-text').html('<div class="style1"> Masih terdapat pengajuan form lembur yang belum di ACC oleh atasannya! Lanjutkan untuk lihat pengajuan form lembur? </div>');
                     $('.style1').attr('style','width:100% !important; padding:15px; border-radius:4px; font-size:13px; background-color:#d9e2f7;');
                     $('.style2').attr('style','width:100% !important; padding:15px; border-radius:4px; font-weight:600;');
-                }
+                }else if(json.val == 'ada-ijincuti'){
+                    swal({
+                        title: "ACC Form Ijin/Cuti",
+                        type: "warning",
+                        text: ' ',
+                        buttons: {
+                            cancel: {
+                                visible: true,
+                                text: "Kembali",
+                                className: "btn btn-danger",
+                            },
+                            confirm: {
+                                text: "Lanjutkan",
+                                className: "btn btn-success",
+                            },
+                        },
+                    }).then((Delete) => {
+                        if (Delete) {
+                            var base_url = $('input[name="base_url"]').val();
+                            document.location.href = base_url + 'rekap-ijincuti';
+                        } else {
+                            swal.close();
+                        }
+                    });
+                    $('.swal-text').html('<div class="style1"> Masih terdapat pengajuan form ijin/cuti yang belum di ACC! Lanjutkan untuk lihat pengajuan form ijin/cuti? </div>');
+                    $('.style1').attr('style','width:100% !important; padding:15px; border-radius:4px; font-size:13px; background-color:#d9e2f7;');
+                    $('.style2').attr('style','width:100% !important; padding:15px; border-radius:4px; font-weight:600;');
+                }else{
+                    $("#modal-scanlog").modal();
+                    $('input[name="tgl_libur"]').val('');
+                    $('input[name="ket_libur"]').val('');
+                    $("#file_scanlog").val('');
+                    $('input[name="id_periode_x"]').val(id_periode);
+                    arrHlibur.splice(0, arrHlibur.length);
+                    listHlibur();
+                } 
             },
         });
     });

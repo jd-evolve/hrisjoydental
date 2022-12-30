@@ -400,6 +400,7 @@ class Menu extends CI_Controller {
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
 			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
 			$data['cekmenu'] = $this->DataLevel();
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
 			$data['data_ijincuti'] = $this->m_main->getResult('db_ijincuti','status',1);
 			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
 			$this->load->view('layout/header', $data);

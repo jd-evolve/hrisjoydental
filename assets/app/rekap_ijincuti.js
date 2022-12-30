@@ -17,8 +17,18 @@
         rekapijincuti();
     });
 
+    $('select[name="filter-periode"]').change(function() {
+        rekapijincuti();
+    });
+
+    $('select[name="filter-status"]').change(function() {
+        rekapijincuti();
+    });
+
     rekapijincuti();
     function rekapijincuti(){
+        var periode = $('select[name="filter-periode"]').val();
+        var status = $('select[name="filter-status"]').val();
         var ijincuti = $('select[name="filter-ijincuti"]').val();
         var karyawan = $('select[name="filter-karyawan"]').val();
         var id_ijincuti = ijincuti == "" ? null : ijincuti;
@@ -29,6 +39,8 @@
                 url: "rekapdata/read_rekapijincuti",
                 type: "POST",
                 data: {
+                    periode: periode,
+                    status: status,
                     id_ijincuti: id_ijincuti,
                     id_karyawan: id_karyawan,
                 },
@@ -63,14 +75,26 @@
             buttons: [ ],
             columns: [
                 { data: "No" },
-                { data: "Tanggal" },
+                { data: "Periode" },
+                { data: "Atasan" },
+                { data: "Karyawan" },
                 { data: "IjinCuti" },
                 { data: "Awal" },
                 { data: "Akhir" },
-                { data: "Hari" },
-                { data: "Jam" },
-                { data: "Potongan" },
-                { data: "Karyawan" },
+                { data: "Potong" },
+                { data: "Status" , render : function ( data, type, row, meta ) {
+                    var stts = "";
+                    if(data == 0){
+                        stts = '<span class="btn btn-warning fw-bold btn-xs py-0 px-1">Diajukan Atasan</span>';
+                    }else if(data == 1){
+                        stts = '<span class="btn btn-warning fw-bold btn-xs py-0 px-1">Diajukan Personalia</span>';
+                    }else if(data == 2){
+                        stts = '<span class="btn btn-success fw-bold btn-xs py-0 px-1">Disetujui</span>';
+                    }else if(data == 3){
+                        stts = '<span class="btn btn-danger fw-bold btn-xs py-0 px-1">Ditolak</span>';
+                    }
+                    return type === 'display' ? stts : data;
+                }},
                 { data: "Aksi" , render : function ( data, type, row, meta ) {
                     return type === 'display'  ?
                     '<button type="button" data-id="'+data+'" id="show-form" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
@@ -102,7 +126,7 @@
                         stts = '<span class="btn btn-danger fw-bold btn-xs py-0 px-1">Ditolak</span>';
                     }
                     document.getElementById("text-showform").innerHTML = 'Status : '+stts;
-                    $("#show-tgl_create").html(data.tgl_input);
+                    $("#show-tgl_create").html(data.tgl_create);
                     $("#show-keperluan").html(data.keperluan);
                     $("#show-tgl_awal").html(data.tgl_awal);
                     $("#show-tgl_akhir").html(data.tgl_akhir);

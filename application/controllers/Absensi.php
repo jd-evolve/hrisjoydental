@@ -579,6 +579,20 @@ class Absensi extends CI_Controller {
 		];
 		$this->m_main->createIN('db_scanlog',$datax);
 	}
+
+	public function cek_form_pengajuan(){
+		$ceklembur = $this->m_main->countData('db_lembur','id_periode = '.$_POST['id_periode'].' AND status = 1');
+		$cekijincuti = $this->m_main->countData('db_ijincuti_list','id_periode = '.$_POST['id_periode'].' AND (status = 0 OR status = 1)');
+		if($ceklembur['count']){
+			$output['val'] = "ada-lembur";
+		}else if($cekijincuti['count']){
+			$output['val'] = "ada-ijincuti";
+		}else{
+			$output['val'] = "null";
+		}
+		echo json_encode($output);
+		exit();
+	}
 	
     //================= JAM KERJA
 	public function read_jamkerja(){
@@ -1017,10 +1031,5 @@ class Absensi extends CI_Controller {
 		}
         echo json_encode($output);
         exit();
-	}
-
-	public function cek_lembur(){
-		$ceklembur = $this->m_main->countData('db_lembur','id_periode = '.$_POST['id_periode'].' AND status = 1');
-		echo json_encode($ceklembur['count']);
 	}
 }

@@ -21,12 +21,32 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="btn-group border-option my-1">
+                        <label class="label-filter">Periode: </label>&nbsp;&nbsp;
+                        <select class="form-control" name="filter-periode" id="filter-periode">
+                                <?php foreach ($data_periode as $list) { ?>
+                                    <option value="<?= $list->id_periode ?>"><?= $list->keterangan ?></option>
+                                <?php }?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="btn-group border-option my-1">
                         <label class="label-filter">Ijin/Cuti: </label>&nbsp;&nbsp;
                         <select class="form-control" name="filter-ijincuti" id="filter-ijincuti">
                             <option value="">Semua Ijin/Cuti</option>
                             <?php foreach ($data_ijincuti as $list) { ?>
                                 <option value="<?= $list->id_ijincuti ?>"><?= $list->nama_ijincuti ?></option>
                             <?php }?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="btn-group border-option my-1">
+                        <label class="label-filter">Status: </label>&nbsp;&nbsp;
+                        <select class="form-control" name="filter-status" id="filter-status">
+                            <option value="1">Diajukan</option>
+                            <option value="2" selected>Disetujui</option>
+                            <option value="3">Ditolak</option>
                         </select>
                     </div>
                 </div>
@@ -51,15 +71,15 @@
                 <thead>
                     <tr>
                         <th style="width:5%;">No</th>
-                        <th style="width:10%;">Tanggal</th>
-                        <th style="width:15%;">Ijin/Cuti</th>
+                        <th style="width:10%;">Periode</th>
+                        <th style="width:20%;">Atasan</th>
+                        <th style="width:20%;">Karyawan</th>
+                        <th style="width:10%;">Ijin/Cuti</th>
                         <th style="width:10%;">Awal</th>
                         <th style="width:10%;">Akhir</th>
-                        <th style="width:8%;">Jml.Hari</th>
-                        <th style="width:8%;">Jml.Jam</th>
-                        <th style="width:8%;">Potongan</th>
-                        <th style="width:16%;">Karyawan</th>
-                        <th style="width:10%;">Aksi</th>
+                        <th style="width:5%;">Potong</th>
+                        <th style="width:5%;">Status</th>
+                        <th style="width:5%;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
