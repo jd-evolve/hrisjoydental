@@ -70,6 +70,7 @@ class Ijincuti extends CI_Controller {
 				'jam_akhir' => date_format(date_create($_POST['jam_akhir']),"H:i:s"),
 				'total_hari' => $_POST['total_hari'],
 				'total_menit' => $_POST['total_menit'],
+				'ket_ijincuti' => $_POST['ket_ijincuti'],
 				'tgl_input' => date("Y-m-d H:i:s"),
 				'tgl_edit' => date("Y-m-d H:i:s"),
 				'potong_cuti' => $potongancuti['potong_cuti'],

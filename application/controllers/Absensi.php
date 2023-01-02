@@ -494,6 +494,17 @@ class Absensi extends CI_Controller {
 															//Simpan data scanlog
 															$next = true;
 															$hdkey = date_format(date_create($date_range[$i]),"Ymd");
+															$cekIC = $this->m_auth->cekScanIjinCutiJam($id_periode, $account['id_account'], date_format(date_create($date_range[$i]),"Y-m-d"));
+															if($cekIC){
+																if($cekIC['ket_ijincuti'] == '1'){
+																	$terlambat = $terlambat - intval($cekIC['total_menit']);
+																}else if($cekIC['ket_ijincuti'] == '2'){
+																	$pulangawal = $pulangawal - intval($cekIC['total_menit']);
+																}
+																$terlambat = $terlambat < 0 ? 0 : $terlambat;
+																$pulangawal = $pulangawal < 0 ? 0 : $pulangawal;
+															}
+															$keterangan = $cekIC ? $cekIC['nama_ijincuti'] : (!empty($harilibur[$hdkey]['ket']) ? $harilibur[$hdkey]['ket'] : NULL);
 															$datax = [
 																'id_periode' => $id_periode,
 																'id_karyawan' => $account['id_account'],
@@ -505,7 +516,7 @@ class Absensi extends CI_Controller {
 																'terlambat' => $terlambat,
 																'pulangawal' => $pulangawal,
 																'shift' => $jk['dihitung'],
-																'keterangan' => !empty($harilibur[$hdkey]['ket']) ? $harilibur[$hdkey]['ket'] : NULL,
+																'keterangan' => $keterangan,
 																'libur' => !empty($harilibur[$hdkey]['ket']) ? 1 : ($id_hari==0?1:0),
 																'lupa' => 0,
 																'tgl_input' => date("Y-m-d H:i:s"),
@@ -558,11 +569,12 @@ class Absensi extends CI_Controller {
 		exit();
 	}
 
-	private function NullScan($id_periode,$account,$date_range,$id_hari,$harilibur){
-		$hdkey = date_format(date_create($date_range),"Ymd");							
+	private function NullScan($id_periode,$id_karyawan,$date_range,$id_hari,$harilibur){
+		$cekIC = $this->m_auth->cekScanIjinCutiShift($id_periode, $id_karyawan, date_format(date_create($date_range),"Y-m-d"));
+		$hdkey = date_format(date_create($date_range),"Ymd");
 		$datax = [
 			'id_periode' => $id_periode,
-			'id_karyawan' => $account,
+			'id_karyawan' => $id_karyawan,
 			'id_cabang' => NULL,
 			'tanggal' => date_format(date_create($date_range),"Y-m-d"),
 			'jam_masuk' => NULL,
@@ -570,8 +582,8 @@ class Absensi extends CI_Controller {
 			'lembur' => 0,
 			'terlambat' => 0,
 			'pulangawal' => 0,
-			'shift' => 0,
-			'keterangan' => !empty($harilibur[$hdkey]['ket']) ? $harilibur[$hdkey]['ket'] : ($id_hari==0?'Hari Minggu':NULL),
+			'shift' => $cekIC ? 1 : 0,
+			'keterangan' => $cekIC ? $cekIC['nama_ijincuti'] : (!empty($harilibur[$hdkey]['ket']) ? $harilibur[$hdkey]['ket'] : ($id_hari==0?'Hari Minggu':NULL)),
 			'libur' => !empty($harilibur[$hdkey]['ket']) ? 1 : ($id_hari==0?1:0),
 			'tgl_input' => date("Y-m-d H:i:s"),
 			'tgl_edit' => date("Y-m-d H:i:s"),

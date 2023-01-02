@@ -10435,6 +10435,9 @@ hr {
 .inline-flex {
     display: -webkit-inline-box !important;
 }
+.width-auto {
+    width: auto;
+}
 .width-full {
     width: 100%;
 }

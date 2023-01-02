@@ -89,13 +89,13 @@
                                                     <td><input type="file" accept=".jpg, .jpeg, .png" class="form-control-file" name="file_ijincuti"></td>
                                                 </tr>
                                             </table>
-                                            <p class="mb-0 mt-3">Dengan ini mengajukan permintaan ijin/cuti, 
-                                                
+                                            <p class="mb-0 mt-3">Dengan ini mengajukan permintaan ijin/cuti,
                                                 <span class="ml-3">
                                                     <label class="checkbox-inline mr-1"><input type="radio" name="pilih_ijincuti" value="1" require checked> Per Shift </label>
                                                     <label class="checkbox-inline mr-1"><input type="radio" name="pilih_ijincuti" value="0" required> Per Jam </label>
                                                 </span>
                                             </p>
+                                            <input type="hidden" name="ket_ijincuti" id="ket_ijincuti" value="0"> 
                                             <table class="mb-0" width="100%">
                                                 <tbody id="per_shift">
                                                     <tr valign="top">
@@ -110,6 +110,18 @@
                                                     </tr>
                                                 </tbody>
                                                 <tbody id="per_jam" class="none">
+                                                    <tr valign="top">
+                                                        <td width="20%">Keterangan</td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <select class="input-line bg-transparent p-0 width-auto" id="ket-list">
+                                                                <option value="">Pilih...</option>
+                                                                <option value="1">Terlambat</option>
+                                                                <option value="2">Pulang Awal</option>
+                                                                <option value="3">Diantara Jam Kerja</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
                                                     <tr valign="top">
                                                         <td width="20%">Tanggal</td>
                                                         <td> : </td>

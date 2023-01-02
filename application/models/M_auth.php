@@ -470,4 +470,33 @@ class M_auth extends CI_Model {
         ")->result();
         return $query;
     }
+
+    public function cekScanIjinCutiShift($id_periode, $id_karyawan, $date_range){
+        $query = $this->db->query("
+            SELECT b.nama_ijincuti
+            FROM db_ijincuti_list a
+            JOIN db_ijincuti b ON a.id_ijincuti = b.id_ijincuti
+            WHERE a.status = 2
+            AND a.ket_ijincuti = 0
+            AND a.id_periode = ".$id_periode."
+            AND a.id_karyawan = ".$id_karyawan."
+            AND a.tgl_awal >= '".$date_range."' 
+            AND a.tgl_akhir <= '".$date_range."'
+        ")->row_array();
+        return $query;
+    }
+
+    public function cekScanIjinCutiJam($id_periode, $id_karyawan, $date_range){
+        $query = $this->db->query("
+            SELECT a.total_menit, a.ket_ijincuti, b.nama_ijincuti
+            FROM db_ijincuti_list a
+            JOIN db_ijincuti b ON a.id_ijincuti = b.id_ijincuti
+            WHERE a.status = 2
+            AND a.ket_ijincuti > 0
+            AND a.id_periode = ".$id_periode."
+            AND a.id_karyawan = ".$id_karyawan."
+            AND a.tgl_awal = '".$date_range."'
+        ")->row_array();
+        return $query;
+    }
 }

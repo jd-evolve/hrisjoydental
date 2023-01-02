@@ -64,6 +64,7 @@
             $('#per_shift').removeClass('none');
             $('#per_jam').addClass('none');
             $('#tanggal').attr('required',false);
+            $('#ket-list').attr('required',false);
             $('#tanggal').val('');
             $('#tgl_awal').val('');
             $('#tgl_akhir').val('');
@@ -77,6 +78,7 @@
             $('#per_shift').addClass('none');
             $('#per_jam').removeClass('none');
             $('#tanggal').attr('required',true);
+            $('#ket-list').attr('required',true);
             $('#tanggal').val('');
             $('#tgl_awal').val('');
             $('#tgl_akhir').val('');
@@ -134,6 +136,13 @@
         }
     }
 
+    $('#ket-list').change(function() {
+        if($(this).val()){
+            $('#ket_ijincuti').val($(this).val());
+        }else{
+            $('#ket_ijincuti').val(0);
+        }
+    });
     $('#jam_awal').keyup(function(){
         range_jam();
     });
