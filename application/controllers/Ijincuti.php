@@ -48,6 +48,7 @@ class Ijincuti extends CI_Controller {
 			$row['Bagian'] = $list->bagian;
 			$row['Status'] = $list->status;
 			$row['Aksi'] = $list->id_ijincuti_list;
+			$row['status_periode'] = $list->status_periode;
 			$data[] = $row; 
 		}
 		$output = [ "data" => $data ];

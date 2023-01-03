@@ -248,10 +248,11 @@ class M_auth extends CI_Model {
             $stts = 'WHERE a.status = '.$status;
         }
         $query = $this->db->query("
-            SELECT b.nama_ijincuti, c.nama as karyawan, c.bagian, a.id_ijincuti_list, a.potong_cuti, a.status, a.tgl_input
+            SELECT b.nama_ijincuti, c.nama as karyawan, c.bagian, a.id_ijincuti_list, a.potong_cuti, a.status, a.tgl_input, d.status_periode
             FROM db_ijincuti_list a
             JOIN db_ijincuti b ON a.id_ijincuti = b.id_ijincuti
             JOIN db_account c ON a.id_karyawan = c.id_account
+            JOIN db_periode d ON a.id_periode = d.id_periode
             ".$stts."
             ORDER BY a.tgl_edit desc
         ")->result();

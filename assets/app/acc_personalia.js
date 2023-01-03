@@ -85,7 +85,7 @@
                 }},
                 { data: "Aksi" , render : function ( data, type, row, meta ) {
                     return type === 'display'  ?
-                    '<button type="button" data-id="'+data+'" id="show-detail" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
+                    '<button type="button" data-id="'+data+'" data-stp="'+row['status_periode']+'" id="show-detail" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
                         '<i class="fa fa-eye"></i>'+
                     '</button>':
                     data;
@@ -111,19 +111,25 @@
         $('body').on('click','#show-detail', function(){
             $("#modal-showform").modal();
             let id_ijincuti_list = $(this).data('id');
+            let status_periode = $(this).data('stp');
             $('input[name="id_ijincuti_list"]').val(id_ijincuti_list);
-            show_form(id_ijincuti_list);
+            show_form(id_ijincuti_list,status_periode);
         });
 
-        function show_form(id_ijincuti_list){
+        function show_form(id_ijincuti_list,status_periode){
+            console.log(status_periode)
             if(status == 3){
                 $("#show-button").addClass('none');
             }else{
                 $("#show-button").removeClass('none');
                 if(status == 2){
-                    $("#btn-tolak").html('Batalkan')
-                    $("#btn-tolak").removeClass('none');
                     $("#btn-setujui").addClass('none');
+                    if(status_periode == 2){
+                        $("#btn-tolak").addClass('none');
+                    }else{
+                        $("#btn-tolak").html('Batalkan')
+                        $("#btn-tolak").removeClass('none');
+                    }
                 }else{
                     $("#btn-tolak").removeClass('none');
                     $("#btn-setujui").removeClass('none');
