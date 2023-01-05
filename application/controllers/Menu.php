@@ -76,6 +76,8 @@ class Menu extends CI_Controller {
 			$data['data_posisi'] = $this->m_main->getResult('db_posisi','status',1);
 			$data['data_cabang'] = $this->m_main->getResult('db_cabang','status',1);
 			$data['data_jadwal_kerja'] = $this->m_main->getResult('db_jadwal_kerja','status',1);
+			$data['bpjs_dtwan_kesehatan'] = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_kesehatan');
+			$data['bpjs_dtwan_tk'] = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_tk');
 			$this->load->view('layout/header', $data);
 			$this->load->view('masterdata/account');
 			$this->load->view('layout/footer');

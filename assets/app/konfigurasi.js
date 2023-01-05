@@ -19,6 +19,10 @@
             $('input[name="initial_name"]').val(json.initial_name);
             $('input[name="keterlambatan"]').val(json.keterlambatan);
             $('input[name="pulang_awal"]').val(json.pulang_awal);
+            $('input[name="bpjs_dtnik_kesehatan"]').val(json.bpjs_dtnik_kesehatan);
+            $('input[name="bpjs_dtwan_kesehatan"]').val(json.bpjs_dtwan_kesehatan);
+            $('input[name="bpjs_dtnik_tk"]').val(json.bpjs_dtnik_tk);
+            $('input[name="bpjs_dtwan_tk"]').val(json.bpjs_dtwan_tk);
         },
     });
 

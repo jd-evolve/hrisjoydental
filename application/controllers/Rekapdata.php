@@ -65,15 +65,12 @@ class Rekapdata extends CI_Controller {
 				);
 				$insentif = $count_ijin_cuti['count'] > 0 || $count_keterlambatan['count'] > 0 || $count_lupa_absen['count'] > 0 ? 0 : $list->insentif;
 
-				//Keterlambatan
-				$sum_keterlambatan = $this->m_main->sumData(
-					'db_keterlambatan',
-						'id_periode = '.$list->id_periode.' AND '.
-						'id_karyawan = '.$list->id_karyawan.' AND '.
-						'status = 1',
-					'terlambat'
-				);
-				$keterlambatan = intval(($sum_keterlambatan['sum']) * ($list->uang_shift/$list->jam_perhari/60));
+				//Keterlambatan & Pulang Awal
+				$keterlambatan = intval(($list->terlambat) * ($list->uang_shift/$list->jam_perhari/60));
+				$pulangawal = intval(($list->pulangawal) * ($list->uang_shift/$list->jam_perhari/60));
+
+				//BPJS Corporate
+				$bpjs_corporate = $list->bpjs_corporate;
 
 				$no++;
 				$row = [];
@@ -90,6 +87,8 @@ class Rekapdata extends CI_Controller {
 				$row['no_rek'] = $list->no_rek;
 				$row['nama_bank'] = $list->nama_bank;
 				$row['nama_rek'] = $list->nama_rek;
+				$row['bpjs_persen_kesehatan'] = $list->bpjs_persen_kesehatan;
+				$row['bpjs_persen_tk'] = $list->bpjs_persen_tk;
 
 				//PENERIMAAN
 				$row['gaji_tetap'] = $list->gaji_tetap;
@@ -104,6 +103,7 @@ class Rekapdata extends CI_Controller {
 				$row['masuk_hari_libur'] = $list->uang_hlibur * $list->libur;
 				$row['tambahan_shift'] = 0;
 				$row['bonus_thr'] = 0;
+				$row['bpjs_corporate'] = $bpjs_corporate;
 				$row['lainnya_terima'] = 0;
 				$penerimaan = 
 					$row['gaji_tetap'] + 
@@ -118,11 +118,14 @@ class Rekapdata extends CI_Controller {
 					$row['masuk_hari_libur'] +
 					$row['tambahan_shift'] +
 					$row['bonus_thr'] +
+					$row['bpjs_corporate'] +
 					$row['lainnya_terima'];
 				$row['total_penerimaan'] = $penerimaan;
 
 				//POTONGAN
+				$row['bpjs_corporate_ded'] = $bpjs_corporate;
 				$row['keterlambatan'] = $keterlambatan;
+				$row['pulangawal'] = $pulangawal;
 				$row['bpjs_kesehatan'] = $list->bpjs_kesehatan;
 				$row['bpjs_tk'] = $list->bpjs_tk;
 				$row['cicilan'] = 0;
@@ -130,7 +133,9 @@ class Rekapdata extends CI_Controller {
 				$row['pajak_pph21'] = 0;
 				$row['lainnya_potong'] = 0;
 				$potongan = 
+					$row['bpjs_corporate_ded'] +
 					$row['keterlambatan'] +
+					$row['pulangawal'] +
 					$row['bpjs_kesehatan'] +
 					$row['bpjs_tk'] +
 					$row['cicilan'] +

@@ -511,31 +511,32 @@ class M_auth extends CI_Model {
 
         $query = $this->db->query("
             SELECT 
-                IF(a.id_periode is NULL, ".$id_periode.", a.id_periode) as id_periode,
+                z.id_periode, z.gaji_tetap, z.insentif, z.uang_makan, z.uang_transport,
+                z.uang_hlibur, z.uang_lembur, z.uang_shift, z.tunjangan_jabatan,
+                z.tunjangan_str, z.bpjs_kesehatan, z.bpjs_tk, z.bpjs_corporate, 
+                z.bpjs_persen_kesehatan, z.bpjs_persen_tk, 
                 IF(a.lembur is NULL, 0, a.lembur) as lembur,
                 IF(a.terlambat is NULL, 0, a.terlambat) as terlambat,
                 IF(a.pulangawal is NULL, 0, a.pulangawal) as pulangawal,
                 IF(a.shift is NULL, 0, a.shift) as shift,
                 IF(a.libur is NULL, 0, a.libur) as libur,
-                x.nama as karyawan, x.id_account as id_karyawan, x.bagian, x.nomor_induk, x.email, x.jam_perhari,
-                x.nomor_induk, x.email, x.nama_bank, x.nama_rek, x.no_rek,
-                x.gaji_tetap, x.insentif, x.uang_makan, x.uang_transport,
-                x.uang_hlibur, x.uang_lembur, x.uang_shift, x.tunjangan_jabatan,
-                x.tunjangan_str, x.bpjs_kesehatan, x.bpjs_tk, x.id_cabang, 
-                d.nama_cabang, b.keterangan as ket_periode, c.nama_posisi as jabatan
-            FROM db_account x 
+                x.nama as karyawan, x.id_account as id_karyawan, x.bagian, x.nomor_induk, x.email, 
+                x.jam_perhari, x.nomor_induk, x.email, x.nama_bank, x.nama_rek, x.no_rek,
+                d.id_cabang, d.nama_cabang, b.keterangan as ket_periode, c.nama_posisi as jabatan
+            FROM db_penggajian z
+            LEFT JOIN db_account x ON z.id_karyawan = x.id_account
             LEFT JOIN (
                 SELECT id_scanlog, id_periode, id_karyawan,
                     SUM(lembur) as lembur, SUM(terlambat) as terlambat, SUM(pulangawal) as pulangawal,
                     SUM(shift) as shift, SUM(IF(libur=1, shift, 0)) as libur
                 FROM db_scanlog
-                WHERE id_periode = ".$id_periode."
                 GROUP BY id_periode, id_karyawan
-            ) a ON x.id_account = a.id_karyawan
-            LEFT JOIN db_periode b ON IF(a.id_periode is NULL, ".$id_periode.", a.id_periode) = b.id_periode
+            ) a ON z.id_karyawan = a.id_karyawan
+            LEFT JOIN db_periode b ON z.id_periode = b.id_periode
             LEFT JOIN db_posisi c ON x.id_posisi = c.id_posisi
             LEFT JOIN db_cabang d ON x.id_cabang = d.id_cabang
-            WHERE x.status = 1
+            WHERE z.status = 1
+            AND z.id_periode = ".$id_periode."
             ".$karyawan."
             ORDER BY x.id_account asc
         ")->result();

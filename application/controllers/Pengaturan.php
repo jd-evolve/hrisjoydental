@@ -28,6 +28,10 @@ class Pengaturan extends CI_Controller {
 		$initial_name = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','initial_name');
 		$keterlambatan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','keterlambatan');
 		$pulang_awal = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','pulang_awal');
+		$bpjs_dtnik_kesehatan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtnik_kesehatan');
+		$bpjs_dtwan_kesehatan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_kesehatan');
+		$bpjs_dtnik_tk = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtnik_tk');
+		$bpjs_dtwan_tk = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_tk');
 		
 		$output = [
 			'cuti_tahunan' => floatval($cuti_tahunan['potong_cuti']),
@@ -43,6 +47,10 @@ class Pengaturan extends CI_Controller {
 			'initial_name' => $initial_name['isi_konfigurasi'],
 			'keterlambatan' => $keterlambatan['isi_konfigurasi'],
 			'pulang_awal' => $pulang_awal['isi_konfigurasi'],
+			'bpjs_dtnik_kesehatan' => $bpjs_dtnik_kesehatan['isi_konfigurasi'],
+			'bpjs_dtwan_kesehatan' => $bpjs_dtwan_kesehatan['isi_konfigurasi'],
+			'bpjs_dtnik_tk' => $bpjs_dtnik_tk['isi_konfigurasi'],
+			'bpjs_dtwan_tk' => $bpjs_dtwan_tk['isi_konfigurasi'],
 		];
 		echo json_encode($output);
 	}
@@ -61,6 +69,10 @@ class Pengaturan extends CI_Controller {
         $initial_name['isi_konfigurasi'] = $_POST['initial_name'];
         $keterlambatan['isi_konfigurasi'] = $_POST['keterlambatan'];
         $pulang_awal['isi_konfigurasi'] = $_POST['pulang_awal'];
+        $bpjs_dtnik_kesehatan['isi_konfigurasi'] = $_POST['bpjs_dtnik_kesehatan'];
+        $bpjs_dtwan_kesehatan['isi_konfigurasi'] = $_POST['bpjs_dtwan_kesehatan'];
+        $bpjs_dtnik_tk['isi_konfigurasi'] = $_POST['bpjs_dtnik_tk'];
+        $bpjs_dtwan_tk['isi_konfigurasi'] = $_POST['bpjs_dtwan_tk'];
         $tgl['tgl_edit'] = date("Y-m-d H:i:s");
 
         $this->m_main->updateIN('db_ijincuti','id_ijincuti',1,$cuti_tahunan);
@@ -69,15 +81,17 @@ class Pengaturan extends CI_Controller {
         $this->m_main->updateIN('db_ijincuti','id_ijincuti',4,$ijin_pribadi);
         $this->m_main->updateIN('db_ijincuti','id_ijincuti',5,$ijin_duka);
         $this->m_main->updateIN('db_ijincuti','id_ijincuti',6,$ijin_sakit);
-
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_host',$smtp_host);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_port',$smtp_port);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_user',$smtp_user);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','smtp_pass',$smtp_pass);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','initial_name',$initial_name);
-
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','keterlambatan',$keterlambatan);
         $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','pulang_awal',$pulang_awal);
+        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','bpjs_dtnik_kesehatan',$bpjs_dtnik_kesehatan);
+        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_kesehatan',$bpjs_dtwan_kesehatan);
+        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','bpjs_dtnik_tk',$bpjs_dtnik_tk);
+        $this->m_main->updateIN('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_tk',$bpjs_dtwan_tk);
         $this->m_main->updateIN('db_konfigurasi','status',1,$tgl);
         
         $output['message'] ="Data konfigurasi berhasil diubah!";

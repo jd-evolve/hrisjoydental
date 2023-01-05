@@ -81,6 +81,9 @@
                         'data-grade="'+row['Grade']+'" '+
                         'data-cabang="'+row['Cabang']+'" '+
 
+                        'data-bpjs_persen_kesehatan="'+row['bpjs_persen_kesehatan']+'" '+
+                        'data-bpjs_persen_tk="'+row['bpjs_persen_tk']+'" '+
+
                         'data-gaji_tetap="'+row['gaji_tetap']+'" '+
                         'data-uang_makan="'+row['uang_makan']+'" '+
                         'data-uang_transport="'+row['uang_transport']+'" '+
@@ -93,14 +96,17 @@
                         'data-masuk_hari_libur="'+row['masuk_hari_libur']+'" '+
                         'data-tambahan_shift="'+row['tambahan_shift']+'" '+
                         'data-bonus_thr="'+row['bonus_thr']+'" '+
+                        'data-bpjs_corporate="'+row['bpjs_corporate']+'" '+
                         'data-lainnya_terima="'+row['lainnya_terima']+'" '+
                         
                         'data-keterlambatan="'+row['keterlambatan']+'" '+
+                        'data-pulangawal="'+row['pulangawal']+'" '+
                         'data-bpjs_kesehatan="'+row['bpjs_kesehatan']+'" '+
                         'data-bpjs_tk="'+row['bpjs_tk']+'" '+
                         'data-cicilan="'+row['cicilan']+'" '+
                         'data-biaya_transfer="'+row['biaya_transfer']+'" '+
                         'data-pajak_pph21="'+row['pajak_pph21']+'" '+
+                        'data-bpjs_corporate_ded="'+row['bpjs_corporate_ded']+'" '+
                         'data-lainnya_potong="'+row['lainnya_potong']+'" '+
 
                         'data-total_penerimaan="'+row['total_penerimaan']+'" '+
@@ -131,6 +137,9 @@
             $("#list-grade").html($(this).data('grade'));
             $("#list-cabang").html($(this).data('cabang'));
 
+            $("#bpjs_persen_kesehatan").html($(this).data('bpjs_persen_kesehatan'));
+            $("#bpjs_persen_tk").html($(this).data('bpjs_persen_tk'));
+
             $("#pen-gaji_tetap").html(FormatCurrency($(this).data('gaji_tetap')));
             $("#pen-uang_makan").html(FormatCurrency($(this).data('uang_makan')));
             $("#pen-uang_transport").html(FormatCurrency($(this).data('uang_transport')));
@@ -143,9 +152,12 @@
             $("#pen-masuk_hari_libur").html(FormatCurrency($(this).data('masuk_hari_libur')));
             $("#pen-tambahan_shift").html(FormatCurrency($(this).data('tambahan_shift')));
             $("#pen-bonus_thr").html(FormatCurrency($(this).data('bonus_thr')));
+            $("#pen-bpjs_corporate").html(FormatCurrency($(this).data('bpjs_corporate')));
             $("#pen-lainnya_terima").html(FormatCurrency($(this).data('lainnya_terima')));
 
+            $("#pot-bpjs_corporate_ded").html(FormatCurrency($(this).data('bpjs_corporate_ded')));
             $("#pot-keterlambatan").html(FormatCurrency($(this).data('keterlambatan')));
+            $("#pot-pulangawal").html(FormatCurrency($(this).data('pulangawal')));
             $("#pot-bpjs_kesehatan").html(FormatCurrency($(this).data('bpjs_kesehatan')));
             $("#pot-bpjs_tk").html(FormatCurrency($(this).data('bpjs_tk')));
             $("#pot-cicilan").html(FormatCurrency($(this).data('cicilan')));

@@ -590,19 +590,27 @@
                                                     <td><input type="text" class="form-control form-rm" name="tunjangan_jabatan" id="tunjangan_jabatan" placeholder="0" data-type="currency" required></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Tunjangan STR</b></td>
+                                                    <td><b>Tunjangan SIP</b></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
                                                     <td><input type="text" class="form-control form-rm" name="tunjangan_str" id="tunjangan_str" placeholder="0" data-type="currency" required></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>BPJS Kesehatan</b></td>
+                                                    <td><b>BPJS Kesehatan <?= $bpjs_dtwan_kesehatan['isi_konfigurasi'] ?>%</b></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
                                                     <td><input type="text" class="form-control form-rm" name="bpjs_kesehatan" id="bpjs_kesehatan" placeholder="0" data-type="currency" required></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>BPJS TK</b></td>
+                                                    <td><b>BPJS TK <?= $bpjs_dtwan_tk['isi_konfigurasi'] ?>%</b></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
                                                     <td><input type="text" class="form-control form-rm" name="bpjs_tk" id="bpjs_tk" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><div class="separator-solid" style="border-color: #a9a9a9"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Total BPJS (Corporate)</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="bpjs_corporate" id="bpjs_corporate" placeholder="0" data-type="currency" required></td>
                                                 </tr>
                                             </tbody>
                                         </table>

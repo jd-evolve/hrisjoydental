@@ -22,7 +22,7 @@
                     <div class="card-list p-3">
                         <div class="item-list py-2">
                             <div class="info-user">
-                                <div class="card-title">Seting Absensi</div>
+                                <div class="card-title">Setting Absensi</div>
                                 <div class="card-category mt-0">Menyesuaikan pembulatan dari keterlambatan dan pulang awal (menit).</div>
                                 <div class="box-bg-grey mt-2">
                                     <div class="table-responsive">
@@ -37,6 +37,38 @@
                                                     <td>Pulang Awal <span class="text-danger">*</span></td>
                                                     <td>&nbsp;:&nbsp;</td>
                                                     <td><input type="number" name="pulang_awal" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator-solid"></div>
+                        <div class="item-list py-2">
+                            <div class="info-user">
+                                <div class="card-title">Perhitungan BPJS</div>
+                                <div class="card-category mt-0">Hanya bersifat sebagai keterangan dan tidak digunakan untuk perhitungan (%).</div>
+                                <div class="box-bg-grey mt-2">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td width="10%">BPJS</td>
+                                                    <td width="2%"></td>
+                                                    <td>Klinik</td>
+                                                    <td>Karyawan</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kesehatan</td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="bpjs_dtnik_kesehatan" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                    <td><input type="number" name="bpjs_dtwan_kesehatan" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TK</td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="bpjs_dtnik_tk" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                    <td><input type="number" name="bpjs_dtwan_tk" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
                                                 </tr>
                                         </table>
                                     </div>

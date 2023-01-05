@@ -311,6 +311,36 @@ class Absensi extends CI_Controller {
 			$tgl_awal = $periode['periode_awal'];
 			$tgl_akhir = $periode['periode_akhir'];
 
+			//simpan data penggajian karyawan
+			$karyawan = $this->m_main->getResultData('db_account','status = 1','nomor_induk asc');
+			$bpjs_dtwan_kesehatan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_kesehatan');
+			$bpjs_dtwan_tk = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_tk');
+			foreach($karyawan as $list){
+				$dtpgj = [
+					'id_periode' => $id_periode,
+					'id_karyawan' => $list->id_account,
+					'gaji_tetap' => $list->gaji_tetap,
+					'insentif' => $list->insentif,
+					'uang_makan' => $list->uang_makan,
+					'uang_transport' => $list->uang_transport,
+					'uang_hlibur' => $list->uang_hlibur,
+					'uang_lembur' => $list->uang_lembur,
+					'uang_shift' => $list->uang_shift,
+					'tunjangan_jabatan' => $list->tunjangan_jabatan,
+					'tunjangan_str' => $list->tunjangan_str,
+					'bpjs_kesehatan' => $list->bpjs_kesehatan,
+					'bpjs_tk' => $list->bpjs_tk,
+					'bpjs_corporate' => $list->bpjs_corporate,
+					'bpjs_persen_kesehatan' => $bpjs_dtwan_kesehatan['isi_konfigurasi'],
+					'bpjs_persen_tk' => $bpjs_dtwan_tk['isi_konfigurasi'],
+					'tgl_input' => date("Y-m-d H:i:s"),
+					'tgl_edit' => date("Y-m-d H:i:s"),
+					'status' => 1,
+					'id_account' => ID_ACCOUNT,
+				];
+				$this->m_main->createIN('db_penggajian',$dtpgj);
+			}
+
 			//insert data hari libur
 			$harilibur = [];
 			$hari_libur = json_decode($_POST['hari_libur']);

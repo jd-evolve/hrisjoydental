@@ -84,6 +84,7 @@
                                         table-layout: fixed;
                                         vertical-align: top;
                                         color: #000;
+                                        font-size: 12px !important;
                                     }
                                     .table-slip-gaji > tbody > tr > td,
                                     .table-slip-gaji > tbody > tr > th {
@@ -205,6 +206,7 @@
                                                         Masuk Hari Libur <br>
                                                         Tambahan Shift <br>
                                                         Bonus/THR <br>
+                                                        Jamsostek & BPJS (Corporate) <br>
                                                         Lainnya
                                                     </td>
                                                     <td class="right-text"> 
@@ -221,21 +223,26 @@
                                                         <span id="pen-masuk_hari_libur"></span> <br>
                                                         <span id="pen-tambahan_shift"></span> <br>
                                                         <span id="pen-bonus_thr"></span> <br>
+                                                        <span id="pen-bpjs_corporate"></span> <br>
                                                         <span id="pen-lainnya_terima"></span> <br>
                                                     </td>
                                                     <td>&nbsp;</td>
                                                     <td class="align-top"> 
+                                                        Jamsostek & BPJS Ded (Corporate) <br>
                                                         Keterlambatan <br>
-                                                        BPJS <br>
-                                                        &emsp;- Kesehatan <br>
-                                                        &emsp;- Tenaga Kerja <br>
+                                                        Pulang Awal <br>
+                                                        Iuran BPJS <br>
+                                                        &emsp;- Kesehatan <span id="bpjs_persen_kesehatan"></span>% <br>
+                                                        &emsp;- TK <span id="bpjs_persen_tk"></span>% <br>
                                                         Cicilan Pinjaman <br>
                                                         Biaya Transfer <br>
                                                         PPh 21 <br>
                                                         Lainnya
                                                      </td>
                                                     <td class="right-text align-top"> 
+                                                        <span id="pot-bpjs_corporate_ded"></span> <br>
                                                         <span id="pot-keterlambatan"></span> <br>
+                                                        <span id="pot-pulangawal"></span> <br>
                                                         <br>
                                                         <span id="pot-bpjs_kesehatan"></span> <br>
                                                         <span id="pot-bpjs_tk"></span> <br>

@@ -201,6 +201,7 @@ class Masterdata extends CI_Controller {
 				'tunjangan_str' => str_replace(".","",$_POST['tunjangan_str']),
 				'bpjs_kesehatan' => str_replace(".","",$_POST['bpjs_kesehatan']),
 				'bpjs_tk' => str_replace(".","",$_POST['bpjs_tk']),
+				'bpjs_corporate' => str_replace(".","",$_POST['bpjs_corporate']),
 				'tgl_edit' => date("Y-m-d H:i:s"),
 			];
 			$this->m_main->updateIN('db_account','id_account',$_POST['id_account'],$data);
