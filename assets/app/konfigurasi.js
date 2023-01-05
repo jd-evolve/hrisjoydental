@@ -17,6 +17,8 @@
             $('input[name="smtp_user"]').val(json.smtp_user);
             $('input[name="smtp_pass"]').val(json.smtp_pass);
             $('input[name="initial_name"]').val(json.initial_name);
+            $('input[name="keterlambatan"]').val(json.keterlambatan);
+            $('input[name="pulang_awal"]').val(json.pulang_awal);
         },
     });
 

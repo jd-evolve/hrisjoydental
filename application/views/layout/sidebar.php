@@ -65,6 +65,7 @@
                 );
 
                 $rekapdata = array(
+                    'rekap-gaji',
                     'rekap-ijincuti',
                     'rekap-lembur',
                     'rekap-keterlambatan',
@@ -186,6 +187,11 @@
                     </a>
                     <div id="rekap_data" <?= in_array($uri_path, $rekapdata) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['rekap-gaji'] ? 'gone' : '' ?> <?= $uri_path == "rekap-gaji"? 'active' : '' ?>">
+                                <a href="<?= base_url('rekap-gaji') ?>">
+                                    <span class="sub-item">Rekap Gaji</span>
+                                </a>
+                            </li>
                             <li class="<?= !$cekmenu['rekap-ijincuti'] ? 'gone' : '' ?> <?= $uri_path == "rekap-ijincuti"? 'active' : '' ?>">
                                 <a href="<?= base_url('rekap-ijincuti') ?>">
                                     <span class="sub-item">Rekap Ijin/Cuti</span>

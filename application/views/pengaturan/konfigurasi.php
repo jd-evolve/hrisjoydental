@@ -22,8 +22,32 @@
                     <div class="card-list p-3">
                         <div class="item-list py-2">
                             <div class="info-user">
+                                <div class="card-title">Seting Absensi</div>
+                                <div class="card-category mt-0">Menyesuaikan pembulatan dari keterlambatan dan pulang awal (menit).</div>
+                                <div class="box-bg-grey mt-2">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td width="10%">Keterlambatan <span class="text-danger">*</span></td>
+                                                    <td width="2%">&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="keterlambatan" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pulang Awal <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="pulang_awal" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator-solid"></div>
+                        <div class="item-list py-2">
+                            <div class="info-user">
                                 <div class="card-title">Setting Ijin/Cuti</div>
-                                <div class="card-category mt-0">Menyesuaikan potongan cuti dari masing-masing ijin/cuti</div>
+                                <div class="card-category mt-0">Menyesuaikan potongan cuti dari masing-masing ijin/cuti (shift).</div>
                                 <div class="box-bg-grey mt-2">
                                     <div class="table-responsive">
                                         <table class="mb-0" width="100%">

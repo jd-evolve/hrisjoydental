@@ -33,6 +33,7 @@ $route['data-scanlog'] = 'menu/data_scanlog';
 $route['jam-kerja'] = 'menu/jam_kerja';
 $route['jadwal-kerja'] = 'menu/jadwal_kerja';
 
+$route['rekap-gaji'] = 'menu/rekap_gaji';
 $route['rekap-ijincuti'] = 'menu/rekap_ijincuti';
 $route['rekap-lembur'] = 'menu/rekap_lembur';
 $route['rekap-keterlambatan'] = 'menu/rekap_keterlambatan';

@@ -314,6 +314,7 @@ class M_auth extends CI_Model {
             SELECT *
             FROM db_account
             WHERE status = 1
+            AND id_account != 1
             ORDER BY nama asc
         ")->result();
         return $query;
@@ -498,6 +499,46 @@ class M_auth extends CI_Model {
             AND a.id_karyawan = ".$id_karyawan."
             AND a.tgl_awal = '".$date_range."'
         ")->row_array();
+        return $query;
+    }
+
+    public function GetLlistGaji_Rekap($id_periode, $id_karyawan){
+        if($id_karyawan){
+            $karyawan = ' AND x.id_karyawan = '.$id_karyawan;
+        }else{
+            $karyawan = '';
+        }
+
+        $query = $this->db->query("
+            SELECT 
+                IF(a.id_periode is NULL, ".$id_periode.", a.id_periode) as id_periode,
+                IF(a.lembur is NULL, 0, a.lembur) as lembur,
+                IF(a.terlambat is NULL, 0, a.terlambat) as terlambat,
+                IF(a.pulangawal is NULL, 0, a.pulangawal) as pulangawal,
+                IF(a.shift is NULL, 0, a.shift) as shift,
+                IF(a.libur is NULL, 0, a.libur) as libur,
+                x.nama as karyawan, x.id_account as id_karyawan, x.bagian, x.nomor_induk, x.email, x.jam_perhari,
+                x.nomor_induk, x.email, x.nama_bank, x.nama_rek, x.no_rek,
+                x.gaji_tetap, x.insentif, x.uang_makan, x.uang_transport,
+                x.uang_hlibur, x.uang_lembur, x.uang_shift, x.tunjangan_jabatan,
+                x.tunjangan_str, x.bpjs_kesehatan, x.bpjs_tk, x.id_cabang, 
+                d.nama_cabang, b.keterangan as ket_periode, c.nama_posisi as jabatan
+            FROM db_account x 
+            LEFT JOIN (
+                SELECT id_scanlog, id_periode, id_karyawan,
+                    SUM(lembur) as lembur, SUM(terlambat) as terlambat, SUM(pulangawal) as pulangawal,
+                    SUM(shift) as shift, SUM(IF(libur=1, shift, 0)) as libur
+                FROM db_scanlog
+                WHERE id_periode = ".$id_periode."
+                GROUP BY id_periode, id_karyawan
+            ) a ON x.id_account = a.id_karyawan
+            LEFT JOIN db_periode b ON IF(a.id_periode is NULL, ".$id_periode.", a.id_periode) = b.id_periode
+            LEFT JOIN db_posisi c ON x.id_posisi = c.id_posisi
+            LEFT JOIN db_cabang d ON x.id_cabang = d.id_cabang
+            WHERE x.status = 1
+            ".$karyawan."
+            ORDER BY x.id_account asc
+        ")->result();
         return $query;
     }
 }

@@ -120,6 +120,7 @@
                     var html = "";
                     $("#tabel-listlembur tbody").html(html);
                     $('#simpan_lembur').addClass('none');
+                    console.log(data.length)
                     let total = 0;
                     for (var i=0; i<data.length; i++) {
                         html += 

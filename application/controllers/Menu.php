@@ -393,6 +393,23 @@ class Menu extends CI_Controller {
 		}
     }
 	
+    public function rekap_gaji(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Rekap Gaji';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1 AND status_periode = 2','tgl_input desc');
+			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
+			$this->load->view('layout/header', $data);
+			$this->load->view('rekapdata/rekap_gaji');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
     public function rekap_ijincuti(){
 		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
 			$data['vrs'] = U_VERSI; 

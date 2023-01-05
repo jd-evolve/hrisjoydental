@@ -478,20 +478,7 @@ class Absensi extends CI_Controller {
 												if($loop==count($jamscan)){
 													if($jmy && $jpy){
 														if(!$next){
-															//Cek keterlambatan
-															if($jk['dihitung'] > 0){
-																$hitungterlambat = $hitungterlambat + intval($terlambat);
-																$jumterlambat = $jumterlambat + ($terlambat > 0 ? 1 : 0);
-																if($urutterlambat <= 4){
-																	if($terlambat > 0){
-																		$urutterlambat = $urutterlambat + 1;
-																	}else{
-																		$urutterlambat = 0;
-																	}
-																}
-															}
-
-															//Simpan data scanlog
+															//Konfigurasi Ijin/Cuti
 															$next = true;
 															$hdkey = date_format(date_create($date_range[$i]),"Ymd");
 															$cekIC = $this->m_auth->cekScanIjinCutiJam($id_periode, $account['id_account'], date_format(date_create($date_range[$i]),"Y-m-d"));
@@ -505,6 +492,33 @@ class Absensi extends CI_Controller {
 																$pulangawal = $pulangawal < 0 ? 0 : $pulangawal;
 															}
 															$keterangan = $cekIC ? $cekIC['nama_ijincuti'] : (!empty($harilibur[$hdkey]['ket']) ? $harilibur[$hdkey]['ket'] : NULL);
+
+															//Cek keterlambatan
+															if($jk['dihitung'] > 0){
+																$hitungterlambat = $hitungterlambat + intval($terlambat);
+																$jumterlambat = $jumterlambat + ($terlambat > 0 ? 1 : 0);
+																if($urutterlambat <= 4){
+																	if($terlambat > 0){
+																		$urutterlambat = $urutterlambat + 1;
+																	}else{
+																		$urutterlambat = 0;
+																	}
+																}
+															}
+															
+															//Pembulatan keterlambatan dan pulang awal
+															$dt_keterlambatan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','keterlambatan');
+															$dt_pulang_awal = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','pulang_awal');
+															$pembulat_terlambat = intval($dt_keterlambatan['isi_konfigurasi']);
+															$pembulat_pulang_awal = intval($dt_pulang_awal['isi_konfigurasi']);
+															if($pembulat_terlambat > 0 && $terlambat > 0){
+																$terlambat = ceil($terlambat/$pembulat_terlambat)*$pembulat_terlambat;
+															}
+															if($pembulat_pulang_awal > 0 && $pulangawal > 0){
+																$pulangawal = ceil($pulangawal/$pembulat_pulang_awal)*$pembulat_pulang_awal;
+															}
+
+															//Simpan data scanlog
 															$datax = [
 																'id_periode' => $id_periode,
 																'id_karyawan' => $account['id_account'],
@@ -998,7 +1012,7 @@ class Absensi extends CI_Controller {
 	public function karyawan_lembur(){
 		$listlembur = $this->m_main->getResultData(
 			'db_lembur',
-			('id_periode = '.$_POST['id_periode'].' AND id_atasan = '.$_POST['id_atasan'].' AND id_karyawan = '.$_POST['id_karyawan']),
+			('id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']),
 			'tgl_lembur asc'
 		);
 		$data = [];
