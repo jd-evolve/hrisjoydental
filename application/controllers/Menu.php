@@ -279,7 +279,13 @@ class Menu extends CI_Controller {
 			$data['id_ijincuti'] = 5;
 			$data['persyaratan'] = 
 				'<li>Sebelum mengisi form ijin/cuti pastikan data periode sudah tersedia.</li>'.
-				'<li>Progress. . .</li>';
+				'<li>Karyawan mengisi form permohonan ijin ditunjukkan kepada atasan yang bersangkutan dan bagian HRD (karena bersifat mendesak karyawan menghubungi atasan dan bagian HRD agar permohonan ijin segera diproses).</li>'.
+				'<li>Karyawan menunggu persetujuan dari atasan.</li>'.
+				'<li>Karyawan menunggu pemberitahuan dari bagian HRD bahwa proses permohonan telah selesai.</li>'.
+				'<li>Karyawan mendapat ijin selama 2 hari (jika yang meninggal anggota keluarga : suami/istri, orang tua/mertua atau anak/menantunya).</li>'.
+				'<li>Karyawan mendapat ijin selama 1 hari (jika yang meninggal anggota keluarga yang tinggal satu rumah dengan karyawan).</li>'.
+				'<li>Karyawan yang mengajukan ijin lebih dari ketentuan di atas akan di potongkan jatah cuti tahunan (jika yang meninggal orangtua, pasangan, dan anak).</li>'.
+				'<li>Jika yang meninggal selain orangtua, pasangan, dan anak, terhitung ijin pribadi.</li>';
 			$this->load->view('layout/header', $data);
 			$this->load->view('ijincuti/layout_ijincuti');
 			$this->load->view('layout/footer');
@@ -308,6 +314,42 @@ class Menu extends CI_Controller {
 				'<li>Untuk karyawan masa percobaan, akan di potongkan gaji sebesar 1 shift yang di kalikan dengan jumlah ijin yang diajukan.</li>';
 			$this->load->view('layout/header', $data);
 			$this->load->view('ijincuti/layout_ijincuti');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+	
+    public function pengajuan_dinasluar(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Pengajuan Dinas Luar';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$data['persyaratan'] = 
+				'<li>Sebelum mengisi form perjalanan dinas pastikan data periode sudah tersedia.</li>';
+			$this->load->view('layout/header', $data);
+			$this->load->view('dinasluar/pengajuan_dinasluar');
+			$this->load->view('layout/footer');
+		}else{
+			redirect('logout');
+		}
+    }
+
+    public function insentif_dinasluar(){
+		if(EMAIL && (JAM_MASUK == JAM_MASUK_OLD)){
+			$data['vrs'] = U_VERSI; 
+			$data['title'] = 'Insentif Dinas Luar';
+			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
+			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['cekmenu'] = $this->DataLevel();
+			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
+			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
+			$this->load->view('layout/header', $data);
+			$this->load->view('dinasluar/insentif_dinasluar');
 			$this->load->view('layout/footer');
 		}else{
 			redirect('logout');

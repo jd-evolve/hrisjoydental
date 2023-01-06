@@ -72,6 +72,11 @@
                     'rekap-lupaabsen',
                 );
 
+                $dinasluar = array(
+                    'pengajuan-dinasluar',
+                    'insentif-dinasluar',
+                );
+
                 $uri_path = $this->uri->segment(1);
             ?> 
 
@@ -173,6 +178,28 @@
                             <li class="<?= !$cekmenu['ijin-sakit'] ? 'gone' : '' ?> <?= $uri_path == "ijin-sakit"? 'active' : '' ?>">
                                 <a href="<?= base_url('ijin-sakit') ?>">
                                     <span class="sub-item">Ijin Sakit</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item <?= !$cekmenu['menu_dinasluar'] ? 'gone' : '' ?><?= in_array($uri_path, $dinasluar) ? 'active submenu' : '' ?>">
+                    <a data-toggle="collapse" href="#dinas_luar">
+                        <i class="fas fa-car-side"></i>
+                        <p>Dinas Luar</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div id="dinas_luar" <?= in_array($uri_path, $dinasluar) ? 'class="collapse show"' : 'class="collapse"' ?>>
+                        <ul class="nav nav-collapse">
+                            <li class="<?= !$cekmenu['pengajuan-dinasluar'] ? 'gone' : '' ?> <?= $uri_path == "pengajuan-dinasluar"? 'active' : '' ?>">
+                                <a href="<?= base_url('pengajuan-dinasluar') ?>">
+                                    <span class="sub-item">Pengajuan Dinas Luar</span>
+                                </a>
+                            </li>
+                            <li class="<?= !$cekmenu['insentif-dinasluar'] ? 'gone' : '' ?> <?= $uri_path == "insentif-dinasluar"? 'active' : '' ?>">
+                                <a href="<?= base_url('insentif-dinasluar') ?>">
+                                    <span class="sub-item">Insentif Dinas Luar</span>
                                 </a>
                             </li>
                         </ul>

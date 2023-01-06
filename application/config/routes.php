@@ -25,7 +25,9 @@ $route['cuti-melahirkan'] = 'menu/cuti_melahirkan';
 $route['ijin-pribadi'] = 'menu/ijin_pribadi';
 $route['ijin-duka'] = 'menu/ijin_duka';
 $route['ijin-sakit'] = 'menu/ijin_sakit';
-$route['konfigurasi'] = 'menu/konfigurasi';
+
+$route['pengajuan-dinasluar'] = 'menu/pengajuan_dinasluar';
+$route['insentif-dinasluar'] = 'menu/insentif_dinasluar';
 
 $route['acc-lembur'] = 'menu/acc_lembur';
 $route['form-lembur'] = 'menu/form_lembur';
@@ -38,3 +40,5 @@ $route['rekap-ijincuti'] = 'menu/rekap_ijincuti';
 $route['rekap-lembur'] = 'menu/rekap_lembur';
 $route['rekap-keterlambatan'] = 'menu/rekap_keterlambatan';
 $route['rekap-lupaabsen'] = 'menu/rekap_lupaabsen';
+
+$route['konfigurasi'] = 'menu/konfigurasi';
