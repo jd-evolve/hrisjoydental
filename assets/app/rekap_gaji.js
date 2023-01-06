@@ -67,7 +67,7 @@
                 { data: "Bagian" },
                 { data: "Total",
                     render: function(data, type, row, meta) {
-                        return FormatCurrency(data,true);
+                        return FormatCurrency(data);
                     }
                 },
                 { data: "Aksi" , render : function ( data, type, row, meta ) {

@@ -84,16 +84,17 @@
                                         table-layout: fixed;
                                         vertical-align: top;
                                         color: #000;
+                                        line-height: 1.5;
                                         font-size: 12px !important;
+                                        white-space: nowrap !important;
                                     }
                                     .table-slip-gaji > tbody > tr > td,
                                     .table-slip-gaji > tbody > tr > th {
                                         border: 2px solid #000 !important;
                                         padding: 2px;
                                     }
-                                    .tb-td {
+                                    .padding-line {
                                         padding: 35px !important;
-                                        line-height: 1.5;
                                     }
                                     .w100 {
                                         width: 100%;
@@ -124,160 +125,162 @@
                                 </style>
                                 <table class="table-slip-gaji">
                                     <tr>
-                                        <td class="tb-td">
-                                            <table class="w100">
-                                                <tr class="border-bottom">
-                                                    <td colspan="2" style="width:49%;" class="left-text">
-                                                        <b>KLINIK GIGI JOYDENTAL</b>
-                                                    </td>
-                                                    <td>&nbsp;</td>
-                                                    <td colspan="2" style="width:49%;" class="right-text">
-                                                        <b>SLIP GAJI</b>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2"></td>
-                                                    <td>&nbsp;</td>
-                                                    <td colspan="2" class="right-text">
-                                                        <b><span id="list-periode"></span></b>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <table class="w100">
-                                                            <tr>
-                                                                <td style="width:18%;">NIP</td>
-                                                                <td style="width:7%;">&nbsp;:&nbsp;</td>
-                                                                <td id="list-nik"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Nama</td>
-                                                                <td>&nbsp;:&nbsp;</td>
-                                                                <td id="list-nama"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Email</td>
-                                                                <td>&nbsp;:&nbsp;</td>
-                                                                <td id="list-email"></td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                    <td>&nbsp;</td>
-                                                    <td colspan="2">
-                                                        <table class="w100">
-                                                            <tr>
-                                                                <td style="width:18%;">Jabatan</td>
-                                                                <td style="width:7%;">&nbsp;:&nbsp;</td>
-                                                                <td id="list-jabatan"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Grade</td>
-                                                                <td>&nbsp;:&nbsp;</td>
-                                                                <td id="list-grade"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cabang</td>
-                                                                <td>&nbsp;:&nbsp;</td>
-                                                                <td id="list-cabang"></td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="5"><div class="p4"></div></td>
-                                                </tr>
-                                                <tr class="border-top-bottom">
-                                                    <td colspan="2"><b>P E N E R I M A A N</b></td>
-                                                    <td>&nbsp;</td>
-                                                    <td colspan="2"><b>P O T O N G A N</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td> 
-                                                        Gaji Tetap <br>
-                                                        Uang Makan <br>
-                                                        Uang Transport <br>
-                                                        Uang Lembur <br>
-                                                        Insentif <br>
-                                                        Tunjangan <br>
-                                                        &emsp;- Jabatan <br>
-                                                        &emsp;- SIP <br>
-                                                        &emsp;- PPh 21 <br>
-                                                        Dinas Luar <br>
-                                                        Masuk Hari Libur <br>
-                                                        Tambahan Shift <br>
-                                                        Bonus/THR <br>
-                                                        Jamsostek & BPJS (Corporate) <br>
-                                                        Lainnya
-                                                    </td>
-                                                    <td class="right-text"> 
-                                                        <span id="pen-gaji_tetap"></span> <br>
-                                                        <span id="pen-uang_makan"></span> <br>
-                                                        <span id="pen-uang_transport"></span> <br>
-                                                        <span id="pen-uang_lembur"></span> <br>
-                                                        <span id="pen-insentif"></span> <br>
-                                                        <br>
-                                                        <span id="pen-tunjangan_jabatan"></span> <br>
-                                                        <span id="pen-tunjangan_str"></span> <br>
-                                                        <span id="pen-tunjangan_pph21"></span> <br>
-                                                        <span id="pen-dinas_luar"></span> <br>
-                                                        <span id="pen-masuk_hari_libur"></span> <br>
-                                                        <span id="pen-tambahan_shift"></span> <br>
-                                                        <span id="pen-bonus_thr"></span> <br>
-                                                        <span id="pen-bpjs_corporate"></span> <br>
-                                                        <span id="pen-lainnya_terima"></span> <br>
-                                                    </td>
-                                                    <td>&nbsp;</td>
-                                                    <td class="align-top"> 
-                                                        Jamsostek & BPJS Ded (Corporate) <br>
-                                                        Keterlambatan <br>
-                                                        Pulang Awal <br>
-                                                        Iuran BPJS <br>
-                                                        &emsp;- Kesehatan <span id="bpjs_persen_kesehatan"></span>% <br>
-                                                        &emsp;- TK <span id="bpjs_persen_tk"></span>% <br>
-                                                        Cicilan Pinjaman <br>
-                                                        Biaya Transfer <br>
-                                                        PPh 21 <br>
-                                                        Lainnya
-                                                     </td>
-                                                    <td class="right-text align-top"> 
-                                                        <span id="pot-bpjs_corporate_ded"></span> <br>
-                                                        <span id="pot-keterlambatan"></span> <br>
-                                                        <span id="pot-pulangawal"></span> <br>
-                                                        <br>
-                                                        <span id="pot-bpjs_kesehatan"></span> <br>
-                                                        <span id="pot-bpjs_tk"></span> <br>
-                                                        <span id="pot-cicilan"></span> <br>
-                                                        <span id="pot-biaya_transfer"></span> <br>
-                                                        <span id="pot-pajak_pph21"></span> <br>
-                                                        <span id="pot-lainnya_potong"></span> <br>
-                                                    </td>
-                                                </tr>
-                                                <tr class="border-top-bottom-double">
-                                                    <td><b>Total Penerimaan</b></td>
-                                                    <td class="right-text"><b> <span id="total-penerimaan"></span> </b></td>
-                                                    <td>&nbsp;</td>
-                                                    <td><b>Total Potongan</b></td>
-                                                    <td class="right-text"><b> <span id="total-potongan"></span> </b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="5"><div class="p4"></div></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Take Home Pay</b></td>
-                                                    <td class="right-text"><b> <span id="total-gaji"></span> </b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="5"><div class="p4"></div></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="5">
-                                                        Ditransfer Ke : &emsp;
-                                                        <span id="nama_bank"></span> &emsp; 
-                                                        <span id="no_rek"></span> &emsp; 
-                                                        <span id="nama_rek"></span> &emsp;
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                        <td class="padding-line">
+                                            <div class="table-responsive">
+                                                <table class="w100">
+                                                    <tr class="border-bottom">
+                                                        <td colspan="2" style="width:49%;" class="left-text">
+                                                            <b>KLINIK GIGI JOYDENTAL</b>
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                        <td colspan="2" style="width:49%;" class="right-text">
+                                                            <b>SLIP GAJI</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"></td>
+                                                        <td>&nbsp;</td>
+                                                        <td colspan="2" class="right-text">
+                                                            <b><span id="list-periode"></span></b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <table class="w100">
+                                                                <tr>
+                                                                    <td style="width:18%;">NIP</td>
+                                                                    <td style="width:7%;">&nbsp;:&nbsp;</td>
+                                                                    <td id="list-nik"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Nama</td>
+                                                                    <td>&nbsp;:&nbsp;</td>
+                                                                    <td id="list-nama"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>&nbsp;:&nbsp;</td>
+                                                                    <td id="list-email"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                        <td colspan="2">
+                                                            <table class="w100">
+                                                                <tr>
+                                                                    <td style="width:18%;">Jabatan</td>
+                                                                    <td style="width:7%;">&nbsp;:&nbsp;</td>
+                                                                    <td id="list-jabatan"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Grade</td>
+                                                                    <td>&nbsp;:&nbsp;</td>
+                                                                    <td id="list-grade"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Cabang</td>
+                                                                    <td>&nbsp;:&nbsp;</td>
+                                                                    <td id="list-cabang"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5"><div class="p4"></div></td>
+                                                    </tr>
+                                                    <tr class="border-top-bottom">
+                                                        <td colspan="2"><b>P E N E R I M A A N</b></td>
+                                                        <td>&nbsp;</td>
+                                                        <td colspan="2"><b>P O T O N G A N</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> 
+                                                            Gaji Tetap <br>
+                                                            Uang Makan <br>
+                                                            Uang Transport <br>
+                                                            Uang Lembur <br>
+                                                            Insentif <br>
+                                                            Tunjangan <br>
+                                                            &emsp;- Jabatan <br>
+                                                            &emsp;- SIP <br>
+                                                            &emsp;- PPh 21 <br>
+                                                            Dinas Luar <br>
+                                                            Masuk Hari Libur <br>
+                                                            Tambahan Shift <br>
+                                                            Bonus/THR <br>
+                                                            Jamsostek & BPJS (Corporate) <br>
+                                                            Lainnya
+                                                        </td>
+                                                        <td class="right-text"> 
+                                                            <span id="pen-gaji_tetap"></span> <br>
+                                                            <span id="pen-uang_makan"></span> <br>
+                                                            <span id="pen-uang_transport"></span> <br>
+                                                            <span id="pen-uang_lembur"></span> <br>
+                                                            <span id="pen-insentif"></span> <br>
+                                                            <br>
+                                                            <span id="pen-tunjangan_jabatan"></span> <br>
+                                                            <span id="pen-tunjangan_str"></span> <br>
+                                                            <span id="pen-tunjangan_pph21"></span> <br>
+                                                            <span id="pen-dinas_luar"></span> <br>
+                                                            <span id="pen-masuk_hari_libur"></span> <br>
+                                                            <span id="pen-tambahan_shift"></span> <br>
+                                                            <span id="pen-bonus_thr"></span> <br>
+                                                            <span id="pen-bpjs_corporate"></span> <br>
+                                                            <span id="pen-lainnya_terima"></span> <br>
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                        <td class="align-top"> 
+                                                            Jamsostek & BPJS Ded (Corporate) <br>
+                                                            Keterlambatan <br>
+                                                            Pulang Awal <br>
+                                                            Iuran BPJS <br>
+                                                            &emsp;- Kesehatan <span id="bpjs_persen_kesehatan"></span>% <br>
+                                                            &emsp;- TK <span id="bpjs_persen_tk"></span>% <br>
+                                                            Cicilan Pinjaman <br>
+                                                            Biaya Transfer <br>
+                                                            PPh 21 <br>
+                                                            Lainnya
+                                                        </td>
+                                                        <td class="right-text align-top"> 
+                                                            <span id="pot-bpjs_corporate_ded"></span> <br>
+                                                            <span id="pot-keterlambatan"></span> <br>
+                                                            <span id="pot-pulangawal"></span> <br>
+                                                            <br>
+                                                            <span id="pot-bpjs_kesehatan"></span> <br>
+                                                            <span id="pot-bpjs_tk"></span> <br>
+                                                            <span id="pot-cicilan"></span> <br>
+                                                            <span id="pot-biaya_transfer"></span> <br>
+                                                            <span id="pot-pajak_pph21"></span> <br>
+                                                            <span id="pot-lainnya_potong"></span> <br>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="border-top-bottom-double">
+                                                        <td><b>Total Penerimaan</b></td>
+                                                        <td class="right-text"><b> <span id="total-penerimaan"></span> </b></td>
+                                                        <td>&nbsp;</td>
+                                                        <td><b>Total Potongan</b></td>
+                                                        <td class="right-text"><b> <span id="total-potongan"></span> </b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5"><div class="p4"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Take Home Pay</b></td>
+                                                        <td class="right-text"><b> <span id="total-gaji"></span> </b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5"><div class="p4"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5">
+                                                            Ditransfer Ke : &emsp;
+                                                            <span id="nama_bank"></span> &emsp; 
+                                                            <span id="no_rek"></span> &emsp; 
+                                                            <span id="nama_rek"></span> &emsp;
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
