@@ -44,13 +44,17 @@ class Rekapdata extends CI_Controller {
 					$lembur = intval(($lembur/60) * $list->uang_lembur);
 				}
 
-				//Insentif Kehadiran
+				//Uang Makan & Transport
 				$count_ijin_cuti = $this->m_main->countData(
 					'db_ijincuti_list',
 						'id_periode = '.$list->id_periode.' AND '.
 						'id_karyawan = '.$list->id_karyawan.' AND '.
 						'status = 2'
 				);
+				$uang_makan = $list->uang_makan * ($list->shift - intval($count_ijin_cuti['count']));
+				$uang_transport = $list->uang_transport * ($list->shift - intval($count_ijin_cuti['count']));
+
+				//Insentif Kehadiran
 				$count_keterlambatan = $this->m_main->countData(
 					'db_keterlambatan',
 						'id_periode = '.$list->id_periode.' AND '.
@@ -92,8 +96,8 @@ class Rekapdata extends CI_Controller {
 
 				//PENERIMAAN
 				$row['gaji_tetap'] = $list->gaji_tetap;
-				$row['uang_makan'] = $list->uang_makan * $list->shift;
-				$row['uang_transport'] = $list->uang_transport * $list->shift;
+				$row['uang_makan'] = $uang_makan;
+				$row['uang_transport'] = $uang_transport;
 				$row['uang_lembur'] = $lembur;
 				$row['insentif'] = $insentif;
 				$row['tunjangan_jabatan'] = $list->tunjangan_jabatan;

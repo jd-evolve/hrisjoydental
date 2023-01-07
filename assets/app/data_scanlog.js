@@ -528,9 +528,14 @@
                                                             '<td>'+data[i].pulangawal+' menit</td>'+
                                                         '</tr>'+
                                                         '<tr>'+
-                                                            '<td>Tatal Shift</td>'+
+                                                            '<td>Jumlah Shift</td>'+
                                                             '<td>&nbsp;:&nbsp;</td>'+
                                                             '<td>'+data[i].shift+' hari</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<td>Ijin/Cuti</td>'+
+                                                            '<td>&nbsp;:&nbsp;</td>'+
+                                                            '<td>'+data[i].ijincuti+' hari</td>'+
                                                         '</tr>'+
                                                         '<tr>'+
                                                             '<td>Masuk Hari Libur</td>'+

@@ -153,11 +153,15 @@ class Absensi extends CI_Controller {
 		$terlambat = 0;
 		$pulangawal = 0;
 		$shift = 0;
+		$ijincuti = 0;
 		$libur = 0;
 		$lupa = 0;
 		$jumterlambat = 0;
 		$urutterlambat = 0;
 		foreach ($scanlog as $list) {
+			$cekIC = $this->m_auth->cekScanIjinCutiShift($_POST['id_periode'], $_POST['id_karyawan'], $list->tanggal);
+
+			$ijincuti = $ijincuti + ($cekIC ? 1 : 0);
 			$lembur = $lembur + intval($list->lembur);
 			$terlambat = $terlambat + intval($list->terlambat);
 			$pulangawal = $pulangawal + intval($list->pulangawal);
@@ -184,6 +188,7 @@ class Absensi extends CI_Controller {
 			$row['terlambat'] = $list->jam_masuk == null ? '' : $list->terlambat;
 			$row['pulangawal'] = $list->jam_masuk == null ? '' : $list->pulangawal;
 			$row['shift'] = $list->shift == 0 ? '' : $list->shift;
+			$row['ijincuti'] = $cekIC ? 1 : 0;
 			$row['libur'] = $list->libur == 1 ? '<i class="text-danger fas fa-check-circle">' : '';
 			$row['lupa'] = $list->lupa == 1 ? '<i class="text-default fas fa-exclamation-triangle">' : '';
 			$row['keterangan'] = $list->keterangan == null ? '' : $list->keterangan;
@@ -271,6 +276,7 @@ class Absensi extends CI_Controller {
 		$row['terlambat'] = $terlambat;
 		$row['pulangawal'] = $pulangawal;
 		$row['shift'] = $shift;
+		$row['ijincuti'] = $ijincuti;
 		$row['libur'] = $libur;
 		$row['lupa'] = $lupa > 0 ? 'Ya' : 'Tidak';
 		$row['jumterlambat'] = $jumterlambat;
