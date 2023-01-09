@@ -76,6 +76,11 @@ class Rekapdata extends CI_Controller {
 				$keterlambatan = intval(($list->terlambat) * ($list->uang_shift/$list->jam_perhari/60));
 				$pulangawal = intval(($list->pulangawal) * ($list->uang_shift/$list->jam_perhari/60));
 
+				//Transfer Beda Bank
+				$default_bank = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','default_bank');
+				$biaya_transfer = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','biaya_transfer');
+				$tf_bedabank = $list->nama_bank != strtoupper($default_bank['isi_konfigurasi']) ? intval($biaya_transfer['isi_konfigurasi']) : 0;
+
 				//BPJS Corporate
 				$bpjs_corporate = $list->bpjs_corporate;
 
@@ -136,7 +141,7 @@ class Rekapdata extends CI_Controller {
 				$row['bpjs_kesehatan'] = $list->bpjs_kesehatan;
 				$row['bpjs_tk'] = $list->bpjs_tk;
 				$row['cicilan'] = 0;
-				$row['biaya_transfer'] = 0;
+				$row['biaya_transfer'] = $tf_bedabank;
 				$row['pajak_pph21'] = $list->tunjangan_pph21;
 				$row['lainnya_potong'] = 0;
 				$potongan = 

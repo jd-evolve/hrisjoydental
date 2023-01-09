@@ -508,14 +508,16 @@ class M_auth extends CI_Model {
                 z.uang_hlibur, z.uang_lembur, z.uang_shift, z.tunjangan_jabatan,
                 z.tunjangan_str, z.tunjangan_pph21, z.bpjs_kesehatan, z.bpjs_tk, 
                 z.bpjs_corporate, z.bpjs_persen_kesehatan, z.bpjs_persen_tk, 
+                z.nama_bank, z.nama_rek, z.no_rek,
                 IF(a.lembur is NULL, 0, a.lembur) as lembur,
                 IF(a.terlambat is NULL, 0, a.terlambat) as terlambat,
                 IF(a.pulangawal is NULL, 0, a.pulangawal) as pulangawal,
                 IF(a.shift is NULL, 0, a.shift) as shift,
                 IF(a.libur is NULL, 0, a.libur) as libur,
-                x.nama as karyawan, x.id_account as id_karyawan, x.bagian, x.nomor_induk, x.email, 
-                x.jam_perhari, x.nomor_induk, x.email, x.nama_bank, x.nama_rek, x.no_rek,
-                d.id_cabang, d.nama_cabang, b.keterangan as ket_periode, b.jumlah_shift ,c.nama_posisi as jabatan
+                x.nama as karyawan, x.id_account as id_karyawan, x.bagian, 
+                x.nomor_induk, x.email, x.jam_perhari, x.nomor_induk, x.email,
+                d.id_cabang, d.nama_cabang, b.keterangan as ket_periode, 
+                b.jumlah_shift, c.nama_posisi as jabatan
             FROM db_penggajian z
             LEFT JOIN db_account x ON z.id_karyawan = x.id_account
             LEFT JOIN (

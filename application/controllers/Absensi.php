@@ -303,6 +303,9 @@ class Absensi extends CI_Controller {
 				$dtpgj = [
 					'id_periode' => $id_periode,
 					'id_karyawan' => $list->id_account,
+					'nama_bank' => $list->nama_bank,
+					'nama_rek' => $list->nama_rek,
+					'no_rek' => $list->no_rek,
 					'gaji_tetap' => $list->gaji_tetap,
 					'insentif' => $list->insentif,
 					'uang_makan' => $list->uang_makan,
