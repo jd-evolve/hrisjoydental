@@ -25,6 +25,8 @@
             $('input[name="bpjs_dtwan_tk"]').val(json.bpjs_dtwan_tk);
             $('input[name="pph21_persen_gaji"]').val(json.pph21_persen_gaji);
             $('input[name="pph21_ketentuan_gaji"]').val(json.pph21_ketentuan_gaji);
+            $('input[name="default_bank"]').val(json.default_bank);
+            $('input[name="biaya_transfer"]').val(json.biaya_transfer);
         },
     });
 

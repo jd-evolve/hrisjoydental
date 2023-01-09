@@ -148,6 +148,32 @@
                         <div class="separator-solid"></div>
                         <div class="item-list py-2">
                             <div class="info-user">
+                                <div class="card-title">Transfer Default</div>
+                                <div class="card-category mt-0">Menentukan default bank unutuk penggajian dan biaya transfer beda bank.</div>
+                                <div class="box-bg-grey mt-2">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td width="10%">Default Bank <span class="text-danger">*</span></td>
+                                                    <td width="2%">&nbsp;:&nbsp;</td>
+                                                    <td><input type="text" name="default_bank" step="0.1" min="0" class="form-control form-rm" placeholder="Nama Bank" required oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya tf Beda Bank <span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="biaya_transfer" data-type="currency" class="form-control form-rm" placeholder="0" required>
+                                                    </td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator-solid"></div>
+                        <div class="item-list py-2">
+                            <div class="info-user">
                                 <div class="card-title">Email Lupa Password</div>
                                 <div class="card-category mt-0">Konfigurasi email admin untuk mengirim pesan lupa password.</div>
                                 <div class="box-bg-grey mt-2">

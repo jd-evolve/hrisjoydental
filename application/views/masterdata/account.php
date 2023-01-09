@@ -201,7 +201,7 @@
                                                 <tr>
                                                     <td><b>Nama Bank</b></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
-                                                    <td><input type="text" class="form-control form-rm" name="nama_bank" placeholder="Nama Bank"></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nama_bank" placeholder="Nama Bank" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);"></td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>Nama Rek</b></td>
