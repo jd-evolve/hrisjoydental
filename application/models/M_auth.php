@@ -437,7 +437,6 @@ class M_auth extends CI_Model {
             JOIN db_account c ON a.id_karyawan = c.id_account
             JOIN db_posisi d ON c.id_posisi = d.id_posisi
             WHERE a.id_periode = ".$id_periode."
-            AND a.status = 1
             AND a.terlambat != 0
             ".$karyawan."
             ".$kategori."
@@ -460,7 +459,6 @@ class M_auth extends CI_Model {
             JOIN db_account c ON a.id_karyawan = c.id_account
             JOIN db_posisi d ON c.id_posisi = d.id_posisi
             WHERE a.id_periode = ".$id_periode."
-            AND a.status = 1
             AND a.jum_lupa_absen != 0
             ".$karyawan."
             ORDER BY a.id_karyawan asc
@@ -517,7 +515,7 @@ class M_auth extends CI_Model {
                 IF(a.libur is NULL, 0, a.libur) as libur,
                 x.nama as karyawan, x.id_account as id_karyawan, x.bagian, x.nomor_induk, x.email, 
                 x.jam_perhari, x.nomor_induk, x.email, x.nama_bank, x.nama_rek, x.no_rek,
-                d.id_cabang, d.nama_cabang, b.keterangan as ket_periode, c.nama_posisi as jabatan
+                d.id_cabang, d.nama_cabang, b.keterangan as ket_periode, b.jumlah_shift ,c.nama_posisi as jabatan
             FROM db_penggajian z
             LEFT JOIN db_account x ON z.id_karyawan = x.id_account
             LEFT JOIN (

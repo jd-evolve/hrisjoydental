@@ -199,11 +199,11 @@
                                                 <tbody>
                                                     <tr>
                                                         <td id="tgl-scn">...</td>
-                                                        <td><input type="text" class="form-control form-rm min-rm2 waktu" name="masuk" id="masuk" required></td>
-                                                        <td><input type="text" class="form-control form-rm min-rm2 waktu" name="pulang" id="pulang" required></td>
-                                                        <td><input type="number" class="form-control form-rm min-rm" min="0" name="lbr" id="lbr" required></td>
-                                                        <td><input type="number" class="form-control form-rm min-rm" min="0" name="tlt" id="tlt" required></td>
-                                                        <td><input type="number" class="form-control form-rm min-rm" min="0" name="pla" id="pla" required></td>
+                                                        <td><input type="text" class="form-control form-rm min-rm2 waktu" name="masuk" id="masuk"></td>
+                                                        <td><input type="text" class="form-control form-rm min-rm2 waktu" name="pulang" id="pulang"></td>
+                                                        <td><input type="number" class="form-control form-rm min-rm" min="0" name="lbr" id="lbr"></td>
+                                                        <td><input type="number" class="form-control form-rm min-rm" min="0" name="tlt" id="tlt"></td>
+                                                        <td><input type="number" class="form-control form-rm min-rm" min="0" name="pla" id="pla"></td>
                                                         <td><input type="number" class="form-control form-rm min-rm" min="0" name="sft" id="sft" required></td>
                                                         <td><input type="text" class="form-control form-rm" name="ket" id="ket"></td>
                                                     </tr>

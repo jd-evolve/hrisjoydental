@@ -59,9 +59,18 @@ class Rekapdata extends CI_Controller {
 					'db_scanlog_kehadiran',
 						'id_periode = '.$list->id_periode.' AND '.
 						'id_karyawan = '.$list->id_karyawan.' AND '.
-						'status = 1'
+						'(jum_terlambat > 0 OR jum_lupa_absen > 0)'
 				);
 				$insentif = $count_ijin_cuti['count'] > 0 || $kehadiran['count'] > 0 ? 0 : $list->insentif;
+
+				//Tambahan Shift
+				$bonus_shift = $this->m_main->getData(
+					'db_scanlog_kehadiran',
+						'id_periode = '.$list->id_periode.' AND '.
+						'id_karyawan = '.$list->id_karyawan.' AND '.
+						'bonus_shift > 0'
+				);
+				$tambahan_shift = $bonus_shift ? intval(($bonus_shift['shift_total'] - $list->jumlah_shift) * $list->uang_shift) : 0;
 
 				//Keterlambatan & Pulang Awal
 				$keterlambatan = intval(($list->terlambat) * ($list->uang_shift/$list->jam_perhari/60));
@@ -99,7 +108,7 @@ class Rekapdata extends CI_Controller {
 				$row['tunjangan_pph21'] = $list->tunjangan_pph21;
 				$row['dinas_luar'] = 0;
 				$row['masuk_hari_libur'] = $list->uang_hlibur * $list->libur;
-				$row['tambahan_shift'] = 0;
+				$row['tambahan_shift'] = $tambahan_shift;
 				$row['bonus_thr'] = 0;
 				$row['bpjs_corporate'] = $bpjs_corporate;
 				$row['lainnya_terima'] = 0;

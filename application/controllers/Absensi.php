@@ -153,6 +153,7 @@ class Absensi extends CI_Controller {
 		$terlambat = 0;
 		$pulangawal = 0;
 		$shift = 0;
+		$bonus = 0;
 		$ijincuti = 0;
 		$libur = 0;
 		$lupa = 0;
@@ -166,6 +167,7 @@ class Absensi extends CI_Controller {
 			$terlambat = $terlambat + intval($list->terlambat);
 			$pulangawal = $pulangawal + intval($list->pulangawal);
 			$shift = $shift + intval($list->shift);
+			$bonus = $bonus + (intval($list->shift) == 2 ? 1 : 0);
 			$libur = $libur + ($list->libur == 1 ? intval($list->shift) : 0);
 			$lupa = $lupa + ($list->lupa == 1 ? intval($list->shift) : 0);
 
@@ -196,11 +198,13 @@ class Absensi extends CI_Controller {
 			$data[] = $row; 
 		}
 
-		//Triger update keterlambatan dan lupa
-		if($jumterlambat > 0 || $lupa > 0){
+		//Triger update keterlambatan, lupa, bonus shift
+		if($jumterlambat > 0 || $lupa > 0 || $bonus > 0){
 			$scandata = $this->m_main->getData('db_scanlog_kehadiran','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
 			if($scandata){
 				$dtscn = [
+					'shift_total' => $shift,
+					'bonus_shift' => $bonus,
 					'terlambat' => $terlambat,
 					'jum_terlambat' => $jumterlambat,
 					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
@@ -213,6 +217,8 @@ class Absensi extends CI_Controller {
 				$dtscn = [
 					'id_periode' => $_POST['id_periode'],
 					'id_karyawan' => $_POST['id_karyawan'],
+					'shift_total' => $shift,
+					'bonus_shift' => $bonus,
 					'terlambat' => $terlambat,
 					'jum_terlambat' => $jumterlambat,
 					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
@@ -227,6 +233,8 @@ class Absensi extends CI_Controller {
 			$scandata = $this->m_main->getData('db_scanlog_kehadiran','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
 			if($scandata){
 				$dtscn = [
+					'shift_total' => $shift,
+					'bonus_shift' => 0,
 					'terlambat' => 0,
 					'jum_terlambat' => 0,
 					'urut5x_terlambat' => 0,
@@ -261,8 +269,8 @@ class Absensi extends CI_Controller {
 
 	public function edit_scanlog(){
 		$data = [
-			'jam_masuk' => $_POST['masuk'],
-			'jam_pulang' => $_POST['pulang'],
+			'jam_masuk' => $_POST['masuk'] ? $_POST['masuk'] : null,
+			'jam_pulang' => $_POST['pulang'] ? $_POST['pulang'] : null,
 			'lembur' => $_POST['lbr'],
 			'terlambat' => $_POST['tlt'],
 			'pulangawal' => $_POST['pla'],
@@ -399,6 +407,8 @@ class Absensi extends CI_Controller {
 				$account = $this->m_main->getRow('db_account','kode',$list['pin']);
 				if($account){
 					$hitungterlambat = 0;
+					$hitungshift = 0;
+					$hitungbonus = 0;
 					$jumterlambat = 0;
 					$urutterlambat = 0;
 					for($i=0; $i<count($date_range); $i++){
@@ -512,6 +522,10 @@ class Absensi extends CI_Controller {
 																	}
 																}
 															}
+
+															//Hitung shift dan bonus
+															$hitungshift = $hitungshift + intval($jk['dihitung']);
+															$hitungbonus = $hitungbonus + (intval($jk['dihitung']) == 2 ? 1 : 0);
 															
 															//Pembulatan keterlambatan dan pulang awal
 															$dt_keterlambatan = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','keterlambatan');
@@ -569,6 +583,8 @@ class Absensi extends CI_Controller {
 						$dtrlmbt = [
 							'id_periode' => $id_periode,
 							'id_karyawan' => $account['id_account'],
+							'shift_total' => $hitungshift,
+							'bonus_shift' => $hitungbonus,
 							'terlambat' => $hitungterlambat,
 							'jum_terlambat' => $jumterlambat,
 							'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
