@@ -16,6 +16,8 @@ class Masterdata extends CI_Controller {
 	//================= ACCOUNT
 	public function read_account(){
 		$account = $this->m_auth->GetAllAccount();
+		$pph21_persen_gaji = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','pph21_persen_gaji');
+		$pph21_ketentuan_gaji = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','pph21_ketentuan_gaji');
 		$data = [];
 		$no = 0;
 		foreach ($account as $list) {
@@ -50,6 +52,7 @@ class Masterdata extends CI_Controller {
 				$row['id_jadwal_kerja'] = $list->id_jadwal_kerja;
 				$row['tgl_masuk'] = date_format(date_create($list->tgl_kerja),"d-m-Y");
 				$row['no_ktp'] = $list->no_ktp;
+				$row['no_npwp'] = $list->no_npwp;
 				$row['nama_ibu'] = $list->nama_ibu;
 				$row['telp_referensi'] = $list->telp_referensi;
 				$row['pendidikan_terakhir'] = $list->pendidikan_terakhir;
@@ -66,10 +69,14 @@ class Masterdata extends CI_Controller {
 				$row['uang_hlibur'] = number_format($list->uang_hlibur,0,',','.');
 				$row['uang_lembur'] = number_format($list->uang_lembur,0,',','.');
 				$row['uang_shift'] = number_format($list->uang_shift,0,',','.');
-				$row['tunjangan_jabatan'] = number_format($list->tunjangan_jabatan,0,',','.');
-				$row['tunjangan_str'] = number_format($list->tunjangan_str,0,',','.');
 				$row['bpjs_kesehatan'] = number_format($list->bpjs_kesehatan,0,',','.');
 				$row['bpjs_tk'] = number_format($list->bpjs_tk,0,',','.');
+				$row['bpjs_corporate'] = number_format($list->bpjs_corporate,0,',','.');
+				$row['tunjangan_jabatan'] = number_format($list->tunjangan_jabatan,0,',','.');
+				$row['tunjangan_str'] = number_format($list->tunjangan_str,0,',','.');
+				$row['tunjangan_pph21'] = number_format($list->tunjangan_pph21,0,',','.');
+				$row['pph21_persen_gaji'] = floatval($pph21_persen_gaji['isi_konfigurasi']);
+				$row['pph21_ketentuan_gaji'] = intval($pph21_ketentuan_gaji['isi_konfigurasi']);
 
 				$masa_kerja = date_diff(date_create($list->tgl_kerja),date_create(date("Y-m-d")));
 				$row['masa_kerja'] = ($masa_kerja->y).' Thn, '.($masa_kerja->m).' Bln';
@@ -90,6 +97,7 @@ class Masterdata extends CI_Controller {
 				'kode' => $_POST['kode'],
 				'nomor_induk' => $_POST['nomor_induk'],
 				'no_ktp' => $_POST['nomor_ktp'],
+				'no_npwp' => $_POST['nomor_npwp'],
 				'nama_ibu' => $_POST['nama_ibu'],
 				'nama' => $_POST['nama'],
 				'gender' => $_POST['gender'],
@@ -145,6 +153,7 @@ class Masterdata extends CI_Controller {
 					'kode' => $_POST['kode'],
 					'nomor_induk' => $_POST['nomor_induk'],
 					'no_ktp' => $_POST['nomor_ktp'],
+					'no_npwp' => $_POST['nomor_npwp'],
 					'nama_ibu' => $_POST['nama_ibu'],
 					'nama' => $_POST['nama'],
 					'gender' => $_POST['gender'],
@@ -199,6 +208,7 @@ class Masterdata extends CI_Controller {
 				'uang_shift' => str_replace(".","",$_POST['uang_shift']),
 				'tunjangan_jabatan' => str_replace(".","",$_POST['tunjangan_jabatan']),
 				'tunjangan_str' => str_replace(".","",$_POST['tunjangan_str']),
+				'tunjangan_pph21' => str_replace(".","",$_POST['tunjangan_pph21']),
 				'bpjs_kesehatan' => str_replace(".","",$_POST['bpjs_kesehatan']),
 				'bpjs_tk' => str_replace(".","",$_POST['bpjs_tk']),
 				'bpjs_corporate' => str_replace(".","",$_POST['bpjs_corporate']),

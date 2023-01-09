@@ -55,19 +55,13 @@ class Rekapdata extends CI_Controller {
 				$uang_transport = $list->uang_transport * ($list->shift - intval($count_ijin_cuti['count']));
 
 				//Insentif Kehadiran
-				$count_keterlambatan = $this->m_main->countData(
-					'db_keterlambatan',
+				$kehadiran = $this->m_main->countData(
+					'db_scanlog_kehadiran',
 						'id_periode = '.$list->id_periode.' AND '.
 						'id_karyawan = '.$list->id_karyawan.' AND '.
 						'status = 1'
 				);
-				$count_lupa_absen = $this->m_main->countData(
-					'db_lupa_absen',
-						'id_periode = '.$list->id_periode.' AND '.
-						'id_karyawan = '.$list->id_karyawan.' AND '.
-						'status = 1'
-				);
-				$insentif = $count_ijin_cuti['count'] > 0 || $count_keterlambatan['count'] > 0 || $count_lupa_absen['count'] > 0 ? 0 : $list->insentif;
+				$insentif = $count_ijin_cuti['count'] > 0 || $kehadiran['count'] > 0 ? 0 : $list->insentif;
 
 				//Keterlambatan & Pulang Awal
 				$keterlambatan = intval(($list->terlambat) * ($list->uang_shift/$list->jam_perhari/60));
@@ -102,7 +96,7 @@ class Rekapdata extends CI_Controller {
 				$row['insentif'] = $insentif;
 				$row['tunjangan_jabatan'] = $list->tunjangan_jabatan;
 				$row['tunjangan_str'] = $list->tunjangan_str;
-				$row['tunjangan_pph21'] = 0;
+				$row['tunjangan_pph21'] = $list->tunjangan_pph21;
 				$row['dinas_luar'] = 0;
 				$row['masuk_hari_libur'] = $list->uang_hlibur * $list->libur;
 				$row['tambahan_shift'] = 0;
@@ -134,7 +128,7 @@ class Rekapdata extends CI_Controller {
 				$row['bpjs_tk'] = $list->bpjs_tk;
 				$row['cicilan'] = 0;
 				$row['biaya_transfer'] = 0;
-				$row['pajak_pph21'] = 0;
+				$row['pajak_pph21'] = $list->tunjangan_pph21;
 				$row['lainnya_potong'] = 0;
 				$potongan = 
 					$row['bpjs_corporate_ded'] +

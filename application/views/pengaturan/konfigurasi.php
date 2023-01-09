@@ -78,6 +78,32 @@
                         <div class="separator-solid"></div>
                         <div class="item-list py-2">
                             <div class="info-user">
+                                <div class="card-title">Perhitungan PPh 21</div>
+                                <div class="card-category mt-0">Menentukan nominal PPh 21 dengan ketentuan wajib memiliki NPWP.</div>
+                                <div class="box-bg-grey mt-2">
+                                    <div class="table-responsive">
+                                        <table class="mb-0" width="100%">
+                                            <tbody class="nowraping">
+                                                <tr>
+                                                    <td width="10%">% Dari Gaji <span class="text-danger">*</span></td>
+                                                    <td width="2%">&nbsp;:&nbsp;</td>
+                                                    <td><input type="number" name="pph21_persen_gaji" step="0.1" min="0" class="form-control form-rm" placeholder="0" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gaji <b>></b> Dari<span class="text-danger">*</span></td>
+                                                    <td>&nbsp;:&nbsp;</td>
+                                                    <td>
+                                                        <input type="text" name="pph21_ketentuan_gaji" data-type="currency" class="form-control form-rm" placeholder="0" required>
+                                                    </td>
+                                                </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator-solid"></div>
+                        <div class="item-list py-2">
+                            <div class="info-user">
                                 <div class="card-title">Setting Ijin/Cuti</div>
                                 <div class="card-category mt-0">Menyesuaikan potongan cuti dari masing-masing ijin/cuti (shift).</div>
                                 <div class="box-bg-grey mt-2">

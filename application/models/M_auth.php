@@ -401,18 +401,11 @@ class M_auth extends CI_Model {
         return $query;
     }
 
-    public function updateKeterlambatan($id_periode, $id_karyawan, $data){
+    public function updateRekScanlog($id_periode, $id_karyawan, $data){
         return $this->db
         ->where('id_periode', $id_periode)
         ->where('id_karyawan', $id_karyawan)
-        ->update('db_keterlambatan', $data);
-    }
-
-    public function updateLupaAbsen($id_periode, $id_karyawan, $data){
-        return $this->db
-        ->where('id_periode', $id_periode)
-        ->where('id_karyawan', $id_karyawan)
-        ->update('db_lupa_absen', $data);
+        ->update('db_scanlog_kehadiran', $data);
     }
 
     public function GetLlistTerlambat_Rekap($id_periode, $status, $id_karyawan){
@@ -439,12 +432,13 @@ class M_auth extends CI_Model {
 
         $query = $this->db->query("
             SELECT a.*, b.keterangan as ket_periode, c.nama as karyawan, c.bagian
-            FROM db_keterlambatan a
+            FROM db_scanlog_kehadiran a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
             JOIN db_posisi d ON c.id_posisi = d.id_posisi
             WHERE a.id_periode = ".$id_periode."
             AND a.status = 1
+            AND a.terlambat != 0
             ".$karyawan."
             ".$kategori."
             ORDER BY a.id_karyawan asc
@@ -461,12 +455,13 @@ class M_auth extends CI_Model {
 
         $query = $this->db->query("
             SELECT a.*, b.keterangan as ket_periode, c.nama as karyawan, c.bagian
-            FROM db_lupa_absen a
+            FROM db_scanlog_kehadiran a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
             JOIN db_posisi d ON c.id_posisi = d.id_posisi
             WHERE a.id_periode = ".$id_periode."
             AND a.status = 1
+            AND a.jum_lupa_absen != 0
             ".$karyawan."
             ORDER BY a.id_karyawan asc
         ")->result();
@@ -513,8 +508,8 @@ class M_auth extends CI_Model {
             SELECT 
                 z.id_periode, z.gaji_tetap, z.insentif, z.uang_makan, z.uang_transport,
                 z.uang_hlibur, z.uang_lembur, z.uang_shift, z.tunjangan_jabatan,
-                z.tunjangan_str, z.bpjs_kesehatan, z.bpjs_tk, z.bpjs_corporate, 
-                z.bpjs_persen_kesehatan, z.bpjs_persen_tk, 
+                z.tunjangan_str, z.tunjangan_pph21, z.bpjs_kesehatan, z.bpjs_tk, 
+                z.bpjs_corporate, z.bpjs_persen_kesehatan, z.bpjs_persen_tk, 
                 IF(a.lembur is NULL, 0, a.lembur) as lembur,
                 IF(a.terlambat is NULL, 0, a.terlambat) as terlambat,
                 IF(a.pulangawal is NULL, 0, a.pulangawal) as pulangawal,

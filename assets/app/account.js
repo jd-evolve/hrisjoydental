@@ -245,6 +245,7 @@
 		$('input[name="kode"]').val('');
 		$('input[name="nomor_induk"]').val('');
 		$('input[name="nomor_ktp"]').val('');
+		$('input[name="nomor_npwp"]').val('');
 		$('input[name="nama_ibu"]').val('');
 		$('input[name="nama"]').val('');
         $('select[name="gender"]').val('');
@@ -305,6 +306,7 @@
 		$("#show-kode").html(data["Kode"]);
 		$("#show-nomor_induk").html(data["nomor_induk"]);
 		$("#show-nomor_ktp").html(data["no_ktp"]);
+		$("#show-nomor_npwp").html(data["no_npwp"]);
 		$("#show-nama_ibu").html(data["nama_ibu"]);
         $("#show-gender").html(data["gender"] != 0 ? 'Laki-Laki' : 'Perempuan');
 		$("#show-tempat_lahir").html(data["tempat_lahir"]);
@@ -343,6 +345,7 @@
 		$('input[name="kode"]').val(data["Kode"]);
 		$('input[name="nomor_induk"]').val(data["nomor_induk"]);
 		$('input[name="nomor_ktp"]').val(data["no_ktp"]);
+		$('input[name="nomor_npwp"]').val(data["no_npwp"]);
 		$('input[name="nama_ibu"]').val(data["nama_ibu"]);
 		$('input[name="nama"]').val(data["nama_account"]);
         $('select[name="gender"]').val(data["gender"]);
@@ -410,15 +413,20 @@
 		$('input[name="uang_shift"]').val(data["uang_shift"]);
 		$('input[name="tunjangan_jabatan"]').val(data["tunjangan_jabatan"]);
 		$('input[name="tunjangan_str"]').val(data["tunjangan_str"]);
+		$('input[name="tunjangan_pph21"]').val(data["tunjangan_pph21"]);
 		$('input[name="bpjs_kesehatan"]').val(data["bpjs_kesehatan"]);
 		$('input[name="bpjs_tk"]').val(data["bpjs_tk"]);
+		$('input[name="bpjs_corporate"]').val(data["bpjs_corporate"]);
 		$('input[name="id_account"]').val(id_account);
         $('#gaji_tetap').keyup(function(){
             var gaji = $(this).val().split('.').join('');
             var u_lembur = parseInt(gaji/173).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             var u_shift = parseInt(gaji/25).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            const pph21 = gaji > data["pph21_ketentuan_gaji"] && data["no_npwp"] ? (data["pph21_persen_gaji"]/100*gaji) : 0;
+            var u_pph21 = parseInt(pph21).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             $('input[name="uang_lembur"]').val(u_lembur);
             $('input[name="uang_shift"]').val(u_shift);
+            $('input[name="tunjangan_pph21"]').val(u_pph21);
         });
     });
     

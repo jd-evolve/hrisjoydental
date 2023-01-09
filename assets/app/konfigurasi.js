@@ -23,6 +23,8 @@
             $('input[name="bpjs_dtwan_kesehatan"]').val(json.bpjs_dtwan_kesehatan);
             $('input[name="bpjs_dtnik_tk"]').val(json.bpjs_dtnik_tk);
             $('input[name="bpjs_dtwan_tk"]').val(json.bpjs_dtwan_tk);
+            $('input[name="pph21_persen_gaji"]').val(json.pph21_persen_gaji);
+            $('input[name="pph21_ketentuan_gaji"]').val(json.pph21_ketentuan_gaji);
         },
     });
 

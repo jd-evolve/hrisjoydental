@@ -196,75 +196,45 @@ class Absensi extends CI_Controller {
 			$data[] = $row; 
 		}
 
-		//Triger update keterlambatan
-		if($jumterlambat > 0){
-			$data_terlambat = $this->m_main->getData('db_keterlambatan','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
-			if($data_terlambat){
-				$dtrlmbt = [
+		//Triger update keterlambatan dan lupa
+		if($jumterlambat > 0 || $lupa > 0){
+			$scandata = $this->m_main->getData('db_scanlog_kehadiran','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
+			if($scandata){
+				$dtscn = [
 					'terlambat' => $terlambat,
 					'jum_terlambat' => $jumterlambat,
 					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
+					'jum_lupa_absen' => $lupa,
 					'tgl_edit' => date("Y-m-d H:i:s"),
 					'status' => 1,
 				];
-				$this->m_auth->updateKeterlambatan($_POST['id_periode'],$_POST['id_karyawan'],$dtrlmbt);
+				$this->m_auth->updateRekScanlog($_POST['id_periode'],$_POST['id_karyawan'],$dtscn);
 			}else{
-				$dtrlmbt = [
+				$dtscn = [
 					'id_periode' => $_POST['id_periode'],
 					'id_karyawan' => $_POST['id_karyawan'],
 					'terlambat' => $terlambat,
 					'jum_terlambat' => $jumterlambat,
 					'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
+					'jum_lupa_absen' => $lupa,
 					'tgl_input' => date("Y-m-d H:i:s"),
 					'tgl_edit' => date("Y-m-d H:i:s"),
 					'status' => 1,
 				];
-				$this->m_main->createIN('db_keterlambatan',$dtrlmbt);
+				$this->m_main->createIN('db_scanlog_kehadiran',$dtscn);
 			}
 		}else{
-			$data_terlambat = $this->m_main->getData('db_keterlambatan','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
-			if($data_terlambat){
-				$dtrlmbt = [
+			$scandata = $this->m_main->getData('db_scanlog_kehadiran','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
+			if($scandata){
+				$dtscn = [
 					'terlambat' => 0,
 					'jum_terlambat' => 0,
 					'urut5x_terlambat' => 0,
-					'tgl_edit' => date("Y-m-d H:i:s"),
-					'status' => 0,
-				];
-				$this->m_auth->updateKeterlambatan($_POST['id_periode'],$_POST['id_karyawan'],$dtrlmbt);
-			}
-		}
-
-		//Triger update lupa absen
-		if($lupa > 0){
-			$data_lupa = $this->m_main->getData('db_lupa_absen','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
-			if($data_lupa){
-				$dtrlpa = [
-					'jum_lupa_absen' => $lupa,
-					'tgl_edit' => date("Y-m-d H:i:s"),
-					'status' => 1,
-				];
-				$this->m_auth->updateLupaAbsen($_POST['id_periode'],$_POST['id_karyawan'],$dtrlpa);
-			}else{
-				$dtrlpa = [
-					'id_periode' => $_POST['id_periode'],
-					'id_karyawan' => $_POST['id_karyawan'],
-					'jum_lupa_absen' => $lupa,
-					'tgl_input' => date("Y-m-d H:i:s"),
-					'tgl_edit' => date("Y-m-d H:i:s"),
-					'status' => 1,
-				];
-				$this->m_main->createIN('db_lupa_absen',$dtrlpa);
-			}
-		}else{
-			$data_lupa = $this->m_main->getData('db_lupa_absen','id_periode = '.$_POST['id_periode'].' AND id_karyawan = '.$_POST['id_karyawan']);
-			if($data_lupa){
-				$dtrlpa = [
 					'jum_lupa_absen' => 0,
 					'tgl_edit' => date("Y-m-d H:i:s"),
 					'status' => 0,
 				];
-				$this->m_auth->updateLupaAbsen($_POST['id_periode'],$_POST['id_karyawan'],$dtrlpa);
+				$this->m_auth->updateRekScanlog($_POST['id_periode'],$_POST['id_karyawan'],$dtscn);
 			}
 		}
 
@@ -334,6 +304,7 @@ class Absensi extends CI_Controller {
 					'uang_shift' => $list->uang_shift,
 					'tunjangan_jabatan' => $list->tunjangan_jabatan,
 					'tunjangan_str' => $list->tunjangan_str,
+					'tunjangan_pph21' => $list->tunjangan_pph21,
 					'bpjs_kesehatan' => $list->bpjs_kesehatan,
 					'bpjs_tk' => $list->bpjs_tk,
 					'bpjs_corporate' => $list->bpjs_corporate,
@@ -601,11 +572,12 @@ class Absensi extends CI_Controller {
 							'terlambat' => $hitungterlambat,
 							'jum_terlambat' => $jumterlambat,
 							'urut5x_terlambat' => $urutterlambat > 4 ? 1 : 0,
+							'jum_lupa_absen' => 0,
 							'tgl_input' => date("Y-m-d H:i:s"),
 							'tgl_edit' => date("Y-m-d H:i:s"),
 							'status' => 1,
 						];
-						$this->m_main->createIN('db_keterlambatan',$dtrlmbt);
+						$this->m_main->createIN('db_scanlog_kehadiran',$dtrlmbt);
 					}
 				}
 			}

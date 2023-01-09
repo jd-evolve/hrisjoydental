@@ -108,6 +108,11 @@
                                                     <td><input type="text" class="form-control form-rm" name="nomor_ktp" placeholder="No. KTP"></td>
                                                 </tr>
                                                 <tr>
+                                                    <td><b>No. NPWP</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="nomor_npwp" placeholder="No. NPWP"></td>
+                                                </tr>
+                                                <tr>
                                                     <td><b>Nama Ibu</b></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
                                                     <td><input type="text" class="form-control form-rm" name="nama_ibu" placeholder="Nama Ibu"></td>
@@ -367,6 +372,11 @@
                                                         <td><span id="show-nomor_ktp"></span></td>
                                                     </tr>
                                                     <tr>
+                                                        <td><b>No. NPWP</b></td>
+                                                        <td><b>&nbsp;:&nbsp;</b></td>
+                                                        <td><span id="show-nomor_npwp"></span></td>
+                                                    </tr>
+                                                    <tr>
                                                         <td><b>Nama Ibu</b></td>
                                                         <td><b>&nbsp;:&nbsp;</b></td>
                                                         <td><span id="show-nama_ibu"></span></td>
@@ -593,6 +603,11 @@
                                                     <td><b>Tunjangan SIP</b></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
                                                     <td><input type="text" class="form-control form-rm" name="tunjangan_str" id="tunjangan_str" placeholder="0" data-type="currency" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Tunjangan PPh 21</b></td>
+                                                    <td><b>&nbsp;:&nbsp;</b></td>
+                                                    <td><input type="text" class="form-control form-rm" name="tunjangan_pph21" id="tunjangan_pph21" placeholder="0" data-type="currency" required readonly style="background: #fff !important;"></td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>BPJS Kesehatan <?= $bpjs_dtwan_kesehatan['isi_konfigurasi'] ?>%</b></td>
