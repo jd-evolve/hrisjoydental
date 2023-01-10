@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <th style="width:5%;">No</th>
-                            <th style="width:40%;">Nama Posisi</th>
+                            <th style="width:40%;">Nama Jabatan</th>
                             <th style="width:55%;">Keterangan</th>
                             <th style="width:10%;">Aksi</th>
                         </tr>
@@ -63,14 +63,14 @@
                     <div class="table-responsive">
                         <div>
                             <input type="hidden" name="numb">
-                            <input type="hidden" name="id_posisi">
+                            <input type="hidden" name="id_jabatan">
                             <div class="box-bg-grey mb-3">
                                 <table class="mb-0" width="100%">
                                     <tbody class="nowraping">
                                         <tr>
-                                            <td width="10%">Nama Posisi <span class="text-danger">*</span></td>
+                                            <td width="10%">Nama Jabatan <span class="text-danger">*</span></td>
                                             <td width="2%">&nbsp;:&nbsp;</td>
-                                            <td><input type="text" class="form-control" name="nama_posisi" placeholder="Nama Posisi" required></td>
+                                            <td><input type="text" class="form-control" name="nama_jabatan" placeholder="Nama Jabatan" required></td>
                                         </tr>
                                         <tr>
                                             <td>Keterangan <span class="text-danger">*</span></td>

@@ -7,10 +7,10 @@ class Menu extends CI_Controller {
         parent::__construct();
 		$this->load->model('M_main', 'm_main');
 		$this->load->model('M_auth', 'm_auth');
-		define('U_VERSI', '01.01.25'); //Setiap edit program wajib di ganti untuk clear chace!
+		define('U_VERSI', '01.01.30'); //Setiap edit program wajib di ganti untuk clear chace!
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
-		define('ID_POSISI',$this->session->userdata('id_posisi'));
+		define('ID_JABATAN',$this->session->userdata('id_jabatan'));
 		define('ID_CABANG',$this->session->userdata('id_cabang'));
 		$account = $this->m_main->getRow('db_account','email',EMAIL);
 		define('JAM_MASUK_OLD',$account['tgl_masuk']);
@@ -24,11 +24,11 @@ class Menu extends CI_Controller {
 	private function DataLevel(){
 		$menu = $this->m_auth->GetLevelMenu();
 		foreach ($menu as $list) {
-			$data[$list->uri_menu] = $this->m_auth->cekMenu(ID_POSISI,$list->id_level_menu);
+			$data[$list->uri_menu] = $this->m_auth->cekMenu(ID_JABATAN,$list->id_level_menu);
 		}
 		$submenu = $this->m_auth->GetLevelSubmenu();
 		foreach ($submenu as $list) {
-			$data[$list->uri_submenu] = $this->m_auth->cekSubmenu(ID_POSISI,$list->id_level_submenu);
+			$data[$list->uri_submenu] = $this->m_auth->cekSubmenu(ID_JABATAN,$list->id_level_submenu);
 		}
 		return $data;
 	}
@@ -38,7 +38,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI;
 			$data['title'] = 'Dashboard';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cabang'] = $this->m_main->getRow('db_cabang','id_cabang',ID_CABANG);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['account_online'] = $this->m_auth->GetAccountOnline();
@@ -70,10 +70,10 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Account';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cabang'] = $this->m_main->getRow('db_cabang','id_cabang',ID_CABANG);
 			$data['cekmenu'] = $this->DataLevel();
-			$data['data_posisi'] = $this->m_main->getResult('db_posisi','status',1);
+			$data['data_jabatan'] = $this->m_main->getResult('db_jabatan','status',1);
 			$data['data_cabang'] = $this->m_main->getResult('db_cabang','status',1);
 			$data['data_jadwal_kerja'] = $this->m_main->getResult('db_jadwal_kerja','status',1);
 			$data['bpjs_dtwan_kesehatan'] = $this->m_main->getRow('db_konfigurasi','kode_konfigurasi','bpjs_dtwan_kesehatan');
@@ -91,7 +91,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Jabatan';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cabang'] = $this->m_main->getRow('db_cabang','id_cabang',ID_CABANG);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['atasan'] = $this->m_auth->GetAtasan();
@@ -136,7 +136,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'ACC Atasan';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$this->load->view('layout/header', $data);
 			$this->load->view('ijincuti/acc_atasan');
@@ -151,7 +151,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'ACC Personalia';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$this->load->view('layout/header', $data);
 			$this->load->view('ijincuti/acc_personalia');
@@ -166,7 +166,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Cuti Tahunan';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -192,7 +192,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Cuti Menikah';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -218,7 +218,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Cuti Melahirkan';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -246,7 +246,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Ijin Pribadi';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -272,7 +272,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Ijin Duka';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -299,7 +299,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Ijin Sakit';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -325,7 +325,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Pengajuan Dinas Luar';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -344,7 +344,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Insentif Dinas Luar';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -361,7 +361,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'ACC Lembur';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -378,7 +378,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Form Lembur';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['on_periode'] = $this->m_auth->onPeriode() ? $this->m_auth->onPeriode() : null;
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
@@ -395,7 +395,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Data Scanlog';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
 			$this->load->view('layout/header', $data);
@@ -411,7 +411,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Jam Kerja';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$this->load->view('layout/header', $data);
 			$this->load->view('absensi/jam_kerja');
@@ -426,7 +426,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Jadwal Kerja';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_jamkerja'] = $this->m_auth->GetAllJamKerja();
 			$this->load->view('layout/header', $data);
@@ -442,7 +442,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Rekap Gaji';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1 AND status_periode = 2','tgl_input desc');
 			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
@@ -459,7 +459,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Rekap Ijin Cuti';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
 			$data['data_ijincuti'] = $this->m_main->getResult('db_ijincuti','status',1);
@@ -477,7 +477,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Rekap Lembur';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
 			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
@@ -494,7 +494,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Rekap Keterlambatan';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
 			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
@@ -511,7 +511,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Rekap Lupa Absen';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['cekmenu'] = $this->DataLevel();
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
 			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
@@ -528,7 +528,7 @@ class Menu extends CI_Controller {
 			$data['vrs'] = U_VERSI; 
 			$data['title'] = 'Konfigurasi';
 			$data['account'] = $this->m_main->getRow('db_account','email',EMAIL);
-			$data['posisi'] = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$data['jabatan'] = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data['account_online'] = $this->m_auth->GetAccountOnline();
 			$data['cekmenu'] = $this->DataLevel();
 			$this->load->view('layout/header', $data);

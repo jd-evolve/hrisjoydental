@@ -12,7 +12,7 @@ class Absensi extends CI_Controller {
 		$this->load->model('M_auth', 'm_auth');
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
-		define('ID_POSISI',$this->session->userdata('id_posisi'));
+		define('ID_JABATAN',$this->session->userdata('id_jabatan'));
 		define('ID_CABANG',$this->session->userdata('id_cabang'));
     }
 
@@ -778,9 +778,9 @@ class Absensi extends CI_Controller {
 	}
 
 	public function level_jamkerja(){
-		$output['tambah'] = $this->m_auth->cekAksi(ID_POSISI,17,2);
-		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,17,3);
-		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,17,4);
+		$output['tambah'] = $this->m_auth->cekAksi(ID_JABATAN,17,2);
+		$output['ubah'] = $this->m_auth->cekAksi(ID_JABATAN,17,3);
+		$output['hapus'] = $this->m_auth->cekAksi(ID_JABATAN,17,4);
 		echo json_encode($output);
 	}
 	
@@ -934,9 +934,9 @@ class Absensi extends CI_Controller {
 	}
 
 	public function level_jadwalkerja(){
-		$output['tambah'] = $this->m_auth->cekAksi(ID_POSISI,18,2);
-		$output['ubah'] = $this->m_auth->cekAksi(ID_POSISI,18,3);
-		$output['hapus'] = $this->m_auth->cekAksi(ID_POSISI,18,4);
+		$output['tambah'] = $this->m_auth->cekAksi(ID_JABATAN,18,2);
+		$output['ubah'] = $this->m_auth->cekAksi(ID_JABATAN,18,3);
+		$output['hapus'] = $this->m_auth->cekAksi(ID_JABATAN,18,4);
 		echo json_encode($output);
 	}
 	
@@ -968,7 +968,7 @@ class Absensi extends CI_Controller {
 	}
 
 	public function add_lembur(){
-		$atasan = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+		$atasan = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 		$data = [
 			'id_periode' => $_POST['id_periode'],
 			'id_karyawan' => ID_ACCOUNT,

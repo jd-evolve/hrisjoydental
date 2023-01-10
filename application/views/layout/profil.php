@@ -26,8 +26,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-default">
-                                <label>Posisi</label>
-                                <input type="text" class="form-control" placeholder="Posisi" value="<?= $posisi['nama_posisi']; ?>" style="background: #fff !important; color:black;" readonly>
+                                <label>Jabatan</label>
+                                <input type="text" class="form-control" placeholder="Jabatan" value="<?= $jabatan['nama_jabatan']; ?>" style="background: #fff !important; color:black;" readonly>
                             </div>
                         </div>
                     </div>

@@ -31,14 +31,14 @@
                 <div class="col-sm">
                     <div class="btn-group border-option my-1">
                         <label class="label-filter">Jabatan: </label>&nbsp;&nbsp;
-                        <select class="form-control" name="filter-posisi" id="filter-posisi">
+                        <select class="form-control" name="filter-jabatan" id="filter-jabatan">
                             <option value="">Semua</option>
-                            <?php foreach ($data_posisi as $list) { 
-                                if($list->id_posisi == 2){ }
-                                else if($list->id_posisi == 13){ }
+                            <?php foreach ($data_jabatan as $list) { 
+                                if($list->id_jabatan == 2){ }
+                                else if($list->id_jabatan == 13){ }
                                 else {
                             ?>
-                                <option value="<?= $list->id_posisi.'-' ?>"><?= $list->nama_posisi ?></option>
+                                <option value="<?= $list->id_jabatan.'-' ?>"><?= $list->nama_jabatan ?></option>
                             <?php } } ?>
                         </select>
                     </div>
@@ -264,10 +264,10 @@
                                                     <td><b>Jabatan</b> <span class="text-danger">*</span></td>
                                                     <td><b>&nbsp;:&nbsp;</b></td>
                                                     <td>
-                                                        <select class="form-control form-rm" name="posisi" id="posisi" style="padding: 0.4rem 0.5rem !important;" required>
+                                                        <select class="form-control form-rm" name="jabatan" id="jabatan" style="padding: 0.4rem 0.5rem !important;" required>
                                                             <option value="">Pilih Jabatan</option>
-                                                            <?php foreach ($data_posisi as $list) { ?>
-                                                                <option value="<?= $list->id_posisi ?>"><?= $list->nama_posisi ?></option>
+                                                            <?php foreach ($data_jabatan as $list) { ?>
+                                                                <option value="<?= $list->id_jabatan ?>"><?= $list->nama_jabatan ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </td>
@@ -488,7 +488,7 @@
                                                     <tr>
                                                         <td><b>Jabatan</b></td>
                                                         <td><b>&nbsp;:&nbsp;</b></td>
-                                                        <td><span id="show-posisi"></span></td>
+                                                        <td><span id="show-jabatan"></span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Jadwal Kerja</b></td>

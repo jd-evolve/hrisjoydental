@@ -3,9 +3,9 @@
 class M_auth extends CI_Model {
 
     public function GetAllAccount(){
-        $query = $this->db->select('a.*, a.nama as nama_account, bpjs_tk, b.nama_posisi, c.nama_cabang, d.nama_jadwal_kerja')
+        $query = $this->db->select('a.*, a.nama as nama_account, bpjs_tk, b.nama_jabatan, c.nama_cabang, d.nama_jadwal_kerja')
             ->from('db_account a')
-            ->join('db_posisi b','a.id_posisi = b.id_posisi')
+            ->join('db_jabatan b','a.id_jabatan = b.id_jabatan')
             ->join('db_cabang c','a.id_cabang = c.id_cabang')
             ->join('db_jadwal_kerja d','a.id_jadwal_kerja = d.id_jadwal_kerja')
             ->order_by('a.tgl_edit','desc')
@@ -22,14 +22,14 @@ class M_auth extends CI_Model {
         return $query;
     }
 
-    public function cekMenu($id_posisi,$id_menu){
+    public function cekMenu($id_jabatan,$id_menu){
         $query = $this->db->select('*')
             ->from('db_level_akses a')
             ->join('db_level_submenu b','a.id_level_submenu = b.id_level_submenu')
             ->join('db_level_menu c','b.id_level_menu = c.id_level_menu')
             ->join('db_level_aksi d','a.id_level_aksi = d.id_level_aksi')
             ->where('c.id_level_menu',$id_menu)
-            ->where('a.id_posisi',$id_posisi)
+            ->where('a.id_jabatan',$id_jabatan)
             ->where('a.id_level_aksi',1)
             ->where('a.status',1)
             ->limit(1)
@@ -51,14 +51,14 @@ class M_auth extends CI_Model {
         return $query;
     }
     
-    public function cekSubmenu($id_posisi,$id_submenu){
+    public function cekSubmenu($id_jabatan,$id_submenu){
         $query = $this->db->select('*')
             ->from('db_level_akses a')
             ->join('db_level_submenu b','a.id_level_submenu = b.id_level_submenu')
             ->join('db_level_menu c','b.id_level_menu = c.id_level_menu')
             ->join('db_level_aksi d','a.id_level_aksi = d.id_level_aksi')
             ->where('b.id_level_submenu',$id_submenu)
-            ->where('a.id_posisi',$id_posisi)
+            ->where('a.id_jabatan',$id_jabatan)
             ->where('a.id_level_aksi',1)
             ->where('a.status',1)
             ->limit(1)
@@ -71,14 +71,14 @@ class M_auth extends CI_Model {
         }
     }
 
-    public function cekAksi($id_posisi,$id_submenu,$id_aksi){
+    public function cekAksi($id_jabatan,$id_submenu,$id_aksi){
         $query = $this->db->select('*')
             ->from('db_level_akses a')
             ->join('db_level_submenu b','a.id_level_submenu = b.id_level_submenu')
             ->join('db_level_menu c','b.id_level_menu = c.id_level_menu')
             ->join('db_level_aksi d','a.id_level_aksi = d.id_level_aksi')
             ->where('b.id_level_submenu',$id_submenu)
-            ->where('a.id_posisi',$id_posisi)
+            ->where('a.id_jabatan',$id_jabatan)
             ->where('a.id_level_aksi',$id_aksi)
             ->where('a.status',1)
             ->limit(1)
@@ -93,16 +93,16 @@ class M_auth extends CI_Model {
 
     public function GetAllLevel(){
         $query = $this->db->select('*')
-            ->from('db_posisi')
+            ->from('db_jabatan')
             ->order_by('tgl_edit','desc')
             ->get()->result();
         return $query;
     }
 
-    public function cekLevel($id_posisi, $id_level_submenu, $id_level_aksi){
+    public function cekLevel($id_jabatan, $id_level_submenu, $id_level_aksi){
         $query = $this->db->select('id_level_akses')
             ->from('db_level_akses')
-            ->where('id_posisi',$id_posisi)
+            ->where('id_jabatan',$id_jabatan)
             ->where('id_level_submenu',$id_level_submenu)
             ->where('id_level_aksi',$id_level_aksi)
             ->limit(1)
@@ -138,7 +138,7 @@ class M_auth extends CI_Model {
     public function CekHakAkses($id_level_submenu,$id_level_aksi,$id_level){
         $query = $this->db->select('*')
             ->from('db_level_akses')
-            ->where('id_posisi',$id_level)
+            ->where('id_jabatan',$id_level)
             ->where('id_level_submenu',$id_level_submenu)
             ->where('id_level_aksi',$id_level_aksi)
             ->limit(1)
@@ -164,9 +164,9 @@ class M_auth extends CI_Model {
 
     public function GetAccountOnline(){
         $query = $this->db->query("
-            SELECT a.nama, a.email, b.nama_posisi, c.nama_cabang, c.kode_cabang, if(a.foto != NULL, a.foto, 'profile.jpg') as foto 
+            SELECT a.nama, a.email, b.nama_jabatan, c.nama_cabang, c.kode_cabang, if(a.foto != NULL, a.foto, 'profile.jpg') as foto 
             FROM db_account a 
-            JOIN db_posisi b ON a.id_posisi = b.id_posisi 
+            JOIN db_jabatan b ON a.id_jabatan = b.id_jabatan 
             JOIN db_cabang c ON a.id_cabang = c.id_cabang 
             WHERE a.status = 1 
             AND a.tgl_masuk > a.tgl_keluar 
@@ -229,7 +229,7 @@ class M_auth extends CI_Model {
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_ijincuti c ON a.id_ijincuti = c.id_ijincuti
             JOIN db_account d ON a.id_karyawan = d.id_account
-            JOIN db_posisi e ON d.id_posisi = e.id_posisi
+            JOIN db_jabatan e ON d.id_jabatan = e.id_jabatan
             JOIN db_account f ON e.id_atasan = f.id_account
             WHERE a.id_periode = ".$id_periode."
             ".$ijincuti."
@@ -358,12 +358,12 @@ class M_auth extends CI_Model {
         }
 
         $query = $this->db->query("
-            SELECT b.keterangan as ket_periode, c.nama as karyawan, c.bagian, b.status_periode as status, b.id_periode, a.id_karyawan, d.nama_posisi as jabatan, 
+            SELECT b.keterangan as ket_periode, c.nama as karyawan, c.bagian, b.status_periode as status, b.id_periode, a.id_karyawan, d.nama_jabatan as jabatan, 
                 SUM(IF(a.status != 3, a.jumlah, 0)) as total_lembur
             FROM db_lembur a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
-            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            JOIN db_jabatan d ON c.id_jabatan = d.id_jabatan
             WHERE b.status_periode != 0
             AND a.id_atasan = '".$id_account."'
             ".$stts." ".$prde."
@@ -385,12 +385,12 @@ class M_auth extends CI_Model {
             $status = ' AND a.status != 1';
         }
         $query = $this->db->query("
-            SELECT b.keterangan as ket_periode, c.nama as karyawan, e.nama as atasan, c.bagian, a.status, b.id_periode, a.id_karyawan, d.id_atasan, d.nama_posisi as jabatan, 
+            SELECT b.keterangan as ket_periode, c.nama as karyawan, e.nama as atasan, c.bagian, a.status, b.id_periode, a.id_karyawan, d.id_atasan, d.nama_jabatan as jabatan, 
                 SUM(IF(a.status != 3, a.jumlah, 0)) as total_lembur
             FROM db_lembur a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
-            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            JOIN db_jabatan d ON c.id_jabatan = d.id_jabatan
             JOIN db_account e ON d.id_atasan = e.id_account
             WHERE a.id_periode = ".$id_periode."
             AND b.status_periode != 0
@@ -435,7 +435,7 @@ class M_auth extends CI_Model {
             FROM db_scanlog_kehadiran a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
-            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            JOIN db_jabatan d ON c.id_jabatan = d.id_jabatan
             WHERE a.id_periode = ".$id_periode."
             AND a.terlambat != 0
             ".$karyawan."
@@ -457,7 +457,7 @@ class M_auth extends CI_Model {
             FROM db_scanlog_kehadiran a
             JOIN db_periode b ON a.id_periode = b.id_periode
             JOIN db_account c ON a.id_karyawan = c.id_account
-            JOIN db_posisi d ON c.id_posisi = d.id_posisi
+            JOIN db_jabatan d ON c.id_jabatan = d.id_jabatan
             WHERE a.id_periode = ".$id_periode."
             AND a.jum_lupa_absen != 0
             ".$karyawan."
@@ -517,7 +517,7 @@ class M_auth extends CI_Model {
                 x.nama as karyawan, x.id_account as id_karyawan, x.bagian, 
                 x.nomor_induk, x.email, x.jam_perhari, x.nomor_induk, x.email,
                 d.id_cabang, d.nama_cabang, b.keterangan as ket_periode, 
-                b.jumlah_shift, c.nama_posisi as jabatan
+                b.jumlah_shift, c.nama_jabatan as jabatan
             FROM db_penggajian z
             LEFT JOIN db_account x ON z.id_karyawan = x.id_account
             LEFT JOIN (
@@ -528,7 +528,7 @@ class M_auth extends CI_Model {
                 GROUP BY id_periode, id_karyawan
             ) a ON z.id_karyawan = a.id_karyawan
             LEFT JOIN db_periode b ON z.id_periode = b.id_periode
-            LEFT JOIN db_posisi c ON x.id_posisi = c.id_posisi
+            LEFT JOIN db_jabatan c ON x.id_jabatan = c.id_jabatan
             LEFT JOIN db_cabang d ON x.id_cabang = d.id_cabang
             WHERE z.status = 1
             AND z.id_periode = ".$id_periode."

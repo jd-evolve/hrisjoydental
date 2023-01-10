@@ -185,9 +185,9 @@
         $('.cb').attr("disabled",true);
         $('.cb').prop("checked",false);
         $('input[name="cb-0"]').prop("checked",true);
-        $('input[name="nama_posisi"]').val('');
+        $('input[name="nama_jabatan"]').val('');
         $('input[name="keterangan"]').val('');
-        $('input[name="id_posisi"]').val('');
+        $('input[name="id_jabatan"]').val('');
         
         $.ajax({
             url: "masterdata/list_jabatan",
@@ -239,10 +239,10 @@
 
         let id_jabatan = $(this).data('id');
         let data = table_jabatan.row($(this).parents("tr")).data();
-        $('input[name="nama_posisi"]').val(data["Nama"]);
+        $('input[name="nama_jabatan"]').val(data["Nama"]);
         $('input[name="keterangan"]').val(data["Keterangan"]);
         $('#list_atasan').val(data["id_atasan"]).trigger("change");
-        $('input[name="id_posisi"]').val(id_jabatan);
+        $('input[name="id_jabatan"]').val(id_jabatan);
         
         $.ajax({
             url: "masterdata/list_jabatan",
@@ -322,7 +322,7 @@
                     method: "POST",
                     dataType: "json",
                     data: {
-                        id_posisi: id_jabatan
+                        id_jabatan: id_jabatan
                     },
                     success: function (json) {
                         let result = json.result;

@@ -9,7 +9,7 @@ class Ijincuti extends CI_Controller {
 		$this->load->model('M_auth', 'm_auth');
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
-		define('ID_POSISI',$this->session->userdata('id_posisi'));
+		define('ID_JABATAN',$this->session->userdata('id_jabatan'));
 		define('ID_CABANG',$this->session->userdata('id_cabang'));
     }
 
@@ -58,7 +58,7 @@ class Ijincuti extends CI_Controller {
     public function add_ijincuti(){
 		if(!empty($_POST['id_ijincuti']) && !empty($_POST['id_periode'])){
 			$potongancuti = $this->m_main->getRow('db_ijincuti','id_ijincuti',$_POST['id_ijincuti']);
-			$atasan = $this->m_main->getRow('db_posisi','id_posisi',ID_POSISI);
+			$atasan = $this->m_main->getRow('db_jabatan','id_jabatan',ID_JABATAN);
 			$data = [
 				'id_ijincuti' => $_POST['id_ijincuti'],
 				'id_periode' => $_POST['id_periode'],
@@ -140,7 +140,7 @@ class Ijincuti extends CI_Controller {
 		$detail = $this->m_main->getRow('db_ijincuti_list','id_ijincuti_list',$_POST['id_ijincuti_list']);
 		$atasan = $this->m_main->getRow('db_account','id_account',$detail['id_atasan']);
 		$karyawan = $this->m_main->getRow('db_account','id_account',$detail['id_karyawan']);
-		$jabatan = $this->m_main->getRow('db_posisi','id_posisi',$karyawan['id_posisi']);
+		$jabatan = $this->m_main->getRow('db_jabatan','id_jabatan',$karyawan['id_jabatan']);
 		$ijincuti = $this->m_main->getRow('db_ijincuti','id_ijincuti',$detail['id_ijincuti']);
 
 		if($detail['id_personalia'] != null){
@@ -165,7 +165,7 @@ class Ijincuti extends CI_Controller {
 		$data['karyawan'] = $karyawan['nama'];
 		$data['bagian'] = $karyawan['bagian'];
 		$data['jam_perhari'] = $karyawan['jam_perhari'];
-		$data['jabatan'] = $jabatan['nama_posisi'];
+		$data['jabatan'] = $jabatan['nama_jabatan'];
 		$data['id_atasan'] = $detail['id_atasan'];
 		$data['id_personalia'] = $detail['id_personalia'];
 		$data['nama_atasan'] = $atasan['nama'];

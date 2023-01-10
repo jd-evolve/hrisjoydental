@@ -9,7 +9,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('M_auth', 'm_auth');
 		define('EMAIL',$this->session->userdata('email'));
 		define('ID_ACCOUNT',$this->session->userdata('id_account'));
-		define('ID_POSISI',$this->session->userdata('id_posisi'));
+		define('ID_JABATAN',$this->session->userdata('id_jabatan'));
 		define('ID_CABANG',$this->session->userdata('id_cabang'));
     }
 

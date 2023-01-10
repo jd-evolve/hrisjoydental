@@ -74,7 +74,7 @@
         columns: [
             { data: "No" },
             { data: "nama_account" },
-            { data: "nama_posisi" },
+            { data: "nama_jabatan" },
             { data: "telp" },
             { data: "email" },
             { data: "alamat" },
@@ -96,9 +96,9 @@
                 data;
             }},
             { data: "status" },
-            { data: "IDposisi" },
+            { data: "IDjabatan" },
             { data: "alamat" },
-            { data: "id_posisi" },
+            { data: "id_jabatan" },
             { data: "tgl_masuk" },
             { data: "gender" },
             { data: "Kode" },
@@ -183,7 +183,7 @@
         filter();
     });
 
-    $('select[name="filter-posisi"]').change(function() {
+    $('select[name="filter-jabatan"]').change(function() {
         saveKey();
         filter();
     });
@@ -191,7 +191,7 @@
     function filter(){
         var src = $('input[name="filter-search"]').val().toLowerCase();
         var sta = $('select[name="filter-status"]').val().toLowerCase();
-        var pos = $('select[name="filter-posisi"]').val().toLowerCase();
+        var pos = $('select[name="filter-jabatan"]').val().toLowerCase();
         $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
             if (~data[1].toLowerCase().indexOf(src) && 
                 ~data[8].toLowerCase().indexOf(pos) &&
@@ -219,7 +219,7 @@
     function saveKey(){
         var src = $('input[name="filter-search"]').val().toLowerCase();
         var sta = $('select[name="filter-status"]').val().toLowerCase();
-        var pos = $('select[name="filter-posisi"]').val().toLowerCase();
+        var pos = $('select[name="filter-jabatan"]').val().toLowerCase();
         
         if(src != undefined){
             $('#datatable-account').DataTable().search(src).draw();
@@ -265,7 +265,7 @@
 		$('input[name="nama_rek"]').val('');
         $('select[name="level"]').val('');
         $('select[name="bagian"]').val('');
-        $('select[name="posisi"]').val('');
+        $('select[name="jabatan"]').val('');
         $('select[name="jadwal_kerja"]').val('');
         $('select[name="status_karyawan"]').val('');
 		$('input[name="tgl_masuk"]').val('');
@@ -330,7 +330,7 @@
 		$("#show-status_karyawan").html(data["status_karyawan"] == 1 ? 'Tetap' : 'Percobaan');
         $("#show-level").html(data["level"] == 1 ? 'Staff' : 'Atasan');
         $("#show-bagian").html(data["bagian"]);
-        $("#show-posisi").html(data["nama_posisi"]);
+        $("#show-jabatan").html(data["nama_jabatan"]);
         $("#show-jadwal_kerja").html(data["nama_jadwal_kerja"]);
         $("#show-alasan_keluar").html(data["alasan_resign"]);
         $("#show-masa_kerja").html(data["masa_kerja"]);
@@ -365,7 +365,7 @@
 		$('input[name="nama_rek"]').val(data["nama_rek"]);
         $('select[name="level"]').val(data["level"]);
         $('select[name="bagian"]').val(data["bagian"]);
-        $('select[name="posisi"]').val(data["id_posisi"]);
+        $('select[name="jabatan"]').val(data["id_jabatan"]);
         $('select[name="jadwal_kerja"]').val(data["id_jadwal_kerja"]);
         $('select[name="status_karyawan"]').val(data["status_karyawan"]);
 		$('input[name="tgl_masuk"]').val(data["tgl_masuk"]);

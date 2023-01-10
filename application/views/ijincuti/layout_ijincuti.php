@@ -71,7 +71,7 @@
                                                 <tr valign="top">
                                                     <td width="20%">Jabatan</td>
                                                     <td> : </td>
-                                                    <td><?= $posisi['nama_posisi'] ?></td>
+                                                    <td><?= $jabatan['nama_jabatan'] ?></td>
                                                 </tr>
                                                 <tr valign="top">
                                                     <td width="20%">Bagian</td>
@@ -224,7 +224,7 @@
                                                 <tr valign="top">
                                                     <td width="20%">Jabatan</td>
                                                     <td> : </td>
-                                                    <td><?= $posisi['nama_posisi'] ?></td>
+                                                    <td><?= $jabatan['nama_jabatan'] ?></td>
                                                 </tr>
                                                 <tr valign="top">
                                                     <td width="20%">Bagian</td>

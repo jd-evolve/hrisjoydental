@@ -17,7 +17,7 @@
                                         </div>
                                         <div class="ml-3">
                                             <h4 class="mt-3 mb-0 fw-bold"><?= $account['nama'] ?></h4>
-                                            <p class="mb-0 text-grey"><?= $posisi['nama_posisi'] ?></p>
+                                            <p class="mb-0 text-grey"><?= $jabatan['nama_jabatan'] ?></p>
                                         </div>
                                     </div>
                                 </div>

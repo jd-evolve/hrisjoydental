@@ -127,7 +127,7 @@
                                                     <tr>
                                                         <td>Jabatan</td>
                                                         <td>&nbsp;:&nbsp;</td>
-                                                        <td><?= $posisi['nama_posisi'] ?></td>
+                                                        <td><?= $jabatan['nama_jabatan'] ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Bagian</td>
