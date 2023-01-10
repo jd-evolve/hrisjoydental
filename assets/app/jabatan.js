@@ -188,6 +188,9 @@
         $('input[name="nama_jabatan"]').val('');
         $('input[name="keterangan"]').val('');
         $('input[name="id_jabatan"]').val('');
+        $('input[name="limit_penginapan"]').val(0);
+        $('input[name="limit_uang_makan"]').val(0);
+        $('input[name="insentif_perjalanan"]').val(0);
         
         $.ajax({
             url: "masterdata/list_jabatan",
@@ -243,6 +246,9 @@
         $('input[name="keterangan"]').val(data["Keterangan"]);
         $('#list_atasan').val(data["id_atasan"]).trigger("change");
         $('input[name="id_jabatan"]').val(id_jabatan);
+        $('input[name="limit_penginapan"]').val(data["limit_penginapan"]);
+        $('input[name="limit_uang_makan"]').val(data["limit_uang_makan"]);
+        $('input[name="insentif_perjalanan"]').val(data["insentif_perjalanan"]);
         
         $.ajax({
             url: "masterdata/list_jabatan",

@@ -92,10 +92,12 @@ class M_auth extends CI_Model {
     }
 
     public function GetAllLevel(){
-        $query = $this->db->select('*')
-            ->from('db_jabatan')
-            ->order_by('tgl_edit','desc')
-            ->get()->result();
+        $query = $this->db->query("
+            SELECT a.*, b.limit_penginapan, b.limit_uang_makan, b.insentif_perjalanan
+            FROM db_jabatan a
+            JOIN db_dinas_insentif b ON a.id_jabatan = b.id_jabatan
+            ORDER BY a.tgl_edit desc
+        ")->result();
         return $query;
     }
 

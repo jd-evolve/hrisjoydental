@@ -92,6 +92,27 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="box-bg-grey mb-3">
+                                <table class="mb-0" width="100%">
+                                    <tbody class="nowraping">
+                                        <tr>
+                                            <td width="10%">Limit Penginapan Per Hari <span class="text-danger">*</span></td>
+                                            <td width="2%">&nbsp;:&nbsp;</td>
+                                            <td><input type="text" class="form-control" name="limit_penginapan" value="0" data-type="currency" placeholder="0" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Limit Uang Makan Per Hari <span class="text-danger">*</span></td>
+                                            <td>&nbsp;:&nbsp;</td>
+                                            <td><input type="text" class="form-control" name="limit_uang_makan" value="0" data-type="currency" placeholder="0" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insentif Perjalanan Dinas Per Hari <span class="text-danger">*</span></td>
+                                            <td>&nbsp;:&nbsp;</td>
+                                            <td><input type="text" class="form-control" name="insentif_perjalanan" value="0" data-type="currency" placeholder="0" required></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </form>

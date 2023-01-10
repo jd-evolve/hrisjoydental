@@ -295,6 +295,9 @@ class Masterdata extends CI_Controller {
 			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
 			$row['Aksi'] = $list->id_jabatan;
 			$row['id_atasan'] = $list->id_atasan;
+			$row['limit_penginapan'] = $list->limit_penginapan;
+			$row['limit_uang_makan'] = $list->limit_uang_makan;
+			$row['insentif_perjalanan'] = $list->insentif_perjalanan;
 			$data[] = $row; 
 		}
 		$output = [ "data" => $data ];
@@ -314,6 +317,14 @@ class Masterdata extends CI_Controller {
 			];
 			$qry = $this->m_main->createIN('db_jabatan',$datax);
 			$id_jabatan = $qry['result'];
+			
+			$indinas = [
+				'id_jabatan' => $id_jabatan,
+				'limit_penginapan' => $_POST['limit_penginapan'],
+				'limit_uang_makan' => $_POST['limit_uang_makan'],
+				'insentif_perjalanan' => $_POST['insentif_perjalanan']
+			];
+			$this->m_main->createIN('db_dinas_insentif',$indinas);
 
 			for($i=0; $i<$_POST['numb']; $i++){
 				$level = $_POST['lvl'.$i];
@@ -358,6 +369,13 @@ class Masterdata extends CI_Controller {
 			];
 			$this->m_main->updateIN('db_jabatan','id_jabatan',$_POST['id_jabatan'],$datax);
 
+			$indinas = [
+				'limit_penginapan' => $_POST['limit_penginapan'],
+				'limit_uang_makan' => $_POST['limit_uang_makan'],
+				'insentif_perjalanan' => $_POST['insentif_perjalanan'],
+			];
+			$this->m_main->updateIN('db_dinas_insentif','id_jabatan',$_POST['id_jabatan'],$indinas);
+
 			for($i=0; $i<$_POST['numb']; $i++){
 				$level = $_POST['lvl'.$i];
 				$status = explode(",",$level)[0] == 'true' ? 1 : 0;
@@ -393,7 +411,7 @@ class Masterdata extends CI_Controller {
 	
 	public function remove_jabatan(){
 		if(!empty($_POST['id_jabatan'])){
-			if($_POST['id_jabatan'] == 1 || $_POST['id_jabatan'] == 2){
+			if($_POST['id_jabatan'] == 1){
 				$output['message'] = "Data jabatan tidak dapat dihapus!";
 				$output['result'] = "error";
 			}else{
