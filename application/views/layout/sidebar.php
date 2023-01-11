@@ -73,8 +73,8 @@
                 );
 
                 $dinasluar = array(
-                    'pengajuan-dinasluar',
-                    'insentif-dinasluar',
+                    'dinasluar-pengajuan',
+                    'dinasluar-insentif',
                 );
 
                 $uri_path = $this->uri->segment(1);
@@ -187,19 +187,19 @@
                 <li class="nav-item <?= !$cekmenu['menu_dinasluar'] ? 'gone' : '' ?><?= in_array($uri_path, $dinasluar) ? 'active submenu' : '' ?>">
                     <a data-toggle="collapse" href="#dinas_luar">
                         <i class="fas fa-car-side"></i>
-                        <p>Dinas Luar</p>
+                        <p>Dinas Diluar</p>
                         <span class="caret"></span>
                     </a>
                     <div id="dinas_luar" <?= in_array($uri_path, $dinasluar) ? 'class="collapse show"' : 'class="collapse"' ?>>
                         <ul class="nav nav-collapse">
-                            <li class="<?= !$cekmenu['pengajuan-dinasluar'] ? 'gone' : '' ?> <?= $uri_path == "pengajuan-dinasluar"? 'active' : '' ?>">
-                                <a href="<?= base_url('pengajuan-dinasluar') ?>">
-                                    <span class="sub-item">Pengajuan Dinas Luar</span>
+                            <li class="<?= !$cekmenu['dinasluar-pengajuan'] ? 'gone' : '' ?> <?= $uri_path == "dinasluar-pengajuan"? 'active' : '' ?>">
+                                <a href="<?= base_url('dinasluar-pengajuan') ?>">
+                                    <span class="sub-item">Pengajuan Dinas</span>
                                 </a>
                             </li>
-                            <li class="<?= !$cekmenu['insentif-dinasluar'] ? 'gone' : '' ?> <?= $uri_path == "insentif-dinasluar"? 'active' : '' ?>">
-                                <a href="<?= base_url('insentif-dinasluar') ?>">
-                                    <span class="sub-item">Insentif Dinas Luar</span>
+                            <li class="<?= !$cekmenu['dinasluar-insentif'] ? 'gone' : '' ?> <?= $uri_path == "dinasluar-insentif"? 'active' : '' ?>">
+                                <a href="<?= base_url('dinasluar-insentif') ?>">
+                                    <span class="sub-item">Insentif Dinas</span>
                                 </a>
                             </li>
                         </ul>

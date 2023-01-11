@@ -539,4 +539,18 @@ class M_auth extends CI_Model {
         ")->result();
         return $query;
     }
+
+    public function getDinasLuar(){
+        $this->db->simple_query('SET SESSION group_concat_max_len=15000');
+        $this->db->simple_query('SET @x:=0');
+        $query = $this->db->query('
+            SELECT a.*, group_concat(concat((@x:=@x+1), ". ",c.nama), "   ") as member, @x:=0
+            FROM db_dinas_diluar a
+            JOIN db_dinas_member b ON a.id_dinas_diluar = b.id_dinas_diluar
+            JOIN db_account c ON b.id_account = c.id_account
+            GROUP BY b.id_dinas_diluar
+            ORDER BY a.tgl_edit desc
+        ')->result();
+        return $query;
+    }
 }

@@ -26,8 +26,8 @@ $route['ijin-pribadi'] = 'menu/ijin_pribadi';
 $route['ijin-duka'] = 'menu/ijin_duka';
 $route['ijin-sakit'] = 'menu/ijin_sakit';
 
-$route['pengajuan-dinasluar'] = 'menu/pengajuan_dinasluar';
-$route['insentif-dinasluar'] = 'menu/insentif_dinasluar';
+$route['dinasluar-pengajuan'] = 'menu/dinasluar_pengajuan';
+$route['dinasluar-insentif'] = 'menu/dinasluar_insentif';
 
 $route['acc-lembur'] = 'menu/acc_lembur';
 $route['form-lembur'] = 'menu/form_lembur';
