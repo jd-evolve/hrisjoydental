@@ -88,7 +88,7 @@
                     var dt = 'data-id="'+data+'" data-ida="'+row['id_atasan']+'" data-idk="'+row['id_karyawan']+'"';
                     var kr = 'data-nama="'+row['Karyawan']+'" data-atasan="'+row['Atasan']+'" data-jabatan="'+row['Jabatan']+'" data-bagian="'+row['Bagian']+'" data-periode="'+row['Periode']+'"';
                     return type === 'display'  ?
-                    '<button type="button" '+dt+' '+kr+' id="show-lembur" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
+                    '<button type="button" '+dt+' '+kr+' id="show-lembur" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat data lembur.">'+
                         '<i class="fa fa-eye"></i>'+
                     '</button>':
                     data;

@@ -84,7 +84,7 @@
                 }},
                 { data: "Aksi" , render : function ( data, type, row, meta ) {
                     return type === 'display'  ?
-                    '<button type="button" data-id="'+data+'" id="show-detail" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
+                    '<button type="button" data-id="'+data+'" id="show-detail" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti.">'+
                         '<i class="fa fa-eye"></i>'+
                     '</button>':
                     data;

@@ -25,7 +25,7 @@ class Dinasluar extends CI_Controller {
 			$row['Nama'] = count(explode("   ,",$list->member)) > 1 ? str_replace('   ,','<br>',$list->member) : $list->member;
 			$row['Tanggal'] = date_format(date_create($list->tgl_berangkat),"d/m/Y").' s/d '.date_format(date_create($list->tgl_pulang),"d/m/Y");
 			$row['Keperluan'] = $list->keperluan;
-			$row['Aksi'] = $list->id_dinas_member;
+			$row['Aksi'] = $list->id_dinas_diluar;
 			$row['Status'] = $list->status == 1 ? 'aktif-' : 'hapus-';
 			$data[] = $row; 
 		}

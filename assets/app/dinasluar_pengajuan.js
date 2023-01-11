@@ -60,7 +60,7 @@
             { data: "Keperluan" },
             { data: "Aksi" , render : function ( data, type, row, meta ) {
                 return type === 'display'  ?
-                '<button type="button" data-id="'+data+'" id="show-detail" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
+                '<button type="button" data-id="'+data+'" id="show-detail" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat menu perjalanan dinas diluar.">'+
                     '<i class="fas fa-folder-open"></i>'+
                 '</button>':
                 data;
@@ -117,6 +117,20 @@
             $('#datatable-dinasluar').DataTable().search(sta).draw();
         }
     }
+        
+    $('body').on('click','#show-detail', function(){
+        $("#modal-showform").modal();
+        $('#show-1').addClass('none');
+        $('#show-2').removeClass('none');
+        let id_dinas_diluar = $(this).data('id');
+        // data_scanlog(id_periode);
+    });
+
+    $("body").on("click", "#btn-back", function () {
+        $('#show-1').removeClass('none');
+        $('#show-2').addClass('none');
+        window.location.reload();
+    });
 
     function action(urlfunc,id_dinasluar,text){
         swal({

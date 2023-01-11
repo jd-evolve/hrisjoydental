@@ -118,7 +118,7 @@
                         'data-nama_rek="'+row['nama_rek']+'" '+
                         '';
                     return type === 'display'  ?
-                    '<button type="button" '+list_data+' id="show-form" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat ijin/cuti dan lakukan acc atau tolak.">'+
+                    '<button type="button" '+list_data+' id="show-form" class="btn btn-icon btn-round btn-secondary btn-sm" title="Lihat detail gaji.">'+
                         '<i class="fa fa-eye"></i>'+
                     '</button>':
                     data;
