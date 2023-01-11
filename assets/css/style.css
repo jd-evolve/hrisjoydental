@@ -3956,30 +3956,24 @@ label.error {
 }
 .nav-pills.nav-default .nav-link.active {
     background: #282a3c;
-    border: 1px solid #282a3c;
 }
 .nav-pills.nav-primary .nav-link.active {
     background: #6176b1;
 }
 .nav-pills.nav-secondary .nav-link.active {
     background: #716aca;
-    border: 1px solid #716aca;
 }
 .nav-pills.nav-info .nav-link.active {
     background: #36a3f7;
-    border: 1px solid #36a3f7;
 }
 .nav-pills.nav-success .nav-link.active {
     background: #35cd3a;
-    border: 1px solid #35cd3a;
 }
 .nav-pills.nav-warning .nav-link.active {
     background: #ffa534;
-    border: 1px solid #ffa534;
 }
 .nav-pills.nav-danger .nav-link.active {
     background: #f3545d;
-    border: 1px solid #f3545d;
 }
 .nav-sm .nav-link {
     font-size: 11px !important;

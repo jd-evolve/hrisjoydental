@@ -331,6 +331,7 @@ class Menu extends CI_Controller {
 			$data['data_periode'] = $this->m_main->getResultData('db_periode','status = 1','tgl_input desc');
 			$data['persyaratan'] = 
 				'<li>Sebelum mengisi form perjalanan dinas pastikan data periode sudah tersedia.</li>';
+			$data['data_karyawan'] = $this->m_auth->GetAktifKaryawan();
 			$this->load->view('layout/header', $data);
 			$this->load->view('dinasluar/dinasluar_pengajuan');
 			$this->load->view('layout/footer');

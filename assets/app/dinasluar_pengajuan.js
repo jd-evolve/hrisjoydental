@@ -131,6 +131,25 @@
         $('#show-2').addClass('none');
         window.location.reload();
     });
+    
+    submenu();
+    function submenu(){
+        $("#menu-pengajuan").on("click", function () {
+            $('#for-menu-pengajuan').removeClass('none');
+            $('#for-menu-perjalanan').addClass('none');
+            $('#for-menu-reimburse').addClass('none');
+        });
+        $("#menu-perjalanan").on("click", function () {
+            $('#for-menu-pengajuan').addClass('none');
+            $('#for-menu-perjalanan').removeClass('none');
+            $('#for-menu-reimburse').addClass('none');
+        });
+        $("#menu-reimburse").on("click", function () {
+            $('#for-menu-pengajuan').addClass('none');
+            $('#for-menu-perjalanan').addClass('none');
+            $('#for-menu-reimburse').removeClass('none');
+        });
+    }
 
     function action(urlfunc,id_dinasluar,text){
         swal({
